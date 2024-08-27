@@ -2,12 +2,21 @@
   "name": "gf-components",
   "version": "1.0.0",
   "description": "geoFluxus library of components",
-  "main": "index.ts",
   "repository": "https://github.com/geoFluxus/gf-components.git",
   "author": "Rui de Klerk <rvzk.mota@gmail.com>",
   "license": "none",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
-    "format": "prettier --write --parser typescript '**/*.{ts,tsx}'"
+    "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
+    "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
+    "build": "tsc && vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@types/react": "^18.3.4",
@@ -20,7 +29,9 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-storybook": "^0.8.0",
     "prettier": "^3.3.3",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vite-plugin-dts": "^4.0.3"
   },
   "peerDependencies": {
     "react": "^8.3.1"
