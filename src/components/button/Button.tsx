@@ -5,7 +5,6 @@ export type ButtonProps = {
   text?: string;
   type?: "link" | "text" | "primary" | "default" | "dashed" | undefined;
   disabled?: boolean;
-  size?: "small" | "medium" | "large";
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
