@@ -1,7 +1,7 @@
 {
   // Specify the environments where the code will run
   "env": {
-    // "jest": true,       // Enable Jest for testing
+    "jest": true,       // Enable Jest for testing
     "browser": true     // Enable browser environment
   },
 
