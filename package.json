@@ -1,0 +1,16 @@
+{
+  "name": "gf-components",
+  "version": "1.0.0",
+  "description": "geoFluxus library of components",
+  "main": "index.ts",
+  "repository": "https://github.com/geoFluxus/gf-components.git",
+  "author": "Rui de Klerk <rvzk.mota@gmail.com>",
+  "license": "none",
+  "devDependencies": {
+    "@types/react": "^18.3.4",
+    "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "react": "^8.3.1"
+  }
+}
