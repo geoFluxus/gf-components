@@ -5,6 +5,7 @@ export const globals = {
     colorBgDebug: "orange",
     colorBorder: "#EAECF0",
     colorTextSecondary: "#475467",
+    colorTextHeading: "#1D2939",
     radiusSm: 2,
     paddingMd: 16,
 

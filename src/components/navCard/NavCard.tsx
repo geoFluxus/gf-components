@@ -1,7 +1,9 @@
 import React, { MouseEventHandler, CSSProperties, useState } from 'react'
 import { InfoCircleOutlined } from '@ant-design/icons'
-import { Row, Col } from 'antd';
+import { Row, Col, Typography } from 'antd';
 import { globals } from '../../globals';
+
+const { Text } = Typography
 
 export type NavCardProps = {
   icon?: any;
@@ -26,6 +28,10 @@ const NavCard: React.FC<NavCardProps> = ({
     borderRadius: globals.style.radiusSm,
     padding: globals.style.paddingMd,
   }
+  const styleTitle: CSSProperties = {
+    color: hover ? globals.style.colorPrimaryHover : globals.style.colorTextHeading,
+    fontWeight: 700,
+  }
 
   return (
     <div 
@@ -34,17 +40,19 @@ const NavCard: React.FC<NavCardProps> = ({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <Row>
+      <Row gutter={16}>
         <Col span={1}>
           {icon}
         </Col>
-        <Col span={20}>
-          {title}
+        <Col span={23}>
+          <Text style={styleTitle}>
+            {title}
+          </Text>
         </Col>
       </Row>
-      <Row>
+      <Row gutter={16}>
         <Col span={1} />
-        <Col span={20}>
+        <Col span={23}>
           {description}
         </Col>
       </Row>
