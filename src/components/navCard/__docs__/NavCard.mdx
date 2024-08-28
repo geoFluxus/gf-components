@@ -1,0 +1,41 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import { InfoCircleOutlined } from '@ant-design/icons'
+import Example from "./Example.tsx";
+import * as NavCard from "./NavCard.stories.tsx";
+
+<Meta of={NavCard} title="NavCard" />
+
+# Navigation Card
+
+Clickable card intended for navigation within the application.
+
+#### Example
+
+<Canvas of={NavCard.Default} />
+
+## Usage
+
+```ts
+import {NavCard} from "gf-components";
+
+const Example = () => {
+  return (
+    <NavCard
+      icon={<InfoCircleOutlined />}
+      disabled={false}
+      title={text}
+      description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex fa.'}
+      onClick={()=> console.log("Clicked")}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **icon** - the icon to render on the card, associated with the section it links to.
+- **title** _`() => void`_ - A string that represents the section to navigate to.
+- **description** -`() => void`_ - A string that describes the section to navigate to.
+- **disabled** - A boolean indicating whether the navigation card should be disabled or not. When disabled, the navigation card cannot be clicked or interacted with.
+- **onClick** - A function that is called when the navigation card is clicked. It receives a MouseEventHandler for handling the click event on the navigation card element.
