@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES5", 
+    "outDir": "dist",
     "useDefineForClassFields": true, 
     "lib": ["ES2020", "DOM", "DOM.Iterable"], 
     "module": "ESNext",
@@ -19,8 +20,13 @@
     "noFallthroughCasesInSwitch": true,
     "declaration": true
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "vite.config.ts"
+  ],
   "exclude": [
-    "src/**/__docs__","src/**/__test__"
+    "src/**/__docs__",
+    "src/**/__test__",
+    "node_modules"
   ]
 }
