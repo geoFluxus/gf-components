@@ -1,11 +1,14 @@
 :root {
   /* colors */
   --gf-color-bg-base: #FFFFFF;
-  --gf-color-primary-hover: #3858F2;
+  --gf-color-bg-tertiary: #F9FAFB;
   --gf-color-bg-debug: orange;
+  --gf-color-primary-hover: #3858F2;
   --gf-color-border-base: #EAECF0;
+
+  --gf-color-text-primary: #1D2939;
   --gf-color-text-secondary: #475467;
-  --gf-color-text-heading: #1D2939;
+  --gf-color-text-tertiary: #667085;
 
   /* radius */
   --gf-radius-sm: 2px;
@@ -15,7 +18,7 @@
   --gf-padding-sm: 8px;
   --gf-padding-md: 16px;
 
-  /* text */
+  /* fonts */
   --gf-font: Roboto, sans-serif;
   --gf-display-1: normal normal 600 48px/60px Roboto, sans-serif;
 
