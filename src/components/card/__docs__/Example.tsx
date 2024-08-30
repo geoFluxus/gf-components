@@ -4,8 +4,8 @@ import '../Card.css'
 
 const Example = ({
   cardType,
-  title = 'Title',
-  children = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex fa.',
+  title,
+  children,
 }) => {
   return (
     <div
