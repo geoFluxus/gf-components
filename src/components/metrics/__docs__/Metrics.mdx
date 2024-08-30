@@ -1,0 +1,36 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Metrics from "./Metrics.stories.tsx";
+
+<Meta of={Metrics} title="Metrics" />
+
+# Metrics
+
+Metrics to be used as base for the remaining components.
+
+#### Example
+
+<Canvas of={Metrics.Default} />
+
+## Usage
+
+```ts
+import {Metrics} from "gf-components";
+
+const Example = () => {
+  return (
+    <Metrics
+      percent={35},
+      cost={18.6},
+      description={'description of the metrics'}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **percent** - The percentual value of the metrics.
+- **cost** - The cost of the metrics, in euros.
+- **description** - The content of the card.

@@ -34,6 +34,7 @@
   --gf-label-lg-default: normal normal 400 16px/24px Roboto, sans-serif;
   --gf-label-md-bold: normal normal 700 14px/22px Roboto, sans-serif;
   --gf-label-md-default: normal normal 400 14px/22px Roboto, sans-serif;
+  --gf-label-md-italic: normal italic 400 18px/34px Roboto, sans-serif;
   --gf-label-sm-bold: normal normal 700 12px/14px Roboto, sans-serif;
   --gf-label-sm-default: normal normal 400 12px/14px Roboto, sans-serif;
 }

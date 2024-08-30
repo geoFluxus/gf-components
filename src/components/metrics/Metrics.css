@@ -1,0 +1,17 @@
+.gf-metrics {
+  min-width: 226px;
+}
+
+.gf-value-bold {
+  font: var(--gf-header-h1);
+}
+
+.gf-cost-italic {
+  font: var(--gf-label-md-italic);
+  color: var(--gf-color-text-tertiary);
+}
+
+.gf-metrics-description {
+  font: var(--gf-label-lg-default);
+  color: var(--gf-color-text-secondary);
+}

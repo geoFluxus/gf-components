@@ -1,10 +1,8 @@
-import React, { FC } from "react";
-import GFCard from "../GFCard";
-import '../GFCard.css'
+import React from "react";
+import Metrics from "../Metrics";
+import '../Metrics.css'
 
 const Example = ({
-  cardType,
-  title,
   children,
 }) => {
   return (
@@ -16,9 +14,11 @@ const Example = ({
         height: "100%",
       }}
     >
-      <GFCard cardType={cardType} title={title}>
-        {children}
-      </GFCard>
+      <Metrics 
+        percent={35} 
+        cost={18.6} 
+        description={'van de totale importwaarde waren machines en apparaten'}
+      />
     </div>
   );
 };

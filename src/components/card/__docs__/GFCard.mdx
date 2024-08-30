@@ -1,25 +1,25 @@
 import { Canvas, Meta } from "@storybook/blocks";
 import Example from "./Example.tsx";
-import * as Card from "./Card.stories.tsx";
+import * as GFCard from "./GFCard.stories.tsx";
 
-<Meta of={Card} title="Card" />
+<Meta of={GFCard} title="GFCard" />
 
-# Card
+# GFCard
 
-Card to be used as base for the remaining components.
+Base Card to be used as base for the remaining components.
 
 #### Example
 
-<Canvas of={Card.Default} />
+<Canvas of={GFCard.Default} />
 
 ## Usage
 
 ```ts
-import {Card} from "gf-components";
+import {GFCard} from "gf-components";
 
 const Example = () => {
   return (
-    <Card
+    <GFCard
       cardType={'default'}
       title={text}
       children={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.'}
