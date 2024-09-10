@@ -5,7 +5,8 @@ const Example: FC<GFButtonProps> = ({
   disabled = false,
   onClick = () => {},
   type = 'default',
-  text = "Button",
+  label = "Button",
+  ...props
 }) => {
   return (
     <div
@@ -17,10 +18,11 @@ const Example: FC<GFButtonProps> = ({
       }}
     >
       <GFButton
-        text={text}
+        label={label}
         disabled={disabled}
         onClick={onClick}
         type={type}
+        {...props}
       />
     </div>
   );

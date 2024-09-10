@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Example from "./Example";
 
 const meta: Meta<typeof Example> = {
-  title: "Button",
+  title: "Components/Buttons/GFButton",
   component: Example,
 };
 
@@ -11,7 +11,7 @@ type Story = StoryObj<typeof Example>;
 
 export const Primary: Story = {
   args: {
-    text: "Button",
+    label: "Button",
     type: 'primary',
     disabled: false,
     onClick: () => alert("You clicked me!"),
@@ -19,7 +19,7 @@ export const Primary: Story = {
 };
 export const Default: Story = {
   args: {
-    text: "Button",
+    label: "Button",
     type: 'default',
     disabled: false,
     onClick: () => alert("You clicked me!"),
@@ -27,7 +27,7 @@ export const Default: Story = {
 };
 export const Link: Story = {
   args: {
-    text: "Button",
+    label: "Button",
     type: 'link',
     disabled: false,
     onClick: () => alert("You clicked me!"),
@@ -35,7 +35,7 @@ export const Link: Story = {
 };
 export const Text: Story = {
   args: {
-    text: "Button",
+    label: "Button",
     type: 'text',
     disabled: false,
     onClick: () => alert("You clicked me!"),

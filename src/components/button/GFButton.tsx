@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import './GFButton.css'
 
 export interface GFButtonProps extends ButtonProps {
-  text?: string;
+  label?: React.ReactNode;
   type?: "link" | "text" | "primary" | "default" | "dashed" | undefined;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -13,7 +13,7 @@ export interface GFButtonProps extends ButtonProps {
 const GFButton: React.FC<GFButtonProps> = ({
   type='default',
   disabled=false,
-  text,
+  label,
   onClick,
   ...props
 }) => {
@@ -30,9 +30,10 @@ const GFButton: React.FC<GFButtonProps> = ({
       type={type}
       disabled={disabled}
       onClick={onClick}
+      {...props}
       className={classes}
     >
-      {text}
+      {label}
     </Button>
   )
 }

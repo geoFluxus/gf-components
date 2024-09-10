@@ -3,7 +3,7 @@ import { InfoCircleOutlined } from '@ant-design/icons'
 import Example from "./Example";
 
 const meta: Meta<typeof Example> = {
-  title: "NavCard",
+  title: "Components/Cards/NavCard",
   component: Example,
 };
 
