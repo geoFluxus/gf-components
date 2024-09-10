@@ -1,0 +1,7 @@
+.gf-button {
+  border-radius: var(--gf-radius-sm);
+}
+
+.gf-button-primary {
+  background: var(--gf-color-button-primary);
+}

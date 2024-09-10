@@ -33,3 +33,11 @@ export const Link: Story = {
     onClick: () => alert("You clicked me!"),
   },
 };
+export const Text: Story = {
+  args: {
+    text: "Button",
+    type: 'text',
+    disabled: false,
+    onClick: () => alert("You clicked me!"),
+  },
+};

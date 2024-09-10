@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import Button, { ButtonProps } from "../Button";
+import GFButton, { GFButtonProps } from "../GFButton";
 
-const Example: FC<ButtonProps> = ({
+const Example: FC<GFButtonProps> = ({
   disabled = false,
   onClick = () => {},
   type = 'default',
@@ -16,7 +16,7 @@ const Example: FC<ButtonProps> = ({
         height: "100%",
       }}
     >
-      <Button
+      <GFButton
         text={text}
         disabled={disabled}
         onClick={onClick}

@@ -12,11 +12,11 @@ const GFCard: React.FC<GFCardProps> = ({
   ...props
 }) => {
   const classes = classNames(
-    props?.className,
     {
       'gf-card-default': cardType === ('default' || undefined),
       'gf-card-grey': cardType === 'grey',
-    }
+    },
+    props?.className,
   )
 
   return (
