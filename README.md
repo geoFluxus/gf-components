@@ -8,6 +8,7 @@ Library of components to be used in geoFluxus applications.
   --gf-color-bg-tertiary: #F9FAFB;
   --gf-color-bg-debug: orange;
   --gf-color-primary-hover: #3858F2;
+  --gf-color-button-primary: #152BEE;
   --gf-color-border-base: #EAECF0;
 
   --gf-color-text-primary: #1D2939;
@@ -38,8 +39,12 @@ Library of components to be used in geoFluxus applications.
   --gf-label-lg-default: normal normal 400 16px/24px Roboto, sans-serif;
   --gf-label-md-bold: normal normal 700 14px/22px Roboto, sans-serif;
   --gf-label-md-default: normal normal 400 14px/22px Roboto, sans-serif;
+  --gf-label-md-italic: normal italic 400 18px/34px Roboto, sans-serif;
   --gf-label-sm-bold: normal normal 700 12px/14px Roboto, sans-serif;
   --gf-label-sm-default: normal normal 400 12px/14px Roboto, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 ```
 
 ## Installation
