@@ -1,4 +1,6 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { DownloadOutlined } from '@ant-design/icons'
 import Example from "./Example";
 
 const meta: Meta<typeof Example> = {
@@ -39,5 +41,15 @@ export const Text: Story = {
     type: 'text',
     disabled: false,
     onClick: () => alert("You clicked me!"),
+  },
+};
+export const Download: Story = {
+  args: {
+    label: "Download",
+    type: 'default',
+    disabled: false,
+    icon: <DownloadOutlined />,
+    iconPosition: 'start',
+    onClick: () => alert("Download successful!"),
   },
 };
