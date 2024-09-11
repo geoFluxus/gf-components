@@ -38,4 +38,8 @@
   --gf-label-md-italic: normal italic 400 18px/34px Roboto, sans-serif;
   --gf-label-sm-bold: normal normal 700 12px/14px Roboto, sans-serif;
   --gf-label-sm-default: normal normal 400 12px/14px Roboto, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
 }
