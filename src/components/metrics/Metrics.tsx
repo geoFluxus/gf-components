@@ -1,9 +1,9 @@
 import React from 'react'
 import { Flex, Space, CardProps } from 'antd';
-import GFCard from '../card/GFCard';
+import GFCard, { GFCardProps } from '../card/GFCard';
 import './Metrics.css'
 
-export interface Props extends CardProps {
+export interface Props extends GFCardProps {
   percent: number | string;
   cost?: number | string;
   description?: string ;
@@ -24,7 +24,6 @@ const Metrics = ({
         </Space>
         <text className='gf-metrics-description'>{description}</text>
       </Flex>
-      {'demo'}
     </GFCard>
   )
 }

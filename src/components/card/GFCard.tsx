@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import './GFCard.css'
 
 export interface GFCardProps extends CardProps {
-  cardType?: "default" | "grey" | undefined;
+  cardType?: "default" | "grey" | 'debug' | undefined;
 }
 
 const GFCard: React.FC<GFCardProps> = ({
@@ -12,9 +12,11 @@ const GFCard: React.FC<GFCardProps> = ({
   ...props
 }) => {
   const classes = classNames(
+    'gf-card',
     {
       'gf-card-default': cardType === ('default' || undefined),
       'gf-card-grey': cardType === 'grey',
+      'gf-card-debug': cardType === 'debug',
     },
     props?.className,
   )

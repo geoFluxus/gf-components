@@ -1,11 +1,16 @@
-.gf-card-default {
-  background: var(--gf-color-bg-base);
+.gf-card {
   border-radius: var(--gf-radius-sm);
   border-color: var(--gf-color-border-base);
 }
 
+.gf-card-default {
+  background: var(--gf-color-bg-base);
+}
+
 .gf-card-grey {
   background: var(--gf-color-bg-tertiary);
-  border-radius: var(--gf-radius-sm);
-  border-color: var(--gf-color-border-base);
+}
+
+.gf-card-debug {
+  background: var(--gf-color-bg-debug);
 }
