@@ -1,0 +1,19 @@
+.gf-title-primary {
+  font: var(--gf-header-h2);
+  color: var(--gf-color-text-primary);
+}
+
+.gf-subtitle-primary {
+  font: var(--gf-label-xl-default);
+  color: var(--gf-color-text-primary);
+}
+
+.gf-title-secondary {
+  font: var(--gf-header-h4);
+  color: var(--gf-color-text-primary);
+}
+
+.gf-subtitle-secondary {
+  font: var(--gf-label-lg-default);
+  color: var(--gf-color-text-secondary);
+}

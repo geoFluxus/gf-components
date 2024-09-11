@@ -1,0 +1,40 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Title from "./Title.stories.tsx";
+
+<Meta of={Title} title="Title" />
+
+# Title
+
+Base component for titles and subtitles.
+
+### Primary title (default)
+
+<Canvas of={Title.Default} />
+
+### Seccondary title
+
+<Canvas of={Title.Secondary} />
+
+## Usage
+
+```ts
+import {Title} from "gf-components";
+
+const Example = () => {
+  return (
+    <Title
+      title={text}
+      subtitle={subtitle}
+      type={type}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **title** - A string that represents the title.
+- **subtitle** - A string that represents the subtitle (optional).
+- **type** - Either 'primary' or 'secondary', depending if it is a main title or a section title (optional).

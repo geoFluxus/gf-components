@@ -42,3 +42,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.gf-full-width {
+  width: 100%;
+}
