@@ -8,7 +8,7 @@ import * as Metrics from "./Metrics.stories.tsx";
 
 Metrics to be used as base for the remaining components.
 
-#### Example
+### Example (default)
 
 <Canvas of={Metrics.Default} />
 
@@ -22,7 +22,31 @@ const Example = () => {
     <Metrics
       percent={35},
       cost={18.6},
-      description={'description of the metrics'}
+      description={'description of the metrics'},
+      editable={false},
+    />
+  );
+};
+
+export default Example;
+```
+
+### Editable Metric card
+
+<Canvas of={Metrics.Editable} />
+
+## Usage
+
+```ts
+import {Metrics} from "gf-components";
+
+const Example = () => {
+  return (
+    <Metrics
+      percent={35},
+      cost={18.6},
+      description={'description of the metrics'},
+      editable={true},
     />
   );
 };
@@ -34,3 +58,4 @@ export default Example;
 - **percent** - The percentual value of the metrics.
 - **cost** - The cost of the metrics, in euros.
 - **description** - The content of the card.
+- **editable** - Boolean that makes the description of the Metric editable (for translation purposes).

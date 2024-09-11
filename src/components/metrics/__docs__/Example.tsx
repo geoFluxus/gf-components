@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Metrics from "../Metrics";
 import '../Metrics.css'
 
 const Example = ({
-  children,
+  percent,
+  cost,
+  description,
+  editable,
+  ...props
 }) => {
+  const [ editableText, setEditableText ] = useState(description)
+  const edit = editable ? { onChange: setEditableText } : false
+
   return (
     <div
       style={{
@@ -15,9 +22,10 @@ const Example = ({
       }}
     >
       <Metrics 
-        percent={35} 
-        cost={18.6} 
-        description={'van de totale importwaarde waren machines en apparaten'}
+        percent={percent} 
+        cost={cost} 
+        description={editableText}
+        editable={edit}
       />
     </div>
   );

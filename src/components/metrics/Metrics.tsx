@@ -1,20 +1,26 @@
-import React from 'react'
-import { Flex, Space, CardProps } from 'antd';
+import React, { useState } from 'react'
+import { Flex, Space, Typography } from 'antd';
 import GFCard, { GFCardProps } from '../card/GFCard';
 import './Metrics.css'
 
+const { Paragraph } = Typography
 export interface Props extends GFCardProps {
   percent: number | string;
   cost?: number | string;
   description?: string ;
+  editable?: boolean;
 }
 
 const Metrics = ({
   percent,
   cost,
   description,
+  editable,
   ...props
 }) => {
+  const [ editableText, setEditableText ] = useState(description)
+  const edit = editable ? { onChange: setEditableText } : false
+
   return (
     <GFCard className='gf-metrics' cardType={'grey'}>
       <Flex vertical gap={8}>
@@ -22,7 +28,9 @@ const Metrics = ({
           <text className='gf-value-bold'>{`${percent}%`}</text>
           <text className='gf-cost-italic'>{`€${cost} md`}</text>
         </Space>
-        <text className='gf-metrics-description'>{description}</text>
+        <Paragraph className='gf-metrics-description' editable={edit}>
+          {editableText}
+        </Paragraph>
       </Flex>
     </GFCard>
   )
