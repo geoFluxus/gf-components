@@ -18,7 +18,7 @@
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "build": "vite build",
     "prebuild": "tsc --pretty --watch",
-    "prepare": "npm run build",
+    "prepare": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
