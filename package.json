@@ -17,7 +17,7 @@
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "build": "vite build",
-    "prebuild": "tsc",
+    "prebuild": "tsc --pretty --watch",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
