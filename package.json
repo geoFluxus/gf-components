@@ -5,6 +5,7 @@
   "description": "geoFluxus library of components",
   "repository": "https://github.com/geoFluxus/gf-components.git",
   "author": "Rui de Klerk <rvzk.mota@gmail.com>",
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
