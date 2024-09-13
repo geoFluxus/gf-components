@@ -1,6 +1,6 @@
 {
   "name": "gf-components",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "description": "geoFluxus library of React components",
   "repository": {
@@ -25,9 +25,9 @@
   ],
   "license": "MIT",
   "type": "module",
-  "main": "dist/index",
-  "module": "dist/index",
-  "types": "dist/index",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "files": [
     "/dist"
   ],
