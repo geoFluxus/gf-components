@@ -39,6 +39,7 @@ const NavCard: React.FC<NavCardProps> = ({
       onClick={() => onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      {...props}
     >
       <Row gutter={16}>
         <Col span={1}>
