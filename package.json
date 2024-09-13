@@ -1,10 +1,18 @@
 {
   "name": "gf-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "description": "geoFluxus library of React components",
-  "repository": "https://github.com/geoFluxus/gf-components.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geoFluxus/gf-components.git"
+  },
   "author": "Rui de Klerk <rvzk.mota@gmail.com>",
+  "keywords": [
+    "geofluxus",
+    "react",
+    "ui"
+  ],
   "contributors": [
     {
       "name": "Rui de Klerk",
@@ -17,9 +25,9 @@
   ],
   "license": "MIT",
   "type": "module",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index",
+  "module": "dist/index",
+  "types": "dist/index",
   "files": [
     "/dist"
   ],
