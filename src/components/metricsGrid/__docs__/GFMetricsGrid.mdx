@@ -1,0 +1,30 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as GFMetricsGrid from "./GFMetricsGrid.stories.tsx";
+
+<Meta of={GFMetricsGrid} title="GFMetricsGrid" />
+
+# GFMetricsGrid
+
+Grid of Metrics card components
+
+#### Example
+
+<Canvas of={GFMetricsGrid.Default} />
+
+## Usage
+
+```ts
+import {GFMetricsGrid} from "gf-components";
+
+const Example = () => {
+  return (
+    <GFMetricsGrid/>
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **Array of Metrics card component** - A string that represents the content in the card.
