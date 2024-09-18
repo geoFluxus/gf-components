@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react'
 import { Button, ButtonProps } from 'antd';
-import classNames from 'classnames';
-import './GFButton.css'
+import styled, { css } from "styled-components"
+import '../../globals.css'
 
 export interface GFButtonProps extends ButtonProps {
   label?: React.ReactNode;
@@ -10,6 +10,14 @@ export interface GFButtonProps extends ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
+const StyledButton = styled(Button)<GFButtonProps>`
+  border-radius: var(--gf-radius-sm);
+  // background: ${props => props.type === 'primary' ? 'var(--gf-color-button-primary)' : ''};
+  ${props => props.type === 'primary' && css`
+    background: var(--gf-color-button-primary);
+  `}
+`
+
 const GFButton: React.FC<GFButtonProps> = ({
   type='default',
   disabled=false,
@@ -17,24 +25,16 @@ const GFButton: React.FC<GFButtonProps> = ({
   onClick,
   ...props
 }) => {
-  const classes = classNames(
-    'gf-button',
-    {
-      'gf-button-primary': type === 'primary',
-    },
-    props?.className,
-  )
 
   return (
-    <Button
+    <StyledButton
       type={type}
       disabled={disabled}
       onClick={onClick}
       {...props}
-      className={classes}
     >
       {label}
-    </Button>
+    </StyledButton>
   )
 }
 
