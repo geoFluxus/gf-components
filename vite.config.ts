@@ -11,7 +11,7 @@ export default defineConfig({
       formats: ["cjs", "es"], // Specifies the output formats (CommonJS and ES modules).
     },
     rollupOptions: {
-      external: [...Object.keys(peerDependencies)], // Defines external dependencies for Rollup bundling.
+      external: [...Object.keys(peerDependencies), 'styled-components'], // Defines external dependencies for Rollup bundling.
     },
     cssCodeSplit: false,
     sourcemap: true, // Generates source maps for debugging.
