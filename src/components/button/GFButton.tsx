@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 import { Button, ButtonProps } from 'antd';
 import styled, { css } from "styled-components"
 import '../../globals.css'
