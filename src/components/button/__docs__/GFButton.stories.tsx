@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Example>;
 
 export const Primary: Story = {
   args: {
-    label: "Button",
+    children: 'Button',
     type: 'primary',
     disabled: false,
     onClick: () => alert("You clicked me!"),
@@ -21,7 +21,7 @@ export const Primary: Story = {
 };
 export const Default: Story = {
   args: {
-    label: "Button",
+    children: 'Button',
     type: 'default',
     disabled: false,
     onClick: () => alert("You clicked me!"),
@@ -29,7 +29,7 @@ export const Default: Story = {
 };
 export const Link: Story = {
   args: {
-    label: "Button",
+    children: 'Button',
     type: 'link',
     disabled: false,
     onClick: () => alert("You clicked me!"),
@@ -37,7 +37,7 @@ export const Link: Story = {
 };
 export const Text: Story = {
   args: {
-    label: "Button",
+    children: 'Button',
     type: 'text',
     disabled: false,
     onClick: () => alert("You clicked me!"),
@@ -45,11 +45,11 @@ export const Text: Story = {
 };
 export const Download: Story = {
   args: {
-    label: "Download",
     type: 'default',
     disabled: false,
     icon: <DownloadOutlined />,
     iconPosition: 'start',
+    children: 'Download',
     onClick: () => alert("Download successful!"),
   },
 };

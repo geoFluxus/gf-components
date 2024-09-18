@@ -5,7 +5,6 @@ const Example: FC<GFButtonProps> = ({
   disabled = false,
   onClick = () => {},
   type = 'default',
-  label = "Button",
   ...props
 }) => {
   return (
@@ -18,7 +17,6 @@ const Example: FC<GFButtonProps> = ({
       }}
     >
       <GFButton
-        label={label}
         disabled={disabled}
         onClick={onClick}
         type={type}

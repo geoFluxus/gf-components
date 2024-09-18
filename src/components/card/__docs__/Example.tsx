@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import GFCard from "../GFCard";
-import '../GFCard.css'
 
 const Example = ({
   cardType,
