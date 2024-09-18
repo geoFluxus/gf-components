@@ -21,6 +21,10 @@
     {
       "name": "Vasilis Bouzas",
       "email": "vasilis@geofluxus.com"
+    },
+    {
+      "name": "Gaurangi Mane",
+      "email": "manegaurangi89@gmail.com"
     }
   ],
   "license": "MIT",
@@ -61,6 +65,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "prettier": "^3.3.3",
     "storybook": "^8.2.9",
+    "styled-components": "^6.1.13",
     "typescript": "^5.5.4",
     "vite": "^5.4.2",
     "vite-plugin-dts": "^4.0.3"
@@ -72,5 +77,8 @@
   "dependencies": {
     "antd": "^5.20.3",
     "classnames": "^2.5.1"
+  },
+  "resolutions": {
+    "styled-components": "^6"
   }
 }
