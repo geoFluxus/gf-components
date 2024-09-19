@@ -9,11 +9,13 @@ export interface Props {
   columns?: 2 | 3 | 4;
   editable?: boolean;
   style?: CSSProperties | undefined;
+  textalign?: 'left' | 'center' | 'right' | 'justify';
   className?: string;
 }
 
-const StyledDiv = styled.div<{columns?: 2 | 3 | 4 }>`
-  column-count: ${props => props.columns}
+const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center' | 'right' | 'justify'}>`
+  column-count: ${props => props.columns};
+  text-align: ${props => props.textalign};
 `
 const StyledText = styled(Text)`
   font: var(--gf-label-lg-default);
@@ -24,6 +26,7 @@ const Description: React.FC<Props> = ({
   text,
   columns=2,
   editable=false,
+  textalign='left',
   style,
   className,
 }) => {
@@ -33,7 +36,7 @@ const Description: React.FC<Props> = ({
   return (
     <>
       <GlobalStyle />
-      <StyledDiv columns={columns} style={style || {}} className={className || ''}>
+      <StyledDiv columns={columns} textalign={textalign} style={style || {}} className={className || ''}>
         <StyledText editable={edit}>{editableText}</StyledText>
       </StyledDiv>
     </>
