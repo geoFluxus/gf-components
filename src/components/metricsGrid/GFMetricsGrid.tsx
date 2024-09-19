@@ -5,27 +5,6 @@ export interface GFMetricsGridProps extends MetricsProps {
   metricsData: MetricsProps[];
 }
 
-// const metricsData = [
-//   {
-//     percent: 35,
-//     cost: 18.6,
-//     description: "description of the metrics",
-//     editable: false,
-//   },
-//   {
-//     percent: 35,
-//     cost: 18.6,
-//     description: "description of the metrics",
-//     editable: false,
-//   },
-//   {
-//     percent: 35,
-//     cost: 18.6,
-//     description: "description of the metrics",
-//     editable: false,
-//   },
-// ];
-
 const GFMetricsGrid: React.FC<GFMetricsGridProps> = ({ metricsData }) => {
   return (
     <Flex gap={10} wrap>
