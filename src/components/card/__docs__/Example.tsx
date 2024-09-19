@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import GFCard from "../GFCard";
 
 const Example = ({
-  cardType,
+  cardtype,
   title,
   children,
 }) => {
@@ -15,7 +15,7 @@ const Example = ({
         height: "100%",
       }}
     >
-      <GFCard cardType={cardType} title={title}>
+      <GFCard cardtype={cardtype} title={title}>
         {children}
       </GFCard>
     </div>

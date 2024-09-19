@@ -3,12 +3,12 @@ import { Flex, Space, Typography } from 'antd';
 import GFCard, { GFCardProps } from '../card/GFCard';
 import './Metrics.css'
 
-const { Paragraph } = Typography
+const { Paragraph, Text } = Typography
 export interface MetricsProps extends GFCardProps {
   percent: number | string;
   cost?: number | string;
   description?: string ;
-  editable?: boolean;
+  editable?: boolean | any;
 }
 
 const Metrics: React.FC<MetricsProps> = ({
@@ -22,11 +22,11 @@ const Metrics: React.FC<MetricsProps> = ({
   const edit = editable ? { onChange: setEditableText } : false
 
   return (
-    <GFCard className='gf-metrics' cardType={'grey'} {...props}>
+    <GFCard className='gf-metrics' cardtype={'grey'} {...props}>
       <Flex vertical gap={8}>
         <Space direction='horizontal' size={16} align='end'>
-          <text className='gf-value-bold'>{`${percent}%`}</text>
-          <text className='gf-cost-italic'>{`€${cost} md`}</text>
+          <Text className='gf-value-bold'>{`${percent}%`}</Text>
+          <Text className='gf-cost-italic'>{`€${cost} md`}</Text>
         </Space>
         <Paragraph className='gf-metrics-description' editable={edit}>
           {editableText}
