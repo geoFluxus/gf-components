@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Metrics from "../Metrics";
-import '../Metrics.css'
 
 const Example = ({
   percent,

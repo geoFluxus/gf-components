@@ -3,7 +3,6 @@ import { Flex, Space, Typography } from 'antd';
 import GlobalStyle from '../../globalStyles';
 import styled from 'styled-components';
 import GFCard, { GFCardProps } from '../card/GFCard';
-import './Metrics.css'
 
 const { Paragraph, Text } = Typography
 export interface MetricsProps extends GFCardProps {
