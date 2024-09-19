@@ -1,7 +1,6 @@
 import React from 'react'
 import { Space, Typography } from 'antd';
 import classNames from 'classnames';
-import '../../globals.css'
 import './Title.css'
 
 const { Text } = Typography

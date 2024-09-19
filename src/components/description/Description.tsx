@@ -1,7 +1,6 @@
 import React, { CSSProperties, useState } from 'react'
 import { Typography } from 'antd';
 import classNames from 'classnames';
-import '../../globals.css'
 import './Description.css'
 
 const { Text } = Typography
