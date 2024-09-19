@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Flex, Space, Typography } from 'antd';
+import GlobalStyle from '../../globalStyles';
+import styled from 'styled-components';
 import GFCard, { GFCardProps } from '../card/GFCard';
 import './Metrics.css'
 
@@ -10,6 +12,21 @@ export interface MetricsProps extends GFCardProps {
   description?: string ;
   editable?: boolean | any;
 }
+
+const StyledCard = styled(GFCard)<GFCardProps>`
+  min-width: 226px;
+`
+const StyledTitle = styled(Text)`
+  font: var(--gf-header-h1);
+`
+const StyledItalic = styled(Text)`
+  font: var(--gf-label-md-italic);
+  color: var(--gf-color-text-tertiary);
+`
+const StyledParagraph = styled(Paragraph)`
+  font: var(--gf-label-lg-default);
+  color: var(--gf-color-text-secondary);
+`
 
 const Metrics: React.FC<MetricsProps> = ({
   percent,
@@ -22,17 +39,20 @@ const Metrics: React.FC<MetricsProps> = ({
   const edit = editable ? { onChange: setEditableText } : false
 
   return (
-    <GFCard className='gf-metrics' cardtype={'grey'} {...props}>
-      <Flex vertical gap={8}>
-        <Space direction='horizontal' size={16} align='end'>
-          <Text className='gf-value-bold'>{`${percent}%`}</Text>
-          <Text className='gf-cost-italic'>{`€${cost} md`}</Text>
-        </Space>
-        <Paragraph className='gf-metrics-description' editable={edit}>
-          {editableText}
-        </Paragraph>
-      </Flex>
-    </GFCard>
+    <>
+      <GlobalStyle />
+      <StyledCard cardtype='grey' {...props}>
+        <Flex vertical gap={8}>
+            <Space direction='horizontal' size={16} align='end'>
+              <StyledTitle>{`${percent}%`}</StyledTitle>
+              <StyledItalic>{`€${cost} md`}</StyledItalic>
+            </Space>
+            <StyledParagraph editable={edit}>
+              {editableText}
+            </StyledParagraph>
+          </Flex>
+      </StyledCard>
+    </>
   )
 }
 
