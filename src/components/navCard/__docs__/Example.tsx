@@ -5,7 +5,7 @@ import NavCard, { NavCardProps } from "../NavCard";
 const Example: FC<NavCardProps> = ({
   disabled = false,
   onClick = () => {},
-  icon=<InfoCircleOutlined />,
+  icon=InfoCircleOutlined,
   title= "Navigation Card",
   description= 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex fa.',
 }) => {
@@ -19,7 +19,7 @@ const Example: FC<NavCardProps> = ({
       }}
     >
       <NavCard
-        icon={<InfoCircleOutlined />}
+        icon={icon}
         title={title}
         description={description}
         disabled={disabled}

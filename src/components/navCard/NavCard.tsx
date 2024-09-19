@@ -1,17 +1,41 @@
-import React, { MouseEventHandler, CSSProperties, useState } from 'react'
+import React, { MouseEventHandler } from 'react'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import { Row, Col, Typography } from 'antd';
-import { globals } from '../../globals';
+import GlobalStyle from '../../globalStyles';
+import styled from 'styled-components';
+import GFCard, { GFCardProps } from '../card/GFCard';
 
 const { Text } = Typography
 
-export type NavCardProps = {
+export interface NavCardProps extends GFCardProps {
   icon?: any;
   title?: string;
   description: string;
   disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLElement>;
 };
+
+const StyledCard = styled(GFCard)`
+  &:hover {
+    cursor: pointer;
+    border: 1px solid var(--gf-color-primary-hover);
+    color: var(--gf-color-primary-hover);
+  }
+  
+  svg:hover {
+    fill: var(--gf-color-primary-hover);
+  }
+`
+const StyledText = styled(Text)`
+  font: var(--gf-header-h5);
+  ${StyledCard}:hover & {
+    color: var(--gf-color-primary-hover);
+  }
+`
+const StyledDescription = styled(Text)`
+  font: var(--gf-label-md-default);
+  color: var(--gf-color-text-secondary);
+`
 
 const NavCard: React.FC<NavCardProps> = ({
   disabled=false,
@@ -21,43 +45,30 @@ const NavCard: React.FC<NavCardProps> = ({
   onClick,
   ...props
 }) => {
-  const [ hover, setHover ] = useState<boolean>(false)
-  const style: CSSProperties = {
-    backgroundColor: globals.style.colorBgBase,
-    border: `1px solid ${hover? globals.style.colorPrimaryHover : globals.style.colorBorder}`,
-    borderRadius: globals.style.radiusSm,
-    padding: globals.style.paddingMd,
-  }
-  const styleTitle: CSSProperties = {
-    color: hover ? globals.style.colorPrimaryHover : globals.style.colorTextHeading,
-    fontWeight: 700,
-  }
-
   return (
-    <div 
-      style={style}
-      onClick={() => onClick}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      {...props}
-    >
-      <Row gutter={16}>
-        <Col span={1}>
-          {icon}
-        </Col>
-        <Col span={23}>
-          <Text style={styleTitle}>
-            {title}
-          </Text>
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={1} />
-        <Col span={23}>
-          {description}
-        </Col>
-      </Row>
-    </div>
+    <>
+      <GlobalStyle />
+      <StyledCard onClick={onClick} cardtype='default' {...props}>
+        <Row gutter={16}>
+          <Col span={1}>
+            {icon}
+          </Col>
+          <Col span={23}>
+            <StyledText >
+              {title}
+            </StyledText>
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col span={1} />
+          <Col span={23}>
+            <StyledDescription >
+              {description}
+            </StyledDescription>
+          </Col>
+        </Row>
+      </StyledCard>
+    </>
   )
 }
 

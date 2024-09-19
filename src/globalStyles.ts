@@ -2,9 +2,6 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-    font-family: 'Roboto', sans-serif;
-
     /* colors */
     --gf-color-bg-base: #FFFFFF;
     --gf-color-bg-tertiary: #F9FAFB;
@@ -26,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     --gf-padding-md: 16px;
 
     /* fonts */
+    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
     --gf-font: Roboto, sans-serif;
     --gf-display-1: normal normal 600 48px/60px Roboto, sans-serif;
 
