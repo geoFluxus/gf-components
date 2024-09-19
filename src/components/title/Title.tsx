@@ -1,7 +1,7 @@
 import React from 'react'
 import { Space, Typography } from 'antd';
-import classNames from 'classnames';
-import './Title.css'
+import GlobalStyle from '../../globalStyles';
+import styled, { css } from 'styled-components';
 
 const { Text } = Typography
 export interface Props {
@@ -10,29 +10,39 @@ export interface Props {
   type?: 'primary' | 'secondary';
 }
 
+const StyledTitle = styled(Text)<{type?: string}>`
+  color: var(--gf-color-text-primary) !important;  
+  ${props => props.type === ('primary' || undefined ) && css`
+    font: var(--gf-header-h2);
+  `}
+  ${props => props.type === 'secondary' && css`
+    font: var(--gf-header-h4);
+  `}
+`
+const StyledSubTitle = styled(Text)<{type?: string}>`
+  ${props => props.type === ('primary' || undefined ) && css`
+    font: var(--gf-label-xl-default);
+    color: var(--gf-color-text-primary) !important;
+  `}
+  ${props => props.type === 'secondary' && css`
+    font: var(--gf-label-lg-default);
+    color: var(--gf-color-text-secondary) !important;
+  `}
+`
+
 const Metrics: React.FC<Props> = ({
   title,
   subtitle,
   type='primary',
 }) => {
-  const titleClasses = classNames(
-    {
-      'gf-title-primary': type === 'primary',
-      'gf-title-secondary': type === 'secondary',
-    },
-  )
-  const subTitleClasses = classNames(
-    {
-      'gf-subtitle-primary': type === 'primary',
-      'gf-subtitle-secondary': type === 'secondary',
-    },
-  )
-
   return (
-    <Space className='gf-full-width' direction='vertical' size={8} align='start'>
-      <Text className={titleClasses}>{title}</Text>
-      <Text className={subTitleClasses}>{subtitle}</Text>
-    </Space>
+    <>
+      <GlobalStyle />
+      <Space className='gf-full-width' direction='vertical' size={8} align='start'>
+        <StyledTitle type={type}>{title}</StyledTitle>
+        <StyledSubTitle type={type}>{subtitle}</StyledSubTitle>
+      </Space>
+    </>
   )
 }
 
