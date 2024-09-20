@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     --gf-color-border-base: #EAECF0;
 
     --gf-color-text-primary: #1D2939;
+    --gf-color-primary-text-active: #03052D;
     --gf-color-text-secondary: #475467;
     --gf-color-text-tertiary: #667085;
 

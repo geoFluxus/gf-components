@@ -6,14 +6,14 @@ import styled, {css} from 'styled-components';
 const { Text } = Typography
 export interface Props {
   text: string;
-  columns?: 1| 2 | 3 | 4;
+  columns?: 2 | 3 | 4;
   editable?: boolean;
   style?: CSSProperties | undefined;
   textalign?: 'left' | 'center' | 'right' | 'justify';
   className?: string;
 }
 
-const StyledDiv = styled.div<{columns?: 1 | 2 | 3 | 4, textalign?: 'left' | 'center' | 'right' | 'justify'}>`
+const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center' | 'right' | 'justify'}>`
   ${props => props.columns && props.columns > 1 && css`
     column-count: ${props.columns};
   `}
@@ -26,7 +26,7 @@ const StyledText = styled(Text)`
 
 const Description: React.FC<Props> = ({
   text,
-  columns=2,
+  columns,
   editable=false,
   textalign='left',
   style,
