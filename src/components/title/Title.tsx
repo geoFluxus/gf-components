@@ -30,7 +30,7 @@ const StyledSubTitle = styled(Text)<{type?: string}>`
   `}
 `
 
-const Metrics: React.FC<Props> = ({
+const Title: React.FC<Props> = ({
   title,
   subtitle,
   type='primary',
@@ -46,4 +46,4 @@ const Metrics: React.FC<Props> = ({
   )
 }
 
-export default Metrics
+export default Title
