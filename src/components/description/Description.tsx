@@ -1,20 +1,22 @@
 import React, { CSSProperties, useState } from 'react'
 import { Typography } from 'antd';
 import GlobalStyle from '../../globalStyles';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const { Text } = Typography
 export interface Props {
   text: string;
-  columns?: 2 | 3 | 4;
+  columns?: 1| 2 | 3 | 4;
   editable?: boolean;
   style?: CSSProperties | undefined;
   textalign?: 'left' | 'center' | 'right' | 'justify';
   className?: string;
 }
 
-const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center' | 'right' | 'justify'}>`
-  column-count: ${props => props.columns};
+const StyledDiv = styled.div<{columns?: 1 | 2 | 3 | 4, textalign?: 'left' | 'center' | 'right' | 'justify'}>`
+  ${props => props.columns && props.columns > 1 && css`
+    column-count: ${props.columns};
+  `}
   text-align: ${props => props.textalign};
 `
 const StyledText = styled(Text)`
