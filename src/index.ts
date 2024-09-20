@@ -1,3 +1,3 @@
 export * from './components'
-export * from './globals'
+export * from './images'
 export * from './globalStyles'
