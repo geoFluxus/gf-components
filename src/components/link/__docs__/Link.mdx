@@ -1,0 +1,43 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Link from "./Link.stories.tsx";
+
+<Meta of={Link} title="Link" />
+
+# Link
+
+Base component for links (with or withou icons).
+
+### Simple Link
+
+<Canvas of={Link.Default} />
+
+### Link with icon
+
+<Canvas of={Link.Icon} />
+
+## Usage
+
+```ts
+import {Link} from "gf-components";
+
+const Example = () => {
+  return (
+    <Link
+      label={label}
+      href={href}
+      icon={icon}
+      type={type}
+      {...props}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **label** - A string that represents the label of the link.
+- **href** - A string with the href instruction for the link.
+- **icons** - Icon for the link (optional).
+- **type** - Either 'light' | 'dark'.
