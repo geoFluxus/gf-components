@@ -1,0 +1,38 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as ButtonControls from "./ButtonControls.stories.tsx";
+
+<Meta of={ButtonControls} title="ButtonControls" />
+
+# ButtonControls
+
+Button controls used to switch between options.
+
+### Example 
+
+<Canvas of={ButtonControls.Default} />
+
+## Usage
+
+```ts
+import {ButtonControls} from "gf-components";
+
+const Example = () => {
+  return (
+    <ButtonControls
+      content={content}
+      handler={handler}
+      disabled={disabled}
+      {...props}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+
+- **content** - Array of objects of the form ```{ key: string, label: string, disabled?: boolean }``` corresponding to the different buttons.
+- **handler** - A function that is called when a button is clicked. It receives a RadioChangeEvent (from Ant Design) and should be used to pass the value of the button to a state at the parent component.
+- **disabled** - A boolean indicating whether the button controls should be disabled or not. When disabled, the none of the buttons in the control can be clicked or interacted with.
