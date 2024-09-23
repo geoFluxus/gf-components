@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import GFButton, { GFButtonProps} from "./GFButton";
 
-const ExpandButton: React.FC<GFButtonProps> = ({
+export interface ExpandButtonProps extends GFButtonProps {
+  open: boolean;
+}
+
+const ExpandButton: React.FC<ExpandButtonProps> = ({
   disabled=false,
+  open,
   onClick,
   ...props
 }) => {
-  const [ opened, setOpened ] = useState<boolean>(false)
-
-  const handleClick = () => {
-    setOpened(prev => !prev)
-    onClick
-  }
 
   return (
     <>
       <GFButton
         type={'link'}
         disabled={disabled}
-        onClick={handleClick}
-        icon={opened ? <UpOutlined /> : <DownOutlined />}
+        onClick={onClick}
+        icon={open ? <UpOutlined /> : <DownOutlined />}
         iconPosition={'end'}
         {...props}
       />
