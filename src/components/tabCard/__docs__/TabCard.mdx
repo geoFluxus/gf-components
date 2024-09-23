@@ -6,7 +6,7 @@ import * as TabCard from "./TabCard.stories.tsx";
 
 # TabCard
 
-Base Card to be used as base for the remaining components.
+Card with tabs and optional expandable section.
 
 #### Example
 
@@ -19,8 +19,13 @@ import {TabCard} from "gf-components";
 
 const Example = () => {
   return (
-    <TabCard
-      children={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.'}
+    <TabCard 
+      tabList={tabList}                   // List of tabs
+      tabContent={tabContent}             // Object with content for each tab 
+      expandContent={expandContent}       // Object with the content do be displayed in the expandable for each tab (optional)
+      expandLabel={expandLabel}           // Label for the expandable button (optional)
+      handleDownload={handleDownload}     // Handler for the download button
+      {...props}                          // Additional props (optional -- see GFCard / AntD Card)
     />
   );
 };
@@ -29,4 +34,8 @@ export default Example;
 ```
 
 #### Arguments
-- **children** - The content of the card.
+- **tabList** - List of objects of the form ```{ key: string, label: string }``` corresponding to the tabs of the card.
+- **tabContent** - Object that holds the content of each tab, where each key corresponds to the key of the tab (see tabList above) and the content can be of type React.ReactElement | React.ReactNode.
+- **expandContent** - Object that holds the content of the expandable section of each tab, where each key corresponds to the key of the tab (see tabList above) and the content can be of type React.ReactElement | React.ReactNode.
+- **expandLabel** - String for the label of the expandable button.
+- **handleDownload** - Function that is triggered when someone clicks the download button.

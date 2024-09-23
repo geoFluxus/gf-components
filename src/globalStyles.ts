@@ -51,6 +51,11 @@ const GlobalStyle = createGlobalStyle`
   .gf-full-width {
     width: 100%;
   }
+
+  .gf-override-ant-card-actions > .ant-card-actions > li {
+    padding: 4px 0px;
+    margin: 0px;
+  }
 `
 
 export default GlobalStyle

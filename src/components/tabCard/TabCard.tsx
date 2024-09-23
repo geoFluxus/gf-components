@@ -15,7 +15,7 @@ interface ContentT {
 export interface TabCardProps extends GFCardProps {
   tabList: TabT[];
   tabContent: ContentT;
-  expandContent: ContentT;
+  expandContent?: ContentT;
   expandLabel?: string;
   handleDownload?: MouseEventHandler<HTMLButtonElement>;
 }
@@ -42,19 +42,19 @@ const TabCard: React.FC<TabCardProps> = ({
     <>
       <GlobalStyle />
       <GFCard 
-        className='gf-full-width'
+        className='gf-full-width gf-override-ant-card-actions'
         tabList={tabList}
         cardtype={'default'} 
         activeTabKey={activeTab}
         onTabChange={handleTabChange}
         tabBarExtraContent={<DownloadButton onClick={handleDownload}/>}
-        actions={[
+        actions={expandContent?.[activeTab] ? [
           <Flex vertical>
             <ExpandButton open={expand} onClick={handleExpad}>{expandLabel}</ExpandButton>
             { expand && expandContent?.[activeTab]}
           </Flex>
 
-        ]}
+        ] : undefined}
         {...props} 
       >
         {tabContent?.[activeTab]}
