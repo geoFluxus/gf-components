@@ -1,0 +1,41 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as QuickNavCard from "./QuickNavCard.stories.tsx";
+
+<Meta of={QuickNavCard} title="QuickNavCard" />
+
+# QuickNavCard
+
+Base Card to be used as base for the remaining components.
+
+#### Example
+
+<Canvas of={QuickNavCard.Default} />
+
+## Usage
+
+```ts
+import {QuickNavCard} from "gf-components";
+
+const Example = () => {
+  return (
+    <QuickNavCard
+      title={title} 
+      subtitle={subtitle} 
+      listTitle={listTitle}
+      items={items}
+      gap={gap}
+      {...props}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **title** - A string that represents the content in the card.
+- **subtitle** - A string that adds additional information about the content in the card (optional).
+- **listTitle** - A string that represents title of the list of items.
+- **items** - Array of objects of the form ```{ name: string, href: React.MutableRefObject<any> | string }``` corresponding to the different links.
+- **gap** - A number that is to be used as vertical adjustment when the window scrolls to top (to accomodate for a sticky header, for instance -- optional).

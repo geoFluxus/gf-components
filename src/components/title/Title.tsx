@@ -7,7 +7,7 @@ const { Text } = Typography
 export interface Props {
   title: string;
   subtitle?: string;
-  type?: 'primary' | 'secondary';
+  type?: 'primary' | 'secondary' | 'header';
 }
 
 const StyledTitle = styled(Text)<{type?: string}>`
@@ -18,6 +18,9 @@ const StyledTitle = styled(Text)<{type?: string}>`
   ${props => props.type === 'secondary' && css`
     font: var(--gf-header-h4);
   `}
+  ${props => props.type === 'header' && css`
+    font: var(--gf-header-h1);
+  `}
 `
 const StyledSubTitle = styled(Text)<{type?: string}>`
   ${props => props.type === ('primary' || undefined ) && css`
@@ -26,6 +29,10 @@ const StyledSubTitle = styled(Text)<{type?: string}>`
   `}
   ${props => props.type === 'secondary' && css`
     font: var(--gf-label-lg-default);
+    color: var(--gf-color-text-secondary) !important;
+  `}
+  ${props => props.type === 'header' && css`
+    font: var(--gf-label-xl-default);
     color: var(--gf-color-text-secondary) !important;
   `}
 `
