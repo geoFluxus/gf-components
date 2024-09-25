@@ -1,6 +1,6 @@
 {
   "name": "gf-components",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "private": false,
   "description": "geoFluxus library of React components",
   "repository": {
@@ -72,7 +72,7 @@
     "vite-plugin-dts": "^4.0.3"
   },
   "peerDependencies": {
-    "react": "^8.3.1",
+    "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styled-components": "^6.1.13"
   },
