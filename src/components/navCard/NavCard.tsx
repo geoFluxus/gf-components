@@ -48,7 +48,7 @@ const NavCard: React.FC<NavCardProps> = ({
   return (
     <>
       <GlobalStyle />
-      <StyledCard onClick={onClick} cardtype='default' {...props}>
+      <StyledCard onClick={onClick} padding={24} cardtype='default' {...props}>
         <Row gutter={16}>
           <Col span={1}>
             {icon}

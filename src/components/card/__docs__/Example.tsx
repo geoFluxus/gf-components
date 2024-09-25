@@ -3,8 +3,8 @@ import GFCard from "../GFCard";
 
 const Example = ({
   cardtype,
-  title,
-  children,
+  padding,
+  ...props
 }) => {
   return (
     <div
@@ -15,9 +15,7 @@ const Example = ({
         height: "100%",
       }}
     >
-      <GFCard cardtype={cardtype} title={title}>
-        {children}
-      </GFCard>
+      <GFCard cardtype={cardtype} padding={padding} {...props} />
     </div>
   );
 };

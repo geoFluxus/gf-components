@@ -40,7 +40,7 @@ const Metrics: React.FC<MetricsProps> = ({
   return (
     <>
       <GlobalStyle />
-      <StyledCard cardtype='grey' {...props}>
+      <StyledCard cardtype='grey' padding={24} {...props}>
         <Flex vertical gap={8}>
             <Space direction='horizontal' size={16} align='end'>
               <StyledTitle>{`${percent}%`}</StyledTitle>

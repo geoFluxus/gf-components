@@ -11,7 +11,6 @@ export interface GFButtonProps extends ButtonProps {
 
 const StyledButton = styled(Button)<GFButtonProps>`
   border-radius: var(--gf-radius-sm);
-  // background: ${props => props.type === 'primary' ? 'var(--gf-color-button-primary)' : ''};
   ${props => props.type === 'primary' && css`
     background: var(--gf-color-button-primary);
   `}

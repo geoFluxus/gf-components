@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 
 export interface GFCardProps extends CardProps {
   cardtype?: "default" | "grey" | 'debug' | undefined;
+  padding?: number;
 }
 
 const StyledCard = styled(Card)<GFCardProps>`
@@ -22,12 +23,20 @@ const StyledCard = styled(Card)<GFCardProps>`
 
 const GFCard: React.FC<GFCardProps> = ({
   cardtype,
+  padding=32,
   ...props
 }) => {
   return (
     <>
       <GlobalStyle />
-      <StyledCard cardtype={cardtype} {...props} />
+      <StyledCard 
+        cardtype={cardtype} 
+        styles={{
+          header: {padding: padding},
+          body: {padding: padding},
+        }} 
+        {...props} 
+      />
     </>
   )
 }
