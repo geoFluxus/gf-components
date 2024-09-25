@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 const { Text } = Typography
 export interface Props {
   title: string;
-  subtitle?: string | undefined;
+  subtitle?: string;
   type?: 'primary' | 'secondary';
 }
 
