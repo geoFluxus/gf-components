@@ -6,6 +6,7 @@ const Example: FC<TabCardProps> = ({
   tabContent,
   expandContent,
   expandLabel,
+  padding,
   handleDownload,
   ...props
 }) => {
@@ -23,6 +24,7 @@ const Example: FC<TabCardProps> = ({
         tabContent={tabContent}
         expandContent={expandContent}
         expandLabel={expandLabel}
+        padding={padding}
         handleDownload={handleDownload}
         {...props}
       />

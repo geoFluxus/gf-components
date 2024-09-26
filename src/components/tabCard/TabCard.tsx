@@ -17,6 +17,7 @@ export interface TabCardProps extends GFCardProps {
   tabContent: ContentT;
   expandContent?: ContentT;
   expandLabel?: string;
+  padding?: number;
   handleDownload?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -25,6 +26,7 @@ const TabCard: React.FC<TabCardProps> = ({
   tabContent,
   expandContent,
   expandLabel,
+  padding=24,
   handleDownload,
   ...props
 }) => {
@@ -55,6 +57,10 @@ const TabCard: React.FC<TabCardProps> = ({
           </Flex>
 
         ] : undefined}
+        styles={{
+          header: {padding: `0px ${padding}`},
+          body: {padding: padding},
+        }}
         {...props} 
       >
         {tabContent?.[activeTab]}
