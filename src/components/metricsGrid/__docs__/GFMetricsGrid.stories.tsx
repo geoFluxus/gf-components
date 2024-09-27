@@ -3,7 +3,7 @@ import Example from "./Example";
 import React from "react";
 
 const meta: Meta<typeof Example> = {
-  title: "Components/MetricsGrid/GFMetricsGrid",
+  title: "Components/Cards/GFMetricsGrid",
   component: Example,
   argTypes: {
     metricsData: {
