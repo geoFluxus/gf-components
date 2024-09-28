@@ -43,8 +43,8 @@ const Metrics: React.FC<MetricsProps> = ({
       <StyledCard cardtype='grey' padding={24} {...props}>
         <Flex vertical gap={8}>
             <Space direction='horizontal' size={16} align='end'>
-              <StyledTitle>{`${percent}%`}</StyledTitle>
-              <StyledItalic>{`€${cost} md`}</StyledItalic>
+              <StyledTitle>{percent}</StyledTitle>
+              <StyledItalic>{cost}</StyledItalic>
             </Space>
             <StyledParagraph editable={edit}>
               {editableText}
