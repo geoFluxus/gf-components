@@ -11,6 +11,9 @@ interface TabT {
 interface ContentT {
   [key: string]: React.ReactElement | React.ReactNode;
 }
+interface HandlerT {
+  [key: string]: MouseEventHandler<HTMLButtonElement>;
+}
 
 export interface TabCardProps extends GFCardProps {
   tabList: TabT[];
@@ -18,7 +21,7 @@ export interface TabCardProps extends GFCardProps {
   expandContent?: ContentT;
   expandLabel?: string;
   padding?: number;
-  handleDownload?: MouseEventHandler<HTMLButtonElement>;
+  handleDownload?: HandlerT;
 }
 
 const TabCard: React.FC<TabCardProps> = ({
@@ -39,7 +42,7 @@ const TabCard: React.FC<TabCardProps> = ({
   const handleExpad = () => {
     setExpand(prev => !prev)
   }
-
+  
   return (
     <>
       <GlobalStyle />
@@ -49,7 +52,7 @@ const TabCard: React.FC<TabCardProps> = ({
         cardtype={'default'} 
         activeTabKey={activeTab}
         onTabChange={handleTabChange}
-        tabBarExtraContent={<DownloadButton onClick={handleDownload}/>}
+        tabBarExtraContent={<DownloadButton onClick={handleDownload?.[activeTab]}/>}
         actions={expandContent?.[activeTab] ? [
           <Flex vertical>
             <ExpandButton open={expand} onClick={handleExpad}>{expandLabel}</ExpandButton>
@@ -58,7 +61,7 @@ const TabCard: React.FC<TabCardProps> = ({
 
         ] : undefined}
         styles={{
-          header: {padding: `0px ${padding}`},
+          header: {padding: `0px 24px`},
           body: {padding: padding},
         }}
         {...props} 

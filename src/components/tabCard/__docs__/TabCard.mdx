@@ -25,7 +25,7 @@ const Example = () => {
       expandContent={expandContent}       // Object with the content do be displayed in the expandable for each tab (optional)
       expandLabel={expandLabel}           // Label for the expandable button (optional)
       padding={padding}                   // padding for body and sides of tabcard header
-      handleDownload={handleDownload}     // Handler for the download button
+      handleDownload={handleDownload}     // Handler for the download button (for each tab)
       {...props}                          // Additional props (optional -- see GFCard / AntD Card)
     />
   );
@@ -39,4 +39,4 @@ export default Example;
 - **tabContent** - Object that holds the content of each tab, where each key corresponds to the key of the tab (see tabList above) and the content can be of type React.ReactElement | React.ReactNode.
 - **expandContent** - Object that holds the content of the expandable section of each tab, where each key corresponds to the key of the tab (see tabList above) and the content can be of type React.ReactElement | React.ReactNode.
 - **expandLabel** - String for the label of the expandable button.
-- **handleDownload** - Function that is triggered when someone clicks the download button.
+- **handleDownload** - Object that holds the download action of each tab, where each key corresponds to the key of the tab (see tabList above) and the content is a MouseEventHandler<HTMLButtonElement>.

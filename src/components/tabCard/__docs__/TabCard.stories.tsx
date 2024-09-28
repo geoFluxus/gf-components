@@ -23,6 +23,10 @@ const content = {
               text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.' 
             />,
 }
+const downloadHandlers = {
+  'chart': ()=>alert('Chart download in progress'),
+  'table': ()=>alert('Table download in progress'),
+}
 const ChartDescription = () => <div style={{ padding: 24 }}>
   <Title title="Chart Description" type="secondary"/>
   <Description 
@@ -61,7 +65,7 @@ export const Default: Story = {
     tabContent:content,
     expandContent: expand2,
     expandLabel: 'Show additional content',
-    handleDownload: ()=>alert('Download in progress'),
+    handleDownload: downloadHandlers,
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
   },
 };
@@ -72,7 +76,7 @@ export const WithPartialAdditionalContent: Story = {
     tabContent:content,
     expandContent: expand1,
     expandLabel: 'Show additional content',
-    handleDownload: ()=>alert('Download in progress'),
+    handleDownload: downloadHandlers,
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
   },
 };
@@ -81,7 +85,7 @@ export const NoAdditionalContent: Story = {
   args: {
     tabList: tabs,
     tabContent:content,
-    handleDownload: ()=>alert('Download in progress'),
+    handleDownload: downloadHandlers,
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
   },
 };
