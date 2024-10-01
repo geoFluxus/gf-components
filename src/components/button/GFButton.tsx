@@ -1,7 +1,7 @@
 import { MouseEventHandler } from 'react'
 import GlobalStyle from '../../globalStyles';
 import { Button, ButtonProps } from 'antd';
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components'
 
 export interface GFButtonProps extends ButtonProps {
   type?: "link" | "text" | "primary" | "default" | "dashed" | undefined;
