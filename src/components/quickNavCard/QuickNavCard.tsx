@@ -35,7 +35,8 @@ const StyledCard = styled(GFCard)<GFCardProps>`
 const StyedText = styled(Text)`
   font: var(--gf-header-h5);
   color: var(--gf-color-text-primary);
-  `
+  font-weight: bold;
+`
   const StyledButton = styled(Button)`
   padding: 0px;
   font: var(--gf-label-md-default);
