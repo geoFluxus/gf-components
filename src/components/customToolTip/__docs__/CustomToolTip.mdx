@@ -1,0 +1,27 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as CustomToolTip from "./CustomToolTip.stories.tsx";
+
+<Meta of={CustomToolTip} title="CustomToolTip" />
+
+# CustomToolTip
+
+Custom tooltip for Sankey.
+
+### Example
+
+<Canvas of={CustomToolTip.Default} />
+
+## Usage
+
+```ts
+import {CustomToolTip} from "gf-components";
+
+const Example = () => {
+  return (
+    <CustomToolTip/>
+  );
+};
+
+export default Example;
+```
