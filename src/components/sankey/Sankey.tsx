@@ -16,7 +16,7 @@ const Sankey: React.FC<Props> = ({ sankeyData }) => {
       <div style={{ width: "100%", height: 600 }}>
         <ResponsiveSankey
           data={sankeyData}
-          margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+          margin={{ top: 20, right: 120, bottom: 20, left: 120 }}
         />
       </div>
     </>
