@@ -1,0 +1,32 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as TreeMap from "./TreeMap.stories.tsx";
+
+<Meta of={TreeMap} title="TreeMap" />
+
+# TreeMap
+
+Base component for TreeMap.
+
+### Example
+
+<Canvas of={TreeMap.Default} />
+
+## Usage
+
+```ts
+import {TreeMap} from "gf-components";
+
+const Example = () => {
+  return (
+    <TreeMap
+      treeMapData={data}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **treeMapData** - Object containing nodes for TreeMap
