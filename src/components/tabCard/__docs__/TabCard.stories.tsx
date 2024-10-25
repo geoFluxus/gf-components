@@ -4,7 +4,8 @@ import { Title } from "../../title";
 import { Description } from "../../description";
 import Example from "./Example";
 import { Sankey } from "../../sankey";
-import { SankeyData } from "../../sankey/data"
+import { SankeyData } from "../../sankey/data";
+import { Table } from "antd";
 
 const tabs = [
   {
@@ -16,12 +17,105 @@ const tabs = [
     label: "Table",
   },
 ];
+
+const COLUMNS = [
+  {
+    title: "Materiaal",
+    dataIndex: "type",
+    sorter: (a,b) => a["type"].localeCompare(b["type"])
+  },
+  {
+    title: "Hoofdgroep",
+    dataIndex: "flow",
+    sorter: (a,b) => a["flow"].localeCompare(b["flow"])
+  },
+  {
+    title: "Afval",
+    dataIndex: "value",
+    sorter: (a, b) => a["value"] - b["value"]
+  },
+  {
+    title: "Eenheid",
+    dataIndex: "unit",
+  },
+];
+
+const dataSource = [
+  {
+    key: 1,
+    type: "Totaal",
+    flow: null,
+    unit: "t",
+    value: 468701.56,
+  },
+  {
+    key: 2,
+    type: "Gemengd",
+    flow: "Totaal",
+    unit: "t",
+    value: 112236.988,
+  },
+  {
+    key: 3,
+    type: "Abiotisch",
+    flow: "Totaal",
+    unit: "t",
+    value: 180678.442,
+  },
+  {
+    key: 4,
+    type: "Abiotisch (gemengd)",
+    flow: "Abiotisch",
+    unit: "t",
+    value: 5716.647,
+  },
+  {
+    key: 5,
+    type: "Fossiel Organisch",
+    flow: "Abiotisch",
+    unit: "t",
+    value: 2813.445,
+  },
+  {
+    key: 6,
+    type: "Aardolie",
+    flow: "Fossiel Organisch",
+    unit: "t",
+    value: 460.515,
+  },
+  {
+    key: 7,
+    type: "Aardolie (gemengd)",
+    flow: "Aardolie",
+    unit: "t",
+    value: 159.035,
+  },
+  {
+    key: 8,
+    type: "Aardolie (andere)",
+    flow: "Aardolie",
+    unit: "t",
+    value: 301.48,
+  },
+  {
+    key: 9,
+    type: "Fossiel Organisch (gemengd)",
+    flow: "Fossiel Organisch",
+    unit: "t",
+    value: 2352.93,
+  },
+  {
+    key: 10,
+    type: "Inorganisch",
+    flow: "Abiotisch",
+    unit: "t",
+    value: 172148.35,
+  },
+];
 const content = {
-  chart: (
-    <Sankey sankeyData={SankeyData} />
-  ),
+  chart: <Sankey sankeyData={SankeyData} />,
   table: (
-    <Description text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere." />
+    <Table columns={COLUMNS} dataSource={dataSource} scroll={{y: 500}} pagination={false}/>
   ),
 };
 const downloadHandlers = {
@@ -97,4 +191,3 @@ export const NoAdditionalContent: Story = {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.",
   },
 };
-

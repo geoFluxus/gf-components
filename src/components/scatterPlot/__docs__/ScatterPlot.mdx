@@ -1,0 +1,33 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as ScatterPlot from "./ScatterPlot.stories.tsx";
+
+<Meta of={ScatterPlot} title="ScatterPlot" />
+
+# ScatterPlot
+
+Base component for Scatter plot.
+
+### Example
+
+<Canvas of={ScatterPlot.Default} />
+
+## Usage
+
+```ts
+import {ScatterPlot} from "gf-components";
+
+const Example = () => {
+  return (
+    <ScatterPlot
+      scatterPlotData={data}
+      extraLayer={extra}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **ScatterPlotData** - Object containing nodes for Sankey
