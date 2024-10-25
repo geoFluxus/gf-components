@@ -9,21 +9,33 @@ export interface Props {
 }
 
 const ScatterPlot: React.FC<Props> = ({ scatterPlotData }) => {
+  const line = scatterPlotData.line,
+        x1 = line.x1, y1 = line.y1,
+        x2 = line.x2, y2 = line.y2
   return (
     <>
       <GlobalStyle />
       <div style={{ width: "100%", height: 600 }}>
         <ResponsiveScatterPlot
-          data={scatterPlotData}
+          data={[scatterPlotData.points]}
           margin={{ top: 20, right: 120, bottom: 20, left: 120 }}
-
+          xScale={{ type: 'point' }}
           layers= {[
             'grid',
-          'markers',
-          'axes',
-          'nodes',
-          'legends',
-          LineTarget
+            'markers',
+            'axes',
+            'nodes',
+            'legends',
+            ((props) => {
+                return(
+                    <LineTarget
+                        x1={props.xScale(x1)}
+                        y1={props.yScale(y1)}
+                        x2={props.xScale(x2)}
+                        y2={props.yScale(y2)}
+                    />
+                )
+            })
           ]}
         />
       </div>
