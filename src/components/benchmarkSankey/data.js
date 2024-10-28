@@ -111,126 +111,176 @@ export const data = {
     "links": [{
       "source": "source_A",
       "target": "target_A",
+      "source_rank": "A",
+      "target_rank": "A",
       "value": 32880525,
       "unit": "kg"
     },{
       "source": "source_B",
       "target": "target_A",
+      "source_rank": "B",
+      "target_rank": "A",
       "value": 53684760,
       "unit": "kg"
     },{
       "source": "source_B",
       "target": "target_B",
+      "source_rank": "B",
+      "target_rank": "B",
       "value": 21005475,
       "unit": "kg"
     },{
       "source": "source_C",
       "target": "target_A",
+      "source_rank": "C",
+      "target_rank": "A",
       "value": 98542043,
       "unit": "kg"
     },{
       "source": "source_C",
       "target": "target_B",
+      "source_rank": "C",
+      "target_rank": "B",
       "value": 17230070,
       "unit": "kg"
     },{
       "source": "source_C",
       "target": "target_C",
+      "source_rank": "C",
+      "target_rank": "C",
       "value": 414768637,
       "unit": "kg"
     },{
       "source": "source_D",
       "target": "target_A",
+      "source_rank": "D",
+      "target_rank": "A",
       "value": 2354300,
       "unit": "kg"
     },{
       "source": "source_D",
       "target": "target_C",
+      "source_rank": "D",
+      "target_rank": "C",
       "value": 38964666,
       "unit": "kg"
     },{
       "source": "source_D",
       "target": "target_D",
+      "source_rank": "D",
+      "target_rank": "D",
       "value": 48400920,
       "unit": "kg"
     },{
       "source": "source_E",
       "target": "target_E",
+      "source_rank": "E",
+      "target_rank": "E",
       "value": 113158829,
       "unit": "kg"
     },{
       "source": "source_F",
       "target": "target_A",
+      "source_rank": "F",
+      "target_rank": "A",
       "value": 3200,
       "unit": "kg"
     },{
       "source": "source_F",
       "target": "target_B",
+      "source_rank": "F",
+      "target_rank": "B",
       "value": 5660,
       "unit": "kg"
     },{
       "source": "source_F",
       "target": "target_C",
+      "source_rank": "F",
+      "target_rank": "C",
       "value": 17929660,
       "unit": "kg"
     },{
       "source": "source_F",
       "target": "target_D",
+      "source_rank": "F",
+      "target_rank": "D",
       "value": 51620,
       "unit": "kg"
     },{
       "source": "source_F",
       "target": "target_F",
+      "source_rank": "F",
+      "target_rank": "F",
       "value": 504185,
       "unit": "kg"
     },{
       "source": "source_G",
       "target": "target_C",
+      "source_rank": "G",
+      "target_rank": "C",
       "value": 3612550,
       "unit": "kg"
     },{
       "source": "source_G",
       "target": "target_F",
+      "source_rank": "G",
+      "target_rank": "F",
       "value": 120,
       "unit": "kg"
     },{
       "source": "source_H",
       "target": "target_B",
+      "source_rank": "H",
+      "target_rank": "B",
       "value": 7743960,
       "unit": "kg"
     },{
       "source": "source_H",
       "target": "target_C",
+      "source_rank": "H",
+      "target_rank": "C",
       "value": 9852400,
       "unit": "kg"
     },{
       "source": "source_H",
       "target": "target_D",
+      "source_rank": "H",
+      "target_rank": "D",
       "value": 829100,
       "unit": "kg"
     },{
       "source": "source_H",
       "target": "target_E",
+      "source_rank": "H",
+      "target_rank": "E",
       "value": 42116418,
       "unit": "kg"
     },{
       "source": "source_H",
       "target": "target_F",
+      "source_rank": "H",
+      "target_rank": "F",
       "value": 656760,
       "unit": "kg"
     },{
       "source": "source_H",
       "target": "target_G",
+      "source_rank": "H",
+      "target_rank": "G",
       "value": 135020,
       "unit": "kg"
     },{
       "source": "source_H",
       "target": "target_H",
+      "source_rank": "H",
+      "target_rank": "H",
       "value": 883912,
       "unit": "kg"
     },{
       "source": "source_I",
       "target": "target_I",
+      "source_rank": "I",
+      "target_rank": "I",
       "value": 247273635,
       "unit": "kg"
     }]
