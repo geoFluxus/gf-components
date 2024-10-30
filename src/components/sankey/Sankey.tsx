@@ -1,6 +1,7 @@
 import React from "react";
 import { DefaultLink, DefaultNode, ResponsiveSankey } from "@nivo/sankey";
 import GlobalStyle from "../../globalStyles";
+import { CustomToolTip } from "../customToolTip";
 
 export interface Props {
   sankeyData: {
@@ -17,6 +18,8 @@ const Sankey: React.FC<Props> = ({ sankeyData }) => {
         <ResponsiveSankey
           data={sankeyData}
           margin={{ top: 20, right: 120, bottom: 20, left: 120 }}
+      
+          linkTooltip={CustomToolTip}
         />
       </div>
     </>

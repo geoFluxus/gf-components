@@ -28,15 +28,9 @@ const PieChart: React.FC<Props> = ({ pieChartData, title }) => {
       <div style={{ width: "100%", height: 600 }}>
         <StyledSpan>{title}</StyledSpan>
         <ResponsivePie
-          tooltip={({ datum }) => {
-            return (
-              <CustomToolTip
-                label={datum.label}
-                amount={datum.value}
-                unit="kg"
-              />
-            );
-          }}
+          tooltip={({ datum: { id, label, value, color, unit } }) => (
+            <CustomToolTip label={label} amount={value} unit={unit} />
+          )}
           data={pieChartData}
           margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
           innerRadius={0.5}

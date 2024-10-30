@@ -2,6 +2,7 @@ import React from "react";
 import { ResponsiveScatterPlot, ScatterPlotDatum, ScatterPlotRawSerie } from '@nivo/scatterplot'
 import GlobalStyle from "../../globalStyles";
 import LineTarget from "./LineTarget";
+import { CustomToolTip } from "../customToolTip";
 
 export interface Props {
   scatterPlotData: ScatterPlotRawSerie<ScatterPlotDatum>[],
@@ -37,6 +38,11 @@ const ScatterPlot: React.FC<Props> = ({ scatterPlotData }) => {
                 )
             })
           ]}
+          tooltip={({node}) => {
+            return (
+              <CustomToolTip label={node.serieId} amount={node.formattedY}/>
+            );
+          }}
         />
       </div>
     </>
