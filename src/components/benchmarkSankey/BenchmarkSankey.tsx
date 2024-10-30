@@ -97,13 +97,6 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
   const CustomNodeLayer = ({ nodes }) =>
     nodes.map((node) => <CustomNode key={node.id} node={node} />);
 
-  const tooltipStyle = {
-    background: "white",
-    borderRadius: "2px",
-    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.25)",
-    padding: "5px 9px",
-  };
-
   const Legend = () => (
     <div style={{ marginTop: 10 }}>
       {Object.keys(scale).map((rank) => (
@@ -151,7 +144,6 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
               label={node.rank}
               amount={node.value}
               unit={node.unit}
-              style={tooltipStyle}
             />
           )}
           linkTooltip={({ link }) => {
@@ -166,7 +158,6 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
                 }
                 amount={link.value}
                 unit={link.unit}
-                style={tooltipStyle}
               />
             );
           }}

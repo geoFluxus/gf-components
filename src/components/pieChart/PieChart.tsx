@@ -2,6 +2,7 @@ import React from "react";
 import GlobalStyle from "../../globalStyles";
 import { ResponsivePie } from "@nivo/pie";
 import styled from "styled-components";
+import { CustomToolTip } from "../customToolTip";
 
 export interface Props {
   pieChartData: any;
@@ -9,15 +10,15 @@ export interface Props {
 }
 
 const StyledSpan = styled.span`
-color: black;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    align-items: center;
-    margin-left: 70px;
-    margin-bottom: 50px;
-    padding: 50px;
+  color: black;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  align-items: center;
+  margin-left: 70px;
+  margin-bottom: 50px;
+  padding: 50px;
 `;
 
 const PieChart: React.FC<Props> = ({ pieChartData, title }) => {
@@ -27,6 +28,15 @@ const PieChart: React.FC<Props> = ({ pieChartData, title }) => {
       <div style={{ width: "100%", height: 600 }}>
         <StyledSpan>{title}</StyledSpan>
         <ResponsivePie
+          tooltip={({ datum }) => {
+            return (
+              <CustomToolTip
+                label={datum.label}
+                amount={datum.value}
+                unit="kg"
+              />
+            );
+          }}
           data={pieChartData}
           margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
           innerRadius={0.5}
