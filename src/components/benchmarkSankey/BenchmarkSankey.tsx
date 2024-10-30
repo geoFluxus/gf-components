@@ -1,6 +1,7 @@
 import React from "react";
 import { DefaultLink, DefaultNode, ResponsiveSankey } from "@nivo/sankey";
 import GlobalStyle from "../../globalStyles";
+import CustomToolTip from "../customToolTip/CustomToolTip"
 
 export interface Props {
   data: {
@@ -19,6 +20,18 @@ const scale = {
     G: '#f15a24',
     H: '#cc3333',
     I: '#4d4d4d',
+}
+
+const ranks = {
+    A: 'Direct hoogwardig inzetten',
+    B: 'Indirect hoogwardig inzetten',
+    C: 'Voorbereiding voor recycling',
+    D: 'Microbiologische verwerking',
+    E: 'Grondreiniging',
+    F: 'Verbranding met opbrengst',
+    G: 'Verbranden',
+    H: 'Storten',
+    I: 'Opslag'
 }
 
 const BenchmarkSankey: React.FC<Props> = ({ data }) => {
@@ -79,10 +92,28 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
   const CustomNodeLayer = ({ nodes }) =>
     nodes.map((node) => <CustomNode key={node.id} node={node} />);
 
+  const tooltipStyle = {
+      background: "white",
+      borderRadius: "2px",
+      boxShadow: "0 1px 2px rgba(0, 0, 0, 0.25)",
+      padding: "5px 9px"
+  }
+
+  const Legend = () =>
+    <div style={{ marginTop: 10 }}>
+        {Object.keys(scale).map(rank => (
+            <div style={{display: 'flex'}}>
+            <div style={{backgroundColor: scale[rank], width: 20, height: 20, border: '1px solid gray'}} />
+            <span>{`${rank}`}</span>
+            </>
+        ))}
+    </div>
+
   return (
     <>
       <GlobalStyle />
-      <div style={{ width: "100%", height: 600 }}>
+      <div style={{ width: "100%", height: 600, display: 'flex', justifyContent: 'space-between' }}>
+        <Legend />
         <ResponsiveSankey
           data={data}
           margin={{ top: 20, right: 120, bottom: 20, left: 120 }}
@@ -95,6 +126,28 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
           nodeBorderWidth={0}
           nodeThickness={nodeThickness}
           nodeSpacing={nodeSpacing}
+          nodeTooltip={({node}) =>
+            <CustomToolTip
+                label={node.rank}
+                amount={node.value}
+                unit={node.unit}
+                style={tooltipStyle}
+            />
+          }
+          linkTooltip={({link}) => {
+            return <CustomToolTip
+                label={
+                    <>
+                        <b>{link.source.rank}</b>
+                        <span>{' > '}</span>
+                        <b>{link.target.rank}</b>
+                    </>
+                }
+                amount={link.value}
+                unit={link.unit}
+                style={tooltipStyle}
+            />
+          }}
           layers={["links", "nodes", CustomNodeLayer]}
         />
       </div>
