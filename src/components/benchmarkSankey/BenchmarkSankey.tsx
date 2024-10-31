@@ -1,13 +1,31 @@
 import React from "react";
-import { DefaultLink, DefaultNode, ResponsiveSankey } from "@nivo/sankey";
+import {
+  DefaultLink,
+  DefaultNode,
+  ResponsiveSankey,
+  SankeyLayerId,
+} from "@nivo/sankey";
 import GlobalStyle from "../../globalStyles";
 import CustomToolTip from "../customToolTip/CustomToolTip";
 import { Flex } from "antd";
 
+interface DefaultNodeWithExtras extends DefaultNode {
+  rank: string;
+  value: number;
+  pct: number;
+  unit: string;
+  nodeColor: string;
+}
+interface DefaultLinkWithExtras extends DefaultLink {
+  source_rank: string;
+  target_rank: string;
+
+  unit: string;
+}
 export interface Props {
   data: {
-    nodes: DefaultNode[];
-    links: DefaultLink[];
+    nodes: DefaultNodeWithExtras[];
+    links: DefaultLinkWithExtras[];
   };
 }
 
@@ -94,7 +112,7 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
     );
   };
 
-  const CustomNodeLayer = ({ nodes }) =>
+  const CustomNodeLayer: SankeyLayerId = ({ nodes }) =>
     nodes.map((node) => <CustomNode key={node.id} node={node} />);
 
   const Legend = () => (
