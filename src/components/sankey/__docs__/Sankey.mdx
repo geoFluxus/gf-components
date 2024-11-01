@@ -1,0 +1,32 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Sankey from "./Sankey.stories.tsx";
+
+<Meta of={Sankey} title="Sankey" />
+
+# Sankey
+
+Base component for sankey.
+
+### Example
+
+<Canvas of={Sankey.Default} />
+
+## Usage
+
+```ts
+import {Sankey} from "gf-components";
+
+const Example = () => {
+  return (
+    <Sankey
+      sankeyData={data}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **sankeyData** - Object containing nodes and links for Sankey

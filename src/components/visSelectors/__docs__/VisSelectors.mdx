@@ -1,0 +1,30 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as VisSelectors from "./VisSelectors.stories.tsx";
+
+<Meta of={VisSelectors} title="VisSelectors" />
+
+# VisSelectors
+
+Select dropdown component for visualisation.
+
+#### Example
+
+<Canvas of={VisSelectors.Default} />
+
+## Usage
+
+```ts
+import {VisSelectors} from "gf-components";
+
+const Example = () => {
+  return (
+    <VisSelectors isOneSelector={value}/>
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **isOneSelector** - Boolean value to determine if one or two selectors are rendered

@@ -1,0 +1,32 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Trends from "./Trends.stories.tsx";
+
+<Meta of={Trends} title="Trends" />
+
+# Trends
+
+Base component for Trends chart.
+
+### Example
+
+<Canvas of={Trends.Default} />
+
+## Usage
+
+```ts
+import {Trends} from "gf-components";
+
+const Example = () => {
+  return (
+    <Trends
+    trendsData={data}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **trendsData** - Object containing nodes for Trends

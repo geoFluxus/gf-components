@@ -1,0 +1,34 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as PieChart from "./PieChart.stories.tsx";
+
+<Meta of={PieChart} title="PieChart" />
+
+# PieChart
+
+Base component for Pie chart.
+
+### Example
+
+<Canvas of={PieChart.Default} />
+
+## Usage
+
+```ts
+import {PieChart} from "gf-components";
+
+const Example = () => {
+  return (
+    <PieChart
+      pieChartData={data}
+      title={title}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **pieChartData** - Object containing nodes for Pie chart
+- **title** - Title for the pie chart

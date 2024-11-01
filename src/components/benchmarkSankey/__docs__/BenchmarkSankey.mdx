@@ -1,0 +1,32 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as BenchmarkSankey from "./BenchmarkSankey.stories.tsx";
+
+<Meta of={BenchmarkSankey} title="BenchmarkSankey" />
+
+# BenchmarkSankey
+
+Base component for BenchmarkSankey.
+
+### Example
+
+<Canvas of={BenchmarkSankey.Default} />
+
+## Usage
+
+```ts
+import {BenchmarkSankey} from "gf-components";
+
+const Example = () => {
+  return (
+    <BenchmarkSankey
+      BenchmarkSankeyData={data}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **BenchmarkSankeyData** - Object containing nodes for BenchmarkSankey
