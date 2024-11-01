@@ -49,8 +49,10 @@ const ScatterPlot: React.FC<Props> = ({ scatterPlotData }) => {
             (props) => {
               return (
                 <LineTarget
+                  // @ts-ignore
                   x1={props.xScale(x1)}
                   y1={props.yScale(y1)}
+                  // @ts-ignore
                   x2={props.xScale(x2)}
                   y2={props.yScale(y2)}
                 />

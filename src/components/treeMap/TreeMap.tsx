@@ -2,7 +2,7 @@ import React from "react";
 
 import GlobalStyle from "../../globalStyles";
 import { ResponsiveTreeMap } from "@nivo/treemap";
-import { CustomToolTip } from "../customToolTip";
+//import { CustomToolTip } from "../customToolTip";
 
 export interface Props {
   treeMapData: object;
