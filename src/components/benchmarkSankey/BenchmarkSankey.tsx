@@ -112,6 +112,7 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
     );
   };
 
+  // @ts-ignore
   const CustomNodeLayer: SankeyLayerId = ({ nodes }) =>
     nodes.map((node) => <CustomNode key={node.id} node={node} />);
 

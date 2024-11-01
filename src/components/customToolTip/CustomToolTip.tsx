@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalStyle from "../../globalStyles";
-import numeral from "numeral";
+//import numeral from "numeral";
 import { DatumId } from "@nivo/pie";
 
 export interface Props {
