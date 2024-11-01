@@ -1,1 +1,1 @@
-export { default as VisSelectors } from './visSelectors'
+export { default as VisSelectors } from './VisSelectors'
