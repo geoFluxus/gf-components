@@ -1,11 +1,8 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Example from "./Example";
-import { ScatterPlotData } from "../data";
-import LineTarget from "../LineTarget";
 
 const meta: Meta<typeof Example> = {
-  title: "Components/Visualisation/ScatterPlot",
+  title: "Components/Visualisation/VisSelectors",
   component: Example,
 };
 
@@ -13,7 +10,13 @@ export default meta;
 type Story = StoryObj<typeof Example>;
 
 export const Default: Story = {
-  args: {
-    data: ScatterPlotData,
-  },
+  args: { isOneSelector: true },
+};
+
+export const oneVisSelector: Story = {
+  args: { isOneSelector: true },
+};
+
+export const twoVisSelectors: Story = {
+  args: { isOneSelector: false },
 };

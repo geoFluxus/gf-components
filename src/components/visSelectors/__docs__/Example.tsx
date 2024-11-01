@@ -1,7 +1,7 @@
-import React from "react";
-import { ScatterPlot } from "..";
+import React, { FC } from "react";
+import VisSelectors from "../VisSelectors";
 
-const Example = ({ data }) => {
+const Example = ({ isOneSelector }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Example = ({ data }) => {
         height: "100%",
       }}
     >
-      <ScatterPlot scatterPlotData={data}/>
+      <VisSelectors isOneSelector={isOneSelector} />
     </div>
   );
 };
