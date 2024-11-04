@@ -1,5 +1,5 @@
 import React from "react";
-import { ScatterPlot } from "..";
+import ScatterPlot from "../ScatterPlot";
 
 const Example = ({ data }) => {
   return (

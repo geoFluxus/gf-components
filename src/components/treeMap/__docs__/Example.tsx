@@ -1,5 +1,5 @@
 import React from "react";
-import { TreeMap } from "..";
+import TreeMap from "../TreeMap";
 
 const Example = ({ data }) => {
   return (

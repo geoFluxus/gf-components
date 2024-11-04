@@ -1,5 +1,5 @@
 import React from "react";
-import { Trends } from "..";
+import Trends from "../Trends";
 
 const Example = ({ data, xLeg, yLeg }) => {
   return (
