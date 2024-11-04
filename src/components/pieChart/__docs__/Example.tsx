@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart } from "..";
+import PieChart  from "../PieChart";
 
 const Example = ({ data, title }) => {
   return (

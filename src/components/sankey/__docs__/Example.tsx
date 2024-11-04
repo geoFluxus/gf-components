@@ -1,5 +1,5 @@
 import React from "react";
-import { Sankey } from "..";
+import Sankey from "../Sankey"
 
 const Example = ({ data }) => {
   return (
