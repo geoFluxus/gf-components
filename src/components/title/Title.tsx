@@ -8,6 +8,7 @@ export interface Props {
   title: string;
   subtitle?: string;
   type?: 'primary' | 'secondary' | 'header';
+  align: string;
 }
 
 const StyledTitle = styled(Text)<{type?: string}>`
