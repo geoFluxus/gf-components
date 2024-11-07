@@ -1,7 +1,7 @@
 import React from "react";
 import PieChart  from "../PieChart";
 
-const Example = ({ data, title }) => {
+const Example = ({ data, title, isEmpty }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Example = ({ data, title }) => {
         height: "100%",
       }}
     >
-      <PieChart pieChartData={data} title={title}/>
+      <PieChart pieChartData={data} title={title} isEmpty={isEmpty}/>
     </div>
   );
 };

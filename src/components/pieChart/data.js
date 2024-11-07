@@ -71,3 +71,27 @@ export const PieChartData = [
       "unit": "kg"
     }
   ];
+
+  export const EmptyPieChartData = [
+    {
+      "id": "Biomassa Voedsel",
+      "label": "Biomassa Voedsel",
+      "value": 60.927438,
+      "color": "hsl(184, 70%, 50%)",
+      "unit": "kg"
+    },
+    {
+      "id": "Consumptiegoederen & Kunststoffen",
+      "label": "Consumptiegoederen & Kunststoffen",
+      "value": 11.720626,
+      "color": "hsl(198, 70%, 50%)",
+      "unit": "kg"
+    },
+    {
+      "id": "Onbekend",
+      "label": "Onbekend",
+      "value": 149.668592,
+      "color": "hsl(198, 70%, 50%)",
+      "unit": "kg"
+    },
+];
