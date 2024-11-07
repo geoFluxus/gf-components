@@ -18,10 +18,8 @@ const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center'
     column-count: ${props.columns};
   `}
   text-align: ${props => props.textalign};
-`
-const StyledText = styled(Text)`
   font: var(--gf-label-lg-default);
-  color: var(--gf-color-text-secondary) ;
+  color: var(--gf-color-text-secondary);
 `
 
 const Description: React.FC<Props> = ({
@@ -38,9 +36,12 @@ const Description: React.FC<Props> = ({
   return (
     <>
       <GlobalStyle />
-      <StyledDiv columns={columns} textalign={textalign} style={style || {}} className={className || ''}>
-        <StyledText editable={edit}>{editableText}</StyledText>
-      </StyledDiv>
+      <StyledDiv
+        columns={columns}
+        textalign={textalign}
+        style={style || {}} className={className || ''}
+        dangerouslySetInnerHTML={{__html:editableText}}
+      />
     </>
   )
 }
