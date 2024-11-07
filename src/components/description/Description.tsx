@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components';
 
 
 export interface Props {
-  text: string;
+  text: string[];
   columns?: 2 | 3 | 4;
   editable?: boolean;
   style?: CSSProperties | undefined;
@@ -17,8 +17,11 @@ const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center'
     column-count: ${props.columns};
   `}
   text-align: ${props => props.textalign};
+`
+const StyledText = styled.div`
   font: var(--gf-label-lg-default);
   color: var(--gf-color-text-secondary);
+  margin-bottom: 1em;
 `
 
 const Description: React.FC<Props> = ({
@@ -31,12 +34,11 @@ const Description: React.FC<Props> = ({
   return (
     <>
       <GlobalStyle />
-      <StyledDiv
-        columns={columns}
-        textalign={textalign}
-        style={style || {}} className={className || ''}
-        dangerouslySetInnerHTML={{__html:text}}
-      />
+      <StyledDiv columns={columns} textalign={textalign} style={style || {}} className={className || ''}>
+        {text.map(paragraph =>
+            <StyledText dangerouslySetInnerHTML={{__html: paragraph}} />
+        )}
+      </StyledDiv>
     </>
   )
 }

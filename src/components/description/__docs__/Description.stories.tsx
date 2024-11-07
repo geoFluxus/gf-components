@@ -11,42 +11,55 @@ type Story = StoryObj<typeof Example>;
 
 export const SingleColumn: Story = {
   args: {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
-  },
-};
-
-export const SingleColumnEditable: Story = {
-  args: {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
-    editable: true,
+    text: [
+        'Als onderdeel van het strategisch ontwikkelingsplan 2019-2023 heeft de gemeente Zaanstad afgesproken om een regionale grondstoffenstrategie te ontwikkelen en uit te voeren in lijn met de landelijke ambities Circulaire Economie. Dit dashboard is een eerste poging om te monitoren hoe ver de gemeente is op weg om de gestelde doelen te halen. Het dashboard verzamelt, integreert en analyseert de verschillende beschikbare databronnen en geeft inzichten volgens de vier onderwerpen:',
+        'Overzicht: een algemeen overzicht en evenwicht tussen de goederen die in de gemeentelijke economie circuleren en het geproduceerde afval.',
+        'Materialen: welke materialen en bijbehorende kenmerken vinden we in de gemeente terug.',
+        'Doelen en vooruitgang: hoe goed scoort de gemeente in het licht van de nationaal geformuleerde doelstellingen.',
+        'Handelingsperspectieven: De mogelijkheden met het grootste effect om de nationale en lokale doelen te behalen.',
+        'Deze monitor Circulaire Economie geeft inzicht in de huidige stand van kennis over materialen in de gemeente. Het geeft een overzicht van welke informatie kan worden gevonden en afgeleid uit de beschikbare informatiebronnen, terwijl tegelijkertijd de lacunes worden blootgelegd. Door middel van de laatste (wetenschappelijke) inzichten en nieuwe gegevens, zal deze monitor blijvend verbeterd, verfijnd en uitgebreid worden.'
+    ],
   },
 };
 
 export const TwoColumns: Story = {
   args: {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
-    columns: 2
-  },
-};
-
-export const TwoColumnsEditable: Story = {
-  args: {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
+    text: [
+        'Als onderdeel van het strategisch ontwikkelingsplan 2019-2023 heeft de gemeente Zaanstad afgesproken om een regionale grondstoffenstrategie te ontwikkelen en uit te voeren in lijn met de landelijke ambities Circulaire Economie. Dit dashboard is een eerste poging om te monitoren hoe ver de gemeente is op weg om de gestelde doelen te halen. Het dashboard verzamelt, integreert en analyseert de verschillende beschikbare databronnen en geeft inzichten volgens de vier onderwerpen:',
+        'Overzicht: een algemeen overzicht en evenwicht tussen de goederen die in de gemeentelijke economie circuleren en het geproduceerde afval.',
+        'Materialen: welke materialen en bijbehorende kenmerken vinden we in de gemeente terug.',
+        'Doelen en vooruitgang: hoe goed scoort de gemeente in het licht van de nationaal geformuleerde doelstellingen.',
+        'Handelingsperspectieven: De mogelijkheden met het grootste effect om de nationale en lokale doelen te behalen.',
+        'Deze monitor Circulaire Economie geeft inzicht in de huidige stand van kennis over materialen in de gemeente. Het geeft een overzicht van welke informatie kan worden gevonden en afgeleid uit de beschikbare informatiebronnen, terwijl tegelijkertijd de lacunes worden blootgelegd. Door middel van de laatste (wetenschappelijke) inzichten en nieuwe gegevens, zal deze monitor blijvend verbeterd, verfijnd en uitgebreid worden.'
+    ],
     columns: 2,
-    editable: true,
   },
 };
 
 export const ThreeColumns: Story = {
   args: {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
+    text: [
+        'Als onderdeel van het strategisch ontwikkelingsplan 2019-2023 heeft de gemeente Zaanstad afgesproken om een regionale grondstoffenstrategie te ontwikkelen en uit te voeren in lijn met de landelijke ambities Circulaire Economie. Dit dashboard is een eerste poging om te monitoren hoe ver de gemeente is op weg om de gestelde doelen te halen. Het dashboard verzamelt, integreert en analyseert de verschillende beschikbare databronnen en geeft inzichten volgens de vier onderwerpen:',
+        'Overzicht: een algemeen overzicht en evenwicht tussen de goederen die in de gemeentelijke economie circuleren en het geproduceerde afval.',
+        'Materialen: welke materialen en bijbehorende kenmerken vinden we in de gemeente terug.',
+        'Doelen en vooruitgang: hoe goed scoort de gemeente in het licht van de nationaal geformuleerde doelstellingen.',
+        'Handelingsperspectieven: De mogelijkheden met het grootste effect om de nationale en lokale doelen te behalen.',
+        'Deze monitor Circulaire Economie geeft inzicht in de huidige stand van kennis over materialen in de gemeente. Het geeft een overzicht van welke informatie kan worden gevonden en afgeleid uit de beschikbare informatiebronnen, terwijl tegelijkertijd de lacunes worden blootgelegd. Door middel van de laatste (wetenschappelijke) inzichten en nieuwe gegevens, zal deze monitor blijvend verbeterd, verfijnd en uitgebreid worden.'
+    ],
     columns: 3
   },
 };
 
 export const FourColumns: Story = {
   args: {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio, ultrices volutpat ex faucibus ac. Nam volutpat vulputate dolor eu imperdiet. Cras ac tellus eu ligula cursus venenatis et quis diam. Vestibulum dictum pulvinar ex, in semper felis fermentum nec. In auctor eu libero eu mattis. Sed faucibus, ipsum a sollicitudin scelerisque, augue purus tristique enim, at condimentum nibh augue at erat. Nunc suscipit dignissim nisl non elementum. Nunc non lorem sit amet mauris cursus porttitor et non augue. Nam iaculis viverra lectus id posuere.',
+    text: [
+        'Als onderdeel van het strategisch ontwikkelingsplan 2019-2023 heeft de gemeente Zaanstad afgesproken om een regionale grondstoffenstrategie te ontwikkelen en uit te voeren in lijn met de landelijke ambities Circulaire Economie. Dit dashboard is een eerste poging om te monitoren hoe ver de gemeente is op weg om de gestelde doelen te halen. Het dashboard verzamelt, integreert en analyseert de verschillende beschikbare databronnen en geeft inzichten volgens de vier onderwerpen:',
+        'Overzicht: een algemeen overzicht en evenwicht tussen de goederen die in de gemeentelijke economie circuleren en het geproduceerde afval.',
+        'Materialen: welke materialen en bijbehorende kenmerken vinden we in de gemeente terug.',
+        'Doelen en vooruitgang: hoe goed scoort de gemeente in het licht van de nationaal geformuleerde doelstellingen.',
+        'Handelingsperspectieven: De mogelijkheden met het grootste effect om de nationale en lokale doelen te behalen.',
+        'Deze monitor Circulaire Economie geeft inzicht in de huidige stand van kennis over materialen in de gemeente. Het geeft een overzicht van welke informatie kan worden gevonden en afgeleid uit de beschikbare informatiebronnen, terwijl tegelijkertijd de lacunes worden blootgelegd. Door middel van de laatste (wetenschappelijke) inzichten en nieuwe gegevens, zal deze monitor blijvend verbeterd, verfijnd en uitgebreid worden.'
+    ],
     columns: 4
   },
 };
