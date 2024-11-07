@@ -35,7 +35,7 @@ const Description: React.FC<Props> = ({
     <>
       <GlobalStyle />
       <StyledDiv columns={columns} textalign={textalign} style={style || {}} className={className || ''}>
-        {text.map(paragraph =>
+        {text?.map(paragraph =>
             <StyledText dangerouslySetInnerHTML={{__html: paragraph}} />
         )}
       </StyledDiv>
