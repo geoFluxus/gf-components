@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components';
 
 
 export interface Props {
-  text: string;
+  text: string[];
   columns?: 2 | 3 | 4;
   editable?: boolean;
   style?: CSSProperties | undefined;
