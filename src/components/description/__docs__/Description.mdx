@@ -12,10 +12,6 @@ Base component for titles and subtitles.
 
 <Canvas of={Description.TwoColumns} />
 
-### Two columns (editable)
-
-<Canvas of={Description.TwoColumnsEditable} />
-
 ### Three columns 
 
 <Canvas of={Description.ThreeColumns} />
@@ -30,7 +26,6 @@ const Example = () => {
     <Description
       text={text}
       columns={columns}
-      editable={editable}
     />
   );
 };
@@ -41,4 +36,3 @@ export default Example;
 #### Arguments
 - **text** - A string that represents the body of the Description.
 - **columns** - The number of columns, either 2 | 3 | 4.
-- **editable** - Boolean that makes the description editable (for translation purposes).
