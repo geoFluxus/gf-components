@@ -1,9 +1,8 @@
-import React, { CSSProperties, useState } from 'react'
-import { Typography } from 'antd';
+import React, { CSSProperties } from 'react'
 import GlobalStyle from '../../globalStyles';
 import styled, {css} from 'styled-components';
 
-const { Text } = Typography
+
 export interface Props {
   text: string;
   columns?: 2 | 3 | 4;
@@ -25,14 +24,10 @@ const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center'
 const Description: React.FC<Props> = ({
   text,
   columns,
-  editable=false,
   textalign='left',
   style,
   className,
 }) => {
-  const [ editableText, setEditableText ] = useState(text)
-  const edit = editable ? { onChange: setEditableText } : false
-
   return (
     <>
       <GlobalStyle />
@@ -40,7 +35,7 @@ const Description: React.FC<Props> = ({
         columns={columns}
         textalign={textalign}
         style={style || {}} className={className || ''}
-        dangerouslySetInnerHTML={{__html:editableText}}
+        dangerouslySetInnerHTML={{__html:text}}
       />
     </>
   )
