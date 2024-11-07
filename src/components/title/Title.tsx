@@ -41,11 +41,12 @@ const Title: React.FC<Props> = ({
   title,
   subtitle,
   type='primary',
+  align='start'
 }) => {
   return (
     <>
       <GlobalStyle />
-      <Space className='gf-full-width' direction='vertical' size={8} align='start'>
+      <Space className='gf-full-width' direction='vertical' size={8} align={align}>
         <StyledTitle type={type}>{title}</StyledTitle>
         <StyledSubTitle type={type}>{subtitle}</StyledSubTitle>
       </Space>
