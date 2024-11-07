@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import GlobalStyle from "../../globalStyles";
 import { ResponsivePie } from "@nivo/pie";
 import styled from "styled-components";
