@@ -23,6 +23,26 @@ const StyledSpan = styled.span`
 `;
 
 const PieChart: React.FC<Props> = ({ pieChartData, title, isEmpty }) => {
+  const CenteredMetric = ({ dataWithArc, centerX, centerY }) => {
+    let total = 0;
+    dataWithArc.forEach((datum) => {
+      total += datum.value;
+    });
+    return (
+      <text
+        x={centerX}
+        y={centerY}
+        textAnchor="middle"
+        dominantBaseline="central"
+        style={{
+          fontSize: "16px",
+          fontWeight: 400,
+        }}
+      >
+        {isEmpty ? "Data niet openbaar beschikbaar" : ""}
+      </text>
+    );
+  };
   return (
     <>
       <GlobalStyle />
@@ -52,6 +72,13 @@ const PieChart: React.FC<Props> = ({ pieChartData, title, isEmpty }) => {
           arcLabelsSkipAngle={10}
           arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
           isInteractive={!isEmpty}
+          layers={[
+            "arcs",
+            "arcLabels",
+            "arcLinkLabels",
+            "legends",
+            CenteredMetric,
+          ]}
           defs={[
             {
               id: "dots",
@@ -73,33 +100,6 @@ const PieChart: React.FC<Props> = ({ pieChartData, title, isEmpty }) => {
             },
           ]}
         />
-        {isEmpty && (
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-
-              zIndex: 10,
-              pointerEvents: "none", // Disable events on the overlay
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                color: "#aaa",
-                fontSize: "18px",
-              }}
-            >
-              Data niet openbaar beschikbaar
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

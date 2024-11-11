@@ -1,5 +1,5 @@
 import GlobalStyle from "../../globalStyles";
-import { Flex, Select } from "antd";
+import { Col, Flex, Row, Select } from "antd";
 import { GFCard } from "../card";
 import styled from "styled-components";
 import { GFCardProps } from "../card/GFCard";
@@ -24,7 +24,7 @@ const options_Industries = [
   { label: "Bouw Sloop", value: "Bouw Sloop" },
 ];
 
-const optipns_ProcMethods = [
+const options_ProcMethods = [
   { label: "Alle verwerkings", value: "Alle verwerkings" },
   { label: "bewaren", value: "bewaren" },
   { label: "recyclen", value: "recyclen" },
@@ -38,29 +38,29 @@ const VisSelectors: React.FC<VisSelectorsProps> = ({ isOneSelector }) => {
     <>
       <GlobalStyle />
       <GFCard cardtype="default">
-        <Flex gap={8}>
-          <Flex vertical>
+        <Row gutter={20}>
+          <Col span={!isOneSelector ? 12 : 24}>
             <Title>Selecteer industrie:</Title>
             <Select
               defaultValue="Alle industrieen"
-              style={{ width: "100vh" }}
+              style={{ width: "100%" }}
               onChange={(value) => alert(`Option ${value} selected`)}
               options={options_Industries}
             />
-          </Flex>
+          </Col>
 
           {!isOneSelector && (
-            <Flex vertical>
+            <Col span={12}>
               <Title>Selecteer verwerkingsmethode:</Title>
               <Select
                 defaultValue="Alle verwerkings"
-                style={{ width: "100vh" }}
+                style={{ width: "100%" }}
                 onChange={(value) => alert(`Option ${value} selected`)}
-                options={optipns_ProcMethods}
+                options={options_ProcMethods}
               />
-            </Flex>
+            </Col>
           )}
-        </Flex>
+        </Row>
       </GFCard>
     </>
   );
