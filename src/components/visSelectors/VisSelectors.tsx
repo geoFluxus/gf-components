@@ -3,7 +3,6 @@ import { Col, Row, Select } from "antd";
 import { GFCard } from "../card";
 import styled from "styled-components";
 import { GFCardProps } from "../card/GFCard";
-import { ChangeEvent } from "react";
 
 const Title = styled.h3`
   color: var(--gf-color-button-primary);
