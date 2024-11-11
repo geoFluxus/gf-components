@@ -1,8 +1,9 @@
 import GlobalStyle from "../../globalStyles";
-import { Col, Flex, Row, Select } from "antd";
+import { Col, Row, Select } from "antd";
 import { GFCard } from "../card";
 import styled from "styled-components";
 import { GFCardProps } from "../card/GFCard";
+import { ChangeEvent } from "react";
 
 const Title = styled.h3`
   color: var(--gf-color-button-primary);
@@ -10,6 +11,7 @@ const Title = styled.h3`
 
 export interface VisSelectorsProps extends GFCardProps {
   isOneSelector: boolean;
+  setter: (value: string) => void;
 }
 
 const options_Industries = [
@@ -33,7 +35,7 @@ const options_ProcMethods = [
   { label: "storten", value: "storten" },
 ];
 
-const VisSelectors: React.FC<VisSelectorsProps> = ({ isOneSelector }) => {
+const VisSelectors: React.FC<VisSelectorsProps> = ({ isOneSelector, setter }) => {
   return (
     <>
       <GlobalStyle />
@@ -44,7 +46,10 @@ const VisSelectors: React.FC<VisSelectorsProps> = ({ isOneSelector }) => {
             <Select
               defaultValue="Alle industrieen"
               style={{ width: "100%" }}
-              onChange={(value) => alert(`Option ${value} selected`)}
+              onChange={(value) => {
+                alert(`Option ${value} selected`);
+                setter(value)
+              }}
               options={options_Industries}
             />
           </Col>
