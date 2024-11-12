@@ -27,11 +27,11 @@ const options_Industries = [
 
 const options_ProcMethods = [
   { label: "Alle verwerkings", value: "Alle verwerkings" },
-  { label: "bewaren", value: "bewaren" },
-  { label: "recyclen", value: "recyclen" },
-  { label: "hergebruiken", value: "hergebruiken" },
-  { label: "verbranden", value: "verbranden" },
-  { label: "storten", value: "storten" },
+  { label: "Bewaren", value: "bewaren" },
+  { label: "Recyclen", value: "recyclen" },
+  { label: "Hergebruiken", value: "hergebruiken" },
+  { label: "Verbranden", value: "verbranden" },
+  { label: "Storten", value: "storten" },
 ];
 
 const VisSelectors: React.FC<VisSelectorsProps> = ({ isOneSelector, setter }) => {

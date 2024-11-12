@@ -30,11 +30,19 @@ const Description: React.FC<Props> = ({
   textalign='left',
   style,
   className,
+  editable
 }) => {
   return (
     <>
       <GlobalStyle />
-      <StyledDiv columns={columns} textalign={textalign} style={style || {}} className={className || ''}>
+      <StyledDiv
+        columns={columns}
+        textalign={textalign}
+        style={style || {}}
+        className={className || ''}
+        contentEditable={editable}
+        suppressContentEditableWarning={editable}
+      >
         {text?.map(paragraph =>
             <StyledText dangerouslySetInnerHTML={{__html: paragraph}} />
         )}
