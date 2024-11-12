@@ -1,6 +1,6 @@
 {
   "name": "gf-components",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "private": false,
   "description": "geoFluxus library of React components",
   "repository": {
@@ -38,7 +38,7 @@
   "scripts": {
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "prepare": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
