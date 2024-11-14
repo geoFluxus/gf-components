@@ -19,7 +19,7 @@ import {VisSelectors} from "gf-components";
 
 const Example = () => {
   return (
-    <VisSelectors isOneSelector={value}/>
+    <VisSelectors selectors={selectors}/>
   );
 };
 
@@ -27,4 +27,22 @@ export default Example;
 ```
 
 #### Arguments
-- **isOneSelector** - Boolean value to determine if one or two selectors are rendered
+- **selectors (Array)** - Array of selector objects
+
+    *Selector object*
+    - id (string) - To refer to the selector in the state setter
+    - title (string) - Selector title
+    - defaultValue (string) - Selector option object value to use as default
+    - options (Array) - Array of selector option objects
+
+        *Selector option object*
+        - label (string): Text to show for given selector option
+        - value (string): Key to recover for given selector option
+
+- **setter (function)** - Function to update parent state with args
+    - key (string): Selector key to update
+    - value (Array): Array of values to update selector for given id
+
+
+
+

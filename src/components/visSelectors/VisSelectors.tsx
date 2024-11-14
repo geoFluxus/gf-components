@@ -13,56 +13,27 @@ export interface VisSelectorsProps extends GFCardProps {
   setter: (value: string) => void;
 }
 
-const options_Industries = [
-  { value: "Alle industrieen", label: "Alle industrieen" },
-  { label: "Chemie Energie", value: "Chemie Energie" },
-  { label: "Afval Beheer", value: "Afval Beheer" },
-  { label: "Onbekend", value: "Onbekend" },
-  { label: "Metaal Machine Elektronica", value: "Metaal Machine Elektronica" },
-  { label: "Landbouw Veeteelt", value: "Landbouw Veeteelt" },
-  { label: "Plastic Rubber Textiel", value: "Plastic Rubber Textiel" },
-  { label: "Diversen", value: "Diversen" },
-  { label: "Bouw Sloop", value: "Bouw Sloop" },
-];
 
-const options_ProcMethods = [
-  { label: "Alle verwerkings", value: "Alle verwerkings" },
-  { label: "Bewaren", value: "bewaren" },
-  { label: "Recyclen", value: "recyclen" },
-  { label: "Hergebruiken", value: "hergebruiken" },
-  { label: "Verbranden", value: "verbranden" },
-  { label: "Storten", value: "storten" },
-];
+const VisSelectors: React.FC<VisSelectorsProps> = ({ selectors, setter }) => {
+  const span = 24 / selectors.length
 
-const VisSelectors: React.FC<VisSelectorsProps> = ({ isOneSelector, setter }) => {
   return (
     <>
       <GlobalStyle />
-      <GFCard cardtype="default">
+      <GFCard cardtype="default" style={{ width: "100%" }}>
         <Row gutter={20}>
-          <Col span={!isOneSelector ? 12 : 24}>
-            <Title>Selecteer industrie:</Title>
-            <Select
-              defaultValue="Alle industrieen"
-              style={{ width: "100%" }}
-              onChange={(value) => {
-                alert(`Option ${value} selected`);
-                setter(value)
-              }}
-              options={options_Industries}
-            />
-          </Col>
-
-          {!isOneSelector && (
-            <Col span={12}>
-              <Title>Selecteer verwerkingsmethode:</Title>
-              <Select
-                defaultValue="Alle verwerkings"
-                style={{ width: "100%" }}
-                onChange={(value) => alert(`Option ${value} selected`)}
-                options={options_ProcMethods}
-              />
-            </Col>
+          {selectors.map(s =>
+              <Col span={span}>
+                <Title>{s.title}</Title>
+                <Select
+                  defaultValue={s.defaultValue}
+                  style={{ width: "100%" }}
+                  onChange={(value) => {
+                    setter(s.key, value)
+                  }}
+                  options={s.options}
+                />
+              </Col>
           )}
         </Row>
       </GFCard>
