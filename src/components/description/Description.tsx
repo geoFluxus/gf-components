@@ -25,6 +25,7 @@ const StyledText = styled.div`
 `
 
 const Description: React.FC<Props> = ({
+  id,
   text,
   columns,
   textalign='left',
@@ -36,6 +37,7 @@ const Description: React.FC<Props> = ({
     <>
       <GlobalStyle />
       <StyledDiv
+        id={id}
         columns={columns}
         textalign={textalign}
         style={style || {}}
