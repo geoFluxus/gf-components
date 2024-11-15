@@ -18,21 +18,20 @@ const tooltipStyle = {
 };
 
 const CustomToolTip: React.FC<Props> = ({
-  style = tooltipStyle,
-  label,
-  amount,
-  unit="kg",
+  style=tooltipStyle,
+  body=null
 }) => {
   return (
     <>
       <GlobalStyle />
-
       <div style={style}>
-        {label}: {amount} {unit}
+        { body || <span>Custom tooltip</span> }
       </div>
     </>
   );
 };
+
+
 // const NULL = "0";
 // const NUM = "0,0[.]00";
 // const formatNumGlobal = (num) => (num ? numeral(num).format(NUM) : NULL);
