@@ -26,20 +26,49 @@ export interface Props {
   scatterPlotData: ScatterPlotDataType;
 }
 
-const ScatterPlot: React.FC<Props> = ({ scatterPlotData }) => {
-  const line = scatterPlotData.line,
-    x1 = line.x1,
-    y1 = line.y1,
-    x2 = line.x2,
-    y2 = line.y2;
+const ScatterPlot: React.FC<Props> = ({
+    scatterPlotData,
+    style={},
+    margin={},
+    axisBottom={},
+    axisLeft={},
+    tooltip=null
+}) => {
+  const line = scatterPlotData?.line,
+    x1 = line?.x1,
+    y1 = line?.y1,
+    x2 = line?.x2,
+    y2 = line?.y2;
   return (
     <>
       <GlobalStyle />
-      <div style={{ width: "100%", height: 600 }}>
+      <div style={{ width: "100%", height: 600, ...style }}>
         <ResponsiveScatterPlot
-          data={[scatterPlotData.points]}
-          margin={{ top: 20, right: 120, bottom: 20, left: 120 }}
+          data={[scatterPlotData?.points]}
+          margin={{ top: 20, right: 120, bottom: 100, left: 120, ...margin }}
           xScale={{ type: "point" }}
+          axisBottom={{
+            orient: 'bottom',
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legendPosition: 'middle',
+            legendOffset: 46,
+            truncateTickAt: 0,
+            legend: 'axisBottom',
+            ...axisBottom
+          }}
+          axisLeft={{
+            orient: 'left',
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legendPosition: 'middle',
+            legendOffset: -60,
+            truncateTickAt: 0,
+            legend: 'axisLeft',
+            ...axisLeft
+          }}
           layers={[
             "grid",
             "markers",
@@ -61,7 +90,7 @@ const ScatterPlot: React.FC<Props> = ({ scatterPlotData }) => {
           ]}
           tooltip={({ node }) => {
             return (
-              <CustomToolTip label={node.serieId} amount={node.formattedY} />
+              <CustomToolTip body={ tooltip?.({node}) || <span>Scatterplot tooltip</span>} />
             );
           }}
         />
