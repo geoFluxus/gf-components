@@ -1,47 +1,52 @@
 import React from "react";
-
 import GlobalStyle from "../../globalStyles";
 import { ResponsiveTreeMap } from "@nivo/treemap";
-//import { CustomToolTip } from "../customToolTip";
+import { CustomToolTip } from "../customToolTip";
 
 export interface Props {
   treeMapData: object;
 }
 
-const Sankey: React.FC<Props> = ({ treeMapData }) => {
+const Sankey: React.FC<Props> = ({
+    treeMapData,
+    style={},
+    colors={ datum: 'data.color' },
+    identity=null,
+    value=null,
+    margin={},
+    label=null,
+    orientLabel=false,
+    labelSkipSize=12,
+    labelTextColor=null,
+    borderColor=null,
+    tooltip=null
+}) => {
   return (
     <>
       <GlobalStyle />
-      <div style={{ width: "100%", height: 600 }}>
+      <div style={{ width: "100%", height: 600, ...style }}>
         <ResponsiveTreeMap
           data={treeMapData}
-          identity="name"
-          value="loc"
-          valueFormat=".02s"
-          margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-          labelSkipSize={12}
-          labelTextColor={{
-            from: "color",
-            modifiers: [["darker", 1.2]],
+          colors={colors || {scheme: 'nivo'}}
+          identity={identity || "name"}
+          value={value || "loc"}
+          margin={{ top: 10, right: 10, bottom: 10, left: 10, ...margin }}
+          enableParentLabel={false}
+          label={(node) => {
+            return label?.(node) || `${node?.id}`
           }}
-          parentLabelPosition="left"
-          parentLabelTextColor={{
-            from: "color",
-            modifiers: [["darker", 2]],
-          }}
-          borderColor={{
+          orientLabel={orientLabel}
+          labelSkipSize={labelSkipSize}
+          labelTextColor={labelTextColor || 'black'}
+          borderColor={borderColor || {
             from: "color",
             modifiers: [["darker", 0.1]],
           }}
-          tooltip={({ node }) => (
-            <strong
-              style={{
-                color: node.color,
-              }}
-            >
-              {node.pathComponents.join(" / ")}: {node.formattedValue}
-            </strong>
-          )}
+          tooltip={({ node }) => {
+            return (
+              <CustomToolTip body={ tooltip?.({node}) || <span>Scatterplot tooltip</span>} />
+            );
+          }}
         />
       </div>
     </>
