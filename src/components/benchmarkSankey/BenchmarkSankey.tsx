@@ -7,7 +7,15 @@ import {
 } from "@nivo/sankey";
 import GlobalStyle from "../../globalStyles";
 import CustomToolTip from "../customToolTip/CustomToolTip";
-import { Flex } from "antd";
+import { Flex, Typography } from "antd";
+import styled from 'styled-components';
+
+
+const { Text } = Typography
+const StyledText = styled(Text)`
+  font: var(--gf-label-md-default);
+  color: var(--gf-color-text-secondary);
+`
 
 interface DefaultNodeWithExtras extends DefaultNode {
   rank: string;
@@ -53,15 +61,22 @@ const ranks = {
   I: "Opslag",
 };
 
-const BenchmarkSankey: React.FC<Props> = ({ data }) => {
-  const padding = 2,
-    fontSize = 12,
-    borderWidth = 2;
-  const width = 50,
-    height = padding * 2 + (fontSize + 2) + borderWidth * 2,
-    offsetX = 10;
+
+const BenchmarkSankey: React.FC<Props> = ({
+    data,
+    margin={},
+    height=null,
+    linkTooltip=null
+}) => {
+  // node label
+  const nodeLabelPadding = 2,
+        nodeLabelFontSize = 22,
+        nodeLabelBorderWidth = 2;
+  const nodeLabelWidth = 60,
+        nodeLabelHeight = nodeLabelPadding * 2 + (nodeLabelFontSize + 2) + nodeLabelBorderWidth * 2,
+        nodeLabelOffsetX = 10;
   const nodeThickness = 20,
-    nodeSpacing = height;
+        nodeSpacing = nodeLabelHeight;
 
   // color nodes
   data.nodes = data.nodes.map((n) => ({
@@ -84,29 +99,27 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
 
   const CustomNode = ({ node }) => {
     const transX = node.sourceLinks.length
-        ? -(width + offsetX)
-        : nodeThickness + offsetX,
-      transY = node.height / 2 - height / 2;
+        ? -(nodeLabelWidth + nodeLabelOffsetX)
+        : nodeThickness + nodeLabelOffsetX,
+      transY = node.height / 2 - nodeLabelHeight / 2;
 
     return (
       <g transform={`translate(${node.x0 + transX}, ${node.y0 + transY})`}>
-        <foreignObject width={width} height={height}>
-          <div
+        <foreignObject width={nodeLabelWidth} height={nodeLabelHeight}>
+          <Flex
+            justify="space-between"
+            align="center"
             style={{
               color: "black",
               textAlign: "center",
-              padding: `${padding}px`,
-              fontSize: `${fontSize}px`,
-              border: `${borderWidth}px solid ${node.color}`,
-              display: "flex",
-              justifyContent: "space-between",
+              padding: `${nodeLabelPadding}px`,
+              border: `${nodeLabelBorderWidth}px solid ${node.color}`,
+              whiteSpace: 'nowrap'
             }}
           >
-            <span>
-              <b>{node.rank}</b>
-            </span>
-            <span>{getNodeLabel(node)}</span>
-          </div>
+            <StyledText strong>{node.rank}</StyledText>
+            <StyledText>{getNodeLabel(node)}</StyledText>
+          </Flex>
         </foreignObject>
       </g>
     );
@@ -117,18 +130,18 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
     nodes.map((node) => <CustomNode key={node.id} node={node} />);
 
   const Legend = () => (
-    <div style={{ marginTop: 10 }}>
+    <div style={{ marginTop: 10, whiteSpace: 'nowrap' }}>
       {Object.keys(scale).map((rank) => (
-        <Flex gap={8}>
+        <Flex gap={8} align="center">
           <div
             style={{
               backgroundColor: scale[rank],
-              width: 20,
-              height: 20,
+              width: 22,
+              height: 22,
               border: "1px solid gray",
             }}
           />
-          <span>{`${rank} ${ranks[rank]}`}</span>
+          <StyledText>{`${rank} ${ranks[rank]}`}</StyledText>
         </Flex>
       ))}
     </div>
@@ -140,7 +153,7 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
       <div
         style={{
           width: "100%",
-          height: 600,
+          height: height || 600,
           display: "flex",
           justifyContent: "space-between",
         }}
@@ -148,7 +161,7 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
         <Legend />
         <ResponsiveSankey
           data={data}
-          margin={{ top: 20, right: 260, bottom: 20, left: 260 }}
+          margin={{ top: 20, right: 260, bottom: 20, left: 260, ...margin }}
           sort={"input"}
           labelPosition={"outside"}
           colors={(node) => node.nodeColor}
@@ -167,17 +180,7 @@ const BenchmarkSankey: React.FC<Props> = ({ data }) => {
           )}
           linkTooltip={({ link }) => {
             return (
-              <CustomToolTip
-                label={
-                  <>
-                    <b>{link.source.rank}</b>
-                    <span>{" > "}</span>
-                    <b>{link.target.rank}</b>
-                  </>
-                }
-                amount={link.value}
-                unit={link.unit}
-              />
+              <CustomToolTip body={ linkTooltip?.({node}) || <span>Benchmark sankey tooltip</span>} />
             );
           }}
           layers={["links", "nodes", CustomNodeLayer]}

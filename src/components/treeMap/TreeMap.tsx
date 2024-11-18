@@ -44,7 +44,7 @@ const Sankey: React.FC<Props> = ({
           }}
           tooltip={({ node }) => {
             return (
-              <CustomToolTip body={ tooltip?.({node}) || <span>Scatterplot tooltip</span>} />
+              <CustomToolTip body={ tooltip?.({node}) || <span>Treemap tooltip</span>} />
             );
           }}
         />
