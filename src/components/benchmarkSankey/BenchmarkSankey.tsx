@@ -7,7 +7,7 @@ import {
 } from "@nivo/sankey";
 import GlobalStyle from "../../globalStyles";
 import CustomToolTip from "../customToolTip/CustomToolTip";
-import { Flex, Typography } from "antd";
+import { Flex, Typography, Row, Col } from "antd";
 import styled from 'styled-components';
 
 
@@ -150,42 +150,48 @@ const BenchmarkSankey: React.FC<Props> = ({
   return (
     <>
       <GlobalStyle />
-      <div
-        style={{
-          width: "100%",
-          height: height || 600,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Legend />
-        <ResponsiveSankey
-          data={data}
-          margin={{ top: 20, right: 260, bottom: 20, left: 260, ...margin }}
-          sort={"input"}
-          labelPosition={"outside"}
-          colors={(node) => node.nodeColor}
-          enableLinkGradient={true}
-          linkOpacity={0.5}
-          nodeOpacity={1}
-          nodeBorderWidth={0}
-          nodeThickness={nodeThickness}
-          nodeSpacing={nodeSpacing}
-          nodeTooltip={({ node }) => (
-            <CustomToolTip
-              label={node.rank}
-              amount={node.value}
-              unit={node.unit}
-            />
-          )}
-          linkTooltip={({ link }) => {
-            return (
-              <CustomToolTip body={ linkTooltip?.({link}) || <span>Benchmark sankey tooltip</span>} />
-            );
-          }}
-          layers={["links", "nodes", CustomNodeLayer]}
-        />
-      </div>
+        <Row style={{width: "100%"}}>
+            <Col span={8}>
+                <Legend />
+            </Col>
+            <Col span={16}>
+                <div
+                    style={{
+                      height: height || 600,
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                >
+                    <ResponsiveSankey
+                      data={data}
+                      margin={{ top: 20, right: 100, bottom: 20, left: 100, ...margin }}
+                      sort={"input"}
+                      labelPosition={"outside"}
+                      colors={(node) => node.nodeColor}
+                      enableLinkGradient={true}
+                      linkOpacity={0.5}
+                      nodeOpacity={1}
+                      nodeBorderWidth={0}
+                      nodeThickness={nodeThickness}
+                      nodeSpacing={nodeSpacing}
+                      nodeTooltip={({ node }) => (
+                        <CustomToolTip
+                          label={node.rank}
+                          amount={node.value}
+                          unit={node.unit}
+                        />
+                      )}
+                      linkTooltip={({ link }) => {
+                        return (
+                          <CustomToolTip body={ linkTooltip?.({link}) || <span>Benchmark sankey tooltip</span>} />
+                        );
+                      }}
+                      layers={["links", "nodes", CustomNodeLayer]}
+                    />
+                </div>
+            </Col>
+        </Row>
+
     </>
   );
 };
