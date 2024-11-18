@@ -9,17 +9,25 @@ export interface Props {
   yLeg: string;
 }
 
-const Trends: React.FC<Props> = ({ trendsData, xLeg, yLeg }) => {
+const Trends: React.FC<Props> = ({
+    trendsData,
+    height=null,
+    margin={},
+    colors={datum: 'color'},
+    xLeg,
+    yLeg,
+    tooltip=null
+}) => {
   return (
     <>
       <GlobalStyle />
-      <div style={{ width: "95%", height: "100vh" }}>
+      <div style={{ width: "100%", height: height || 600 }}>
         <ResponsiveLine
           data={trendsData}
-          margin={{ top: 50, right: 190, bottom: 50, left: 90 }}
+          margin={{ top: 50, right: 90, bottom: 50, left: 90, ...margin }}
+          colors={colors}
           xScale={{ type: "point" }}
           yScale={{ type: "linear", min: "auto", max: "auto", reverse: false }}
-          //yFormat={(value) => (numeral(value).format('+ 0,.[00]'))}
           axisTop={null}
           axisRight={null}
           axisBottom={{
@@ -70,9 +78,9 @@ const Trends: React.FC<Props> = ({ trendsData, xLeg, yLeg }) => {
               ],
             },
           ]}
-          tooltip={dataPoint => {
+          tooltip={(dt) => {
             return (
-              <CustomToolTip label={dataPoint.point.serieId} amount={dataPoint.point.data.yFormatted}/>
+              <CustomToolTip body={ tooltip?.(dt) || <span>Line tooltip</span>} />
             );
           }}
         />
