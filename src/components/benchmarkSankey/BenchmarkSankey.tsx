@@ -180,7 +180,7 @@ const BenchmarkSankey: React.FC<Props> = ({
           )}
           linkTooltip={({ link }) => {
             return (
-              <CustomToolTip body={ linkTooltip?.({node}) || <span>Benchmark sankey tooltip</span>} />
+              <CustomToolTip body={ linkTooltip?.({link}) || <span>Benchmark sankey tooltip</span>} />
             );
           }}
           layers={["links", "nodes", CustomNodeLayer]}
