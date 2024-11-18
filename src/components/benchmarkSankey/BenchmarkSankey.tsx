@@ -66,6 +66,7 @@ const BenchmarkSankey: React.FC<Props> = ({
     data,
     margin={},
     height=null,
+    nodeTooltip=null,
     linkTooltip=null
 }) => {
   // node label
@@ -87,8 +88,8 @@ const BenchmarkSankey: React.FC<Props> = ({
   // color links with target color
   data.links = data.links.map((l) => ({
     ...l,
-    startColor: scale[l.target_rank],
-    endColor: scale[l.target_rank],
+    startColor: scale[l.target.rank],
+    endColor: scale[l.target.rank],
   }));
 
   // node label
@@ -174,16 +175,14 @@ const BenchmarkSankey: React.FC<Props> = ({
                       nodeBorderWidth={0}
                       nodeThickness={nodeThickness}
                       nodeSpacing={nodeSpacing}
-                      nodeTooltip={({ node }) => (
-                        <CustomToolTip
-                          label={node.rank}
-                          amount={node.value}
-                          unit={node.unit}
-                        />
-                      )}
+                      nodeTooltip={({ node }) => {
+                        return (
+                          <CustomToolTip body={ nodeTooltip?.({node}) || <span>Node tooltip</span>} />
+                        );
+                      }}
                       linkTooltip={({ link }) => {
                         return (
-                          <CustomToolTip body={ linkTooltip?.({link}) || <span>Benchmark sankey tooltip</span>} />
+                          <CustomToolTip body={ linkTooltip?.({link}) || <span>Link tooltip</span>} />
                         );
                       }}
                       layers={["links", "nodes", CustomNodeLayer]}
