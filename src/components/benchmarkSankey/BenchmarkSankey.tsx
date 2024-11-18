@@ -130,14 +130,14 @@ const BenchmarkSankey: React.FC<Props> = ({
     nodes.map((node) => <CustomNode key={node.id} node={node} />);
 
   const Legend = () => (
-    <div style={{ marginTop: 10 }}>
+    <div style={{ marginTop: 10, whiteSpace: 'nowrap' }}>
       {Object.keys(scale).map((rank) => (
         <Flex gap={8} align="center">
           <div
             style={{
               backgroundColor: scale[rank],
-              width: 22,
-              height: 22,
+              minWidth: 22,
+              minHeight: 22,
               border: "1px solid gray",
             }}
           />
