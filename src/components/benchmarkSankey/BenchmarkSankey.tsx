@@ -88,8 +88,8 @@ const BenchmarkSankey: React.FC<Props> = ({
   // color links with target color
   data.links = data.links.map((l) => ({
     ...l,
-    startColor: scale[l.target.rank],
-    endColor: scale[l.target.rank],
+    startColor: scale[l.target_rank],
+    endColor: scale[l.target_rank],
   }));
 
   // node label
