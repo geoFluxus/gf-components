@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 
 const { Text } = Typography
-const StyledText = styled(Text)`
+const StyledText = styled.span`
   font: var(--gf-label-md-default);
   color: var(--gf-color-text-secondary);
 `
@@ -107,10 +107,11 @@ const BenchmarkSankey: React.FC<Props> = ({
     return (
       <g transform={`translate(${node.x0 + transX}, ${node.y0 + transY})`}>
         <foreignObject width={nodeLabelWidth} height={nodeLabelHeight}>
-          <Flex
-            justify="space-between"
-            align="center"
+          <div
             style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
               color: "black",
               textAlign: "center",
               padding: `${nodeLabelPadding}px`,
@@ -118,9 +119,9 @@ const BenchmarkSankey: React.FC<Props> = ({
               whiteSpace: 'nowrap'
             }}
           >
-            <StyledText strong>{node.rank}</StyledText>
+            <StyledText><b>{node.rank}</b></StyledText>
             <StyledText>{getNodeLabel(node)}</StyledText>
-          </Flex>
+          </div>
         </foreignObject>
       </g>
     );
@@ -131,7 +132,7 @@ const BenchmarkSankey: React.FC<Props> = ({
     nodes.map((node) => <CustomNode key={node.id} node={node} />);
 
   const Legend = () => (
-    <div style={{ marginTop: 10, whiteSpace: 'nowrap' }}>
+    <div style={{ marginTop: 10, marginLeft: 10, whiteSpace: 'nowrap' }}>
       {Object.keys(scale).map((rank) => (
         <Flex gap={8} align="center">
           <div
