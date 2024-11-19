@@ -10,7 +10,7 @@ export interface Props {
 const Sankey: React.FC<Props> = ({
     treeMapData,
     style={},
-    colors={ datum: 'data.color' },
+    colors=null,
     identity=null,
     value=null,
     margin={},

@@ -21,8 +21,9 @@ const GFMetricsGrid: React.FC<GFMetricsGridProps> = ({
         wrap={wrap}
         style={style}
     >
-      {metricsData?.map((metric) => (
+      {metricsData?.map((metric, idx) => (
         <Metrics
+          key={`metrics-${idx}`}
           percent={metric.percent}
           description={metric.description}
           cost={metric.cost}

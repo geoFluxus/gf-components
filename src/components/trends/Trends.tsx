@@ -13,7 +13,7 @@ const Trends: React.FC<Props> = ({
     trendsData,
     height=null,
     margin={},
-    colors={datum: 'color'},
+    colors=null,
     xLeg,
     yLeg,
     tooltip=null
@@ -25,7 +25,7 @@ const Trends: React.FC<Props> = ({
         <ResponsiveLine
           data={trendsData}
           margin={{ top: 50, right: 90, bottom: 50, left: 90, ...margin }}
-          colors={colors}
+          colors={colors || {scheme: 'nivo'}}
           xScale={{ type: "point" }}
           yScale={{ type: "linear", min: "auto", max: "auto", reverse: false }}
           axisTop={null}
