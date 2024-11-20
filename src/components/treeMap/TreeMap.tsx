@@ -50,16 +50,18 @@ const useTextOverflow = (ref) => {
 const Sankey: React.FC<Props> = ({
     treeMapData,
     style={},
-    colors=null,
-    identity=null,
-    value=null,
+    colors={scheme: 'nivo'},
+    identity="name",
+    value="loc",
     margin={},
+    nodeOpacity=0.67,
     labelTextColor='black',
     borderColor='white',
-    labelTitle=null,
+    labelTitle='name',
     labelTitleSize=16,
-    labelText=null,
+    labelText='name',
     labelTextSize=10,
+    labelPadding=5,
     tooltip=null
 }) => {
   const CustomNode = ({ node }) => {
@@ -75,7 +77,10 @@ const Sankey: React.FC<Props> = ({
         const rect = titleRef.current.getBoundingClientRect();
 
         // Check if children overflow the parent's height
-        setTitleOveflows(rect.height > node.height || rect.width > node.width);
+        setTitleOveflows(
+            rect.height > node.height - labelPadding * 2 ||
+            rect.width > node.width - labelPadding * 2
+        );
       };
 
       // Create a ResizeObserver to monitor size changes
@@ -101,8 +106,8 @@ const Sankey: React.FC<Props> = ({
 
         // Check if children overflow the parent's height
         setDescriptionOveflows(
-            descriptionRect.height + titleRect.height > node.height ||
-            maxWidth > node.width
+            descriptionRect.height + titleRect.height > node.height - labelPadding * 2 ||
+            maxWidth > node.width - labelPadding * 2
         );
       };
 
@@ -119,19 +124,26 @@ const Sankey: React.FC<Props> = ({
     }, []);
 
     if (node.isParent) return (<></>)
-    console.log(node)
+    const addAlpha = (color, opacity) => {
+        // coerce values so it is between 0 and 1.
+        var _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
+        return color + _opacity.toString(16).toUpperCase();
+    }
     return (
       <g transform={`translate(${node.x}, ${node.y})`}>
         <foreignObject
             width={node.width}
             height={node.height}
-            style={{backgroundColor: node.color, border: `1px solid ${borderColor}`}}
+            style={{
+                backgroundColor: addAlpha(node.color, nodeOpacity),
+                border: `1px solid ${borderColor}`,
+            }}
         >
           <div
             style={{
               font: 'var(--gf-label-lg-default)',
               color: labelTextColor,
-              padding: 5,
+              padding: labelPadding,
               display: titleOveflows ? 'none' : 'auto'
             }}
           >
@@ -159,9 +171,9 @@ const Sankey: React.FC<Props> = ({
       <div style={{ width: "100%", height: 600, ...style }}>
         <ResponsiveTreeMap
           data={treeMapData}
-          colors={colors || {scheme: 'nivo'}}
-          identity={identity || "name"}
-          value={value || "loc"}
+          colors={colors}
+          identity={identity}
+          value={value}
           margin={{ top: 10, right: 10, bottom: 10, left: 10, ...margin }}
           enableParentLabel={false}
           enableLabel={false}
@@ -172,7 +184,7 @@ const Sankey: React.FC<Props> = ({
               <CustomToolTip body={ tooltip?.({node}) || <span>Scatterplot tooltip</span>} />
             );
           }}
-          layers={[CustomNodeLayer, 'nodes']}
+          layers={[CustomNodeLayer]}
         />
       </div>
     </>
