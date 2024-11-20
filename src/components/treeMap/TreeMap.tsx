@@ -3,7 +3,6 @@ import GlobalStyle from "../../globalStyles";
 import { ResponsiveTreeMap } from "@nivo/treemap";
 import { CustomToolTip } from "../customToolTip";
 import { Flex, Typography } from 'antd'
-import styled from 'styled-components';
 
 
 export interface Props {
@@ -11,10 +10,6 @@ export interface Props {
 }
 
 const { Text } = Typography
-const StyledText = styled.span`
-  font: var(--gf-label-md-default);
-  color: var(--gf-color-text-secondary);
-`
 
 function applyOpacityToColor(color, opacity) {
     // If the color is already in RGBA, just modify the alpha (opacity)
@@ -153,16 +148,18 @@ const Sankey: React.FC<Props> = ({
         >
           <div
             style={{
+              font: 'var(--gf-label-lg-default)',
+              color: labelTextColor,
               padding: labelPadding,
               display: titleOveflows ? 'none' : 'auto'
             }}
           >
             <div ref={titleRef} style={{fontSize: labelTitleSize, display: 'inline-block'}}>
-                <StyledText style={{color: labelTextColor}}><b>{node?.data?.[labelTitle] || 'Title'}</b></StyledText>
+                <b>{node?.data?.[labelTitle] || 'Title'}</b>
             </div>
             <div style={{display: descriptionOveflows ? 'none' : 'auto'}}>
-                <div ref={descriptionRef} style={{fontSize: labelTextSize, display: 'inline-block', }}>
-                    <StyledText style={{color: labelTextColor}}>{node?.data?.[labelText] || 'Text'}</StyledText>
+                <div ref={descriptionRef} style={{fontSize: labelTextSize, display: 'inline-block'}}>
+                    {node?.data?.[labelText] || 'Text'}
                 </div>
             </div>
           </div>
