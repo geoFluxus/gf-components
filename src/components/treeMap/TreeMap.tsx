@@ -155,11 +155,11 @@ const Sankey: React.FC<Props> = ({
             }}
           >
             <div ref={titleRef} style={{fontSize: labelTitleSize, display: 'inline-block'}}>
-                <span style={{color: labelTextColor}}><b>{node?.data?.[labelTitle] || 'Title'}</b></span>
+                <b>{node?.data?.[labelTitle] || 'Title'}</b>
             </div>
             <div style={{display: descriptionOveflows ? 'none' : 'auto'}}>
                 <div ref={descriptionRef} style={{fontSize: labelTextSize, display: 'inline-block', }}>
-                    <span style={{color: labelTextColor}}>{node?.data?.[labelText] || 'Text'}</span>
+                    {node?.data?.[labelText] || 'Text'}
                 </div>
             </div>
           </div>
