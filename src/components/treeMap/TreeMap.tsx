@@ -11,41 +11,53 @@ export interface Props {
 
 const { Text } = Typography
 
-const useTextOverflow = (ref) => {
-  const [isOverflowing, setIsOverflowing] = useState(false);
+function applyOpacityToColor(color, opacity) {
+    // If the color is already in RGBA, just modify the alpha (opacity)
+    if (color.startsWith('rgba')) {
+        return color.replace(/rgba?\((\d+), (\d+), (\d+),? ([\d.]+)?\)/, (_, r, g, b, a) => {
+            return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+        });
+    }
 
-  useEffect(() => {
-    const parent = ref.current;
+    // If the color is in RGB, convert it to RGBA
+    if (color.startsWith('rgb')) {
+        return color.replace(/rgb\((\d+), (\d+), (\d+)\)/, (_, r, g, b) => {
+            return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+        });
+    }
 
-    if (!parent) return;
+    // If the color is in HSL, convert it to HSLA
+    if (color.startsWith('hsl')) {
+        return color.replace(/hsl\((\d+), (\d+)%?, (\d+)%?\)/, (_, h, s, l) => {
+            return `hsla(${h}, ${s}%, ${l}%, ${opacity})`;
+        });
+    }
 
-    const checkOverflow = () => {
-      const parentRect = parent.getBoundingClientRect();
+    // If the color is in HSLA, just modify the alpha (opacity)
+    if (color.startsWith('hsla')) {
+        return color.replace(/hsla?\((\d+), (\d+)%?, (\d+)%?,? ([\d.]+)?\)/, (_, h, s, l, a) => {
+            return `hsla(${h}, ${s}%, ${l}%, ${opacity})`;
+        });
+    }
 
-      // Calculate the combined dimensions of all children
-      const totalChildrenHeight = Array.from(parent.children).reduce(
-        (totalHeight, child) => totalHeight + child.getBoundingClientRect().height,
-        0
-      );
+    // If the color is in Hex format, convert it to RGBA and apply opacity
+    if (color.startsWith('#')) {
+        const rgb = hexToRgb(color);
+        return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+    }
 
-      // Check if children overflow the parent's height
-      setIsOverflowing(totalChildrenHeight > parentRect.height);
-    };
+    throw new Error("Unsupported color format");
+}
 
-    // Create a ResizeObserver to monitor size changes
-    const resizeObserver = new ResizeObserver(checkOverflow);
-    resizeObserver.observe(parent);
+// Convert Hex to RGB
+function hexToRgb(hex) {
+    const hexColor = hex.startsWith('#') ? hex.slice(1) : hex;
+    const r = parseInt(hexColor.slice(0, 2), 16);
+    const g = parseInt(hexColor.slice(2, 4), 16);
+    const b = parseInt(hexColor.slice(4, 6), 16);
+    return { r, g, b };
+}
 
-    // Initial overflow check
-    checkOverflow();
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [ref]);
-
-  return isOverflowing;
-};
 
 const Sankey: React.FC<Props> = ({
     treeMapData,
@@ -124,18 +136,13 @@ const Sankey: React.FC<Props> = ({
     }, []);
 
     if (node.isParent) return (<></>)
-    const addAlpha = (color, opacity) => {
-        // coerce values so it is between 0 and 1.
-        var _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
-        return color + _opacity.toString(16).toUpperCase();
-    }
     return (
       <g transform={`translate(${node.x}, ${node.y})`}>
         <foreignObject
             width={node.width}
             height={node.height}
             style={{
-                backgroundColor: addAlpha(node.color, nodeOpacity),
+                backgroundColor: applyOpacityToColor(node.color, nodeOpacity),
                 border: `1px solid ${borderColor}`,
             }}
         >
@@ -184,7 +191,7 @@ const Sankey: React.FC<Props> = ({
               <CustomToolTip body={ tooltip?.({node}) || <span>Scatterplot tooltip</span>} />
             );
           }}
-          layers={[CustomNodeLayer]}
+          layers={[CustomNodeLayer, 'nodes']}
         />
       </div>
     </>
