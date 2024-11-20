@@ -155,11 +155,11 @@ const Sankey: React.FC<Props> = ({
             }}
           >
             <div ref={titleRef} style={{fontSize: labelTitleSize, display: 'inline-block'}}>
-                <b>{node?.data?.[labelTitle] || 'Title'}</b>
+                <span><b>{node?.data?.[labelTitle] || 'Title'}</b></span>
             </div>
             <div style={{display: descriptionOveflows ? 'none' : 'auto'}}>
                 <div ref={descriptionRef} style={{fontSize: labelTextSize, display: 'inline-block', }}>
-                    {node?.data?.[labelText] || 'Text'}
+                    <span>{node?.data?.[labelText] || 'Text'}</span>
                 </div>
             </div>
           </div>
@@ -186,6 +186,7 @@ const Sankey: React.FC<Props> = ({
           enableLabel={false}
           nodeOpacity={0}
           borderWidth={0}
+          borderColor={'red'}
           tooltip={({ node }) => {
             return (
               <CustomToolTip body={ tooltip?.({node}) || <span>Scatterplot tooltip</span>} />
