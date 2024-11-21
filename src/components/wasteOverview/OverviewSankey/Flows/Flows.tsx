@@ -4,7 +4,14 @@ import {
     ExportVanAfvalFlow,
     HuishoudelijkAfvalFlow,
     InvoerNationaalFlow,
-    InvoerInternationaalFlow
+    InvoerInternationaalFlow,
+    ProductieVanAfvalBinnenDeRegioFlow,
+    UitvoerNationaal,
+    UitvoerInternationaal,
+    InvoerVoorWederuitvoerFlow,
+    DistributieFlow,
+    WederuitvoerFlow,
+    DoorvoerFlow
 } from '.'
 
 
@@ -17,6 +24,13 @@ const Flows = () => {
             <HuishoudelijkAfvalFlow />
             <InvoerNationaalFlow />
             <InvoerInternationaalFlow />
+            <ProductieVanAfvalBinnenDeRegioFlow />
+            <UitvoerNationaal />
+            <UitvoerInternationaal />
+            <InvoerVoorWederuitvoerFlow />
+            <DistributieFlow />
+            <WederuitvoerFlow />
+            <DoorvoerFlow />
         </>
     )
 }
