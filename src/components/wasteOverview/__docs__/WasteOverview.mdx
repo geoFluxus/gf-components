@@ -1,0 +1,30 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as WasteOverview from "./WasteOverview.stories.tsx";
+
+<Meta of={WasteOverview} title="WasteOverview" />
+
+# WasteOverview
+
+Waste overview sankey
+
+#### Example
+
+<Canvas of={WasteOverview.Default} />
+
+## Usage
+
+```ts
+import {WasteOverview} from "gf-components";
+
+const Example = () => {
+  return (
+    <WasteOverview />
+  );
+};
+
+export default Example;
+```
+
+
+
