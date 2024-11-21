@@ -45,8 +45,11 @@ const Description: React.FC<Props> = ({
         contentEditable={editable}
         suppressContentEditableWarning={editable}
       >
-        {text?.map(paragraph =>
-            <StyledText dangerouslySetInnerHTML={{__html: paragraph}} />
+        {text?.map((paragraph, idx) =>
+            <StyledText
+                key={`${id}-${idx}`}
+                dangerouslySetInnerHTML={{__html: paragraph}}
+            />
         )}
       </StyledDiv>
     </>

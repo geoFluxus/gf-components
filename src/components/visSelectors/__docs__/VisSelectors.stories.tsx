@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof Example>;
 
 const options_Industries = [
-  { label: "Alle industrieen", value: null },
+  { label: "Alle industrieen", value: "" },
   { label: "Chemie Energie", value: "chemie_energie" },
   { label: "Afval Beheer", value: "afval_beheer" },
   { label: "Onbekend", value: "onbekend" },
@@ -23,7 +23,7 @@ const options_Industries = [
 ];
 
 const options_ProcMethods = [
-  { label: "Alle verwerkings", value: null },
+  { label: "Alle verwerkings", value: "" },
   { label: "Bewaren", value: "bewaren" },
   { label: "Recyclen", value: "recyclen" },
   { label: "Hergebruiken", value: "hergebruiken" },

@@ -133,8 +133,8 @@ const BenchmarkSankey: React.FC<Props> = ({
 
   const Legend = () => (
     <div style={{ marginTop: 10, marginLeft: 10, whiteSpace: 'nowrap' }}>
-      {Object.keys(scale).map((rank) => (
-        <Flex gap={8} align="center">
+      {Object.keys(scale).map((rank, idx) => (
+        <Flex gap={8} align="center" key={`legend-${idx}`}>
           <div
             style={{
               backgroundColor: scale[rank],
