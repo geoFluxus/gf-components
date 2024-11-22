@@ -1,21 +1,23 @@
 import { useRef, useEffect, useState } from 'react';
 
 
-const FlowWrapper = ({children, name, value, unit}) => {
+const FlowWrapper = (props) => {
     const ref = useRef(null);
     const [rectProps, setRectProps] = useState({ x: 0, y: 0, width: 0, height: 0 });
-    const buffer = 10
+    const buffer = 0
+    const offset = 5
 
     useEffect(() => {
-        // Function to calculate bounding box of all elements inside the <g>
+        // bounding box of <g>
         const calculateBoundingBox = () => {
           const group = ref.current
           if (!group) return
 
-          // Get the bounding box of the entire group
+          // get bounding box of entire group
           const bbox = group.getBBox();
 
-          // Set the calculated bounding box to state (to be used for the <rect> element)
+          // set calculated bounding box to state
+          // (to be used for the <rect> element)
           setRectProps({
             x: bbox.x,
             y: bbox.y,
@@ -26,37 +28,48 @@ const FlowWrapper = ({children, name, value, unit}) => {
 
         calculateBoundingBox(); // Initial calculation
 
-        // Recalculate on window resize or other changes if needed
+        // recalculate on window resize or other changes if needed
         window.addEventListener('resize', calculateBoundingBox);
         return () => window.removeEventListener('resize', calculateBoundingBox);
     }, []);
 
-    const handleMouseEnter = (event) => {
-        const target = event.currentTarget,
-              name = target.getAttribute('data-name'),
+    const handleMouseOver = (event) => {
+        const { target } = event
+        const tooltip = document.getElementById('overview-sankey-tooltip')
+        const name = target.getAttribute('data-name'),
+              info = target.getAttribute('data-info'),
               value = target.getAttribute('data-value'),
               unit = target.getAttribute('data-unit')
 
-        const rect = event.target.getBoundingClientRect();
-        const tooltip = document.getElementById('overview-sankey-tooltip')
+        tooltip.innerHTML = `
+            <div>
+                <div><b>${name}</b></div>
+                <div style="color: var(--gf-color-text-secondary);">${info}</div>
+                <div><b>Gewicht: ${value} ${unit}</b></div>
+            </div>
+        `
         tooltip.style.visibility = 'visible'
     }
 
-    const handleMouseLeave = (event) => {
+    const handleMouseMove = (event) => {
+        const { pageX: X, pageY: Y, target } = event
         const tooltip = document.getElementById('overview-sankey-tooltip')
+        tooltip.style.top = `${Y - offset}px`
+        tooltip.style.left = `${X}px`
+        tooltip.style.transform = 'translate(-50%, -100%)'
+    }
+
+    const handleMouseOut = (event) => {
+        const tooltip = document.getElementById('overview-sankey-tooltip')
+        tooltip.innerHTML = ''
         tooltip.style.visibility = 'hidden'
     }
 
     return (
         <>
             // flow layer
-            <g
-                ref={ref}
-                data-name={name}
-                data-value={value}
-                data-unit={unit}
-            >
-                {children}
+            <g ref={ref}>
+                {props.children}
             </g>
 
             // interaction layer
@@ -66,9 +79,14 @@ const FlowWrapper = ({children, name, value, unit}) => {
                 width={rectProps.width + buffer * 2}
                 height={rectProps.height + buffer * 2}
                 fill="transparent"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onMouseOver={handleMouseOver}
+                onMouseMove={handleMouseMove}
+                onMouseOut={handleMouseOut}
                 style={{cursor: 'pointer', zindex: 1000}}
+                data-name={props.name}
+                data-info={props.info}
+                data-value={props.value}
+                data-unit={props.unit}
             />
         </>
     )

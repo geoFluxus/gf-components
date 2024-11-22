@@ -25,7 +25,14 @@ const OverviewSankey = ({
 
             <CustomToolTip
                 id={'overview-sankey-tooltip'}
-                style={{visibility: 'hidden'}}
+                style={{
+                    visibility: 'hidden',
+                    position: 'absolute',
+                    padding: 10,
+                    fontSize: 14,
+                    width: 300,
+                    zindex: 999999
+                }}
             />
         </>
     )

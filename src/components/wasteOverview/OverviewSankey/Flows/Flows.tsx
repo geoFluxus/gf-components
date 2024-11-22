@@ -30,6 +30,22 @@ const flowComponents = {
     export_van_afval: ExportVanAfvalFlow,
 }
 
+const flowNames = {
+    aanbod_eigen_regio: 'Aanbod eigen regio',
+    distributie: 'Distributie',
+    invoer_internationaal: 'Invoer internationaal',
+    uitvoer_internationaal: 'Uitvoer internationaal',
+    invoer_voor_wederuitvoer: 'Invoer voor wederuitvoer',
+    wederuitvoer: 'Wederuitvoer',
+    doorvoer: 'Doorvoer',
+    invoer_nationaal: 'Invoer nationaal',
+    uitvoer_nationaal: 'Uitvoer nationaal',
+    productie_van_afval_binnen_de_regio: 'Productie van afval binnen de regio',
+    huishoudelijk_afval: 'Huishoudelijk afval',
+    import_van_afval: 'Import van afval',
+    export_van_afval: 'Export van afval',
+}
+
 const flowInfo = {
     aanbod_eigen_regio: 'De goederen die worden vervoerd van een productielocatie in de regio naar een gebruikslocatie in de regio.',
     distributie: 'De goederenstroom binnen het intraregionaal vervoer die niet wordt verklaard door direct productie-gebruik-vervoer.',
@@ -56,7 +72,8 @@ const Flows = ({data}) => {
                 return (
                     <FlowWrapper
                         key={`flow-${index}`}
-                        name={type}
+                        name={`${index + 1}. ${flowNames?.[type]}`}
+                        info={flowInfo?.[type]}
                         value={compData?.value}
                         unit={compData?.unit}
                     >

@@ -3,6 +3,7 @@ import GlobalStyle from "../../globalStyles";
 //import numeral from "numeral";
 import { DatumId } from "@nivo/pie";
 
+
 export interface Props {
   style?: object;
   label: string | React.ReactElement | DatumId;
@@ -15,17 +16,18 @@ const tooltipStyle = {
   borderRadius: "2px",
   boxShadow: "0 1px 2px rgba(0, 0, 0, 0.25)",
   padding: "5px 9px",
+  font: 'var(--gf-label-lg-default)',
 };
 
 const CustomToolTip: React.FC<Props> = ({
   id=null,
-  style=tooltipStyle,
+  style={},
   body=null
 }) => {
   return (
     <>
       <GlobalStyle />
-      <div id={id} style={style}>
+      <div id={id} style={{...tooltipStyle, ...style}}>
         { body || <span>Custom tooltip</span> }
       </div>
     </>
