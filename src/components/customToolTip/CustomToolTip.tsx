@@ -18,13 +18,14 @@ const tooltipStyle = {
 };
 
 const CustomToolTip: React.FC<Props> = ({
+  id=null,
   style=tooltipStyle,
   body=null
 }) => {
   return (
     <>
       <GlobalStyle />
-      <div style={style}>
+      <div id={id} style={style}>
         { body || <span>Custom tooltip</span> }
       </div>
     </>
