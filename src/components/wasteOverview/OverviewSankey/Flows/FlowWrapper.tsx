@@ -42,9 +42,25 @@ const FlowWrapper = (props) => {
               unit = target.getAttribute('data-unit')
 
         tooltip.innerHTML = `
-            <div>
-                <div><b>${name}</b></div>
-                <div style="color: var(--gf-color-text-secondary);">${info}</div>
+            <div style="
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            ">
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                ">
+                    <div><b>${name}</b></div>
+                    <div style="
+                        font-size: 12px;
+                        line-height: 14px;
+                        color: var(--gf-color-text-secondary);
+                    ">
+                        ${info}
+                    </div>
+                </div>
                 <div><b>Gewicht: ${value} ${unit}</b></div>
             </div>
         `
