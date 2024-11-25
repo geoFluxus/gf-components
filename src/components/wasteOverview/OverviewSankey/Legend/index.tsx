@@ -1,0 +1,5 @@
+export { default as Legend } from './Legend'
+export { default as GebruikLegend } from './GebruikLegend'
+export { default as ProductieLegend } from './ProductieLegend'
+export { default as TranshipmentLegend } from './TranshipmentLegend'
+export { default as VerwerkingLegend } from './VerwerkingLegend'
