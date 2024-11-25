@@ -63,7 +63,7 @@ const flowInfo = {
 }
 
 
-const Flows = ({data}) => {
+const Flows = ({data, svgRef}) => {
     return (
         <>
             {Object.entries(flowComponents).map(([type, component], index) => {
@@ -71,6 +71,7 @@ const Flows = ({data}) => {
                       compData = data?.type
                 return (
                     <FlowWrapper
+                        svgRef={svgRef}
                         key={`flow-${index}`}
                         name={`${index + 1}. ${flowNames?.[type]}`}
                         info={flowInfo?.[type]}

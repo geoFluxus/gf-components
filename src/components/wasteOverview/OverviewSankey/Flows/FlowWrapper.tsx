@@ -69,14 +69,13 @@ const FlowWrapper = (props) => {
 
     const handleMouseMove = (event) => {
         const { clientX: X, clientY: Y, target } = event
+        const svg = props.svgRef.current,
+              {left, top, width, height} = svg.getBoundingClientRect()
+
         const tooltip = document.getElementById('overview-sankey-tooltip')
-        const tooltipWidth = tooltip.offsetWidth,
-              tooltipHeight = tooltip.offsetHeight
-        const adjustedX = Math.min(X, window.innerWidth - tooltipWidth),
-              adjustedY = Math.min(Y, window.innerHeight - tooltipHeight)
-        tooltip.style.top = `${adjustedY - offset}px`
-        tooltip.style.left = `${adjustedX}px`
-        tooltip.style.transform = 'translate(-50%, -100%)'
+        tooltip.style.top = `${Y - top - offset}px`
+        tooltip.style.left = `${X - left}px`
+        tooltip.style.transform = `translate(-50%, -100%)`
     }
 
     const handleMouseOut = (event) => {
