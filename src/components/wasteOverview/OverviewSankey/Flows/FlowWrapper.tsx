@@ -68,7 +68,7 @@ const FlowWrapper = (props) => {
     }
 
     const handleMouseMove = (event) => {
-        const { pageX: X, pageY: Y, target } = event
+        const { clientX: X, clientY: Y, target } = event
         const tooltip = document.getElementById('overview-sankey-tooltip')
         tooltip.style.top = `${Y - offset}px`
         tooltip.style.left = `${X}px`
