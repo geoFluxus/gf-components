@@ -1,8 +1,16 @@
-import {OverviewSankey} from './OverviewSankey'
+import { OverviewSankey } from './OverviewSankey'
+import { OverviewBarchart } from './OverviewBarchart'
 
-const WasteOverview = () => {
+
+const WasteOverview = ({
+    sankey={},
+    bar={}
+}) => {
     return (
-        <OverviewSankey />
+        <>
+            <OverviewSankey {...sankey} />
+            <OverviewBarchart {...bar} />
+        </>
     )
 }
 
