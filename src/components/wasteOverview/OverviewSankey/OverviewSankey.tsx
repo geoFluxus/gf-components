@@ -29,7 +29,7 @@ const OverviewSankey = ({
                     padding: 10,
                     fontSize: 14,
                     width: 300,
-                    zindex: 999999
+                    zIndex: 999999
                 }}
             />
         </>
