@@ -101,7 +101,6 @@ const FlowWrapper = (props) => {
                 onMouseOver={handleMouseOver}
                 onMouseMove={handleMouseMove}
                 onMouseOut={handleMouseOut}
-                style={{cursor: 'pointer', zindex: 1000}}
                 data-name={props.name}
                 data-info={props.info}
                 data-value={props.value}
