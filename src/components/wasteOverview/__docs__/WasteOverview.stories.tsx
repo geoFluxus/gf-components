@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Example from "./Example";
-import { data } from './data'
+import { barchartData } from './data'
 
 
 const meta: Meta<typeof Example> = {
@@ -15,14 +15,14 @@ type Story = StoryObj<typeof Example>;
 export const Default: Story = {
   args: {
     bar: {
-        data: data,
+        data: barchartData,
         keys: [
-            'hot dog',
-            'burger',
-            'sandwich',
-            'kebab',
-            'fries',
-            'donut'
+            'agenda_1',
+            'agenda_2',
+            'agenda_3',
+            'agenda_4',
+            'agenda_5',
+            'agenda_6'
         ],
         indexBy: "country"
     }
