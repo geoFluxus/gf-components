@@ -77,6 +77,7 @@
     "styled-components": "^6.1.13"
   },
   "dependencies": {
+    "@nivo/bar": "^0.87.0",
     "@nivo/line": "^0.87.0",
     "@nivo/pie": "^0.87.0",
     "@nivo/sankey": "^0.87.0",
