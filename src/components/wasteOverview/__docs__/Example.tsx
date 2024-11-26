@@ -3,21 +3,22 @@ import WasteOverview from "../WasteOverview";
 import TabCard from "../../tabCard/TabCard";
 
 
-const Example = ({}) => {
+const Example = ({bar, sankey}) => {
   const tabs = [
       {
         key: "chart",
         label: "Grafiek",
-      },
-      {
-        key: "table",
-        label: "Tabel",
-      },
+      }
   ]
 
+  const Chart =
+    <WasteOverview
+        bar={bar}
+        sankey={sankey}
+    />
+
   const content = {
-      chart: <WasteOverview />,
-      table: <WasteOverview />
+      chart: Chart,
   };
 
   return (

@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
-import { data } from './data'
 import styled from 'styled-components';
 import { CustomToolTip } from "../../customToolTip";
 
@@ -13,19 +12,13 @@ const StyledText = styled.span`
 `
 
 const OverviewBarchart = ({
+    data=null,
     height=900,
     margin={},
     labelWidth=100,
     labelPadding=10,
-    keys=[
-                    'hot dog',
-                    'burger',
-                    'sandwich',
-                    'kebab',
-                    'fries',
-                    'donut'
-                ],
-    indexBy="country",
+    keys=keys,
+    indexBy=null,
     tooltip=null
 }) => {
     const CustomNode = ({ bar }) => {
