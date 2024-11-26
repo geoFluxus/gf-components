@@ -1,8 +1,6 @@
 export const barchartData = [
   {
-    "country": "aanbod_eigen_regio",
-    "idx": 1,
-    "name": "Aanbod van eigen goederen",
+    "flow": "aanbod_eigen_regio",
     "total": 711,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 140,
@@ -20,9 +18,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "distributie",
-    "idx": 2,
-    "name": "Distributie",
+    "flow": "distributie",
     "total": 670,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 102,
@@ -40,9 +36,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "invoer_internationaal",
-    "idx": 3,
-    "name": "Invoer internationaal",
+    "flow": "invoer_internationaal",
     "total": 623,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 129,
@@ -60,9 +54,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "uitvoer_internationaal",
-    "idx": 4,
-    "name": "Uitvoer internationaal",
+    "flow": "uitvoer_internationaal",
     "total": 483,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 130,
@@ -80,9 +72,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "invoer_voor_wederuitvoer",
-    "idx": 5,
-    "name": "Invoer voor wederuitvoer",
+    "flow": "invoer_voor_wederuitvoer",
     "total": 661,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 42,
@@ -100,9 +90,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "wederuitvoer",
-    "idx": 6,
-    "name": "Wederuitvoer",
+    "flow": "wederuitvoer",
     "total": 634,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 52,
@@ -120,9 +108,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "doorvoer",
-    "idx": 7,
-    "name": "Doorvoer",
+    "flow": "doorvoer",
     "total": 530,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 51,
@@ -140,9 +126,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "invoer_nationaal",
-    "idx": 8,
-    "name": "Invoer nationaal",
+    "flow": "invoer_nationaal",
     "total": 530,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 51,
@@ -160,9 +144,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "uitvoer_nationaal",
-    "idx": 9,
-    "name": "Uitvoer nationaal",
+    "flow": "uitvoer_nationaal",
     "total": 530,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 51,
@@ -180,9 +162,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "productie_van_afval_binnen_de_regio",
-    "idx": 10,
-    "name": "Productie van afval binnen de regio",
+    "flow": "productie_van_afval_binnen_de_regio",
     "total": 530,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 51,
@@ -200,9 +180,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "huishoudelijk_afval",
-    "idx": 11,
-    "name": "Huishoudelijk afval",
+    "flow": "huishoudelijk_afval",
     "total": 530,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 51,
@@ -220,9 +198,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "import_van_afval",
-    "idx": 12,
-    "name": "Import van afval",
+    "flow": "import_van_afval",
     "total": 530,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 5,
@@ -240,9 +216,7 @@ export const barchartData = [
     "unit": "t"
   },
   {
-    "country": "export_van_afval",
-    "idx": 13,
-    "name": "Export van afval",
+    "flow": "export_van_afval",
     "total": 530,
     "totalColor": "hsl(212, 44%, 53%)",
     "agenda_1": 1,

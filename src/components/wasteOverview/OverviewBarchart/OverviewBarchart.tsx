@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import styled from 'styled-components';
 import { CustomToolTip } from "../../customToolTip";
+import { flows } from "../flows"
 
 
 const StyledText = styled.tspan`
@@ -52,7 +53,7 @@ const OverviewBarchart = ({
 
         // wrap long text
         const data = bar.data.data
-        const text = `${data?.name}`
+        const text = flows?.[data?.[indexBy]]?.name
         const lines = wrapText(text, labelWidth, 10);
 
         // track g height
