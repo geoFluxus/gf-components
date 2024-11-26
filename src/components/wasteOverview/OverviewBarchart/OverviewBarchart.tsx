@@ -53,6 +53,7 @@ const OverviewBarchart = ({
 
         // wrap long text
         const data = bar.data.data
+        const numeral = flows?.[data?.[indexBy]]?.key
         const text = flows?.[data?.[indexBy]]?.name
         const lines = wrapText(text, labelWidth, 10);
 
@@ -78,7 +79,7 @@ const OverviewBarchart = ({
                       alignmentBaseline: 'middle',
                     }}
                 >
-                    <StyledText x={0} dy="10px">{`${data?.idx}.`}</StyledText>
+                    <StyledText x={0} dy="10px">{`${numeral}.`}</StyledText>
                     {lines.map((line, index) => (
                       <StyledText key={index} x={0} dy="14px">
                         {line}
