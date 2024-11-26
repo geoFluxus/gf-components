@@ -1,6 +1,6 @@
 {
   "name": "gf-components",
-  "version": "0.1.66",
+  "version": "0.1.67",
   "private": false,
   "description": "geoFluxus library of React components",
   "repository": {

@@ -24,7 +24,7 @@ export const Default: Story = {
             'agenda_5',
             'agenda_6'
         ],
-        indexBy: "country"
+        indexBy: "flow"
     },
     sankey: {
         data: sankeyData
