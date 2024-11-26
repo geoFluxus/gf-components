@@ -262,4 +262,56 @@ export const barchartData = [
 ]
 
 export const sankeyData = {
+    aanbod_eigen_regio: {
+        value: 3000,
+        unit: 't'
+    },
+    distributie: {
+        value: 3000,
+        unit: 't'
+    },
+    invoer_internationaal: {
+        value: 3000,
+        unit: 't'
+    },
+    uitvoer_internationaal: {
+        value: 3000,
+        unit: 't'
+    },
+    invoer_voor_wederuitvoer: {
+        value: 3000,
+        unit: 't'
+    },
+    wederuitvoer: {
+        value: 3000,
+        unit: 't'
+    },
+    doorvoer: {
+        value: 3000,
+        unit: 't'
+    },
+    invoer_nationaal: {
+        value: 3000,
+        unit: 't'
+    },
+    uitvoer_nationaal: {
+        value: 3000,
+        unit: 't'
+    },
+    productie_van_afval_binnen_de_regio: {
+        value: 3000,
+        unit: 't'
+    },
+    huishoudelijk_afval: {
+        value: 3000,
+        unit: 't'
+    },
+    import_van_afval: {
+        value: 3000,
+        unit: 't'
+    },
+    export_van_afval: {
+        value: 3000,
+        unit: 't'
+    },
 }

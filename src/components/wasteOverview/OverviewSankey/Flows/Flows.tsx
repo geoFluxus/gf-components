@@ -88,7 +88,7 @@ const Flows = ({data, svgRef}) => {
         <>
             {Object.entries(flows).map(([type, flow], index) => {
                 const Component = flow.comp,
-                      compData = data?.type
+                      compData = data?.[type]
                 return (
                     <FlowWrapper
                         svgRef={svgRef}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Example from "./Example";
-import { barchartData } from './data'
+import { barchartData, sankeyData } from './data'
 
 
 const meta: Meta<typeof Example> = {
@@ -25,6 +25,9 @@ export const Default: Story = {
             'agenda_6'
         ],
         indexBy: "country"
+    },
+    sankey: {
+        data: sankeyData
     }
   },
 };
