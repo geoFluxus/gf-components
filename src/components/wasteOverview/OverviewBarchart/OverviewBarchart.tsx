@@ -4,12 +4,37 @@ import styled from 'styled-components';
 import { CustomToolTip } from "../../customToolTip";
 
 
-const StyledText = styled.span`
+const StyledText = styled.tspan`
   font: var(--gf-label-md-default);
   color: var(--gf-color-text-secondary);
   font-size: 10px;
   line-height: 14px;
 `
+
+const wrapText = (text, width, fontSize=10) => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    context.font = `${fontSize}px`;
+
+    const words = text.split(" ");
+    const lines = [];
+    let currentLine = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+        const testLine = `${currentLine} ${words[i]}`;
+        const testWidth = context.measureText(testLine).width;
+        if (testWidth > width) {
+          lines.push(currentLine);
+          currentLine = words[i];
+        } else {
+          currentLine = testLine;
+        }
+    }
+    lines.push(currentLine);
+
+    return lines;
+};
+
 
 const OverviewBarchart = ({
     data=null,
@@ -22,42 +47,43 @@ const OverviewBarchart = ({
     tooltip=null
 }) => {
     const CustomNode = ({ bar }) => {
-        const foreignObjectRef = useRef(null);
-        const contentRef = useRef(null);
-        const [height, setHeight] = useState(100);
+        const gRef = useRef(null);
+        const [gHeight, setGHeight] = useState(0);
 
+        // wrap long text
+        const data = bar.data.data
+        const text = `${data?.name}`
+        const lines = wrapText(text, labelWidth, 10);
+
+        // track g height
         useEffect(() => {
-            const adjustHeight = () => {
-              if (contentRef.current) {
-                setHeight(contentRef.current.offsetHeight);
-              }
-            };
-
-            adjustHeight();
+            if (gRef.current) {
+              const rect = gRef.current.getBoundingClientRect();
+              setGHeight(rect.height);
+            }
         }, []);
 
-        const data = bar.data.data
+        // positioning
         const transX = labelWidth + labelPadding
-        const transY = bar.y + bar.height / 2 - height / 2
+        const transY = bar.y + bar.height / 2 - gHeight / 2
+        
         return (
-            <g transform={`translate(-${transX}, ${transY})`}>
-                <foreignObject
-                    width={100}
-                    height={height}
-                    ref={foreignObjectRef}
-                >
-                  <div
-                    ref={contentRef}
+            <g ref={gRef} transform={`translate(-${transX}, ${transY})`} >
+                <text
                     style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center'
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignmentBaseline: 'middle',
                     }}
-                  >
-                    <StyledText>{`${data?.idx}.`}</StyledText>
-                    <StyledText>{data?.name}</StyledText>
-                  </div>
-                </foreignObject>
+                >
+                    <StyledText x={0} dy="10px">{`${data?.idx}.`}</StyledText>
+                    {lines.map((line, index) => (
+                      <StyledText key={index} x={0} dy="14px">
+                        {line}
+                      </StyledText>
+                    ))}
+                </text>
             </g>
         )
     }
