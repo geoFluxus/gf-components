@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { data } from './data'
 import styled from 'styled-components';
+import { CustomToolTip } from "../../customToolTip";
 
 
 const StyledText = styled.span`
@@ -15,7 +16,17 @@ const OverviewBarchart = ({
     height=900,
     margin={},
     labelWidth=100,
-    labelPadding=10
+    labelPadding=10,
+    keys=[
+                    'hot dog',
+                    'burger',
+                    'sandwich',
+                    'kebab',
+                    'fries',
+                    'donut'
+                ],
+    indexBy="country",
+    tooltip=null
 }) => {
     const CustomNode = ({ bar }) => {
         const foreignObjectRef = useRef(null);
@@ -25,7 +36,6 @@ const OverviewBarchart = ({
         useEffect(() => {
             const adjustHeight = () => {
               if (contentRef.current) {
-                console.log(contentRef.current.offsetHeight)
                 setHeight(contentRef.current.offsetHeight);
               }
             };
@@ -62,11 +72,11 @@ const OverviewBarchart = ({
     // @ts-ignore
     let currName = null
     const CustomNodeLayer = ({ bars }) =>
-        bars.map((bar) => {
-           name = bar?.data?.data?.name
-           if (name === currName) return
+        bars.map((bar, idx) => {
+           name = bar?.data?.id
+           if (name !== currName && currName !== null) return
            currName = name
-           return (<CustomNode bar={bar} />)
+           return (<CustomNode key={`bar-label-${idx}`} bar={bar} />)
         });
 
     const reverseData = data.slice().reverse()
@@ -75,15 +85,8 @@ const OverviewBarchart = ({
             <ResponsiveBar
                 data={reverseData}
                 colors={({ id, data }) => String(data[`${id}Color`])}
-                keys={[
-                    'hot dog',
-                    'burger',
-                    'sandwich',
-                    'kebab',
-                    'fries',
-                    'donut'
-                ]}
-                indexBy="country"
+                keys={keys}
+                indexBy={indexBy}
                 margin={{ top: 50, right: 0, bottom: 50, left: 110, ...margin }}
                 layout="horizontal"
                 enableGridY={false}
@@ -96,6 +99,11 @@ const OverviewBarchart = ({
                 axisBottom={null}
                 axisLeft={null}
                 layers={['grid', 'axes', 'bars', CustomNodeLayer]}
+                tooltip={(bar) => {
+                    return (
+                      <CustomToolTip body={ tooltip?.(bar) || <span>Overview barchart tooltip</span>} />
+                    );
+                }}
             />
         </div>
     )
