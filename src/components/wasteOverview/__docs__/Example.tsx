@@ -21,7 +21,7 @@ const Example = ({}) => {
   };
 
   return (
-    <div style={{padding: '400px 200px'}}>
+    <div style={{padding: '100px 200px'}}>
         <TabCard
             tabContent={content}
             tabList={tabs}
