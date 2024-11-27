@@ -14,9 +14,15 @@ export interface Props {
     nodes: DefaultNodeWithUnit[];
     links: DefaultLinkWithUnit[];
   };
+  linktooltip: ({ link }) => JSX.Element;
+  nodetooltip: ({ node }) => JSX.Element;
 }
 
-const Sankey: React.FC<Props> = ({ sankeyData }) => {
+const Sankey: React.FC<Props> = ({
+  sankeyData,
+  linktooltip = null,
+  nodetooltip = null,
+}) => {
   return (
     <>
       <GlobalStyle />
@@ -24,21 +30,17 @@ const Sankey: React.FC<Props> = ({ sankeyData }) => {
         <ResponsiveSankey
           data={sankeyData}
           margin={{ top: 20, right: 120, bottom: 20, left: 120 }}
-          nodeTooltip={({ node: { id, value, unit } }) => (
-            <CustomToolTip label={id} amount={value} unit={unit} />
+          nodeTooltip={({ node }) => (
+            <CustomToolTip
+              body={nodetooltip?.({ node }) || <span>Sankey node tooltip</span>}
+            />
           )}
           linkTooltip={({ link }) => {
             return (
               <CustomToolTip
-                label={
-                  <>
-                    <b>{link.source.label}</b>
-                    <span>{" > "}</span>
-                    <b>{link.target.label}</b>
-                  </>
+                body={
+                  linktooltip?.({ link }) || <span>Sankey link tooltip</span>
                 }
-                amount={link.value}
-                unit={link.unit}
               />
             );
           }}
