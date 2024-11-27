@@ -1,7 +1,7 @@
 import React from "react";
 import BenchmarkSankey from "../BenchmarkSankey";
 
-const Example = ({ data }) => {
+const Example = ({ data, nodeTooltip, linkTooltip }) => {
   return (
     <div
       style={{
@@ -11,7 +11,11 @@ const Example = ({ data }) => {
         height: "100%",
       }}
     >
-      <BenchmarkSankey data={data} />
+      <BenchmarkSankey
+        data={data}
+        nodeTooltip={nodeTooltip}
+        linkTooltip={linkTooltip}
+      />
     </div>
   );
 };
