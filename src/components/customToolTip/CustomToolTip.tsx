@@ -1,7 +1,8 @@
 import React from "react";
 import GlobalStyle from "../../globalStyles";
 //import numeral from "numeral";
-import { DatumId } from "@nivo/pie";
+import { DatumId, PieTooltipProps } from "@nivo/pie";
+
 
 
 export interface Props {
@@ -9,6 +10,7 @@ export interface Props {
   label: string | React.ReactElement | DatumId;
   amount: number | string;
   unit?: string;
+  body?: React.ReactNode
 }
 
 const tooltipStyle = {

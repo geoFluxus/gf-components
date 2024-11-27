@@ -8,6 +8,7 @@ export interface Props {
   pieChartData: any;
   title: string;
   isEmpty: boolean;
+  tooltip: ({ id, value, color }) => JSX.Element;
 }
 
 const StyledSpan = styled.span`
@@ -22,12 +23,13 @@ const StyledSpan = styled.span`
   padding: 50px;
 `;
 
-const PieChart: React.FC<Props> = ({ pieChartData, title, isEmpty }) => {
-  const CenteredMetric = ({ dataWithArc, centerX, centerY }) => {
-    let total = 0;
-    dataWithArc.forEach((datum) => {
-      total += datum.value;
-    });
+const PieChart: React.FC<Props> = ({
+  pieChartData,
+  title,
+  isEmpty,
+  tooltip = null,
+}) => {
+  const CenteredMetric = ({ centerX, centerY }) => {
     return (
       <text
         x={centerX}
@@ -51,10 +53,6 @@ const PieChart: React.FC<Props> = ({ pieChartData, title, isEmpty }) => {
 
         <ResponsivePie
           colors={{ scheme: isEmpty ? "greys" : "nivo" }}
-          tooltip={(
-            // @ts-ignore
-            { datum: { id, label, value, color, unit } },
-          ) => <CustomToolTip label={label} amount={value} unit={unit} />}
           data={pieChartData}
           enableArcLabels={!isEmpty}
           enableArcLinkLabels={!isEmpty}
@@ -99,6 +97,17 @@ const PieChart: React.FC<Props> = ({ pieChartData, title, isEmpty }) => {
               spacing: 10,
             },
           ]}
+          tooltip={({ datum: { id, value, color } }) => {
+            return (
+              <CustomToolTip
+                body={
+                  tooltip?.({ id, value, color }) || (
+                    <span>Pie chart tooltip</span>
+                  )
+                }
+              />
+            );
+          }}
         />
       </div>
     </>
