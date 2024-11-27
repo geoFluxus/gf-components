@@ -7,6 +7,7 @@ import { Flex, Typography } from 'antd'
 
 export interface Props {
   treeMapData: object;
+  tooltip: ({ node }) => JSX.Element;
 }
 
 const { Text } = Typography
@@ -188,7 +189,7 @@ const Sankey: React.FC<Props> = ({
           borderWidth={0}
           tooltip={({ node }) => {
             return (
-              <CustomToolTip body={ tooltip?.({node}) || <span>Scatterplot tooltip</span>} />
+              <CustomToolTip body={ tooltip?.({node}) || <span>Treemap tooltip</span>} />
             );
           }}
           layers={[CustomNodeLayer, 'nodes']}

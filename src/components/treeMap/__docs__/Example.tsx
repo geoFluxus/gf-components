@@ -1,7 +1,7 @@
 import React from "react";
 import TreeMap from "../TreeMap";
 
-const Example = ({ data }) => {
+const Example = ({ data, tooltip }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Example = ({ data }) => {
         height: "100%",
       }}
     >
-      <TreeMap treeMapData={data} />
+      <TreeMap treeMapData={data} tooltip={tooltip}/>
     </div>
   );
 };

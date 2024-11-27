@@ -7,16 +7,17 @@ export interface Props {
   trendsData: readonly Serie[];
   xLeg: string;
   yLeg: string;
+  tooltip: ({ dt }) => JSX.Element;
 }
 
 const Trends: React.FC<Props> = ({
-    trendsData,
-    height=null,
-    margin={},
-    colors=null,
-    xLeg,
-    yLeg,
-    tooltip=null
+  trendsData,
+  height = null,
+  margin = {},
+  colors = null,
+  xLeg,
+  yLeg,
+  tooltip = null,
 }) => {
   return (
     <>
@@ -25,7 +26,7 @@ const Trends: React.FC<Props> = ({
         <ResponsiveLine
           data={trendsData}
           margin={{ top: 50, right: 90, bottom: 50, left: 90, ...margin }}
-          colors={colors || {scheme: 'nivo'}}
+          colors={colors || { scheme: "nivo" }}
           xScale={{ type: "point" }}
           yScale={{ type: "linear", min: "auto", max: "auto", reverse: false }}
           axisTop={null}
@@ -80,7 +81,9 @@ const Trends: React.FC<Props> = ({
           ]}
           tooltip={(dt) => {
             return (
-              <CustomToolTip body={ tooltip?.(dt) || <span>Line tooltip</span>} />
+              <CustomToolTip
+                body={tooltip?.(dt) || <span>Line tooltip</span>}
+              />
             );
           }}
         />

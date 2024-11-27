@@ -1,7 +1,7 @@
 import React from "react";
 import Trends from "../Trends";
 
-const Example = ({ data, xLeg, yLeg }) => {
+const Example = ({ data, xLeg, yLeg, tooltip }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Example = ({ data, xLeg, yLeg }) => {
         height: "100%",
       }}
     >
-      <Trends trendsData={data} xLeg={xLeg} yLeg={yLeg}/>
+      <Trends trendsData={data} xLeg={xLeg} yLeg={yLeg} tooltip={tooltip}/>
     </div>
   );
 };

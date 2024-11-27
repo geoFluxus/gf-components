@@ -21,6 +21,7 @@ const Example = () => {
   return (
     <ScatterPlot
       scatterPlotData={data}
+      tooltip={tooltip}
     />
   );
 };
@@ -30,3 +31,4 @@ export default Example;
 
 #### Arguments
 - **ScatterPlotData** - Object containing nodes for ScatterPlot
+- **tooltip** - Function returning JSX element as custom tooltip

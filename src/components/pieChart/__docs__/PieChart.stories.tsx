@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Example from "./Example";
 import { PieChartData, EmptyPieChartData } from "../data";
+import React from "react";
 
 const meta: Meta<typeof Example> = {
   title: "Components/Visualisation/PieChart",
@@ -14,7 +15,8 @@ export const Default: Story = {
   args: {
     data: PieChartData,
     title: "Afval Enschede",
-    isEmpty: false
+    isEmpty: false,
+    tooltip: ({ id, value, color }) => <span>Custom piechart tooltip</span>
   },
 };
 

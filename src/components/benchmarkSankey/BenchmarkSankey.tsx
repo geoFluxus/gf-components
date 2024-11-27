@@ -35,6 +35,8 @@ export interface Props {
     nodes: DefaultNodeWithExtras[];
     links: DefaultLinkWithExtras[];
   };
+  linkTooltip: ({ link }) => JSX.Element;
+  nodeTooltip: ({ node }) => JSX.Element;
 }
 
 const scale = {

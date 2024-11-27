@@ -1,7 +1,7 @@
 import React from "react";
-import PieChart  from "../PieChart";
+import PieChart from "../PieChart";
 
-const Example = ({ data, title, isEmpty }) => {
+const Example = ({ data, title, isEmpty, tooltip }) => {
   return (
     <div
       style={{
@@ -11,7 +11,12 @@ const Example = ({ data, title, isEmpty }) => {
         height: "100%",
       }}
     >
-      <PieChart pieChartData={data} title={title} isEmpty={isEmpty}/>
+      <PieChart
+        pieChartData={data}
+        title={title}
+        isEmpty={isEmpty}
+        tooltip={tooltip}
+      />
     </div>
   );
 };

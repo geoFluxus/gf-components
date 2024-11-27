@@ -21,6 +21,8 @@ const Example = () => {
   return (
     <BenchmarkSankey
       BenchmarkSankeyData={data}
+      linkTooltip={linkTooltip}
+      nodeTooltip={nodeTooltip}
     />
   );
 };
@@ -30,3 +32,5 @@ export default Example;
 
 #### Arguments
 - **BenchmarkSankeyData** - Object containing nodes for BenchmarkSankey
+- **nodeTooltip** - Function returning JSX element as custom tooltip for nodes
+- **linkTooltip** - Function returning JSX element as custom tooltip for links
