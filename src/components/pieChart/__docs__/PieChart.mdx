@@ -23,6 +23,7 @@ const Example = () => {
       pieChartData={data}
       title={title}
       isEmpty={isEmpty}
+      tooltip={tooltip}
     />
   );
 };
@@ -34,3 +35,4 @@ export default Example;
 - **pieChartData** - Object containing nodes for Pie chart
 - **title** - Title for the pie chart
 - **isEmpty** - Specify if no data is available
+- **tooltip** - Function returning JSX element as custom tooltip

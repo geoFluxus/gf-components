@@ -1,7 +1,7 @@
 import React from "react";
 import ScatterPlot from "../ScatterPlot";
 
-const Example = ({ data }) => {
+const Example = ({ data, tooltip }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Example = ({ data }) => {
         height: "100%",
       }}
     >
-      <ScatterPlot scatterPlotData={data}/>
+      <ScatterPlot scatterPlotData={data} tooltip={tooltip}/>
     </div>
   );
 };

@@ -21,6 +21,7 @@ const Example = () => {
   return (
     <TreeMap
       treeMapData={data}
+      tooltip={tooltip}
     />
   );
 };
@@ -30,3 +31,4 @@ export default Example;
 
 #### Arguments
 - **treeMapData** - Object containing nodes for TreeMap
+- **tooltip** - Function returning JSX element as custom tooltip

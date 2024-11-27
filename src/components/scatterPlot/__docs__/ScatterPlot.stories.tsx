@@ -15,5 +15,6 @@ type Story = StoryObj<typeof Example>;
 export const Default: Story = {
   args: {
     data: ScatterPlotData,
+    tooltip: ({ node }) => <span>Custom scatterplot tooltip</span>
   },
 };

@@ -21,6 +21,7 @@ const Example = () => {
   return (
     <Trends
     trendsData={data}
+    tooltip={tooltip}
     />
   );
 };
@@ -30,3 +31,4 @@ export default Example;
 
 #### Arguments
 - **trendsData** - Object containing nodes for Trends
+- **tooltip** - Function returning JSX element as custom tooltip
