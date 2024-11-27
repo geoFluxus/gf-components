@@ -7,6 +7,7 @@ import { Flex, Typography } from 'antd'
 
 export interface Props {
   treeMapData: object;
+  tooltip: ({ node }) => JSX.Element;
 }
 
 const { Text } = Typography
