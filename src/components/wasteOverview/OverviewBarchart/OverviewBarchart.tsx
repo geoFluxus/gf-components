@@ -8,7 +8,7 @@ import { flows } from "../flows"
 const StyledText = styled.tspan`
   font: var(--gf-label-md-default);
   color: var(--gf-color-text-secondary);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 14px;
 `
 
@@ -42,7 +42,7 @@ const OverviewBarchart = ({
     height=900,
     margin={},
     labelWidth=100,
-    labelPadding=10,
+    labelPadding=20,
     keys=keys,
     indexBy=null,
     tooltip=null
@@ -108,7 +108,7 @@ const OverviewBarchart = ({
                 colors={({ id, data }) => String(data[`${id}Color`])}
                 keys={keys}
                 indexBy={indexBy}
-                margin={{ top: 50, right: 0, bottom: 50, left: 110, ...margin }}
+                margin={{ top: 50, right: 0, bottom: 50, left: 120, ...margin }}
                 layout="horizontal"
                 enableGridY={false}
                 enableGridX={true}
