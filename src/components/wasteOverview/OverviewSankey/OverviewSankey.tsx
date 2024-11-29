@@ -1,28 +1,25 @@
-import { useRef } from 'react';
+import { forwardRef } from 'react';
 import { Flows } from './Flows'
 import { Legend } from './Legend'
 import Background from './Background'
 import { CustomToolTip } from "../../customToolTip";
 
 
-const OverviewSankey = ({
+const OverviewSankey = forwardRef(({
     data,
-    width='100%',
-}) => {
-    const svgRef = useRef(null)
-
+    height='100%',
+}, ref) => {
     return (
         <div style={{position: 'relative'}}>
             <svg
-                ref={svgRef}
-                width={width}
-                viewBox="0 0 894 568"
+                ref={ref}
+                height={height}
+                viewBox="0 0 602 626"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <Background />
-                <Flows data={data} svgRef={svgRef} />
-                <Legend />
+                <Flows data={data} svgRef={ref} />
             </svg>
 
             <CustomToolTip
@@ -40,6 +37,6 @@ const OverviewSankey = ({
             />
         </div>
     )
-}
+})
 
 export default OverviewSankey

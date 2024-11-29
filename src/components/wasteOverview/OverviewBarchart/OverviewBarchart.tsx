@@ -5,17 +5,19 @@ import { CustomToolTip } from "../../customToolTip";
 import { flows } from "../flows"
 
 
+const fontSize = 12
+const lineHeight = 14
 const StyledText = styled.tspan`
   font: var(--gf-label-md-default);
   color: var(--gf-color-text-secondary);
-  font-size: 12px;
-  line-height: 14px;
+  font-size: ${fontSize}px;
+  line-height: ${lineHeight}px;
 `
 
-const wrapText = (text, width, fontSize=10) => {
+const wrapText = (text, width, fontSize=12) => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-    context.font = `${fontSize}px`;
+    context.font = `${fontSize}px Roboto`;
 
     const words = text.split(" ");
     const lines = [];
@@ -39,9 +41,9 @@ const wrapText = (text, width, fontSize=10) => {
 
 const OverviewBarchart = ({
     data=null,
-    height=900,
+    height=600,
     margin={},
-    labelWidth=100,
+    labelWidth=120,
     labelPadding=20,
     keys=keys,
     indexBy=null,
@@ -54,8 +56,9 @@ const OverviewBarchart = ({
         // wrap long text
         const data = bar.data.data
         const numeral = flows?.[data?.[indexBy]]?.key
-        const text = flows?.[data?.[indexBy]]?.name
-        const lines = wrapText(text, labelWidth, 10);
+        const name = flows?.[data?.[indexBy]]?.name
+        const text = `${numeral}. ${name}`
+        const lines = wrapText(text, labelWidth, fontSize);
 
         // track g height
         useEffect(() => {
@@ -79,9 +82,10 @@ const OverviewBarchart = ({
                       alignmentBaseline: 'middle',
                     }}
                 >
-                    <StyledText x={0} dy="10px">{`${numeral}.`}</StyledText>
                     {lines.map((line, index) => (
-                      <StyledText key={index} x={0} dy="14px">
+                      <StyledText key={index} x={index == 0 ? 0 : (numeral < 10) ? 14 : 20}
+                        dy={index > 0 ? lineHeight : fontSize}
+                      >
                         {line}
                       </StyledText>
                     ))}
@@ -108,7 +112,7 @@ const OverviewBarchart = ({
                 colors={({ id, data }) => String(data[`${id}Color`])}
                 keys={keys}
                 indexBy={indexBy}
-                margin={{ top: 50, right: 0, bottom: 50, left: 120, ...margin }}
+                margin={{ top: 30, right: 10, bottom: 0, left: 140, ...margin }}
                 layout="horizontal"
                 enableGridY={false}
                 enableGridX={true}

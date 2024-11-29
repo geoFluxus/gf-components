@@ -1,15 +1,45 @@
-import { OverviewSankey } from './OverviewSankey'
+import { useRef, useEffect, useState } from 'react';
+import { OverviewSankey, Legend } from './OverviewSankey'
 import { OverviewBarchart } from './OverviewBarchart'
+import { Row, Col, Flex } from "antd"
 
 
 const WasteOverview = ({
     sankey={},
     bar={}
 }) => {
+    const sankeyRef = useRef(null)
+    const [height, setHeight] = useState(null)
+
+    const updateHeight = () => {
+        if (sankeyRef.current) {
+            setHeight(sankeyRef.current.clientHeight);
+        }
+    };
+
+    useEffect(() => {
+        updateHeight();
+
+        window.addEventListener('resize', updateHeight);
+
+        return () => {
+          window.removeEventListener('resize', updateHeight);
+        };
+    }, []);
+
     return (
         <>
-            <OverviewSankey {...sankey} />
-            <OverviewBarchart {...bar} />
+            <Row gutter={[24, 0]}>
+                <Col span={12}>
+                    <OverviewSankey ref={sankeyRef} {...sankey} />
+                </Col>
+                <Col span={12}>
+                    <OverviewBarchart {...bar} height={height} />
+                </Col>
+            </Row>
+            <Flex justify="center" style={{marginTop: 16}}>
+                <Legend />
+            </Flex>
         </>
     )
 }
