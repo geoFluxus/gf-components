@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { OverviewSankey, Legend } from './OverviewSankey'
 import { OverviewBarchart } from './OverviewBarchart'
-import { Row, Col } from "antd"
+import { Row, Col, Flex } from "antd"
 
 
 const WasteOverview = ({
@@ -37,7 +37,9 @@ const WasteOverview = ({
                     <OverviewBarchart {...bar} height={height} />
                 </Col>
             </Row>
-            <Legend />
+            <Flex justify="center" style={{marginTop: 16}}>
+                <Legend />
+            </Flex>
         </>
     )
 }
