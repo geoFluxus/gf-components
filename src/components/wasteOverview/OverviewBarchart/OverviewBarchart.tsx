@@ -39,7 +39,7 @@ const wrapText = (text, width, fontSize=10) => {
 
 const OverviewBarchart = ({
     data=null,
-    height=900,
+    height=600,
     margin={},
     labelWidth=100,
     labelPadding=20,
@@ -108,7 +108,7 @@ const OverviewBarchart = ({
                 colors={({ id, data }) => String(data[`${id}Color`])}
                 keys={keys}
                 indexBy={indexBy}
-                margin={{ top: 50, right: 0, bottom: 50, left: 120, ...margin }}
+                margin={{ top: 30, right: 10, bottom: 0, left: 120, ...margin }}
                 layout="horizontal"
                 enableGridY={false}
                 enableGridX={true}
