@@ -16,7 +16,7 @@ const OverviewSankey = ({
             <svg
                 ref={svgRef}
                 width={width}
-                viewBox="0 0 894 568"
+                viewBox="0 0 602 626"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
