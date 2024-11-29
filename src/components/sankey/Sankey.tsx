@@ -16,20 +16,24 @@ export interface Props {
   };
   linktooltip: ({ link }) => JSX.Element;
   nodetooltip: ({ node }) => JSX.Element;
+  customStyle?: object;
+  customMargin?: object;
 }
 
 const Sankey: React.FC<Props> = ({
   sankeyData,
   linktooltip = null,
   nodetooltip = null,
+  customStyle = {},
+  customMargin = {},
 }) => {
   return (
     <>
       <GlobalStyle />
-      <div style={{ width: "100%", height: 600 }}>
+      <div style={{ width: "100%", height: 600, ...customStyle }}>
         <ResponsiveSankey
           data={sankeyData}
-          margin={{ top: 20, right: 120, bottom: 20, left: 120 }}
+          margin={{ top: 20, right: 120, bottom: 20, left: 120, ...customMargin }}
           nodeTooltip={({ node }) => (
             <CustomToolTip
               body={nodetooltip?.({ node }) || <span>Sankey node tooltip</span>}
