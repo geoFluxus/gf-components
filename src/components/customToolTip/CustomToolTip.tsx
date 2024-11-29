@@ -7,8 +7,8 @@ import { DatumId, PieTooltipProps } from "@nivo/pie";
 
 export interface Props {
   style?: object;
-  label: string | React.ReactElement | DatumId;
-  amount: number | string;
+  label?: string | React.ReactElement | DatumId;
+  amount?: number | string;
   unit?: string;
   body?: React.ReactNode
 }
