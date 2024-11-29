@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { OverviewSankey, Legend } from './OverviewSankey'
 import { OverviewBarchart } from './OverviewBarchart'
 import { Row, Col } from "antd"
@@ -9,7 +9,23 @@ const WasteOverview = ({
     bar={}
 }) => {
     const sankeyRef = useRef(null)
-    console.log(sankeyRef)
+    const [height, setHeight] = useState(null)
+
+    const updateHeight = () => {
+        if (sankeyRef.current) {
+            setHeight(sankeyRef.current.clientHeight);
+        }
+    };
+
+    useEffect(() => {
+        updateHeight();
+
+        window.addEventListener('resize', updateHeight);
+
+        return () => {
+          window.removeEventListener('resize', updateHeight);
+        };
+    }, []);
 
     return (
         <>
@@ -18,7 +34,7 @@ const WasteOverview = ({
                     <OverviewSankey ref={sankeyRef} {...sankey} />
                 </Col>
                 <Col span={12}>
-                    <OverviewBarchart {...bar} />
+                    <OverviewBarchart {...bar} height={height} />
                 </Col>
             </Row>
             <Legend />
