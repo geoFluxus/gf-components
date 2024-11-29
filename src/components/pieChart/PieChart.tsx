@@ -19,9 +19,6 @@ const StyledSpan = styled.span`
   font-size: 20px;
   line-height: 30px;
   align-items: center;
-  margin-left: 100px;
-  margin-bottom: 50px;
-  padding: 50px;
 `;
 
 const PieChart: React.FC<Props> = ({
@@ -52,7 +49,7 @@ const PieChart: React.FC<Props> = ({
       <div style={{ width: "100%", height: 500, position: "relative" }}>
         <Col>
           <Row justify="center">
-            <StyledSpan style={{ marginLeft: "0px" }}>{title}</StyledSpan>
+            <StyledSpan>{title}</StyledSpan>
           </Row>
           <Row
             style={{ width: "100%", height: 500, position: "relative" }}
