@@ -1,0 +1,29 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as DomRawChart from "./DomRawChart.stories.tsx";
+
+<Meta of={DomRawChart} title="DomRawChart" />
+
+# DomRawChart
+
+Base component for DomRawChart.
+
+### Example
+
+<Canvas of={DomRawChart.Default} />
+
+## Usage
+
+```ts
+import {DomRawChart} from "gf-components";
+
+const Example = () => {
+  return (
+    <DomRawChart data={data}/>
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
