@@ -109,7 +109,7 @@ const OverviewBarchart = ({
         <div style={{height: height}}>
             <ResponsiveBar
                 data={reverseData}
-                colors={({ id, data }) => String(data[`${id}Color`])}
+                colors={(node) => nodeColor}
                 keys={keys}
                 indexBy={indexBy}
                 margin={{ top: 30, right: 10, bottom: 0, left: 140, ...margin }}

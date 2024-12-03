@@ -1,4 +1,4 @@
-const Line = ({data, graph, stroke}) => {
+const Line = ({data, graph, stroke, strokeWidth, dashed}) => {
   return (
     // horizontal line representing the target value for comparison
     <g>
@@ -8,8 +8,9 @@ const Line = ({data, graph, stroke}) => {
         x2={graph.xScale(data?.x2)}
         y2={graph.yScale(data?.y2)}
         stroke={stroke || "red"}
-        strokeWidth="3"
-      ></line>
+        strokeWidth={strokeWidth || 3}
+        strokeDasharray={dashed ? "10, 5" : null}
+      />
     </g>
   );
 };
