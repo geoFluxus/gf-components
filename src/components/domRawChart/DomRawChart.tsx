@@ -6,6 +6,15 @@ import Line from "./Line";
 import Area from "./Area";
 
 
+const getMin = (array, prop) => {
+    return array.reduce((min, obj) => (obj?.[prop] < min ? obj?.[prop] : min), Infinity)
+}
+
+const getMax = (array, prop) => {
+    return array.reduce((max, obj) => (obj?.[prop] > max ? obj?.[prop] : max), -Infinity)
+}
+
+
 const DomRawChart: React.FC<Props> = ({
     data,
     style={},
@@ -17,6 +26,16 @@ const DomRawChart: React.FC<Props> = ({
     axisLeft={},
     tooltip=null,
 }) => {
+  // get minmax for x-axis
+  const area = data?.area
+  const minX = getMin(area, 'x')
+  const maxX = getMax(area, 'x')
+
+  // get max for y-axis (min=0)
+  const maxY0 = getMax(area, 'y0')
+  const maxY1 = getMax(area, 'y1')
+  const maxY = Math.max(maxY0, maxY1)
+
   return (
     <>
       <GlobalStyle />
@@ -24,8 +43,8 @@ const DomRawChart: React.FC<Props> = ({
         <ResponsiveScatterPlot
             data={[data?.points]}
             margin={{ top: 20, right: 120, bottom: 20, left: 120, ...margin }}
-            xScale={{ type: 'linear', min: 2015, max: 2030, ...xScale }}
-            yScale={{ type: 'linear', min: 0, max: 5000, ...yScale }}
+            xScale={{ type: 'linear', min: minX, max: maxX, ...xScale }}
+            yScale={{ type: 'linear', min: 0, max: maxY, ...yScale }}
             axisBottom={{
                 orient: "bottom",
                 tickSize: 5,
@@ -53,8 +72,8 @@ const DomRawChart: React.FC<Props> = ({
                 "markers",
                 "axes",
                 "legends",
-                (props) => <Area data={data?.area} layer={props} />,
-                (props) => <Line data={data?.line} layer={props} />,
+                (props) => <Area data={data?.area} graph={props} />,
+                (props) => <Line data={data?.line} graph={props} />,
                 "nodes",
             ]}
             tooltip={({ node }) => {
