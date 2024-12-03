@@ -1,1 +1,1 @@
-export { default as Trends } from './Trends'
+export { default as DomRawChart } from './DomRawChart'
