@@ -175,6 +175,8 @@ const BarChart = ({
     }
 
     const reverseData = data.slice().reverse()
+    layers.push('bars')
+    if (enableLabel) layers.push(CustomLabelLayer)
     return (
         <Flex vertical gap={8}>
             <div style={{height: height}}>
@@ -196,7 +198,7 @@ const BarChart = ({
                         ...axisBottom
                     }}
                     axisLeft={null}
-                    layers={[...layers, 'bars', CustomNodeLayer, CustomLabelLayer]}
+                    layers={[...layers, CustomNodeLayer]}
                     tooltip={(bar) => {
                         return (
                           <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
