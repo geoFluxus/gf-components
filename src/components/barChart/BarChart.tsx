@@ -21,18 +21,22 @@ const StyledLabel = styled.span`
   line-height: ${lineHeight}px;
 `
 
-const wrapText = (text, width, fontSize=12) => {
+const measureText = (text, fontSize=12) => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     context.font = `${fontSize}px Roboto`;
 
+    return context.measureText(text)
+}
+
+const wrapText = (text, width, fontSize=12) => {
     const words = text.split(" ");
     const lines = [];
     let currentLine = words[0];
 
     for (let i = 1; i < words.length; i++) {
         const testLine = `${currentLine} ${words[i]}`;
-        const testWidth = context.measureText(testLine).width;
+        const testWidth = measureText(testLine, fontSize).width;
         if (testWidth > width) {
           lines.push(currentLine);
           currentLine = words[i];
@@ -113,6 +117,41 @@ const BarChart = ({
         });
 
 
+    const CustomLabel = ({bar}) => {
+        const fontSize = 10
+        // text
+        const text = label?.(bar.data)
+        const metrics = measureText(text, fontSize),
+              textWidth = metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft,
+              textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent
+        if (textWidth >= bar.width) return (<></>)
+
+        // positioning
+        const transX = bar.x + bar.width / 2 - textWidth / 2
+        const transY = bar.y + bar.height / 2 + textHeight / 2
+
+        return (
+            <g transform={`translate(${transX}, ${transY})`} >
+                <text
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignmentBaseline: 'middle',
+                    }}
+                >
+                    <StyledText style={{fontSize: fontSize}}>{text || 'label'}</StyledText>
+                </text>
+            </g>
+        )
+    }
+
+    const CustomLabelLayer = ({ bars }) =>
+        bars.map((bar, idx) => {
+           return (<CustomLabel key={`bar-inner-label-${idx}`} bar={bar} />)
+        });
+
+
     const Legend = ({data, keys}) => {
         const legend = keys?.map(key => ({
             name: key,
@@ -121,8 +160,8 @@ const BarChart = ({
 
         return (
             <Flex gap={16} className='gf-full' justify="center" wrap>
-                {legend.map(l =>
-                    <Flex gap={8} align="center">
+                {legend.map((l, idx) =>
+                    <Flex gap={8} align="center" key={`legend-${idx}`}>
                         <div style={{
                             minWidth: 16,
                             minHeight: 16,
@@ -149,8 +188,7 @@ const BarChart = ({
                     enableGridY={false}
                     enableGridX={false}
                     padding={padding}
-                    enableLabel={enableLabel}
-                    label={(d) => label?.(d) || d.formattedValue}
+                    enableLabel={false}
                     axisBottom={{
                         tickSize: 5,
                         legendPosition: 'middle',
@@ -158,7 +196,7 @@ const BarChart = ({
                         ...axisBottom
                     }}
                     axisLeft={null}
-                    layers={[...layers, 'bars', CustomNodeLayer]}
+                    layers={[...layers, 'bars', CustomNodeLayer, CustomLabelLayer]}
                     tooltip={(bar) => {
                         return (
                           <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
