@@ -45,3 +45,52 @@ export const data = [
         "Verandering voorradenColor": "hsla(26, 74%, 58%, 1)"
     },
 ]
+
+
+export const co2eq_data = [
+    {
+        "indicator": "Domestic material input",
+        "Biomassa en voedsel": 15.18,
+        "Biomassa en voedselColor": "hsla(205, 40%, 79%, 1)",
+        "Kunststoffen": 22.66,
+        "KunststoffenColor": "hsla(83, 47%, 73%, 1)",
+        "Bouwmaterialen": 5.36,
+        "BouwmaterialenColor": "hsla(4, 55%, 75%, 1)",
+        "Consumptiegoederen": 19.62,
+        "ConsumptiegoederenColor": "hsla(35, 74%, 73%, 1)",
+        "Overig": 21.99,
+        "OverigColor": "hsla(269, 24%, 77%, 1)",
+        "Maakindustrie": 15.19,
+        "MaakindustrieColor": "hsla(26, 74%, 58%, 1)"
+    },
+    {
+        "indicator": "CO2eq uitstoot",
+        "Biomassa en voedsel": 33.11,
+        "Biomassa en voedselColor": "hsla(205, 40%, 79%, 1)",
+        "Kunststoffen": 10.14,
+        "KunststoffenColor": "hsla(83, 47%, 73%, 1)",
+        "Bouwmaterialen": 6.44,
+        "BouwmaterialenColor": "hsla(4, 55%, 75%, 1)",
+        "Consumptiegoederen": 25.07,
+        "ConsumptiegoederenColor": "hsla(35, 74%, 73%, 1)",
+        "Overig": 24.15,
+        "OverigColor": "hsla(269, 24%, 77%, 1)",
+        "Maakindustrie": 1.09,
+        "MaakindustrieColor": "hsla(26, 74%, 58%, 1)"
+    },
+    {
+        "indicator": "Milieukostenindicator",
+        "Biomassa en voedsel": 21.75,
+        "Biomassa en voedselColor": "hsla(205, 40%, 79%, 1)",
+        "Kunststoffen": 21.59,
+        "KunststoffenColor": "hsla(83, 47%, 73%, 1)",
+        "Bouwmaterialen": 17.91,
+        "BouwmaterialenColor": "hsla(4, 55%, 75%, 1)",
+        "Consumptiegoederen": 6.28,
+        "ConsumptiegoederenColor": "hsla(35, 74%, 73%, 1)",
+        "Overig": 25.40,
+        "OverigColor": "hsla(269, 24%, 77%, 1)",
+        "Maakindustrie": 7.07,
+        "MaakindustrieColor": "hsla(26, 74%, 58%, 1)"
+    }
+]

@@ -54,9 +54,12 @@ const BarChart = ({
     keys=null,
     indexBy=null,
     tooltip=null,
-    labelWidth=120,
-    labelPadding=20,
-    axisBottom={}
+    enableLabel=false,
+    label=null,
+    keyLabelWidth=120,
+    keyLabelPadding=20,
+    axisBottom={},
+    layers=['grid', 'axes']
 }) => {
     const CustomNode = ({ bar }) => {
         const gRef = useRef(null);
@@ -64,7 +67,7 @@ const BarChart = ({
 
         // wrap long text
         const text = bar?.data?.indexValue || 'label'
-        const lines = wrapText(text, labelWidth, fontSize);
+        const lines = wrapText(text, keyLabelWidth, fontSize);
 
         // track g height
         useEffect(() => {
@@ -75,7 +78,7 @@ const BarChart = ({
         }, []);
 
         // positioning
-        const transX = labelWidth + labelPadding
+        const transX = keyLabelWidth + keyLabelPadding
         const transY = bar.y + bar.height / 2 - gHeight / 2
 
         return (
@@ -146,10 +149,16 @@ const BarChart = ({
                     enableGridY={false}
                     enableGridX={false}
                     padding={padding}
-                    enableLabel={false}
-                    axisBottom={axisBottom}
+                    enableLabel={enableLabel}
+                    label={(d) => label?.(d) || d.formattedValue}
+                    axisBottom={{
+                        tickSize: 5,
+                        legendPosition: 'middle',
+                        legendOffset: 40,
+                        ...axisBottom
+                    }}
                     axisLeft={null}
-                    layers={['grid', 'axes', 'bars', CustomNodeLayer]}
+                    layers={[...layers, 'bars', CustomNodeLayer]}
                     tooltip={(bar) => {
                         return (
                           <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
