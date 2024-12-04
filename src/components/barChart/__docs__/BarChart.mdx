@@ -1,0 +1,29 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as BarChart from "./BarChart.stories.tsx";
+
+<Meta of={BarChart} title="BarChart" />
+
+# BarChart
+
+Base component for BarChart.
+
+### Example
+
+<Canvas of={BarChart.Default} />
+
+## Usage
+
+```ts
+import {BarChart} from "gf-components";
+
+const Example = () => {
+  return (
+    <BarChart />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
