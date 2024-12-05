@@ -51,14 +51,21 @@ const MaterialHeatmap = ({
     xLabelPadding=10,
     yLabelWidth=200,
     yLabelPadding=40,
+    yNumeralWidth=30,
+    yNumeralPadding=10,
     tooltip=null
 }) => {
-    const YLabel = ({ cell }) => {
+    const worthValues = data.reduce((acc, obj) => {
+        acc[obj.id] = obj.worth;
+        return acc;
+    }, {});
+
+    const YLabel = ({ cell, text, transX, textAnchor="start" }) => {
         const gRef = useRef(null);
         const [gHeight, setGHeight] = useState(0);
 
         // wrap long text
-        const text = cell?.serieId || 'label'
+        text = text || 'label'
         const lines = wrapText(text, yLabelWidth, fontSize);
 
         // track g height
@@ -70,12 +77,12 @@ const MaterialHeatmap = ({
         }, []);
 
         // positioning
-        const transX = yLabelWidth + yLabelPadding
         const transY = cell.y - gHeight / 2
 
         return (
             <g ref={gRef} transform={`translate(-${transX}, ${transY})`} >
                 <text
+                    text-anchor={textAnchor}
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -121,7 +128,7 @@ const MaterialHeatmap = ({
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      justifyContent: 'center',
+                      justifyContent: 'left',
                       alignmentBaseline: 'middle',
                     }}
                 >
@@ -143,7 +150,19 @@ const MaterialHeatmap = ({
            const name = cell?.serieId
            if (name === currName) return
            currName = name
-           return (<YLabel key={`cell-ylabel-${idx}`} cell={cell} />)
+           return (<YLabel key={`cell-ylabel-${idx}`} cell={cell}
+                    text={cell?.serieId}
+                    transX={yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding} />)
+        });
+    const YNumeralLayer = ({cells}) =>
+        cells.map((cell, idx) => {
+           const name = cell?.serieId
+           if (name === currName) return
+           currName = name
+           return (<YLabel key={`cell-ynumeral-${idx}`} cell={cell}
+                    text={worthValues[name].toString()}
+                    transX={yNumeralPadding}
+                    textAnchor="end" />)
         });
 
     currName = null
@@ -160,7 +179,13 @@ const MaterialHeatmap = ({
             <div style={{height: height}}>
                 <ResponsiveHeatMap
                     data={data}
-                    margin={{ top: 90, right: 0, bottom: 60, left: 240, ...margin }}
+                    margin={{
+                        top: 90,
+                        right: 0,
+                        bottom: 0,
+                        left: yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding,
+                        ...margin
+                    }}
                     enableLabels={false}
                     colors={{
                         type: 'diverging',
@@ -172,7 +197,7 @@ const MaterialHeatmap = ({
                     emptyColor="#555555"
                     axisTop={null}
                     axisLeft={null}
-                    layers={['cells', YLabelLayer, XLabelLayer]}
+                    layers={['cells', YLabelLayer, YNumeralLayer, XLabelLayer]}
                     tooltip={(cell) => {
                         return (
                           <CustomToolTip body={ tooltip?.(cell) || <span>Tooltip</span>} />
