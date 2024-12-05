@@ -52,13 +52,16 @@ const MaterialHeatmap = ({
     yLabelWidth=200,
     yLabelPadding=40,
     yNumeralWidth=30,
-    yNumeralPadding=30,
+    yNumeralPadding=40,
     scalePadding=10,
     scaleTextPadding=5,
     tooltip=null
 }) => {
     // keep track of container dimensions
-    const leftLegendWidth = yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding
+    const leftLegendWidth =
+        yLabelWidth + yLabelPadding +
+        yNumeralWidth + yNumeralPadding +
+        scalePadding + scaleTextPadding
     const containerRef = useRef(null);
     const [container, setContainer] = useState({
         width: 0,
@@ -273,14 +276,29 @@ const MaterialHeatmap = ({
                 </marker>
             </defs>
             <line
-                x1="-10"
+                x1={-scalePadding}
                 y1="5"
-                x2="-10"
+                x2={-scalePadding}
                 y2={container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding)}
                 stroke="black" strokeWidth="1"
                 markerStart="url(#arrow-up)"
                 markerEnd="url(#arrow-down)"
             />
+            <text
+                transform={`
+                    translate(-${scalePadding + scaleTextPadding + fontSize}, 10) rotate(90)`
+                }>
+                <StyledText>Veel ingevoerd</StyledText>
+            </text>
+            <text textAnchor="end"
+                transform={`
+                    translate(-${scalePadding + scaleTextPadding + fontSize},
+                               ${container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding) - 10})
+                    rotate(90)
+                `}
+            >
+                <StyledText>Weinig ingevoerd</StyledText>
+            </text>
         </g>
 
     return (
