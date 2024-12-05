@@ -252,14 +252,14 @@ const MaterialHeatmap = ({
     const YScaleLayer = () =>
         <g>
             <defs>
-                <marker id="arrow-up" markerWidth="5" markerHeight="5" refX="2.5" refY="5" orient="auto">
-                  <path d="M0,5 L2.5,0 L5,5 Z" fill="black" />
+                <marker id="arrow-up" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+                  <path d="M5,0 L0,2.5 L5,5 Z" fill="black" />
                 </marker>
-                <marker id="arrow-down" markerWidth="5" markerHeight="5" refX="2.5" refY="0" orient="auto">
-                  <path d="M0,0 L2.5,5 L5,0 Z" fill="black" />
+                <marker id="arrow-down" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                  <path d="M0,0 L5,2.5 L0,5 Z" fill="black" />
                 </marker>
             </defs>
-            <line x1="-10" y1="0" x2="-10" y2={container.height} stroke="black" strokeWidth="1"
+            <line x1="-10" y1="5" x2="-10" y2={container.height - 90} stroke="black" strokeWidth="1"
                 markerStart="url(#arrow-up)"
                 markerEnd="url(#arrow-down)"
             />
