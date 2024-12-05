@@ -279,7 +279,7 @@ const MaterialHeatmap = ({
                 x1={-scalePadding}
                 y1="5"
                 x2={-scalePadding}
-                y2={container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding)}
+                y2={container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding) - 80}
                 stroke="black" strokeWidth="1"
                 markerStart="url(#arrow-up)"
                 markerEnd="url(#arrow-down)"
@@ -293,12 +293,18 @@ const MaterialHeatmap = ({
             <text textAnchor="end"
                 transform={`
                     translate(-${scalePadding + scaleTextPadding + fontSize},
-                               ${container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding) - 10})
+                               ${container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding) - 10 - 80})
                     rotate(90)
                 `}
             >
                 <StyledText>Weinig ingevoerd</StyledText>
             </text>
+        </g>
+
+    // draw color scale
+    const ColorScaleLayer = () =>
+        <g>
+
         </g>
 
     return (
@@ -310,7 +316,7 @@ const MaterialHeatmap = ({
                     margin={{
                         top: xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding,
                         right: 0,
-                        bottom: 0,
+                        bottom: 80,
                         left: leftLegendWidth,
                         ...margin
                     }}
@@ -326,6 +332,7 @@ const MaterialHeatmap = ({
                     axisTop={null}
                     axisLeft={null}
                     layers={[
+                        'legends',
                         'cells',
                         YLabelLayer, YLabelTitleLayer,
                         YWorthLayer, YWorthTitleLayer,
@@ -338,6 +345,23 @@ const MaterialHeatmap = ({
                           <CustomToolTip body={ tooltip?.(cell) || <span>Tooltip</span>} />
                         );
                     }}
+                    legends={[
+                        {
+                            anchor: 'bottom',
+                            translateX: 0,
+                            translateY: 60,
+                            length: container.width - leftLegendWidth - 20,
+                            thickness: 24,
+                            direction: 'row',
+                            tickPosition: 'after',
+                            tickSize: 3,
+                            tickSpacing: 4,
+                            tickOverlap: false,
+                            title: 'Kritieke grondstoffen per goederengroep (%)',
+                            titleAlign: 'middle',
+                            titleOffset: 10
+                        }
+                    ]}
                 />
             </div>
         </>
