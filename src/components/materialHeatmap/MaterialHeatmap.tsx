@@ -52,14 +52,33 @@ const MaterialHeatmap = ({
     yLabelWidth=200,
     yLabelPadding=40,
     yNumeralWidth=30,
-    yNumeralPadding=10,
+    yNumeralPadding=30,
     tooltip=null
 }) => {
+    // keep track of container dimensions
+    const containerRef = useRef(null);
+    const [container, setContainer] = useState({
+        width: 0,
+        height: 0
+    });
+
+    useEffect(() => {
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect();
+          setContainer({
+            width: rect.width,
+            height: rect.height
+          });
+        }
+    }, []);
+
+    // collect worth values for y-labels
     const worthValues = data.reduce((acc, obj) => {
         acc[obj.id] = obj.worth;
         return acc;
     }, {});
 
+    // y-label
     const YLabel = ({ cell, text, transX, transY, textAnchor="start", textStyle={} }) => {
         const gRef = useRef(null);
         const [gHeight, setGHeight] = useState(0);
@@ -103,6 +122,8 @@ const MaterialHeatmap = ({
         )
     }
 
+
+    // x-label
     const XLabel = ({ cell }) => {
         const gRef = useRef(null);
         const [gWidth, setGWidth] = useState(0);
@@ -145,6 +166,7 @@ const MaterialHeatmap = ({
         )
     }
 
+    // draw y-labels
     let currName = null
     const YLabelLayer = ({cells}) =>
         cells.map((cell, idx) => {
@@ -184,6 +206,7 @@ const MaterialHeatmap = ({
                     textAnchor="end" />)
         });
 
+    // draw x-labels
     currName = null
     const XLabelLayer = ({cells}) =>
         cells.map((cell, idx) => {
@@ -192,10 +215,22 @@ const MaterialHeatmap = ({
             return (<XLabel key={`cell-ylabel-${idx}`} cell={cell} />)
         });
 
+    // draw x-scale
+    const XScaleLayer = () =>
+        <g>
+            <line x1="0" y1="-10" x2={container.width} y2="-10" stroke="black" stroke-width="1" />
+        </g>
+
+    // draw y-scale
+    const YScaleLayer = () =>
+        <g>
+            <line x1="-10" y1="0" x2="-10" y2={container.height} stroke="black" stroke-width="1" />
+        </g>
+
     return (
         <>
             <GlobalStyle />
-            <div style={{height: height}}>
+            <div ref={containerRef} style={{height: height}}>
                 <ResponsiveHeatMap
                     data={data}
                     margin={{
@@ -220,7 +255,8 @@ const MaterialHeatmap = ({
                         'cells',
                         YLabelLayer, YLabelTitleLayer,
                         YWorthLayer, YWorthTitleLayer,
-                        XLabelLayer
+                        XScaleLayer,
+                        YScaleLayer
                     ]}
                     tooltip={(cell) => {
                         return (
