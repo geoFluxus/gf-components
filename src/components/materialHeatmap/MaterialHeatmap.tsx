@@ -47,17 +47,19 @@ const MaterialHeatmap = ({
     data,
     height=1300,
     margin={},
-    keyLabelWidth=200,
-    keyLabelPadding=40,
+    xLabelWidth=80,
+    xLabelPadding=10,
+    yLabelWidth=200,
+    yLabelPadding=40,
     tooltip=null
 }) => {
-    const CustomNode = ({ cell }) => {
+    const YLabel = ({ cell }) => {
         const gRef = useRef(null);
         const [gHeight, setGHeight] = useState(0);
 
         // wrap long text
         const text = cell?.serieId || 'label'
-        const lines = wrapText(text, keyLabelWidth, fontSize);
+        const lines = wrapText(text, yLabelWidth, fontSize);
 
         // track g height
         useEffect(() => {
@@ -68,7 +70,7 @@ const MaterialHeatmap = ({
         }, []);
 
         // positioning
-        const transX = keyLabelWidth + keyLabelPadding
+        const transX = yLabelWidth + yLabelPadding
         const transY = cell.y - gHeight / 2
 
         return (
@@ -93,13 +95,63 @@ const MaterialHeatmap = ({
         )
     }
 
+    const XLabel = ({ cell }) => {
+        const gRef = useRef(null);
+        const [gWidth, setGWidth] = useState(0);
+
+        // wrap long text
+        const text = cell?.data?.x || 'label'
+        const lines = wrapText(text, xLabelWidth, fontSize);
+
+        // track g height
+        useEffect(() => {
+            if (gRef.current) {
+              const rect = gRef.current.getBoundingClientRect();
+              setGWidth(rect.width);
+            }
+        }, []);
+
+        // positioning
+        const transX = cell.x - gWidth / 2
+        const transY = - xLabelPadding
+
+        return (
+            <g ref={gRef} transform={`translate(${transX}, ${transY}) rotate(-90)`} >
+                <text
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignmentBaseline: 'middle',
+                    }}
+                >
+                    {lines.map((line, index) => (
+                      <StyledText key={index} x={0}
+                        dy={index > 0 ? lineHeight : fontSize}
+                      >
+                        {line}
+                      </StyledText>
+                    ))}
+                </text>
+            </g>
+        )
+    }
+
     let currName = null
-    const CustomNodeLayer = ({cells}) =>
+    const YLabelLayer = ({cells}) =>
         cells.map((cell, idx) => {
-           name = cell?.serieId
+           const name = cell?.serieId
            if (name === currName) return
            currName = name
-           return (<CustomNode key={`cell-ylabel-${idx}`} cell={cell} />)
+           return (<YLabel key={`cell-ylabel-${idx}`} cell={cell} />)
+        });
+
+    currName = null
+    const XLabelLayer = ({cells}) =>
+        cells.map((cell, idx) => {
+            const name = cell?.serieId
+            if (name !== currName) return
+            return (<XLabel key={`cell-ylabel-${idx}`} cell={cell} />)
         });
 
     return (
@@ -108,7 +160,7 @@ const MaterialHeatmap = ({
             <div style={{height: height}}>
                 <ResponsiveHeatMap
                     data={data}
-                    margin={{ top: 60, right: 0, bottom: 60, left: 240, ...margin }}
+                    margin={{ top: 90, right: 0, bottom: 60, left: 240, ...margin }}
                     enableLabels={false}
                     colors={{
                         type: 'diverging',
@@ -120,7 +172,7 @@ const MaterialHeatmap = ({
                     emptyColor="#555555"
                     axisTop={null}
                     axisLeft={null}
-                    layers={['cells', CustomNodeLayer]}
+                    layers={['cells', YLabelLayer, XLabelLayer]}
                     tooltip={(cell) => {
                         return (
                           <CustomToolTip body={ tooltip?.(cell) || <span>Tooltip</span>} />
