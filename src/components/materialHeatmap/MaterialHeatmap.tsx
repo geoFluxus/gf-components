@@ -60,7 +60,7 @@ const MaterialHeatmap = ({
         return acc;
     }, {});
 
-    const YLabel = ({ cell, text, transX, textAnchor="start" }) => {
+    const YLabel = ({ cell, text, transX, transY, textAnchor="start", textStyle={} }) => {
         const gRef = useRef(null);
         const [gHeight, setGHeight] = useState(0);
 
@@ -77,7 +77,7 @@ const MaterialHeatmap = ({
         }, []);
 
         // positioning
-        const transY = cell.y - gHeight / 2
+        transY = transY || cell.y - gHeight / 2
 
         return (
             <g ref={gRef} transform={`translate(-${transX}, ${transY})`} >
@@ -93,6 +93,7 @@ const MaterialHeatmap = ({
                     {lines.map((line, index) => (
                       <StyledText key={index} x={0}
                         dy={index > 0 ? lineHeight : fontSize}
+                        style={textStyle}
                       >
                         {line}
                       </StyledText>
@@ -154,7 +155,16 @@ const MaterialHeatmap = ({
                     text={cell?.serieId}
                     transX={yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding} />)
         });
-    const YNumeralLayer = ({cells}) =>
+    const YLabelTitleLayer = ({cells}) =>
+        cells.slice(0, 1).map((cell, idx) => {
+           return (<YLabel key={`cell-ynumeral-${idx}`} cell={cell}
+                    text={'Goederengroep'}
+                    transX={yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding}
+                    transY={-20}
+                    textStyle={{fontWeight: 'bold'}}
+                    />)
+        });
+    const YWorthLayer = ({cells}) =>
         cells.map((cell, idx) => {
            const name = cell?.serieId
            if (name === currName) return
@@ -162,6 +172,15 @@ const MaterialHeatmap = ({
            return (<YLabel key={`cell-ynumeral-${idx}`} cell={cell}
                     text={worthValues[name].toString()}
                     transX={yNumeralPadding}
+                    textAnchor="end" />)
+        });
+    const YWorthTitleLayer = ({cells}) =>
+        cells.slice(0, 1).map((cell, idx) => {
+           return (<YLabel key={`cell-ynumeral-${idx}`} cell={cell}
+                    text={'Invoerwaarde in mln €'}
+                    transX={yNumeralPadding}
+                    transY={-20}
+                    textStyle={{fontWeight: 'bold'}}
                     textAnchor="end" />)
         });
 
@@ -197,7 +216,12 @@ const MaterialHeatmap = ({
                     emptyColor="#555555"
                     axisTop={null}
                     axisLeft={null}
-                    layers={['cells', YLabelLayer, YNumeralLayer, XLabelLayer]}
+                    layers={[
+                        'cells',
+                        YLabelLayer, YLabelTitleLayer,
+                        YWorthLayer, YWorthTitleLayer,
+                        XLabelLayer
+                    ]}
                     tooltip={(cell) => {
                         return (
                           <CustomToolTip body={ tooltip?.(cell) || <span>Tooltip</span>} />
