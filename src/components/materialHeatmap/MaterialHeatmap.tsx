@@ -48,14 +48,17 @@ const MaterialHeatmap = ({
     height=1300,
     margin={},
     xLabelWidth=80,
-    xLabelPadding=10,
+    xLabelPadding=20,
     yLabelWidth=200,
     yLabelPadding=40,
     yNumeralWidth=30,
     yNumeralPadding=30,
+    scalePadding=10,
+    scaleTextPadding=5,
     tooltip=null
 }) => {
     // keep track of container dimensions
+    const leftLegendWidth = yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding
     const containerRef = useRef(null);
     const [container, setContainer] = useState({
         width: 0,
@@ -155,7 +158,7 @@ const MaterialHeatmap = ({
 
         // positioning
         const transX = cell.x - gWidth / 2
-        const transY = - xLabelPadding
+        const transY = - (xLabelPadding + scalePadding + scaleTextPadding)
 
         return (
             <g ref={gRef} transform={`translate(${transX}, ${transY}) rotate(-90)`} >
@@ -188,13 +191,13 @@ const MaterialHeatmap = ({
            currName = name
            return (<YLabel key={`cell-ylabel-${idx}`} cell={cell}
                     text={cell?.serieId}
-                    transX={yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding} />)
+                    transX={leftLegendWidth} />)
         });
     const YLabelTitleLayer = ({cells}) =>
         cells.slice(0, 1).map((cell, idx) => {
            return (<YLabel key={`cell-ynumeral-${idx}`} cell={cell}
                     text={'Goederengroep'}
-                    transX={yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding}
+                    transX={leftLegendWidth}
                     transY={-20}
                     textStyle={{fontWeight: 'bold'}}
                     />)
@@ -239,13 +242,23 @@ const MaterialHeatmap = ({
                   <path d="M0,0 L5,2.5 L0,5 Z" fill="black" />
                 </marker>
             </defs>
-            <line x1="0" y1="-10"
-                x2={container.width - (yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding)}
-                y2="-10" stroke="black"
+            <line
+                x1="0"
+                y1={-scalePadding}
+                x2={container.width - leftLegendWidth}
+                y2={-scalePadding}
+                stroke="black"
                 strokeWidth="1"
                 markerStart="url(#arrow-left)"
                 markerEnd="url(#arrow-right)"
             />
+            <text transform={`translate(10, -${scalePadding + scaleTextPadding})`}>
+                <StyledText>Heel kritiek (40 “Zie toelichting”)</StyledText>
+            </text>
+            <text textAnchor="end"
+                transform={`translate(${container.width - leftLegendWidth - 10}, -${scalePadding + scaleTextPadding})`}>
+                <StyledText>Minder kritiek (0 “Zie toelichting”)</StyledText>
+            </text>
         </g>
 
     // draw y-scale
@@ -259,7 +272,12 @@ const MaterialHeatmap = ({
                   <path d="M0,0 L5,2.5 L0,5 Z" fill="black" />
                 </marker>
             </defs>
-            <line x1="-10" y1="5" x2="-10" y2={container.height - 90} stroke="black" strokeWidth="1"
+            <line
+                x1="-10"
+                y1="5"
+                x2="-10"
+                y2={container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding)}
+                stroke="black" strokeWidth="1"
                 markerStart="url(#arrow-up)"
                 markerEnd="url(#arrow-down)"
             />
@@ -272,10 +290,10 @@ const MaterialHeatmap = ({
                 <ResponsiveHeatMap
                     data={data}
                     margin={{
-                        top: 90,
+                        top: xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding,
                         right: 0,
                         bottom: 0,
-                        left: yLabelWidth + yLabelPadding + yNumeralWidth + yNumeralPadding,
+                        left: leftLegendWidth,
                         ...margin
                     }}
                     enableLabels={false}
@@ -293,6 +311,7 @@ const MaterialHeatmap = ({
                         'cells',
                         YLabelLayer, YLabelTitleLayer,
                         YWorthLayer, YWorthTitleLayer,
+                        XLabelLayer,
                         XScaleLayer,
                         YScaleLayer
                     ]}
