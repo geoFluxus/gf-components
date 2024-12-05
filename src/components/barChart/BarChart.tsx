@@ -3,6 +3,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import { CustomToolTip } from "../customToolTip";
 import styled from 'styled-components';
 import { Flex } from 'antd'
+import GlobalStyle from "../../globalStyles";
 
 
 const fontSize = 12
@@ -131,7 +132,7 @@ const BarChart = ({
         const transY = bar.y + bar.height / 2 + textHeight / 2
 
         return (
-            <g transform={`translate(${transX}, ${transY})`} >
+            <g ref={gRef} transform={`translate(${transX}, ${transY})`} >
                 <text
                     style={{
                       display: 'flex',
@@ -178,36 +179,39 @@ const BarChart = ({
     layers.push('bars')
     if (enableLabel) layers.push(CustomLabelLayer)
     return (
-        <Flex vertical gap={8}>
-            <div style={{height: height}}>
-                <ResponsiveBar
-                    data={reverseData}
-                    colors={({ id, data }) => String(data[`${id}Color`])}
-                    keys={keys}
-                    indexBy={indexBy}
-                    margin={{ top: -10, right: 0, bottom: 50, left: 140, ...margin }}
-                    layout="horizontal"
-                    enableGridY={false}
-                    enableGridX={false}
-                    padding={padding}
-                    enableLabel={false}
-                    axisBottom={{
-                        tickSize: 5,
-                        legendPosition: 'middle',
-                        legendOffset: 40,
-                        ...axisBottom
-                    }}
-                    axisLeft={null}
-                    layers={[...layers, CustomNodeLayer]}
-                    tooltip={(bar) => {
-                        return (
-                          <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
-                        );
-                    }}
-                />
-            </div>
-            <Legend data={data} keys={keys}/>
-        </Flex>
+        <>
+            <GlobalStyle />
+            <Flex vertical gap={8}>
+                <div style={{height: height}}>
+                    <ResponsiveBar
+                        data={reverseData}
+                        colors={({ id, data }) => String(data[`${id}Color`])}
+                        keys={keys}
+                        indexBy={indexBy}
+                        margin={{ top: -10, right: 0, bottom: 50, left: 140, ...margin }}
+                        layout="horizontal"
+                        enableGridY={false}
+                        enableGridX={false}
+                        padding={padding}
+                        enableLabel={false}
+                        axisBottom={{
+                            tickSize: 5,
+                            legendPosition: 'middle',
+                            legendOffset: 40,
+                            ...axisBottom
+                        }}
+                        axisLeft={null}
+                        layers={[...layers, CustomNodeLayer]}
+                        tooltip={(bar) => {
+                            return (
+                              <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
+                            );
+                        }}
+                    />
+                </div>
+                <Legend data={data} keys={keys}/>
+            </Flex>
+        </>
     )
 }
 
