@@ -120,6 +120,7 @@ const BarChart = ({
 
     const CustomLabel = ({bar}) => {
         const fontSize = 10
+
         // text
         const text = label?.(bar.data)
         const metrics = measureText(text, fontSize),
@@ -132,7 +133,7 @@ const BarChart = ({
         const transY = bar.y + bar.height / 2 + textHeight / 2
 
         return (
-            <g ref={gRef} transform={`translate(${transX}, ${transY})`} >
+            <g transform={`translate(${transX}, ${transY})`} >
                 <text
                     style={{
                       display: 'flex',
@@ -181,7 +182,7 @@ const BarChart = ({
     return (
         <>
             <GlobalStyle />
-            <Flex vertical gap={8}>
+            <Flex vertical gap={8} style={{width: "100%"}}>
                 <div style={{height: height}}>
                     <ResponsiveBar
                         data={reverseData}
