@@ -22,7 +22,7 @@ const StyledItalic = styled(Text)`
   font: var(--gf-label-md-italic);
   color: var(--gf-color-text-tertiary);
 `
-const StyledParagraph = styled(Paragraph)`
+const StyledText = styled(Text)`
   font: var(--gf-label-lg-default);
   color: var(--gf-color-text-secondary);
 `
@@ -46,9 +46,9 @@ const Metrics: React.FC<MetricsProps> = ({
               <StyledTitle>{percent}</StyledTitle>
               <StyledItalic>{cost}</StyledItalic>
             </Space>
-            <StyledParagraph editable={edit}>
+            <StyledText editable={edit}>
               {editableText}
-            </StyledParagraph>
+            </StyledText>
           </Flex>
       </StyledCard>
     </>

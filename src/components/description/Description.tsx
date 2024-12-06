@@ -17,6 +17,7 @@ const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center'
     column-count: ${props.columns};
   `}
   text-align: ${props => props.textalign};
+  column-gap: 40px;
 `
 const StyledText = styled.div`
   font: var(--gf-label-lg-default);
@@ -28,7 +29,7 @@ const Description: React.FC<Props> = ({
   id,
   text,
   columns,
-  textalign='left',
+  textalign='justify',
   style,
   className,
   editable

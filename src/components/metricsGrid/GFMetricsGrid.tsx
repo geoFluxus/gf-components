@@ -28,7 +28,6 @@ const GFMetricsGrid: React.FC<GFMetricsGridProps> = ({
           description={metric.description}
           cost={metric.cost}
           editable={metric.editable}
-          style={{width: '100%'}}
         />
       ))}
     </Flex>

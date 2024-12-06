@@ -66,26 +66,26 @@ export const FourCardsGrid: Story = {
   args: {
     metricsData: [
       {
-        percent: 35,
-        cost: 18.6,
+        percent: '35.00%',
+        cost: '18.60 md',
         description: "description of the metrics",
         editable: false,
       },
       {
-        percent: 35,
-        cost: 18.6,
+        percent: '35.00%',
+        cost: '18.60 md',
         description: "description of the metrics",
         editable: false,
       },
       {
-        percent: 35,
-        cost: 18.6,
+        percent: '35.00%',
+        cost: '18.60 md',
         description: "description of the metrics",
         editable: false,
       },
       {
-        percent: 35,
-        cost: 18.6,
+        percent: '35.00%',
+        cost: '18.60 md',
         description: "description of the metrics",
         editable: false,
       },
@@ -97,14 +97,14 @@ export const TwoCardsGrid: Story = {
   args: {
     metricsData: [
       {
-        percent: 35,
-        cost: 18.6,
+        percent: '35.00%',
+        cost: '18.60 md',
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio.",
         editable: false,
       },
       {
-        percent: 35,
-        cost: 18.6,
+        percent: '35.00%',
+        cost: '18.6 md',
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum dignissim odio.",
         editable: false,
       },

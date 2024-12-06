@@ -18,6 +18,7 @@ const StyledTitle = styled(Text)<{type?: string}>`
   `}
   ${props => props.type === 'secondary' && css`
     font: var(--gf-header-h4);
+    font-weight: bold;
   `}
   ${props => props.type === 'header' && css`
     font: var(--gf-header-h1);
