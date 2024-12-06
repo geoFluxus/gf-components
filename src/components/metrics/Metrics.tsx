@@ -42,10 +42,10 @@ const Metrics: React.FC<MetricsProps> = ({
       <GlobalStyle />
       <StyledCard cardtype='grey' padding={24} {...props}>
         <Flex vertical gap={8}>
-            <Space direction='horizontal' size={16} align='end'>
+            <Flex gap={16} align='center' wrap>
               <StyledTitle>{percent}</StyledTitle>
               <StyledItalic>{cost}</StyledItalic>
-            </Space>
+            </Flex>
             <StyledText editable={edit}>
               {editableText}
             </StyledText>
