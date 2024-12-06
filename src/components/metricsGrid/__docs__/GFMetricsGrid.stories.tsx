@@ -68,7 +68,7 @@ export const FourCardsGrid: Story = {
       {
         percent: '35.00%',
         cost: '18.60 md',
-        description: "description of the metrics",
+        description: "lor sit amet, consectetur adipiscing elit. Donec inter",
         editable: false,
       },
       {
