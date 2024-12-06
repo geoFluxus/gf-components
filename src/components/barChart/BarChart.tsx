@@ -182,7 +182,7 @@ const BarChart = ({
     return (
         <>
             <GlobalStyle />
-            <Flex vertical gap={8}>
+            <Flex vertical gap={8} style={{width: "100%"}}>
                 <div style={{height: height}}>
                     <ResponsiveBar
                         data={reverseData}
