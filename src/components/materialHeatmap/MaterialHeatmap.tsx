@@ -47,7 +47,7 @@ const MaterialHeatmap = ({
     data,
     height=1300,
     margin={},
-    xLabelWidth=80,
+    xLabelWidth=110,
     xLabelPadding=20,
     yLabelWidth=200,
     yLabelPadding=40,
@@ -143,12 +143,12 @@ const MaterialHeatmap = ({
 
 
     // x-label
-    const XLabel = ({ cell }) => {
+    const XLabel = ({ cell, text, transX, transY, textAnchor="start", textStyle={}, rotate=-90 }) => {
         const gRef = useRef(null);
         const [gWidth, setGWidth] = useState(0);
 
         // wrap long text
-        const text = cell?.data?.x || 'label'
+        text = text || cell?.data?.x || 'label'
         const lines = wrapText(text, xLabelWidth, fontSize);
 
         // track g height
@@ -160,12 +160,13 @@ const MaterialHeatmap = ({
         }, []);
 
         // positioning
-        const transX = cell.x - gWidth / 2
-        const transY = - (xLabelPadding + scalePadding + scaleTextPadding)
+        transX = transX || cell.x - gWidth / 2
+        transY = transY || - (xLabelPadding + scalePadding + scaleTextPadding)
 
         return (
-            <g ref={gRef} transform={`translate(${transX}, ${transY}) rotate(-90)`} >
+            <g ref={gRef} transform={`translate(${transX}, ${transY}) rotate(${rotate})`} >
                 <text
+                    textAnchor={textAnchor}
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -176,6 +177,7 @@ const MaterialHeatmap = ({
                     {lines.map((line, index) => (
                       <StyledText key={index} x={0}
                         dy={index > 0 ? lineHeight : fontSize}
+                        style={textStyle}
                       >
                         {line}
                       </StyledText>
@@ -197,14 +199,12 @@ const MaterialHeatmap = ({
                     transX={leftLegendWidth} />)
         });
     const YLabelTitleLayer = ({cells}) =>
-        cells.slice(0, 1).map((cell, idx) => {
-           return (<YLabel key={`cell-ynumeral-${idx}`} cell={cell}
-                    text={'Goederengroep'}
-                    transX={leftLegendWidth}
-                    transY={-20}
-                    textStyle={{fontWeight: 'bold'}}
-                    />)
-        });
+        <YLabel
+            text={'Goederengroep'}
+            transX={leftLegendWidth}
+            transY={-20}
+            textStyle={{fontWeight: 'bold'}}
+        />
     const YWorthLayer = ({cells}) =>
         cells.map((cell, idx) => {
            const name = cell?.serieId
@@ -216,14 +216,13 @@ const MaterialHeatmap = ({
                     textAnchor="end" />)
         });
     const YWorthTitleLayer = ({cells}) =>
-        cells.slice(0, 1).map((cell, idx) => {
-           return (<YLabel key={`cell-ynumeral-${idx}`} cell={cell}
-                    text={'Invoerwaarde in mln €'}
-                    transX={yNumeralPadding}
-                    transY={-20}
-                    textStyle={{fontWeight: 'bold'}}
-                    textAnchor="end" />)
-        });
+        <YLabel
+            text={'Invoerwaarde in mln €'}
+            transX={yNumeralPadding}
+            transY={-20}
+            textStyle={{fontWeight: 'bold'}}
+            textAnchor="end"
+        />
 
     // draw x-labels
     currName = null
@@ -233,6 +232,15 @@ const MaterialHeatmap = ({
             if (name !== currName) return
             return (<XLabel key={`cell-ylabel-${idx}`} cell={cell} />)
         });
+    console.log(container.width )
+    const XTitleLayer = ({cells}) =>
+        <XLabel
+            text={'Kritische materialen'}
+            transX={(container.width - leftLegendWidth) / 2 - xLabelWidth / 2}
+            transY={-(xLabelPadding + scalePadding + scaleTextPadding + xLabelWidth)}
+            rotate={0}
+            textStyle={{fontWeight: 'bold'}}
+        />
 
     // draw x-scale
     const XScaleLayer = () =>
@@ -301,12 +309,6 @@ const MaterialHeatmap = ({
             </text>
         </g>
 
-    // draw color scale
-    const ColorScaleLayer = () =>
-        <g>
-
-        </g>
-
     return (
         <>
             <GlobalStyle />
@@ -336,7 +338,7 @@ const MaterialHeatmap = ({
                         'cells',
                         YLabelLayer, YLabelTitleLayer,
                         YWorthLayer, YWorthTitleLayer,
-                        XLabelLayer,
+                        XLabelLayer, XTitleLayer,
                         XScaleLayer,
                         YScaleLayer
                     ]}
