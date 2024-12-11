@@ -2,6 +2,7 @@ import React, {useRef, useState, useEffect} from "react";
 import GlobalStyle from "../../globalStyles";
 import { ResponsiveTreeMap } from "@nivo/treemap";
 import { CustomToolTip } from "../customToolTip";
+import styled from 'styled-components';
 import { Flex, Typography } from 'antd'
 
 
@@ -11,6 +12,41 @@ export interface Props {
 }
 
 const { Text } = Typography
+
+
+const StyledText = styled.tspan`
+  font: var(--gf-label-md-default);
+  color: var(--gf-color-text-primary);
+`
+
+const measureText = (text, fontSize=12) => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    context.font = `${fontSize}px Roboto`;
+
+    return context.measureText(text)
+}
+
+const wrapText = (text, width, fontSize=12) => {
+    const words = text.split(" ");
+    const lines = [];
+    let currentLine = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+        const testLine = `${currentLine} ${words[i]}`;
+        const testWidth = measureText(testLine, fontSize).width;
+        if (testWidth > width) {
+          lines.push(currentLine);
+          currentLine = words[i];
+        } else {
+          currentLine = testLine;
+        }
+    }
+    lines.push(currentLine);
+
+    return lines;
+};
+
 
 function applyOpacityToColor(color, opacity) {
     // If the color is already in RGBA, just modify the alpha (opacity)
@@ -72,99 +108,99 @@ const Sankey: React.FC<Props> = ({
     borderColor='white',
     labelTitle='name',
     labelTitleSize=16,
+    labelTitleLineHeight=20,
     labelText='name',
     labelTextSize=10,
+    labelTextLineHeight=14,
     labelPadding=5,
+    labelGap=8,
     tooltip=null
 }) => {
   const CustomNode = ({ node }) => {
     const titleRef = useRef(null)
     const descriptionRef = useRef(null)
-    const [titleOveflows, setTitleOveflows] = useState(false);
-    const [descriptionOveflows, setDescriptionOveflows] = useState(false);
+    const [titleOverflows, setTitleOverflows] = useState(false);
+    const [descriptionOverflows, setDescriptionOverflows] = useState(false);
+
+    const checkOverflow = () => {
+        if (!titleRef.current || !descriptionRef.current) return;
+
+        const titleRect = titleRef.current.getBoundingClientRect();
+        const descriptionRect = descriptionRef.current.getBoundingClientRect();
+
+        const maxWidth = Math.max(titleRect.width, descriptionRect.width);
+        const totalHeight =
+          titleRect.height +
+          descriptionRect.height +
+          labelGap;
+
+        // Check for title overflow
+        setTitleOverflows(
+          titleRect.height > node.height - labelPadding * 2 ||
+          titleRect.width > node.width - labelPadding * 2
+        );
+
+        // Check for description overflow
+        setDescriptionOverflows(
+          totalHeight > node.height - labelPadding * 2 ||
+          maxWidth > node.width - labelPadding * 2
+        );
+    };
 
     useEffect(() => {
-      if (!titleRef?.current) return
-
-      const checkOverflow = () => {
-        const rect = titleRef.current.getBoundingClientRect();
-
-        // Check if children overflow the parent's height
-        setTitleOveflows(
-            rect.height > node.height - labelPadding * 2 ||
-            rect.width > node.width - labelPadding * 2
-        );
-      };
-
-      // Create a ResizeObserver to monitor size changes
-      const resizeObserver = new ResizeObserver(checkOverflow);
-      resizeObserver.observe(titleRef?.current);
-
-      // Initial overflow check
-      checkOverflow();
-
-      return () => {
-        resizeObserver.disconnect();
-      };
+        checkOverflow();
     }, []);
 
-    useEffect(() => {
-      if (!descriptionRef?.current) return
-      if (!titleRef?.current) return
+    if (node.isParent) return null
+    const labelTitleContent = node?.data?.[labelTitle] || 'Title'
+    const titleLines = wrapText(labelTitleContent, node.width - labelPadding * 2, labelTitleSize);
+    const newLabelGap =
+        titleLines.length * labelTitleSize +
+        (titleLines.length - 1) * (labelTitleLineHeight - labelTitleSize) +
+        labelGap
 
-      const checkOverflow = () => {
-        const descriptionRect = descriptionRef.current.getBoundingClientRect(),
-              titleRect = titleRef.current.getBoundingClientRect(),
-              maxWidth = Math.max([descriptionRect, titleRect])
+    const labelTextContent = node?.data?.[labelText]  || 'Title'
+    const textLines = wrapText(labelTextContent, node.width - labelPadding * 2, labelTextSize);
 
-        // Check if children overflow the parent's height
-        setDescriptionOveflows(
-            descriptionRect.height + titleRect.height > node.height - labelPadding * 2 ||
-            maxWidth > node.width - labelPadding * 2
-        );
-      };
-
-      // Create a ResizeObserver to monitor size changes
-      const resizeObserver = new ResizeObserver(checkOverflow);
-      resizeObserver.observe(titleRef?.current);
-
-      // Initial overflow check
-      checkOverflow();
-
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }, []);
-
-    if (node.isParent) return (<></>)
     return (
       <g transform={`translate(${node.x}, ${node.y})`}>
-        <foreignObject
+        <rect
             width={node.width}
             height={node.height}
-            style={{
-                backgroundColor: applyOpacityToColor(node.color, nodeOpacity),
-                border: `1px solid ${borderColor}`,
-            }}
-        >
-          <div
-            style={{
-              font: 'var(--gf-label-lg-default)',
-              color: labelTextColor,
-              padding: labelPadding,
-              display: titleOveflows ? 'none' : 'auto'
-            }}
-          >
-            <div ref={titleRef} style={{fontSize: labelTitleSize, display: 'inline-block'}}>
-                <b>{node?.data?.[labelTitle] || 'Title'}</b>
-            </div>
-            <div style={{display: descriptionOveflows ? 'none' : 'auto'}}>
-                <div ref={descriptionRef} style={{fontSize: labelTextSize, display: 'inline-block'}}>
-                    {node?.data?.[labelText] || 'Text'}
-                </div>
-            </div>
-          </div>
-        </foreignObject>
+            fill={applyOpacityToColor(node.color, nodeOpacity)}
+            strokeWidth={1}
+            stroke={borderColor}
+        />
+
+        {!titleOverflows &&
+            <text ref={titleRef}>
+                {titleLines.map((line, idx) => (
+                    <StyledText
+                        key={idx}
+                        x={labelPadding}
+                        y={labelPadding + labelTitleSize + idx * labelTitleLineHeight}
+                        style={{fontSize: labelTitleSize, fontWeight: 'bold'}}
+                    >
+                        {line}
+                    </StyledText>
+                ))}
+            </text>
+        }
+
+        {!titleOverflows && !descriptionOverflows &&
+            <text ref={descriptionRef}>
+                {textLines.map((line, idx) => (
+                    <StyledText
+                        key={idx}
+                        x={labelPadding}
+                        y={labelPadding + labelTitleSize + newLabelGap + idx * labelTextLineHeight}
+                        style={{fontSize: labelTextSize}}
+                    >
+                        {line}
+                    </StyledText>
+                ))}
+            </text>
+        }
       </g>
     );
   };

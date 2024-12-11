@@ -232,7 +232,6 @@ const MaterialHeatmap = ({
             if (name !== currName) return
             return (<XLabel key={`cell-ylabel-${idx}`} cell={cell} />)
         });
-    console.log(container.width )
     const XTitleLayer = ({cells}) =>
         <XLabel
             text={'Kritische materialen'}
