@@ -1,0 +1,29 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as GoalChart from "./GoalChart.stories.tsx";
+
+<Meta of={GoalChart} title="GoalChart" />
+
+# GoalChart
+
+Base component for GoalChart.
+
+### Example
+
+<Canvas of={GoalChart.Default} />
+
+## Usage
+
+```ts
+import {GoalChart} from "gf-components";
+
+const Example = () => {
+  return (
+    <GoalChart data={data}/>
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
