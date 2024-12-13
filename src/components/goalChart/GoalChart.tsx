@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from 'react'
 import GlobalStyle from "../../globalStyles";
 import { ResponsiveBar } from '@nivo/bar'
 import styled from 'styled-components';
@@ -11,20 +12,12 @@ const colors = {
     area: 'hsl(205, 40%, 79%)'
 }
 
-const StyledText = styled.text`
+const StyledText = styled.span`
   font: var(--gf-label-md-default);
   color: var(--gf-color-text-secondary);
   font-size: 12px;
-  dominant-baseline: hanging;
+  line-height: 14px;
 `
-
-const measureText = (text, fontSize=12) => {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    context.font = `${fontSize}px Roboto, sans-serif`;
-
-    return context.measureText(text)
-}
 
 
 const GoalChart = ({
@@ -43,42 +36,80 @@ const GoalChart = ({
     tooltip=null
 }) => {
     const barData = data?.bar,
-          goalData = null
+          goalData = data?.goal,
+          area = data?.area
     const barColor = colors[goalData ? 'national' : 'area']
 
     const GoalLayer = (props) =>
         goalData &&
         <Line data={goalData} graph={props} stroke={colors?.goal} />
 
-    const LegendRect = (props) =>
-        <rect
-            width={props.width}
-            height={props.width}
-            fill={barColor}
-            x={props.x}
-            y={props.y}
-        />
+    const LegendGoal = () =>
+        <div style={{
+            display: 'flex',
+            gap: legendGap,
+            alignItems: 'center',
+            marginBottom: legendGap
+        }}>
+            <div style={{
+                backgroundColor: colors?.goal,
+                minWidth: legendShapeWidth,
+                minHeight: 4
+            }}/>
+            <StyledText style={{width: legendLabelWidth}}>
+                {`Nationaal doel: ${goalData.value} ${goalData.unit}`}
+            </StyledText>
+        </div>
+
+    const LegendArea = () =>
+        <div style={{
+            display: 'flex',
+            gap: legendGap,
+            alignItems: 'center'
+        }}>
+            <div style={{
+                backgroundColor: barColor,
+                minWidth: legendShapeWidth,
+                minHeight: legendShapeWidth
+            }}/>
+            <StyledText style={{width: legendLabelWidth}}>
+                {`Primair geproduceerd afval in ${area}`}
+            </StyledText>
+        </div>
 
     const Legend = (props) => {
-        const metrics = measureText('Legend'),
-              textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent
+        const ref = useRef(null)
+        const [size, setSize] = useState({
+            width: 0,
+            height: 0
+        })
+
+        useEffect(() => {
+            if (!ref?.current) return
+            setSize({
+                width: ref?.current?.clientWidth,
+                height: ref?.current?.clientHeight
+            })
+        }, [])
+
         return (
             <g>
-                <LegendRect
-                    x={props.innerWidth + legendPadding}
-                    y={props.innerHeight - legendShapeWidth}
-                    width={legendShapeWidth}
-                />
-                <StyledText
-                    x={props.innerWidth + legendPadding + legendShapeWidth + legendGap}
-                    y={props.innerHeight - legendShapeWidth / 2 - textHeight / 2}
+                <foreignObject
+                 x={props.innerWidth + legendPadding}
+                 y={props.innerHeight - size.height}
+                 width={size.width}
+                 height={size.height}
                 >
-                    Legend
-                </StyledText>
+                    <div ref={ref} style={{ display: "inline-block" }}>
+                        {goalData && <LegendGoal />}
+                        <LegendArea />
+                    </div>
+                </foreignObject>
             </g>
         )
     }
 
+    const legendWidth = legendPadding + legendShapeWidth + legendGap + legendLabelWidth
     return (
         <>
             <GlobalStyle />
@@ -88,7 +119,7 @@ const GoalChart = ({
                     keys={keys}
                     indexBy={indexBy}
                     colors={barColor}
-                    margin={{left: 50, bottom: 50, right: 100, ...margin}}
+                    margin={{left: 50, bottom: 50, right: legendWidth, ...margin}}
                     padding={padding}
                     axisBottom={{
                         tickSize: 5,
