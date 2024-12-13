@@ -17,7 +17,7 @@ const StyledText = styled.tspan`
 const wrapText = (text, width, fontSize=12) => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-    context.font = `${fontSize}px Roboto`;
+    context.font = `${fontSize}px Roboto, sans-serif`;
 
     const words = text.split(" ");
     const lines = [];
