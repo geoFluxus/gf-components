@@ -12,12 +12,12 @@ const colors = {
     area: 'hsl(205, 40%, 79%)'
 }
 
-const StyledText = styled.span`
-  font: var(--gf-label-md-default);
-  color: var(--gf-color-text-secondary);
-  font-size: 12px;
-  line-height: 14px;
-`
+const styledText = {
+  font: "var(--gf-label-md-default)",
+  color: "var(--gf-color-text-secondary)",
+  fontSize: "12px",
+  lineHeight: "14px"
+}
 
 
 const GoalChart = ({
@@ -56,9 +56,9 @@ const GoalChart = ({
                 minWidth: legendShapeWidth,
                 minHeight: 4
             }}/>
-            <StyledText style={{width: legendLabelWidth}}>
+            <span style={{...styledText, width: legendLabelWidth}}>
                 {`Nationaal doel: ${goalData.value} ${goalData.unit}`}
-            </StyledText>
+            </span>
         </div>
 
     const LegendArea = () =>
@@ -72,9 +72,9 @@ const GoalChart = ({
                 minWidth: legendShapeWidth,
                 minHeight: legendShapeWidth
             }}/>
-            <StyledText style={{width: legendLabelWidth}}>
+            <span style={{...styledText, width: legendLabelWidth}}>
                 {`Primair geproduceerd afval in ${area}`}
-            </StyledText>
+            </span>
         </div>
 
     const Legend = (props) => {
