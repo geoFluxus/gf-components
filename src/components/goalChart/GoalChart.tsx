@@ -121,6 +121,7 @@ const GoalChart = ({
                     colors={barColor}
                     margin={{left: 50, bottom: 50, right: legendWidth, ...margin}}
                     padding={padding}
+                    valueFormat={" >-.2f"}
                     axisBottom={{
                         tickSize: 5,
                         legendPosition: 'middle',
