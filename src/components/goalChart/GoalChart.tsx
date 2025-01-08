@@ -28,6 +28,7 @@ const GoalChart = ({
   margin = {},
   axisBottom = {},
   axisLeft = {},
+  valueFormat=null,
   legendLabelWidth = 145,
   legendShapeWidth = 16,
   legendGap = 8,
@@ -120,7 +121,7 @@ const GoalChart = ({
                     colors={barColor}
                     margin={{left: 50, bottom: 50, right: legendWidth, ...margin}}
                     padding={padding}
-                    valueFormat={" >-.2f"}
+                    valueFormat={d => valueFormat?.(d) || d}
                     axisBottom={{
                         tickSize: 5,
                         legendPosition: 'middle',
