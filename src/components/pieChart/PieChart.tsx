@@ -12,6 +12,7 @@ export interface Props {
   tooltip?: ({ id, value, unit }) => JSX.Element;
   customStyle?: object;
   customMargin?: object;
+  height?: number;
 }
 
 const StyledSpan = styled.span`
@@ -30,6 +31,7 @@ const PieChart: React.FC<Props> = ({
   tooltip = null,
   customStyle = {},
   customMargin = {},
+  height = 600,
 }) => {
   const CenteredMetric = ({ centerX, centerY }) => {
     return (
@@ -50,13 +52,20 @@ const PieChart: React.FC<Props> = ({
   return (
     <>
       <GlobalStyle />
-      <div style={{ width: "100%", height: 500, position: "relative", ...customStyle }}>
+      <div
+        style={{
+          width: "100%",
+          height: height,
+          position: "relative",
+          ...customStyle,
+        }}
+      >
         <Col>
           <Row justify="center">
             <StyledSpan>{title}</StyledSpan>
           </Row>
           <Row
-            style={{ width: "100%", height: 500, position: "relative" }}
+            style={{ width: "100%", height: height, position: "relative" }}
             justify="center"
           >
             <ResponsivePie
@@ -64,7 +73,13 @@ const PieChart: React.FC<Props> = ({
               data={pieChartData}
               enableArcLabels={!isEmpty}
               enableArcLinkLabels={!isEmpty}
-              margin={{ top: 20, right: 120, bottom: 100, left: 120, ...customMargin }}
+              margin={{
+                top: 50,
+                right: 80,
+                bottom: 50,
+                left: 80,
+                ...customMargin,
+              }}
               innerRadius={0.5}
               padAngle={0.7}
               cornerRadius={3}
