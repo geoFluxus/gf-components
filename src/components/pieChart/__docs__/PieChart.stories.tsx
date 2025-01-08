@@ -23,7 +23,7 @@ export const Default: Story = {
 
 export const NoDataAvailable: Story = {
   args: {
-    data: EmptyPieChartData,
+    pieChartData: EmptyPieChartData,
     title: "Afval Enschede",
     isEmpty: true
   },
