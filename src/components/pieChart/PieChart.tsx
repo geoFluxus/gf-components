@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import GlobalStyle from "../../globalStyles";
 import { ResponsivePie } from "@nivo/pie";
 import styled from "styled-components";
 import { CustomToolTip } from "../customToolTip";
-import { Col, Row } from "antd";
+import { Col, Row, Flex } from "antd";
 
 export interface Props {
   pieChartData: any;
@@ -17,23 +17,36 @@ export interface Props {
 
 const StyledSpan = styled.span`
   color: black;
-  font-style: normal;
+  font: var(--gf-label-md-default);
   font-weight: 600;
   font-size: 20px;
-  line-height: 30px;
-  align-items: center;
 `;
+
+const StyledLabel = styled.span`
+  font: var(--gf-label-md-default);
+  color: var(--gf-color-text-secondary);
+  font-size: 10px;
+`
 
 const PieChart: React.FC<Props> = ({
   pieChartData,
   title,
   isEmpty,
+  sortByValue=true,
+  arcLabel=null,
   tooltip = null,
   customStyle = {},
   customMargin = {},
   height = 600,
+  legendWidth='50%'
 }) => {
-  const CenteredMetric = ({ centerX, centerY }) => {
+  const [arcData, setArcData] = useState([])
+
+  const CenteredMetric = ({ centerX, centerY, dataWithArc }) => {
+    if (!arcData.length) {
+        setArcData(dataWithArc)
+    }
+
     return (
       <text
         x={centerX}
@@ -49,30 +62,37 @@ const PieChart: React.FC<Props> = ({
       </text>
     );
   };
+
+  const Legend = ({data}) => {
+    return (
+        <Flex gap={16} className='gf-full' justify="center" wrap style={{width: legendWidth}}>
+            {data?.map((l, idx) =>
+                <Flex gap={8} align="center" key={`legend-${idx}`}>
+                    <div style={{
+                        minWidth: 16,
+                        minHeight: 16,
+                        backgroundColor: l.color
+                    }} />
+                    <StyledLabel>{l.label}</StyledLabel>
+                </Flex>
+            )}
+        </Flex>
+    )
+  }
+
   return (
     <>
       <GlobalStyle />
-      <div
-        style={{
-          width: "100%",
-          height: height,
-          position: "relative",
-          ...customStyle,
-        }}
-      >
-        <Col>
-          <Row justify="center">
-            <StyledSpan>{title}</StyledSpan>
-          </Row>
-          <Row
-            style={{ width: "100%", height: height, position: "relative" }}
-            justify="center"
-          >
+      <Flex vertical gap={8} align="center" style={{width: "100%"}}>
+        <StyledSpan>{title}</StyledSpan>
+        <div style={{width: "100%", height: height}}>
             <ResponsivePie
               colors={{ scheme: isEmpty ? "greys" : "nivo" }}
               data={pieChartData}
+              sortByValue={sortByValue}
               enableArcLabels={!isEmpty}
-              enableArcLinkLabels={!isEmpty}
+              arcLabel={d => arcLabel?.(d) || d.formattedValue}
+              enableArcLinkLabels={false}
               margin={{
                 top: 50,
                 right: 80,
@@ -86,10 +106,6 @@ const PieChart: React.FC<Props> = ({
               activeOuterRadiusOffset={8}
               borderWidth={1}
               borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
-              arcLinkLabelsSkipAngle={10}
-              arcLinkLabelsTextColor="#333333"
-              arcLinkLabelsThickness={2}
-              arcLinkLabelsColor={{ from: "color" }}
               arcLabelsSkipAngle={10}
               arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
               isInteractive={!isEmpty}
@@ -98,27 +114,7 @@ const PieChart: React.FC<Props> = ({
                 "arcLabels",
                 "arcLinkLabels",
                 "legends",
-                CenteredMetric,
-              ]}
-              defs={[
-                {
-                  id: "dots",
-                  type: "patternDots",
-                  background: "inherit",
-                  color: "rgba(255, 255, 255, 0.3)",
-                  size: 4,
-                  padding: 1,
-                  stagger: true,
-                },
-                {
-                  id: "lines",
-                  type: "patternLines",
-                  background: "inherit",
-                  color: "rgba(255, 255, 255, 0.3)",
-                  rotation: -45,
-                  lineWidth: 6,
-                  spacing: 10,
-                },
+                CenteredMetric
               ]}
               tooltip={({ datum: { id, value, unit } }) => {
                 return (
@@ -132,9 +128,9 @@ const PieChart: React.FC<Props> = ({
                 );
               }}
             />
-          </Row>
-        </Col>
-      </div>
+        </div>
+        <Legend data={arcData} />
+      </Flex>
     </>
   );
 };

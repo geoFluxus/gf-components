@@ -13,9 +13,10 @@ type Story = StoryObj<typeof Example>;
 
 export const Default: Story = {
   args: {
-    data: PieChartData,
+    pieChartData: PieChartData,
     title: "Afval Enschede",
     isEmpty: false,
+    arcLabel: (d) => `${d.data.value.toFixed(2)}`,
     tooltip: ({ id, value, color }) => <span>Custom piechart tooltip</span>
   },
 };
