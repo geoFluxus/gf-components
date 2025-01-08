@@ -1,16 +1,15 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from "react";
 import GlobalStyle from "../../globalStyles";
-import { ResponsiveBar } from '@nivo/bar'
-import styled from 'styled-components';
+import { ResponsiveBar } from "@nivo/bar";
+import styled from "styled-components";
 import { CustomToolTip } from "../customToolTip";
 import Line from "./Line";
 
-
 const colors = {
-    goal: 'hsl(182, 30%, 45%)',
-    national: 'hsl(35, 100%, 96%)',
-    area: 'hsl(205, 40%, 79%)'
-}
+  goal: "hsl(182, 30%, 45%)",
+  national: "hsl(35, 100%, 96%)",
+  area: "hsl(205, 40%, 79%)",
+};
 
 const styledText = {
   font: "var(--gf-label-md-default)",
@@ -21,24 +20,24 @@ const styledText = {
 
 
 const GoalChart = ({
-    data,
-    height=500,
-    padding=0.2,
-    keys=["total"],
-    indexBy="year",
-    margin={},
-    axisBottom={},
-    axisLeft={},
-    legendLabelWidth=145,
-    legendShapeWidth=16,
-    legendGap=8,
-    legendPadding=8,
-    tooltip=null
+  data,
+  height = 500,
+  padding = 0.2,
+  keys = ["total"],
+  indexBy = "year",
+  margin = {},
+  axisBottom = {},
+  axisLeft = {},
+  legendLabelWidth = 145,
+  legendShapeWidth = 16,
+  legendGap = 8,
+  legendPadding = 8,
+  tooltip = null,
 }) => {
-    const barData = data?.bar,
-          goalData = data?.goal,
-          area = data?.area
-    const barColor = colors[goalData ? 'national' : 'area']
+  const barData = data?.bar,
+    goalData = data?.goal,
+    area = data?.area;
+  const barColor = colors[goalData ? "national" : "area"];
 
     const GoalLayer = (props) =>
         goalData &&
@@ -77,37 +76,37 @@ const GoalChart = ({
             </span>
         </div>
 
-    const Legend = (props) => {
-        const ref = useRef(null)
-        const [size, setSize] = useState({
-            width: 0,
-            height: 0
-        })
+  const Legend = (props) => {
+    const ref = useRef(null);
+    const [size, setSize] = useState({
+      width: 0,
+      height: 0,
+    });
 
-        useEffect(() => {
-            if (!ref?.current) return
-            setSize({
-                width: ref?.current?.clientWidth,
-                height: ref?.current?.clientHeight
-            })
-        }, [])
+    useEffect(() => {
+      if (!ref?.current) return;
+      setSize({
+        width: ref?.current?.clientWidth,
+        height: ref?.current?.clientHeight,
+      });
+    }, []);
 
-        return (
-            <g>
-                <foreignObject
-                 x={props.innerWidth + legendPadding}
-                 y={props.innerHeight - size.height}
-                 width={size.width}
-                 height={size.height}
-                >
-                    <div ref={ref} style={{ display: "inline-block" }}>
-                        {goalData && <LegendGoal />}
-                        <LegendArea />
-                    </div>
-                </foreignObject>
-            </g>
-        )
-    }
+    return (
+      <g>
+        <foreignObject
+          x={props.innerWidth + legendPadding}
+          y={props.innerHeight - size.height}
+          width={size.width}
+          height={size.height}
+        >
+          <div ref={ref} style={{ display: "inline-block" }}>
+            {goalData && <LegendGoal />}
+            <LegendArea />
+          </div>
+        </foreignObject>
+      </g>
+    );
+  };
 
     const legendWidth = legendPadding + legendShapeWidth + legendGap + legendLabelWidth
     return (
@@ -146,4 +145,4 @@ const GoalChart = ({
     )
 }
 
-export default GoalChart
+export default GoalChart;
