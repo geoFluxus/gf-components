@@ -15,7 +15,7 @@ export const data = [
         "Productie goederen": 1100.153332,
         "Productie goederenColor": "hsla(269, 24%, 77%, 1)",
         "Verandering voorraden": -158.792468,
-        "Verandering voorradenColor": "hsla(26, 74%, 58%, 1)"
+        "Verandering voorradenColor": "#BDC4D1"
     },
     {
         "flow": "Invoer_nationaal",
@@ -33,7 +33,7 @@ export const data = [
         "Productie goederen": 2987.270442,
         "Productie goederenColor": "hsla(269, 24%, 77%, 1)",
         "Verandering voorraden": 310.808986,
-        "Verandering voorradenColor": "hsla(26, 74%, 58%, 1)"
+        "Verandering voorradenColor": "#BDC4D1"
     },
     {
         "flow": "Invoer_internationaal",
@@ -51,7 +51,7 @@ export const data = [
         "Productie goederen": 3134.50354,
         "Productie goederenColor": "hsla(269, 24%, 77%, 1)",
         "Verandering voorraden": -180.200249,
-        "Verandering voorradenColor": "hsla(26, 74%, 58%, 1)"
+        "Verandering voorradenColor": "#BDC4D1"
     }
 ]
 

@@ -65,7 +65,9 @@ const BarChart = ({
     keyLabelPadding=20,
     axisBottom={},
     layers=['grid', 'axes'],
-    zeroMarker=false
+    zeroMarker=false,
+    defs=[],
+    fill=[]
 }) => {
     const CustomNode = ({ bar }) => {
         const gRef = useRef(null);
@@ -156,9 +158,23 @@ const BarChart = ({
 
 
     const Legend = ({data, keys}) => {
+        const defsObj = defs.reduce((acc, item) => {
+            acc[item.id] = { ...item };
+            delete acc[item.id].id; // Remove the `id` field if it's not needed in the final object
+            return acc;
+        }, {});
+
+        const fillObj = fill.reduce((acc, item) => {
+            if (item.match && item.match.id) {
+                acc[item.match.id] = item.id;
+            }
+            return acc;
+        }, {});
+
         const legend = keys?.map(key => ({
             name: key,
-            color: data[0]?.[`${key}Color`]
+            color: data[0]?.[`${key}Color`],
+            defs
         }))
 
         return (
@@ -211,6 +227,8 @@ const BarChart = ({
                     <ResponsiveBar
                         data={reverseData}
                         colors={({ id, data }) => String(data[`${id}Color`])}
+                        defs={defs}
+                        fill={fill}
                         keys={keys}
                         indexBy={indexBy}
                         margin={{ top: -10, right: 0, bottom: 50, left: 140, ...margin }}

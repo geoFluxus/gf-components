@@ -26,7 +26,26 @@ export const Default: Story = {
     height: 150,
     padding: 0.2,
     axisBottom: {legend: 'Gewicht (t)'},
-    zeroMarker: true
+    zeroMarker: true,
+    defs: [
+        {
+            id: 'lines',
+            type: 'patternLines',
+            background: 'inherit',
+            color: 'white',
+            rotation: -45,
+            lineWidth: 2,
+            spacing: 5
+        }
+    ],
+    fill: [
+        {
+            match: {
+                id: 'Verandering voorraden'
+            },
+            id: 'lines'
+        }
+    ]
   },
 };
 
