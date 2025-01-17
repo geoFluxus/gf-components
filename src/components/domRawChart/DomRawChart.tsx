@@ -137,7 +137,7 @@ const DomRawChart: React.FC<Props> = ({
                 colors={(d) => colors?.[d?.serieId]}
                 margin={{ top: 20, right: 120, bottom: 60, left: 120, ...margin }}
                 xScale={{ type: 'linear', min: minX, max: 2030, ...xScale }}
-                yScale={{ type: 'linear', min: minY, max: maxY, ...yScale }}
+                yScale={{ type: 'linear', min: minY < 0 ? minY : 0, max: maxY, ...yScale }}
                 axisBottom={{
                     orient: "bottom",
                     tickSize: 5,
