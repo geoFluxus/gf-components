@@ -25,7 +25,8 @@ export const Default: Story = {
     indexBy: "flow",
     height: 150,
     padding: 0.2,
-    axisBottom: {legend: 'Gewicht (t)'}
+    axisBottom: {legend: 'Gewicht (t)'},
+    zeroMarker: true
   },
 };
 

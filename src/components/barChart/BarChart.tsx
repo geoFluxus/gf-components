@@ -64,7 +64,8 @@ const BarChart = ({
     keyLabelWidth=120,
     keyLabelPadding=20,
     axisBottom={},
-    layers=['grid', 'axes']
+    layers=['grid', 'axes'],
+    zeroMarker=false
 }) => {
     const CustomNode = ({ bar }) => {
         const gRef = useRef(null);
@@ -176,9 +177,32 @@ const BarChart = ({
         )
     }
 
+    const ZeroMarkLayer = (props) => {
+        let key = null, zeroX = 0
+        props?.bars?.forEach(bar => {
+            if (bar?.data?.id !== key && key !== null) return
+            key = bar?.data?.id
+            if (bar.x > zeroX) zeroX = bar.x
+        })
+
+        return (
+            <g>
+              <line
+                x1={zeroX}
+                y1={0}
+                x2={zeroX}
+                y2={props?.height - 40 + 5}
+                stroke={"red"}
+                strokeWidth={3}
+              />
+            </g>
+        )
+    }
+
     const reverseData = data.slice().reverse()
     layers.push('bars')
     if (enableLabel) layers.push(CustomLabelLayer)
+    if (zeroMarker) layers.push(ZeroMarkLayer)
     return (
         <>
             <GlobalStyle />
