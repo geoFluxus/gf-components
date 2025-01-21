@@ -329,7 +329,7 @@ const MaterialHeatmap = ({
                         maxValue: 100,
                         divergeAt: 0.5
                     }}
-                    emptyColor="#555555"
+                    emptyColor="#FFFFFF"
                     axisTop={null}
                     axisLeft={null}
                     layers={[
