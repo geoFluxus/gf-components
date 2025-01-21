@@ -123,7 +123,7 @@ const GoalChart = ({
                     keys={keys}
                     indexBy={indexBy}
                     colors={barColor}
-                    margin={{left: 50, bottom: 50, right: legendWidth, ...margin}}
+                    margin={{left: 50, bottom: 50, top: 10, right: legendWidth, ...margin}}
                     padding={padding}
                     valueFormat={d => valueFormat?.(d) || d}
                     minValue={0}
