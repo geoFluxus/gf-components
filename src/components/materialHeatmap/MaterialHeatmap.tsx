@@ -47,7 +47,7 @@ const MaterialHeatmap = ({
     data,
     height=1300,
     margin={},
-    xLabelWidth=110,
+    xLabelWidth=120,
     xLabelPadding=20,
     yLabelWidth=200,
     yLabelPadding=40,
@@ -234,7 +234,7 @@ const MaterialHeatmap = ({
         });
     const XTitleLayer = ({cells}) =>
         <XLabel
-            text={'Kritische materialen'}
+            text={'Kritische grondstoffen'}
             transX={(container.width - leftLegendWidth) / 2 - xLabelWidth / 2}
             transY={-(xLabelPadding + scalePadding + scaleTextPadding + xLabelWidth)}
             rotate={0}
@@ -329,7 +329,7 @@ const MaterialHeatmap = ({
                         maxValue: 100,
                         divergeAt: 0.5
                     }}
-                    emptyColor="#555555"
+                    emptyColor="#FFFFFF"
                     axisTop={null}
                     axisLeft={null}
                     layers={[

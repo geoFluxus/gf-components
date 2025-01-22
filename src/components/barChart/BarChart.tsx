@@ -64,7 +64,10 @@ const BarChart = ({
     keyLabelWidth=120,
     keyLabelPadding=20,
     axisBottom={},
-    layers=['grid', 'axes']
+    layers=['grid', 'axes'],
+    zeroMarker=false,
+    defs=[],
+    fill=[]
 }) => {
     const CustomNode = ({ bar }) => {
         const gRef = useRef(null);
@@ -155,9 +158,23 @@ const BarChart = ({
 
 
     const Legend = ({data, keys}) => {
+        const defsObj = defs.reduce((acc, item) => {
+            acc[item.id] = { ...item };
+            delete acc[item.id].id; // Remove the `id` field if it's not needed in the final object
+            return acc;
+        }, {});
+
+        const fillObj = fill.reduce((acc, item) => {
+            if (item.match && item.match.id) {
+                acc[item.match.id] = item.id;
+            }
+            return acc;
+        }, {});
+
         const legend = keys?.map(key => ({
             name: key,
-            color: data[0]?.[`${key}Color`]
+            color: data[0]?.[`${key}Color`],
+            defs
         }))
 
         return (
@@ -176,9 +193,32 @@ const BarChart = ({
         )
     }
 
+    const ZeroMarkLayer = (props) => {
+        let key = null, zeroX = 0
+        props?.bars?.forEach(bar => {
+            if (bar?.data?.id !== key && key !== null) return
+            key = bar?.data?.id
+            if (bar.x > zeroX) zeroX = bar.x
+        })
+
+        return (
+            <g>
+              <line
+                x1={zeroX}
+                y1={0}
+                x2={zeroX}
+                y2={props?.height - 40 + 5}
+                stroke={"red"}
+                strokeWidth={3}
+              />
+            </g>
+        )
+    }
+
     const reverseData = data.slice().reverse()
     layers.push('bars')
     if (enableLabel) layers.push(CustomLabelLayer)
+    if (zeroMarker) layers.push(ZeroMarkLayer)
     return (
         <>
             <GlobalStyle />
@@ -187,6 +227,8 @@ const BarChart = ({
                     <ResponsiveBar
                         data={reverseData}
                         colors={({ id, data }) => String(data[`${id}Color`])}
+                        defs={defs}
+                        fill={fill}
                         keys={keys}
                         indexBy={indexBy}
                         margin={{ top: -10, right: 0, bottom: 50, left: 140, ...margin }}

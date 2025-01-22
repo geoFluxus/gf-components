@@ -55,6 +55,7 @@ const PieChart: React.FC<Props> = ({
         dominantBaseline="central"
         style={{
           fontSize: "16px",
+          font: 'var(--gf-label-md-default)',
           fontWeight: 400,
         }}
       >
@@ -129,7 +130,7 @@ const PieChart: React.FC<Props> = ({
               }}
             />
         </div>
-        <Legend data={arcData} />
+        {!isEmpty && <Legend data={arcData} />}
       </Flex>
     </>
   );

@@ -39,6 +39,10 @@ const GoalChart = ({
     goalData = data?.goal,
     area = data?.area;
   const barColor = colors[goalData ? "national" : "area"];
+  const maxY = Math.max(
+    ...barData.map(b => keys.filter(key => key in b).reduce((acc, key) => acc + b[key], 0)),
+    goalData?.value || 0
+  )
 
     const GoalLayer = (props) =>
         goalData &&
@@ -119,9 +123,11 @@ const GoalChart = ({
                     keys={keys}
                     indexBy={indexBy}
                     colors={barColor}
-                    margin={{left: 50, bottom: 50, right: legendWidth, ...margin}}
+                    margin={{left: 50, bottom: 50, top: 10, right: legendWidth, ...margin}}
                     padding={padding}
                     valueFormat={d => valueFormat?.(d) || d}
+                    minValue={0}
+                    maxValue={maxY}
                     axisBottom={{
                         tickSize: 5,
                         legendPosition: 'middle',
