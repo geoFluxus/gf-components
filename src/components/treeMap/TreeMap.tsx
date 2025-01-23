@@ -104,6 +104,7 @@ const Sankey: React.FC<Props> = ({
     labelText='name',
     labelTextSize=12,
     labelPadding=10,
+    labelGap=10,
     labelLineHeight=14,
     tooltip=null
 }) => {
@@ -204,7 +205,7 @@ const Sankey: React.FC<Props> = ({
                   <tspan
                     key={index}
                     x={labelPadding}
-                    y={labelPadding + labelTitleSize + labelLineHeight * (index + 1)}
+                    y={labelPadding + labelTitleSize + labelGap + labelLineHeight * index}
                     style={{
                         fill: labelTextColor,
                         font: 'var(--gf-label-lg-default)',
