@@ -60,6 +60,35 @@ function hexToRgb(hex) {
 }
 
 
+const measureText = (text, fontSize=12) => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    context.font = `${fontSize}px Roboto, sans-serif`;
+
+    return context.measureText(text)
+}
+
+const wrapText = (text, width, fontSize=12) => {
+    const words = text.split(" ");
+    const lines = [];
+    let currentLine = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+        const testLine = `${currentLine} ${words[i]}`;
+        const testWidth = measureText(testLine, fontSize).width;
+        if (testWidth > width) {
+          lines.push(currentLine);
+          currentLine = words[i];
+        } else {
+          currentLine = testLine;
+        }
+    }
+    lines.push(currentLine);
+
+    return lines;
+};
+
+
 const Sankey: React.FC<Props> = ({
     treeMapData,
     style={},
@@ -73,10 +102,41 @@ const Sankey: React.FC<Props> = ({
     labelTitle='name',
     labelTitleSize=16,
     labelText='name',
-    labelTextSize=10,
-    labelPadding=5,
+    labelTextSize=12,
+    labelPadding=10,
+    labelGap=10,
+    labelLineHeight=14,
     tooltip=null
 }) => {
+  const containerRef = useRef(null);
+  const [container, setContainer] = useState({
+    width: 0,
+    height: 0
+  });
+
+  useEffect(() => {
+        if (!containerRef?.current) return
+
+        const checkContainer = () => {
+            const rect = containerRef.current.getBoundingClientRect();
+            setContainer({
+                width: rect.width,
+                height: rect.height
+            });
+        }
+
+        // Create a ResizeObserver to monitor size changes
+        const resizeObserver = new ResizeObserver(checkContainer);
+        resizeObserver.observe(containerRef?.current);
+
+        // Initial overflow check
+        checkContainer();
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, []);
+
   const CustomNode = ({ node }) => {
     const titleRef = useRef(null)
     const descriptionRef = useRef(null)
@@ -86,8 +146,8 @@ const Sankey: React.FC<Props> = ({
     const checkOverflow = () => {
         if (!titleRef?.current || !descriptionRef?.current) return
 
-        const descriptionRect = descriptionRef.current.getBoundingClientRect(),
-              titleRect = titleRef.current.getBoundingClientRect(),
+        const titleRect = titleRef.current.getBoundingClientRect(),
+              descriptionRect = descriptionRef.current.getBoundingClientRect(),
               maxWidth = Math.max([descriptionRect, titleRect])
 
         setTitleOveflows(
@@ -96,7 +156,7 @@ const Sankey: React.FC<Props> = ({
         );
 
         setDescriptionOveflows(
-            descriptionRect.height + titleRect.height > node.height - labelPadding * 2 ||
+            descriptionRect.height + titleRect.height + labelLineHeight > node.height - labelPadding * 2 ||
             maxWidth > node.width - labelPadding * 2
         );
     }
@@ -105,35 +165,58 @@ const Sankey: React.FC<Props> = ({
       checkOverflow();
     }, []);
 
+    const description = node?.data?.[labelText] || 'Text'
+    const lines = wrapText(description, node.width - labelPadding * 2, labelTextSize);
+
     if (node.isParent) return (<></>)
     return (
       <g transform={`translate(${node.x}, ${node.y})`}>
-        <foreignObject
+        <rect
             width={node.width}
             height={node.height}
             style={{
-                backgroundColor: applyOpacityToColor(node.color, nodeOpacity),
-                border: `1px solid ${borderColor}`,
+                fill: applyOpacityToColor(node.color, nodeOpacity),
+                stroke: borderColor,
+                strokeWidth: 1
             }}
-        >
-          <div
-            style={{
-              font: 'var(--gf-label-lg-default)',
-              color: labelTextColor,
-              padding: labelPadding,
-              display: titleOveflows ? 'none' : 'auto',
-            }}
-          >
-            <span ref={titleRef} style={{fontSize: labelTitleSize, display: 'inline-block'}}>
-                <b>{node?.data?.[labelTitle] || 'Title'}</b>
-            </span>
-            <div style={{display: descriptionOveflows ? 'none' : 'auto'}}>
-                <span ref={descriptionRef} style={{fontSize: labelTextSize, display: 'inline-block'}}>
-                    {node?.data?.[labelText] || 'Text'}
-                </span>
-            </div>
-          </div>
-        </foreignObject>
+        />
+        {!titleOveflows &&
+            <text
+                ref={titleRef}
+                dominantBaseline="hanging"
+                x={labelPadding}
+                y={labelPadding}
+                style={{
+                    fill: labelTextColor,
+                    font: 'var(--gf-label-lg-default)',
+                    fontWeight: "bold",
+                    fontSize: labelTitleSize
+                }}
+            >
+                {node?.data?.[labelTitle] || 'Title'}
+            </text>
+        }
+        {!titleOveflows && !descriptionOveflows &&
+            <text
+                ref={descriptionRef}
+                dominantBaseline="hanging"
+            >
+                {lines.map((line, index) => (
+                  <tspan
+                    key={index}
+                    x={labelPadding}
+                    y={labelPadding + labelTitleSize + labelGap + labelLineHeight * index}
+                    style={{
+                        fill: labelTextColor,
+                        font: 'var(--gf-label-lg-default)',
+                        fontSize: labelTextSize
+                    }}
+                  >
+                    {line}
+                  </tspan>
+                ))}
+            </text>
+        }
       </g>
     );
   };
@@ -145,7 +228,7 @@ const Sankey: React.FC<Props> = ({
   return (
     <>
       <GlobalStyle />
-      <div style={{ width: "100%", height: 600, ...style }}>
+      <div ref={containerRef} style={{ width: "100%", height: 600, ...style }}>
         <ResponsiveTreeMap
           data={treeMapData}
           colors={colors}

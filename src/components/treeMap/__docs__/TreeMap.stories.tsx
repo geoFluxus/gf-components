@@ -13,7 +13,16 @@ type Story = StoryObj<typeof Example>;
 
 export const Default: Story = {
   args: {
-    data: TreeMapData,
+    treeMapData: TreeMapData,
+    colors: { datum: 'data.color' },
+    nodeOpacity: 1,
+    style: {height: 500},
+    identity: "code",
+    value: "value",
+    labelTitle: "code",
+    labelText: "name",
+    labelTextColor: "white",
+    borderColor: "white",
     tooltip: ({ node }) => <span>Custom treemap tooltip</span>
   },
 };
