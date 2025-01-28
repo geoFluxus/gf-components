@@ -63,18 +63,17 @@ const QuickNavCard: React.FC<QuickNavCardProps> = ({
     <>
       <GlobalStyle />
       <StyledCard 
-        cardtype={'default'} 
-        title={
-          <Title title={title} subtitle={subtitle} type='header'/>
-        } 
+        cardtype={'default'}
         {...props}
       >
+        <Title title={title} subtitle={subtitle} type='header'/>
+        <div style={{borderBottom: '1px solid #f0f0f0', margin: '32px -32px 32px -32px'}} />
         <Flex vertical gap={8} style={{alignItems: 'start'}}>
           <StyedText>{listTitle || 'Table of contents'}</StyedText>
           {items.map((item, i) =>
-            <StyledButton 
-              key={`button-select-item-${i}`} 
-              type='link' 
+            <StyledButton
+              key={`button-select-item-${i}`}
+              type='link'
               href={typeof(item.href) === 'string' ? item.href : undefined}
               onClick={() => handleClick(item.href)}
             >
