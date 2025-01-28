@@ -234,7 +234,7 @@ const MaterialHeatmap = ({
         });
     const XTitleLayer = ({cells}) =>
         <XLabel
-            text={'Kritische grondstoffen'}
+            text={'Kritieke grondstoffen'}
             transX={(container.width - leftLegendWidth) / 2 - xLabelWidth / 2}
             transY={-(xLabelPadding + scalePadding + scaleTextPadding + xLabelWidth)}
             rotate={0}
