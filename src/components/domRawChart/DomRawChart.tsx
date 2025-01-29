@@ -107,7 +107,7 @@ const DomRawChart: React.FC<Props> = ({
     const items = [
         {name: 'Totaal', color: colors?.[diagramType], shape: 'line'},
         {name: 'Abiotisch', color: colors?.abiotic, shape: 'line'},
-        ...[{name: 'Doelstelling 2030', color: colors?.goal, shape: 'line'}],
+        ...[(goals.length && {name: 'Doelstelling 2030', color: colors?.goal, shape: 'line'})],
         {name: 'Betrouwbaarheidsmarge', color: hsla(colors?.[diagramType]), shape: 'circle'},
         {name: 'Betrouwbaarheidsmarge', color: hsla(colors?.abiotic), shape: 'circle'}
     ]
