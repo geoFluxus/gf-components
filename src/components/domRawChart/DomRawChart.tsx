@@ -61,7 +61,7 @@ const DomRawChart: React.FC<Props> = ({
     )
 
   // goal line
-  const goals = data.map(d => d?.goal)
+  const goals = data.filter(d => d?.goal !== undefined).map(d => d?.goal)
   if (goals.length) legendData.push('goal')
   const GoalLayer = (props) =>
     goals.map((goal, idx) =>
