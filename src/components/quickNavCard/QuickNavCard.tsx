@@ -68,7 +68,7 @@ const QuickNavCard: React.FC<QuickNavCardProps> = ({
         cardtype={'default'}
         {...props}
       >
-        <Flex vertical gap={8} style={{alignItems: 'start'}}>
+        <Flex vertical gap={24} style={{alignItems: 'start'}}>
             <Title title={title} subtitle={subtitle} type='header'/>
             {text}
         </Flex>
