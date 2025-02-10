@@ -4,6 +4,7 @@ import GlobalStyle from '../../globalStyles';
 import styled, { css } from 'styled-components';
 import GFCard, { GFCardProps } from '../card/GFCard';
 import { Title } from '../title';
+import { Description } from '../description'
 
 interface ItemProps {
   name: string;
@@ -47,6 +48,7 @@ const StyedText = styled(Text)`
 const QuickNavCard: React.FC<QuickNavCardProps> = ({
   title,
   subtitle,
+  text,
   listTitle,
   items,
   gap,
@@ -66,7 +68,10 @@ const QuickNavCard: React.FC<QuickNavCardProps> = ({
         cardtype={'default'}
         {...props}
       >
-        <Title title={title} subtitle={subtitle} type='header'/>
+        <Flex vertical gap={8} style={{alignItems: 'start'}}>
+            <Title title={title} subtitle={subtitle} type='header'/>
+            {text}
+        </Flex>
         <div style={{borderBottom: '1px solid #f0f0f0', margin: '32px -32px 32px -32px'}} />
         <Flex vertical gap={8} style={{alignItems: 'start'}}>
           <StyedText>{listTitle || 'Table of contents'}</StyedText>

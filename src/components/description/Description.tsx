@@ -22,7 +22,6 @@ const StyledDiv = styled.div<{columns?: 2 | 3 | 4, textalign?: 'left' | 'center'
 const StyledText = styled.div`
   font: var(--gf-label-lg-default);
   color: var(--gf-color-text-secondary);
-  margin-bottom: 1em;
 `
 
 const Description: React.FC<Props> = ({
@@ -30,6 +29,7 @@ const Description: React.FC<Props> = ({
   text,
   columns,
   textalign='justify',
+  gap='1em',
   style,
   className,
   editable
@@ -50,6 +50,7 @@ const Description: React.FC<Props> = ({
             <StyledText
                 key={`${id}-${idx}`}
                 dangerouslySetInnerHTML={{__html: paragraph}}
+                style={{marginBottom: gap}}
             />
         )}
       </StyledDiv>

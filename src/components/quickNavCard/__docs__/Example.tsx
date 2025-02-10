@@ -4,6 +4,7 @@ import QuickNavCard, { QuickNavCardProps } from "../QuickNavCard";
 const Example: FC<QuickNavCardProps> = ({
   title,
   subtitle,
+  text,
   listTitle,
   items,
   gap,
@@ -20,7 +21,8 @@ const Example: FC<QuickNavCardProps> = ({
     >
       <QuickNavCard 
         title={title} 
-        subtitle={subtitle} 
+        subtitle={subtitle}
+        text={text}
         listTitle={listTitle}
         items={items}
         gap={gap}
