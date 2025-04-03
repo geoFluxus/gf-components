@@ -52,8 +52,8 @@ const scale = {
 };
 
 const ranks = {
-  A: "Direct hoogwardig inzetten",
-  B: "Indirect hoogwardig inzetten",
+  A: "Direct hoogwaardig inzetten",
+  B: "Indirect hoogwaardig inzetten",
   C: "Voorbereiding voor recycling",
   D: "Microbiologische verwerking",
   E: "Grondreiniging",
