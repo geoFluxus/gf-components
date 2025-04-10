@@ -88,7 +88,7 @@ const PieChart: React.FC<Props> = ({
         <StyledSpan>{title}</StyledSpan>
         <div style={{width: "100%", height: height}}>
             <ResponsivePie
-              colors={{ scheme: isEmpty ? "greys" : "nivo" }}
+              colors={isEmpty ? {scheme: "greys"} : {datum: 'data.color'} }
               data={pieChartData}
               sortByValue={sortByValue}
               enableArcLabels={!isEmpty}
