@@ -44,6 +44,10 @@ const ScatterPlot: React.FC<Props> = ({
     y1 = line?.y1,
     x2 = line?.x2,
     y2 = line?.y2;
+
+  const y = scatterPlotData?.points?.data?.map(p => p.y),
+        yMin = Math.min(y1, y2, ...y),
+        yMax = Math.max(y1, y2, ...y)
   return (
     <>
       <GlobalStyle />
@@ -52,6 +56,7 @@ const ScatterPlot: React.FC<Props> = ({
           data={[scatterPlotData?.points]}
           margin={{ top: 20, right: 120, bottom: 100, left: 120, ...margin }}
           xScale={{ type: "point" }}
+          yScale={{type: "linear", min: yMin, max: yMax, reverse: false}}
           axisBottom={{
             orient: "bottom",
             tickSize: 5,
