@@ -21,26 +21,6 @@ export const Default: Story = {
     indexBy: "material",
     height: 400,
     padding: 0.3,
-    axisBottom: {legend: 'Gewicht (t)'},
-    zeroMarker: true,
-    defs: [
-        {
-            id: 'lines',
-            type: 'patternLines',
-            background: 'inherit',
-            color: 'white',
-            rotation: -45,
-            lineWidth: 2,
-            spacing: 5
-        }
-    ],
-    fill: [
-        {
-            match: {
-                id: 'Verandering voorraden'
-            },
-            id: 'lines'
-        }
-    ]
+    axisBottom: {legend: 'Percentage (%)'},
   },
 };
