@@ -1,0 +1,29 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as CrmValueChart from "./CrmValueChart.stories.tsx";
+
+<Meta of={CrmValueChart} title="CrmValueChart" />
+
+# CrmValueChart
+
+Base component for CrmValueChart.
+
+### Example
+
+<Canvas of={CrmValueChart.Default} />
+
+## Usage
+
+```ts
+import {CrmValueChart} from "gf-components";
+
+const Example = () => {
+  return (
+    <CrmValueChart />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
