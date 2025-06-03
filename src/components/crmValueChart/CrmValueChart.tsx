@@ -94,7 +94,7 @@ const BarChart = ({
 
         // positioning
         const transX = keyLabelWidth + keyLabelPadding
-        const transY = bar.y + bar.height / 2 - gHeight / 2
+        const transY = bar.y + bar.height - gHeight / 2
 
         return (
             <g ref={gRef} transform={`translate(-${transX}, ${transY})`} >
