@@ -14,5 +14,11 @@ type Story = StoryObj<typeof Example>;
 export const Default: Story = {
   args: {
     data: data,
+    axisLeft: {
+        legend: 'Gewicht (Mt)'
+    },
+    axisBottom: {
+        legend: 'Jaar'
+    }
   },
 };
