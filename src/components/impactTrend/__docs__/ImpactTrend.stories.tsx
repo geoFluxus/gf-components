@@ -14,6 +14,19 @@ type Story = StoryObj<typeof Example>;
 export const Default: Story = {
   args: {
     data: data,
+    indexBy: "year",
+    keys: [
+        "Biomassa en voedsel",
+        "Kunststoffen",
+        "Bouwmaterialen",
+        "Consumptiegoederen",
+        "Overig",
+        "Maakindustrie",
+    ],
+    color: {
+
+    },
+    valueFormat: (d) => Math.round(d),
     axisLeft: {
         legend: 'Gewicht (Mt)'
     },
