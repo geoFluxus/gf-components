@@ -19,8 +19,6 @@ export const Default: Story = {
         "value",
     ],
     indexBy: "material",
-    height: 400,
-    padding: 0.3,
     axisBottom: {legend: 'Percentage (%)'},
   },
 };

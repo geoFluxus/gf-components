@@ -59,16 +59,16 @@ const colorMap = {
 
 const BarChart = ({
     data=[],
-    height=600,
+    height=1300,
     margin={},
-    padding=0.5,
+    padding=0.4,
     innerPadding=3,
     keys=null,
     indexBy=null,
     tooltip=null,
     enableLabel=false,
     label=null,
-    keyLabelWidth=120,
+    keyLabelWidth=200,
     keyLabelPadding=20,
     axisBottom={},
     layers=['grid', 'axes'],
@@ -132,11 +132,11 @@ const BarChart = ({
         const fontSize = 10
 
         // text
-        const text = `${Math.round(bar?.data?.formattedValue)}`
+        const number = bar?.data?.formattedValue,
+              text = (number >= 1) ? `${Math.round(number)}` : ''
         const metrics = measureText(text, fontSize),
               textWidth = metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft,
               textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent
-        if (textWidth >= bar.width) return (<></>)
 
         // positioning
         const transX = bar.x + bar.width + 10
@@ -153,7 +153,7 @@ const BarChart = ({
                       fill: colorMap[bar?.data?.id]
                     }}
                 >
-                    <StyledText style={{fontSize: fontSize, fontWeight: 500}}>{text || 'label'}</StyledText>
+                    <StyledText style={{fontSize: fontSize, fontWeight: 500}}>{text}</StyledText>
                 </text>
             </g>
         )
@@ -242,17 +242,17 @@ const BarChart = ({
                         keys={keys}
                         indexBy={indexBy}
                         groupMode="grouped"
-                        margin={{ top: -10, right: 10, bottom: 50, left: 140, ...margin }}
+                        margin={{ top: -10, right: 30, bottom: 50, left: 220, ...margin }}
                         layout="horizontal"
                         enableGridY={false}
                         enableGridX={true}
-                        valueScale={{ type: 'linear', min: 0, max: 100 }}
-                        gridXValues={[0, 25, 50, 75, 100]}
+                        //valueScale={{ type: 'linear', min: 0, max: 100 }}
+                        //gridXValues={[0, 25, 50, 75, 100]}
                         padding={padding}
                         innerPadding={innerPadding}
                         enableLabel={false}
                         axisBottom={{
-                            tickValues: [0, 25, 50, 75, 100],
+                            //tickValues: [0, 25, 50, 75, 100],
                             tickSize: 5,
                             legendPosition: 'middle',
                             legendOffset: 40,
