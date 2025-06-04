@@ -2,6 +2,7 @@ import GlobalStyle from "../../globalStyles"
 import { ResponsiveBar } from '@nivo/bar'
 import { CustomToolTip } from "../customToolTip";
 import styled from 'styled-components';
+import { Flex } from 'antd'
 
 
 const fontSize = 12
@@ -10,6 +11,13 @@ const StyledText = styled.tspan`
   font: var(--gf-label-md-default);
   color: var(--gf-color-text-secondary);
   font-size: ${fontSize}px;
+  line-height: ${lineHeight}px;
+`
+
+const StyledLabel = styled.span`
+  font: var(--gf-label-md-default);
+  color: var(--gf-color-text-secondary);
+  font-size: 10px;
   line-height: ${lineHeight}px;
 `
 
@@ -79,43 +87,71 @@ const ImpactTrend = ({
            return (<CustomLabel key={`bar-inner-label-${idx}`} bar={bar} />)
         });
 
+    const Legend = ({data, keys}) => {
+        const legend = keys?.map(key => ({
+            name: key,
+            color: colorMap[key]
+        }))
+
+        return (
+            <Flex gap={16} className='gf-full' justify="center" wrap>
+                {legend.map((l, idx) =>
+                    <Flex gap={8} align="center" key={`legend-${idx}`}>
+                        <div style={{
+                            minWidth: 16,
+                            minHeight: 16,
+                            backgroundColor: l.color
+                        }} />
+                        <StyledLabel>{l.name}</StyledLabel>
+                    </Flex>
+                )}
+            </Flex>
+        )
+    }
+
     return (
-        <div style={{height: height}}>
-            <ResponsiveBar
-                data={data}
-                keys={keys}
-                indexBy={indexBy}
-                colors={({ id, data }) => {
-                    return colorMap[id] || "orange"
-                }}
-                enableLabel={false}
-                margin={{left: 50, bottom: 50, top: 10, right: 50, ...margin}}
-                padding={padding}
-                axisBottom={{
-                    tickSize: 5,
-                    legendPosition: 'middle',
-                    legendOffset: 40,
-                    ...axisBottom
-                }}
-                axisLeft={{
-                    tickSize: 5,
-                    legendPosition: 'middle',
-                    legendOffset: -40,
-                    ...axisLeft
-                }}
-                layers={[
-                    'grid',
-                    'axes',
-                    'bars',
-                    CustomLabelLayer
-                ]}
-                tooltip={(bar) => {
-                    return (
-                      <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
-                    );
-                }}
-            />
-        </div>
+        <>
+            <GlobalStyle />
+            <Flex vertical gap={8} style={{width: "100%"}}>
+                <div style={{height: height}}>
+                    <ResponsiveBar
+                        data={data}
+                        keys={keys}
+                        indexBy={indexBy}
+                        colors={({ id, data }) => {
+                            return colorMap[id] || "orange"
+                        }}
+                        enableLabel={false}
+                        margin={{left: 50, bottom: 50, top: 10, right: 50, ...margin}}
+                        padding={padding}
+                        axisBottom={{
+                            tickSize: 5,
+                            legendPosition: 'middle',
+                            legendOffset: 40,
+                            ...axisBottom
+                        }}
+                        axisLeft={{
+                            tickSize: 5,
+                            legendPosition: 'middle',
+                            legendOffset: -40,
+                            ...axisLeft
+                        }}
+                        layers={[
+                            'grid',
+                            'axes',
+                            'bars',
+                            CustomLabelLayer
+                        ]}
+                        tooltip={(bar) => {
+                            return (
+                              <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
+                            );
+                        }}
+                    />
+                </div>
+                <Legend data={data} keys={keys}/>
+            </Flex>
+        </>
     )
 }
 
