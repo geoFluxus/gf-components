@@ -1,0 +1,34 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as ImpactTrend from "./ImpactTrend.stories.tsx";
+
+<Meta of={ImpactTrend} title="ImpactTrend" />
+
+# ImpactTrend
+
+Base component for ImpactTrend chart.
+
+### Example
+
+<Canvas of={ImpactTrend.Default} />
+
+## Usage
+
+```ts
+import {ImpactTrend} from "gf-components";
+
+const Example = () => {
+  return (
+    <ImpactTrend
+        data={data}
+        tooltip={tooltip}
+    />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+- **ImpactTrendData** - Object containing nodes for ImpactTrend
+- **tooltip** - Function returning JSX element as custom tooltip
