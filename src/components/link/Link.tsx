@@ -30,14 +30,25 @@ const Link: React.FC<Props> = ({
   placement='left',
   ...props
 }) => {
+  const iconWrapper =
+    <div style={{
+        width: 16,
+        height: 16,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }}>
+        {icon}
+    </div>
+
   return (
     <>
       <GlobalStyle />
       <StyledLink href={href} {...props}>
-        <Space direction='horizontal' size={8} align='start'>
-          { icon && placement==='left' && icon }
+        <Space direction='horizontal' size={8} align='center'>
+          { icon && placement==='left' && iconWrapper }
           <StyledText type={type}>{label}</StyledText>
-          { icon && placement==='right' && icon }
+          { icon && placement==='right' && iconWrapper }
         </Space>
       </StyledLink>
     </>

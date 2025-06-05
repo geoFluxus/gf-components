@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { MailIcon } from '../../../images/icons'
+import { MailIcon, LocationIcon } from '../../../images/icons'
 import Example from "./Example";
 
 const meta: Meta<typeof Example> = {
@@ -22,7 +22,7 @@ export const Icon: Story = {
   args: {
     label: 'info@geofluxus.com',
     href: 'mailto:info@geofluxus.com',
-    icon: <MailIcon />,
+    icon: <LocationIcon />,
   },
 };
 
