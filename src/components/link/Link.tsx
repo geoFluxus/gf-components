@@ -45,7 +45,7 @@ const Link: React.FC<Props> = ({
     <>
       <GlobalStyle />
       <StyledLink href={href} {...props}>
-        <Space direction='horizontal' size={8} align='center'>
+        <Space direction='horizontal' size={8} align='center' style={{textAlign: 'left'}}>
           { icon && placement==='left' && iconWrapper }
           <StyledText type={type}>{label}</StyledText>
           { icon && placement==='right' && iconWrapper }

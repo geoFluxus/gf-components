@@ -20,7 +20,7 @@ export const Default: Story = {
 
 export const Icon: Story = {
   args: {
-    label: 'info@geofluxus.com',
+    label: 'Stationsplein 45 (unit 53) 3013 AK Rotterdam',
     href: 'mailto:info@geofluxus.com',
     icon: <LocationIcon />,
   },

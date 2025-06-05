@@ -15,6 +15,7 @@ const Example = ({
         justifyContent: "center",
         alignItems: "center",
         height: 150,
+        width: 150,
         background: type === 'light' ? '#03052D' : 'white',
       }}
     >
