@@ -59,16 +59,16 @@ const colorMap = {
 
 const BarChart = ({
     data=[],
-    height=1300,
+    height=1000,
     margin={},
-    padding=0.4,
+    padding=0.3,
     innerPadding=3,
     keys=null,
     indexBy=null,
     tooltip=null,
     enableLabel=false,
     label=null,
-    keyLabelWidth=200,
+    keyLabelWidth=300,
     keyLabelPadding=20,
     axisBottom={},
     layers=['grid', 'axes'],
@@ -93,7 +93,7 @@ const BarChart = ({
         }, []);
 
         // positioning
-        const transX = keyLabelWidth + keyLabelPadding
+        const transX = keyLabelPadding
         const transY = bar.y + bar.height - gHeight / 2
 
         return (
@@ -109,6 +109,7 @@ const BarChart = ({
                     {lines.map((line, index) => (
                       <StyledText key={index} x={0}
                         dy={index > 0 ? lineHeight : fontSize}
+                        textAnchor="end"
                       >
                         {line}
                       </StyledText>
@@ -242,7 +243,7 @@ const BarChart = ({
                         keys={keys}
                         indexBy={indexBy}
                         groupMode="grouped"
-                        margin={{ top: -10, right: 30, bottom: 50, left: 220, ...margin }}
+                        margin={{ top: -10, right: 30, bottom: 50, left: 320, ...margin }}
                         layout="horizontal"
                         enableGridY={false}
                         enableGridX={true}
