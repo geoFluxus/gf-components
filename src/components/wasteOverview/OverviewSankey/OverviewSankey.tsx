@@ -14,7 +14,7 @@ const OverviewSankey = forwardRef(({
             <svg
                 ref={ref}
                 height={height}
-                viewBox="0 0 602 627"
+                viewBox="0 0 602 508"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
