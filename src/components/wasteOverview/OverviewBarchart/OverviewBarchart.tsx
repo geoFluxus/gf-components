@@ -3,6 +3,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import styled from 'styled-components';
 import { CustomToolTip } from "../../customToolTip";
 import { flows } from "../flows"
+import { scaleLinear } from 'd3-scale';
 
 
 const fontSize = 12
@@ -104,6 +105,10 @@ const OverviewBarchart = ({
            return (<CustomNode key={`bar-label-${idx}`} bar={bar} />)
         });
 
+    // x-values
+    const xValues = data.map(d => d?.total)
+    const xScale = scaleLinear().domain([0, Math.max(...xValues)]).nice().ticks(5);
+
     const reverseData = data.slice().reverse()
     return (
         <div style={{height: height}}>
@@ -119,8 +124,10 @@ const OverviewBarchart = ({
                 padding={0.5}
                 enableLabel={false}
                 axisTop={{
-                    tickSize: 5
+                    tickSize: 5,
+                    tickValues: xScale
                 }}
+                gridXValues={xScale}
                 axisBottom={null}
                 axisLeft={null}
                 layers={['grid', 'axes', 'bars', CustomNodeLayer]}
