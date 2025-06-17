@@ -22,7 +22,6 @@ const StyledLabel = styled.span`
 `
 
 const measureText = (text, fontSize=12) => {
-    console.log(text)
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     context.font = `${fontSize}px Roboto, sans-serif`;

@@ -15,10 +15,10 @@ export const Default: Story = {
   args: {
     data: data,
     keys: [
-        "crm",
         "value",
+        "crm",
     ],
     indexBy: "material",
-    axisBottom: {legend: 'Percentage (%)'},
+    axisBottom: {legend: 'Aandeel (%)'},
   },
 };

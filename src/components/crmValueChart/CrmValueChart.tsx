@@ -71,7 +71,7 @@ const BarChart = ({
     keyLabelWidth=300,
     keyLabelPadding=20,
     axisBottom={},
-    layers=['grid', 'axes'],
+    layers=['grid', 'axes', 'bars'],
     zeroMarker=false,
     defs=[],
     fill=[]
@@ -133,8 +133,8 @@ const BarChart = ({
         const fontSize = 10
 
         // text
-        const number = bar?.data?.formattedValue,
-              text = (number >= 1) ? `${Math.round(number)}` : ''
+        const number = bar?.data?.value,
+              text = (number >= 1) ? `${number.toFixed(1)}` : '<0.1%'
         const metrics = measureText(text, fontSize),
               textWidth = metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft,
               textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent
@@ -181,7 +181,7 @@ const BarChart = ({
         }, {});
 
         const legend = keys?.map(key => ({
-            name: key == "crm" ? "CRM" : "Invoerwaarde",
+            name: key == "crm" ? "Kritieke grondstoffen" : "Invoerwaarde",
             color: colorMap[key],
             defs
         }))
@@ -225,8 +225,6 @@ const BarChart = ({
     }
 
     const reverseData = data.slice().reverse()
-    layers.push('bars')
-    layers.push(CustomLabelLayer)
     return (
         <>
             <GlobalStyle />
@@ -243,7 +241,7 @@ const BarChart = ({
                         keys={keys}
                         indexBy={indexBy}
                         groupMode="grouped"
-                        margin={{ top: -10, right: 30, bottom: 50, left: 320, ...margin }}
+                        margin={{ top: 50, right: 30, bottom: 50, left: 320, ...margin }}
                         layout="horizontal"
                         enableGridY={false}
                         enableGridX={true}
@@ -252,11 +250,11 @@ const BarChart = ({
                         padding={padding}
                         innerPadding={innerPadding}
                         enableLabel={false}
-                        axisBottom={{
+                        axisTop={{
                             //tickValues: [0, 25, 50, 75, 100],
                             tickSize: 5,
                             legendPosition: 'middle',
-                            legendOffset: 40,
+                            legendOffset: -40,
                             ...axisBottom
                         }}
                         axisLeft={null}
