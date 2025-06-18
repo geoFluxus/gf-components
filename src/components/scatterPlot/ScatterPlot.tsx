@@ -56,7 +56,7 @@ const ScatterPlot: React.FC<Props> = ({
           data={[scatterPlotData?.points]}
           margin={{ top: 20, right: 120, bottom: 100, left: 120, ...margin }}
           xScale={{ type: "point" }}
-          yScale={{type: "linear", min: yMin, max: yMax, reverse: false}}
+          yScale={{type: "linear", min: 0, max: yMax, reverse: false}}
           axisBottom={{
             orient: "bottom",
             tickSize: 5,
