@@ -208,7 +208,7 @@ const BarChart = ({
                 y1={0}
                 x2={zeroX}
                 y2={props?.height - 40 + 5}
-                stroke={"red"}
+                stroke={"black"}
                 strokeWidth={3}
               />
             </g>
