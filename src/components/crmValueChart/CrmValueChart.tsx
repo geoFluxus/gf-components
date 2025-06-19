@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { CustomToolTip } from "../customToolTip";
 import styled from 'styled-components';
-import { Flex } from 'antd'
+import { Flex, Row, Col } from 'antd'
 import GlobalStyle from "../../globalStyles";
 
 
@@ -59,7 +59,7 @@ const colorMap = {
 
 const BarChart = ({
     data=[],
-    height=1000,
+    height=1300,
     margin={},
     padding=0.3,
     innerPadding=3,
@@ -68,10 +68,11 @@ const BarChart = ({
     tooltip=null,
     enableLabel=false,
     label=null,
-    keyLabelWidth=300,
+    keyLabelWidth=200,
     keyLabelPadding=20,
+    graphGap=40,
     axisBottom={},
-    layers=['grid', 'axes', 'bars'],
+    layers=['grid', 'axes', 'bars', 'markers'],
     zeroMarker=false,
     defs=[],
     fill=[]
@@ -94,7 +95,7 @@ const BarChart = ({
 
         // positioning
         const transX = keyLabelPadding
-        const transY = bar.y + bar.height - gHeight / 2
+        const transY = bar.y + bar.height / 2 - gHeight / 2
 
         return (
             <g ref={gRef} transform={`translate(-${transX}, ${transY})`} >
@@ -165,6 +166,22 @@ const BarChart = ({
            return (<CustomLabel key={`bar-inner-label-${idx}`} bar={bar} />)
         });
 
+    const CustomGrid = ({bar}) => {
+        const labels = bar?.data?.id === "value",
+              x1 = labels ? 0 : - graphGap / 2,
+              y = bar?.y + bar?.height / 2
+        return (
+            <g>
+                <line x1={x1} y1={y} x2="2000" y2={y} stroke="#e1e1e1" strokeWidth="1" />
+            </g>
+        )
+    }
+
+    const CustomGridLayer = ({ bars }) =>
+        bars.map((bar, idx) => {
+            return (<CustomGrid key={`bar-grid-${idx}`} bar={bar} />)
+        });
+
 
     const Legend = ({data, keys}) => {
         const defsObj = defs.reduce((acc, item) => {
@@ -224,48 +241,70 @@ const BarChart = ({
         )
     }
 
+    const Barchart = ({value, labels}) => {
+        return (
+            <div style={{height: height}}>
+                <ResponsiveBar
+                    data={reverseData}
+                    colors={({ id, data }) => {
+                        return colorMap[id]
+                    }}
+                    defs={defs}
+                    fill={fill}
+                    keys={[value]}
+                    indexBy={indexBy}
+                    groupMode="grouped"
+                    margin={{
+                        right: graphGap / 2,
+                        bottom: 50,
+                        left: labels ? keyLabelWidth + keyLabelPadding : graphGap / 2,
+                        ...margin
+                    }}
+                    layout="horizontal"
+                    enableGridY={false}
+                    enableGridX={true}
+                    padding={padding}
+                    innerPadding={innerPadding}
+                    enableLabel={false}
+                    axisBottom={{
+                        tickSize: 5,
+                        legendPosition: 'middle',
+                        legendOffset: 40,
+                        legend: value == 'value' ? 'Percentage (%)' : 'Index'
+                    }}
+                    axisLeft={null}
+                    layers={[CustomGridLayer, ...layers, ...(labels ? [CustomNodeLayer] : [])]}
+                    tooltip={(bar) => {
+                        return (
+                          <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
+                        );
+                    }}
+                    markers={[
+                        {
+                          axis: 'x',
+                          value: 0,
+                          lineStyle: { stroke: '#000000', strokeWidth: 1 },
+                        },
+                    ]}
+                />
+            </div>
+        )
+    }
+
     const reverseData = data.slice().reverse()
     return (
         <>
             <GlobalStyle />
             <Flex vertical gap={8} style={{width: "100%"}}>
                 <Legend data={data} keys={keys}/>
-                <div style={{height: height}}>
-                    <ResponsiveBar
-                        data={reverseData}
-                        colors={({ id, data }) => {
-                            return colorMap[id]
-                        }}
-                        defs={defs}
-                        fill={fill}
-                        keys={keys}
-                        indexBy={indexBy}
-                        groupMode="grouped"
-                        margin={{ top: 50, right: 30, bottom: 50, left: 320, ...margin }}
-                        layout="horizontal"
-                        enableGridY={false}
-                        enableGridX={true}
-                        //valueScale={{ type: 'linear', min: 0, max: 100 }}
-                        //gridXValues={[0, 25, 50, 75, 100]}
-                        padding={padding}
-                        innerPadding={innerPadding}
-                        enableLabel={false}
-                        axisTop={{
-                            //tickValues: [0, 25, 50, 75, 100],
-                            tickSize: 5,
-                            legendPosition: 'middle',
-                            legendOffset: -40,
-                            ...axisBottom
-                        }}
-                        axisLeft={null}
-                        layers={[...layers, CustomNodeLayer]}
-                        tooltip={(bar) => {
-                            return (
-                              <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
-                            );
-                        }}
-                    />
-                </div>
+                <Row gutter={[0, 0]}>
+                    <Col span={15}>
+                        <Barchart value="value" labels={true} />
+                    </Col>
+                    <Col span={9}>
+                        <Barchart value={"crm"} />
+                    </Col>
+                </Row>
             </Flex>
         </>
     )
