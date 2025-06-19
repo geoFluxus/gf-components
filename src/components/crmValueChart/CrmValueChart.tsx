@@ -52,16 +52,17 @@ const wrapText = (text, width, fontSize=12) => {
 
 
 const cats = {
+    value: {
+        color: 'hsl(197, 100%, 19%)', // orange
+        name: "Invoerwaarde",
+        legend: "Index"
+    },
     crm: {
         color: 'hsl(36, 100%, 50%)', // blue
         name: "Kritieke grondstoffen",
         legend: "Percentage (%)",
     },
-    value: {
-        color: 'hsl(197, 100%, 19%)', // orange
-        name: "Invoerwaarde",
-        legend: "Index"
-    }
+
 }
 
 
@@ -82,7 +83,9 @@ const BarChart = ({
     axisBottom={},
     layers=['grid', 'axes', 'bars', 'markers'],
     defs=[],
-    fill=[]
+    fill=[],
+    leftSpan=14,
+    rightSpan=10
 }) => {
     const CustomNode = ({ bar }) => {
         const gRef = useRef(null);
@@ -176,10 +179,14 @@ const BarChart = ({
     const CustomGrid = ({bar}) => {
         const labels = bar?.data?.id === keys[0],
               x1 = labels ? 0 : - graphGap / 2,
+              graphWidth = containerWidth * (labels ? leftSpan : rightSpan) / 24,
+              x2 = labels ?
+                   (graphWidth - keyLabelWidth - graphGap / 2) :
+                   (graphWidth - graphGap / 2),
               y = bar?.y + bar?.height / 2
         return (
             <g>
-                <line x1={x1} y1={y} x2="2000" y2={y} stroke="#e1e1e1" strokeWidth="1" />
+                <line x1={x1} y1={y} x2={x2} y2={y} stroke="#e1e1e1" strokeWidth="1" />
             </g>
         )
     }
@@ -276,17 +283,32 @@ const BarChart = ({
         )
     }
 
+    // track container height
+    const containerRef = useRef(null);
+    const [containerWidth, setContainerWidth] = useState(0);
+    useEffect(() => {
+        const observer = new ResizeObserver(entries => {
+          for (let entry of entries) {
+            setContainerWidth(entry.contentRect.width)
+          }
+        })
+        if (containerRef.current) {
+          observer.observe(containerRef.current)
+        }
+        return () => observer.disconnect()
+    }, [])
+
     const reverseData = data.slice().reverse()
     return (
         <>
             <GlobalStyle />
-            <Flex vertical gap={8} style={{width: "100%"}}>
+            <Flex vertical gap={8} style={{width: "100%"}} ref={containerRef}>
                 <Legend data={data} keys={keys}/>
                 <Row gutter={[0, 0]}>
-                    <Col span={15}>
+                    <Col span={leftSpan}>
                         <Barchart value={keys[0]} labels={true} />
                     </Col>
-                    <Col span={9}>
+                    <Col span={rightSpan}>
                         <Barchart value={keys[1]} />
                     </Col>
                 </Row>
