@@ -20,23 +20,23 @@ export const flows = {
         name: 'Lokale winning',
         info: 'Alle goederen die in de regio gewonnen worden (bijv. geteelde aardappels of gewonnen grind).',
     },
-    invoer_nationaal: {
+    aanbod_eigen_regio: {
         key: 2,
+        comp: AanbodEigenRegioFlow,
+        name: 'Aanbod eigen regio',
+        info: 'De goederen die in de regio worden geproduceerd, en ook in de regio worden gebruikt.',
+    },
+    invoer_nationaal: {
+        key: 3,
         comp: InvoerNationaalFlow,
         name: 'Invoer nationaal',
         info: 'De goederen die worden gebruikt in de regio en afkomstig zijn uit een andere regio in Nederland.',
     },
     invoer_internationaal: {
-        key: 3,
+        key: 4,
         comp: InvoerInternationaalFlow,
         name: 'Invoer internationaal',
         info: 'De goederen die worden gebruikt in de regio en afkomstig zijn uit het buitenland.',
-    },
-    aanbod_eigen_regio: {
-        key: 4,
-        comp: AanbodEigenRegioFlow,
-        name: 'Aanbod eigen regio',
-        info: 'De goederen die in de regio worden geproduceerd, en ook in de regio worden gebruikt.',
     },
     uitvoer_nationaal: {
         key: 5,
@@ -53,7 +53,7 @@ export const flows = {
     productie_van_afval_binnen_de_regio: {
         key: 7,
         comp: ProductieVanAfvalBinnenDeRegioFlow,
-        name: 'Lokale afvalbeheer',
+        name: 'Lokaal afvalbeheer',
         info: 'Afval dat zowel geproduceerd als verwerkt wordt binnen de regio.',
     },
     import_van_afval: {

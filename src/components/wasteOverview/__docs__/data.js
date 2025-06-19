@@ -17,6 +17,24 @@ export const barchartData = [
     "agenda_6Color": "hsl(349, 70%, 50%)",
     "unit": "t"
   },
+  {
+    "flow": "aanbod_eigen_regio",
+    "total": 711,
+    "totalColor": "hsl(212, 44%, 53%)",
+    "agenda_1": 140,
+    "agenda_1Color": "hsl(179, 70%, 50%)",
+    "agenda_2": 198,
+    "agenda_2Color": "hsl(229, 70%, 50%)",
+    "agenda_3": 8,
+    "agenda_3Color": "hsl(39, 70%, 50%)",
+    "agenda_4": 120,
+    "agenda_4Color": "hsl(160, 70%, 50%)",
+    "agenda_5": 112,
+    "agenda_5Color": "hsl(357, 70%, 50%)",
+    "agenda_6": 133,
+    "agenda_6Color": "hsl(228, 70%, 50%)",
+    "unit": "t"
+  },
    {
     "flow": "invoer_nationaal",
     "total": 530,
@@ -51,24 +69,6 @@ export const barchartData = [
     "agenda_5Color": "hsl(75, 70%, 50%)",
     "agenda_6": 96,
     "agenda_6Color": "hsl(253, 70%, 50%)",
-    "unit": "t"
-  },
-  {
-    "flow": "aanbod_eigen_regio",
-    "total": 711,
-    "totalColor": "hsl(212, 44%, 53%)",
-    "agenda_1": 140,
-    "agenda_1Color": "hsl(179, 70%, 50%)",
-    "agenda_2": 198,
-    "agenda_2Color": "hsl(229, 70%, 50%)",
-    "agenda_3": 8,
-    "agenda_3Color": "hsl(39, 70%, 50%)",
-    "agenda_4": 120,
-    "agenda_4Color": "hsl(160, 70%, 50%)",
-    "agenda_5": 112,
-    "agenda_5Color": "hsl(357, 70%, 50%)",
-    "agenda_6": 133,
-    "agenda_6Color": "hsl(228, 70%, 50%)",
     "unit": "t"
   },
   {
