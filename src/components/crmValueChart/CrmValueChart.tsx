@@ -51,9 +51,17 @@ const wrapText = (text, width, fontSize=12) => {
 };
 
 
-const colorMap = {
-    crm: 'hsl(36, 100%, 50%)', // blue
-    value: 'hsl(197, 100%, 19%)', // orange
+const cats = {
+    crm: {
+        color: 'hsl(36, 100%, 50%)', // blue
+        name: "Kritieke grondstoffen",
+        legend: "Percentage (%)",
+    },
+    value: {
+        color: 'hsl(197, 100%, 19%)', // orange
+        name: "Invoerwaarde",
+        legend: "Index"
+    }
 }
 
 
@@ -63,8 +71,8 @@ const BarChart = ({
     margin={},
     padding=0.3,
     innerPadding=3,
-    keys=null,
-    indexBy=null,
+    keys=Object.keys(cats),
+    indexBy="material",
     tooltip=null,
     enableLabel=false,
     label=null,
@@ -73,7 +81,6 @@ const BarChart = ({
     graphGap=40,
     axisBottom={},
     layers=['grid', 'axes', 'bars', 'markers'],
-    zeroMarker=false,
     defs=[],
     fill=[]
 }) => {
@@ -167,7 +174,7 @@ const BarChart = ({
         });
 
     const CustomGrid = ({bar}) => {
-        const labels = bar?.data?.id === "value",
+        const labels = bar?.data?.id === keys[0],
               x1 = labels ? 0 : - graphGap / 2,
               y = bar?.y + bar?.height / 2
         return (
@@ -198,8 +205,8 @@ const BarChart = ({
         }, {});
 
         const legend = keys?.map(key => ({
-            name: key == "crm" ? "Kritieke grondstoffen" : "Invoerwaarde",
-            color: colorMap[key],
+            name: cats[key]?.name,
+            color: cats[key]?.color,
             defs
         }))
 
@@ -219,35 +226,13 @@ const BarChart = ({
         )
     }
 
-    const ZeroMarkLayer = (props) => {
-        let key = null, zeroX = 0
-        props?.bars?.forEach(bar => {
-            if (bar?.data?.id !== key && key !== null) return
-            key = bar?.data?.id
-            if (bar.x > zeroX) zeroX = bar.x
-        })
-
-        return (
-            <g>
-              <line
-                x1={zeroX}
-                y1={0}
-                x2={zeroX}
-                y2={props?.height - 40 + 5}
-                stroke={"red"}
-                strokeWidth={3}
-              />
-            </g>
-        )
-    }
-
     const Barchart = ({value, labels}) => {
         return (
             <div style={{height: height}}>
                 <ResponsiveBar
                     data={reverseData}
                     colors={({ id, data }) => {
-                        return colorMap[id]
+                        return cats[id]?.color
                     }}
                     defs={defs}
                     fill={fill}
@@ -270,7 +255,7 @@ const BarChart = ({
                         tickSize: 5,
                         legendPosition: 'middle',
                         legendOffset: 40,
-                        legend: value == 'value' ? 'Percentage (%)' : 'Index'
+                        legend: cats[value]?.legend
                     }}
                     axisLeft={null}
                     layers={[CustomGridLayer, ...layers, ...(labels ? [CustomNodeLayer] : [])]}
@@ -299,10 +284,10 @@ const BarChart = ({
                 <Legend data={data} keys={keys}/>
                 <Row gutter={[0, 0]}>
                     <Col span={15}>
-                        <Barchart value="value" labels={true} />
+                        <Barchart value={keys[0]} labels={true} />
                     </Col>
                     <Col span={9}>
-                        <Barchart value={"crm"} />
+                        <Barchart value={keys[1]} />
                     </Col>
                 </Row>
             </Flex>

@@ -13,12 +13,6 @@ type Story = StoryObj<typeof Example>;
 
 export const Default: Story = {
   args: {
-    data: data,
-    keys: [
-        "value",
-        "crm",
-    ],
-    indexBy: "material",
-    axisBottom: {legend: 'Aandeel (%)'},
+    data: data
   },
 };
