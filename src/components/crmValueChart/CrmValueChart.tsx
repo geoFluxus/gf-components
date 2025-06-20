@@ -52,17 +52,16 @@ const wrapText = (text, width, fontSize=12) => {
 
 
 const cats = {
-    value: {
-        color: 'hsl(197, 100%, 19%)', // orange
-        name: "Invoerwaarde",
-        legend: "Index"
-    },
     crm: {
         color: 'hsl(36, 100%, 50%)', // blue
-        name: "Kritieke grondstoffen",
+        name: "Kritikaliteit index",
         legend: "Percentage (%)",
     },
-
+    value: {
+        color: 'hsl(197, 100%, 19%)', // orange
+        name: "Aantal kritieke grondstoffen",
+        legend: "Aantal"
+    }
 }
 
 
