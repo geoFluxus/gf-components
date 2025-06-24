@@ -60,7 +60,7 @@ const cats = {
     value: {
         color: 'hsl(197, 100%, 19%)', // orange
         name: "Aantal kritieke grondstoffen",
-        legend: "Aantal"
+        legend: "Aantal kritieke grondstoffen"
     }
 }
 
