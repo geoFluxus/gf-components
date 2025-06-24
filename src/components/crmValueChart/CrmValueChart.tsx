@@ -55,7 +55,7 @@ const cats = {
     crm: {
         color: 'hsl(36, 100%, 50%)', // blue
         name: "Kritikaliteit index",
-        legend: "Percentage (%)",
+        legend: "Kritikaliteit index",
     },
     value: {
         color: 'hsl(197, 100%, 19%)', // orange
