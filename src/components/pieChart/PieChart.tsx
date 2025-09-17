@@ -117,11 +117,11 @@ const PieChart: React.FC<Props> = ({
                 "legends",
                 CenteredMetric
               ]}
-              tooltip={({ datum: { id, value, unit } }) => {
+              tooltip={(dt) => {
                 return (
                   <CustomToolTip
                     body={
-                      tooltip?.({ id, value, unit }) || (
+                      tooltip?.(dt) || (
                         <span>Pie chart tooltip</span>
                       )
                     }
