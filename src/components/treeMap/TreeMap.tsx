@@ -228,25 +228,39 @@ const Sankey: React.FC<Props> = ({
   return (
     <>
       <GlobalStyle />
-      <div ref={containerRef} style={{ width: "100%", height: 600, ...style }}>
-        <ResponsiveTreeMap
-          data={treeMapData}
-          colors={colors}
-          identity={identity}
-          value={value}
-          margin={{ top: 10, right: 10, bottom: 10, left: 10, ...margin }}
-          enableParentLabel={false}
-          enableLabel={false}
-          nodeOpacity={0}
-          borderWidth={0}
-          tooltip={({ node }) => {
-            return (
-              <CustomToolTip body={ tooltip?.({node}) || <span>Treemap tooltip</span>} />
-            );
-          }}
-          layers={[CustomNodeLayer, 'nodes']}
-        />
-      </div>
+      <Flex gap={16} vertical>
+          <div ref={containerRef} style={{ width: "100%", height: 600, ...style }}>
+            <ResponsiveTreeMap
+              data={treeMapData}
+              colors={colors}
+              identity={identity}
+              value={value}
+              margin={{ top: 10, right: 10, bottom: 10, left: 10, ...margin }}
+              enableParentLabel={false}
+              enableLabel={false}
+              nodeOpacity={0}
+              borderWidth={0}
+              tooltip={({ node }) => {
+                return (
+                  <CustomToolTip body={ tooltip?.({node}) || <span>Treemap tooltip</span>} />
+                );
+              }}
+              layers={[CustomNodeLayer, 'nodes']}
+            />
+          </div>
+          <p style={{
+            padding: "0 10px",
+            fontFamily: 'Roboto, sans-serif',
+            fontSize: 14,
+            lineHeight: "22px",
+            color: "#475467"
+          }}>
+            In de grafiek hierboven zijn alle afvalstromen uitgesplitst per EURAL-code,
+            een zescijferige code uit de Europese Afvallijst (EWL) die in heel Europa wordt gebruikt om afval te classificeren.
+            De code geeft de bron van het afval aan, het proces of de activiteit waaruit het afkomstig is en het specifieke type afval,
+            zoals bouw- of huishoudelijk afval. Een asterisk (*) achter de code betekent dat het afval gevaarlijk is.
+          </p>
+      </Flex>
     </>
   );
 };
