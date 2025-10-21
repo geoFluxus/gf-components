@@ -39,6 +39,7 @@ const StyedText = styled(Text)`
   font-weight: bold;
 `
   const StyledButton = styled(Button)`
+  height: 22px;
   padding: 0px;
   font: var(--gf-label-md-default);
   color: var(--gf-color-button-primary);
