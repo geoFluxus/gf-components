@@ -38,71 +38,87 @@ const wrapText = (text, width, fontSize = 12) => {
     }
   }
   lines.push(currentLine);
-
   return lines;
 };
 
-/* ---------------------------------------------------
-   YLabel and XLabel (memoized, no layout reflow)
---------------------------------------------------- */
-const YLabel = React.memo(({ cell, text, transX, transY, hoveredRow, textAnchor = "start", textStyle = {}, yLabelWidth }) => {
-  text = text || "label";
-  const lines = useMemo(() => wrapText(text, yLabelWidth, fontSize), [text, yLabelWidth]);
-  const gHeight = lines.length * lineHeight;
-  transY = transY || cell.y - gHeight / 2;
+// --------------------
+// YLabel + XLabel (memoized, no layout flicker)
+// --------------------
+const YLabel = React.memo(
+  ({ cell, text, transX, transY, textAnchor = "start", textStyle = {}, hoveredRow, yLabelWidth }) => {
+    text = text || "label";
+    const lines = useMemo(() => wrapText(text, yLabelWidth, fontSize), [text, yLabelWidth]);
+    const gHeight = lines.length * lineHeight;
+    transY = transY || cell.y - gHeight / 2;
 
-  return (
-    <g transform={`translate(-${transX}, ${transY})`}>
-      <text textAnchor={textAnchor}>
-        {lines.map((line, index) => (
-          <StyledText
-            key={index}
-            x={0}
-            dy={index > 0 ? lineHeight : fontSize}
-            style={{
-              ...textStyle,
-              fontWeight: text === hoveredRow ? "bold" : "normal",
-            }}
-          >
-            {line}
-          </StyledText>
-        ))}
-      </text>
-    </g>
-  );
-});
+    return (
+      <g transform={`translate(-${transX}, ${transY})`}>
+        <text textAnchor={textAnchor}>
+          {lines.map((line, index) => (
+            <StyledText
+              key={index}
+              x={0}
+              dy={index > 0 ? lineHeight : fontSize}
+              style={{
+                ...textStyle,
+                fontWeight: text === hoveredRow ? "bold" : "normal",
+              }}
+            >
+              {line}
+            </StyledText>
+          ))}
+        </text>
+      </g>
+    );
+  }
+);
 
-const XLabel = React.memo(({ cell, text, transX, transY, hoveredCol, textAnchor = "start", textStyle = {}, rotate = -90, xLabelWidth, xLabelPadding, scalePadding, scaleTextPadding }) => {
-  text = text || cell?.data?.x || "label";
-  const lines = useMemo(() => wrapText(text, xLabelWidth, fontSize), [text, xLabelWidth]);
-  const gWidth = lines.length * lineHeight; // approximate width
-  transX = transX || cell.x - gWidth / 2;
-  transY = transY || -(xLabelPadding + scalePadding + scaleTextPadding);
+const XLabel = React.memo(
+  ({
+    cell,
+    text,
+    transX,
+    transY,
+    textAnchor = "start",
+    textStyle = {},
+    rotate = -90,
+    hoveredCol,
+    xLabelWidth,
+    xLabelPadding,
+    scalePadding,
+    scaleTextPadding,
+  }) => {
+    text = text || cell?.data?.x || "label";
+    const lines = useMemo(() => wrapText(text, xLabelWidth, fontSize), [text, xLabelWidth]);
+    const gWidth = lines.length * lineHeight; // approximate width
+    transX = transX || cell.x - gWidth / 2;
+    transY = transY || -(xLabelPadding + scalePadding + scaleTextPadding);
 
-  return (
-    <g transform={`translate(${transX}, ${transY}) rotate(${rotate})`}>
-      <text textAnchor={textAnchor}>
-        {lines.map((line, index) => (
-          <StyledText
-            key={index}
-            x={0}
-            dy={index > 0 ? lineHeight : fontSize}
-            style={{
-              ...textStyle,
-              fontWeight: text === hoveredCol ? "bold" : "normal",
-            }}
-          >
-            {line}
-          </StyledText>
-        ))}
-      </text>
-    </g>
-  );
-});
+    return (
+      <g transform={`translate(${transX}, ${transY}) rotate(${rotate})`}>
+        <text textAnchor={textAnchor}>
+          {lines.map((line, index) => (
+            <StyledText
+              key={index}
+              x={0}
+              dy={index > 0 ? lineHeight : fontSize}
+              style={{
+                ...textStyle,
+                fontWeight: text === hoveredCol ? "bold" : "normal",
+              }}
+            >
+              {line}
+            </StyledText>
+          ))}
+        </text>
+      </g>
+    );
+  }
+);
 
-/* ---------------------------------------------------
-   Main Heatmap Component
---------------------------------------------------- */
+// --------------------
+// Main Component
+// --------------------
 const MaterialHeatmap = ({
   data,
   height = 1300,
@@ -150,8 +166,11 @@ const MaterialHeatmap = ({
     [data]
   );
 
-  // Label Layers
+  // --------------------
+  // Layers
+  // --------------------
   let currName = null;
+
   const YLabelLayer = ({ cells }) =>
     cells.map((cell, idx) => {
       const name = cell?.serieId;
@@ -175,6 +194,36 @@ const MaterialHeatmap = ({
       transX={leftLegendWidth}
       transY={-20}
       textStyle={{ fontWeight: "bold" }}
+      yLabelWidth={yLabelWidth}
+    />
+  );
+
+  currName = null;
+  const YWorthLayer = ({ cells }) =>
+    cells.map((cell, idx) => {
+      const name = cell?.serieId;
+      if (name === currName) return null;
+      currName = name;
+      return (
+        <YLabel
+          key={`cell-ynumeral-${idx}`}
+          cell={cell}
+          text={worthValues[name]?.toString()}
+          transX={yNumeralPadding}
+          textAnchor="end"
+          hoveredRow={hovered.row}
+          yLabelWidth={yLabelWidth}
+        />
+      );
+    });
+
+  const YWorthTitleLayer = () => (
+    <YLabel
+      text={"Invoerwaarde in mln €"}
+      transX={yNumeralPadding}
+      transY={-20}
+      textStyle={{ fontWeight: "bold" }}
+      textAnchor="end"
       yLabelWidth={yLabelWidth}
     />
   );
@@ -209,6 +258,71 @@ const MaterialHeatmap = ({
       scalePadding={scalePadding}
       scaleTextPadding={scaleTextPadding}
     />
+  );
+
+  const XScaleLayer = () => (
+    <g>
+      <defs>
+        <marker id="arrow-left" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto">
+          <path d="M5,0 L0,2.5 L5,5 Z" fill="black" />
+        </marker>
+        <marker id="arrow-right" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+          <path d="M0,0 L5,2.5 L0,5 Z" fill="black" />
+        </marker>
+      </defs>
+      <line
+        x1="0"
+        y1={-scalePadding}
+        x2={container.width - leftLegendWidth}
+        y2={-scalePadding}
+        stroke="black"
+        strokeWidth="1"
+        markerStart="url(#arrow-left)"
+        markerEnd="url(#arrow-right)"
+      />
+      <text transform={`translate(10, -${scalePadding + scaleTextPadding})`}>
+        <StyledText>Heel kritiek (40 “Zie toelichting”)</StyledText>
+      </text>
+      <text
+        textAnchor="end"
+        transform={`translate(${container.width - leftLegendWidth - 10}, -${scalePadding + scaleTextPadding})`}
+      >
+        <StyledText>Minder kritiek (0 “Zie toelichting”)</StyledText>
+      </text>
+    </g>
+  );
+
+  const YScaleLayer = () => (
+    <g>
+      <defs>
+        <marker id="arrow-up" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+          <path d="M5,0 L0,2.5 L5,5 Z" fill="black" />
+        </marker>
+        <marker id="arrow-down" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+          <path d="M0,0 L5,2.5 L0,5 Z" fill="black" />
+        </marker>
+      </defs>
+      <line
+        x1={-scalePadding}
+        y1="5"
+        x2={-scalePadding}
+        y2={container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding) - 80}
+        stroke="black"
+        strokeWidth="1"
+        markerStart="url(#arrow-up)"
+        markerEnd="url(#arrow-down)"
+      />
+      <text transform={`translate(-${scalePadding + scaleTextPadding + fontSize}, 10) rotate(90)`}>
+        <StyledText>Veel ingevoerd</StyledText>
+      </text>
+      <text
+        textAnchor="end"
+        transform={`translate(-${scalePadding + scaleTextPadding + fontSize},
+          ${container.height - (xLabelWidth + xLabelPadding + scalePadding + scaleTextPadding) - 10 - 80}) rotate(90)`}
+      >
+        <StyledText>Weinig ingevoerd</StyledText>
+      </text>
+    </g>
   );
 
   const handleMouseEnter = (cell) => {
@@ -247,12 +361,33 @@ const MaterialHeatmap = ({
             "cells",
             YLabelLayer,
             YLabelTitleLayer,
+            YWorthLayer,
+            YWorthTitleLayer,
             XLabelLayer,
             XTitleLayer,
+            XScaleLayer,
+            YScaleLayer,
           ]}
           tooltip={(cell) => (
             <CustomToolTip body={tooltip?.(cell) || <span>Tooltip</span>} />
           )}
+          legends={[
+            {
+              anchor: "bottom",
+              translateX: 0,
+              translateY: 60,
+              length: container.width - leftLegendWidth - 20,
+              thickness: 24,
+              direction: "row",
+              tickPosition: "after",
+              tickSize: 3,
+              tickSpacing: 4,
+              tickOverlap: false,
+              title: "Kritieke grondstoffen per goederengroep (%)",
+              titleAlign: "middle",
+              titleOffset: 10,
+            },
+          ]}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         />
