@@ -62,6 +62,10 @@ const MaterialHeatmap = ({
         yLabelWidth + yLabelPadding +
         yNumeralWidth + yNumeralPadding +
         scalePadding + scaleTextPadding
+    const [ hovered, setHovered ] = useState({
+        row: null,
+        col: null
+    })
     const containerRef = useRef(null);
     const [container, setContainer] = useState({
         width: 0,
@@ -131,7 +135,10 @@ const MaterialHeatmap = ({
                     {lines.map((line, index) => (
                       <StyledText key={index} x={0}
                         dy={index > 0 ? lineHeight : fontSize}
-                        style={textStyle}
+                        style={{
+                            textStyle,
+                            fontWeight: text === hovered?.row ? 'bold' : null
+                        }}
                       >
                         {line}
                       </StyledText>
@@ -140,7 +147,6 @@ const MaterialHeatmap = ({
             </g>
         )
     }
-
 
     // x-label
     const XLabel = ({ cell, text, transX, transY, textAnchor="start", textStyle={}, rotate=-90 }) => {
@@ -177,7 +183,10 @@ const MaterialHeatmap = ({
                     {lines.map((line, index) => (
                       <StyledText key={index} x={0}
                         dy={index > 0 ? lineHeight : fontSize}
-                        style={textStyle}
+                        style={{
+                            textStyle,
+                            fontWeight: text === hovered?.col ? 'bold' : null
+                        }}
                       >
                         {line}
                       </StyledText>
@@ -230,7 +239,11 @@ const MaterialHeatmap = ({
         cells.map((cell, idx) => {
             const name = cell?.serieId
             if (name !== currName) return
-            return (<XLabel key={`cell-ylabel-${idx}`} cell={cell} />)
+            return (
+                <XLabel
+                    key={`cell-ylabel-${idx}`}
+                    cell={cell}
+                />)
         });
     const XTitleLayer = ({cells}) =>
         <XLabel
@@ -308,6 +321,19 @@ const MaterialHeatmap = ({
             </text>
         </g>
 
+    const handleMouseEnter = (cell, event) => {
+        setHovered({
+            row: cell?.serieId,
+            col: cell?.data?.x
+        })
+    }
+    const handleMouseLeave = (cell, event) => {
+        setHovered({
+            row: null,
+            col: null
+        })
+    }
+
     return (
         <>
             <GlobalStyle />
@@ -363,6 +389,8 @@ const MaterialHeatmap = ({
                             titleOffset: 10
                         }
                     ]}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                 />
             </div>
         </>
