@@ -14,13 +14,13 @@ export interface VisSelectorsProps extends GFCardProps {
 }
 
 
-const VisSelectors: React.FC<VisSelectorsProps> = ({ selectors, setter }) => {
+const VisSelectors: React.FC<VisSelectorsProps> = ({ selectors, setter, style }) => {
   const span = 24 / selectors.length
 
   return (
     <>
       <GlobalStyle />
-      <GFCard cardtype="default" style={{ width: "100%" }}>
+      <GFCard cardtype="default" style={{ width: "100%", ...style }}>
         <Row gutter={20}>
           {selectors.map((s, idx) =>
               <Col span={span} key={`col-${idx}`}>
