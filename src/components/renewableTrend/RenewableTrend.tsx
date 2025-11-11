@@ -1,6 +1,6 @@
 import { ResponsiveBar } from '@nivo/bar'
 import { Flex } from 'antd'
-import { useState } from 'react'
+import { CustomToolTip } from "../customToolTip";
 
 
 const defaultMap = {
@@ -17,25 +17,6 @@ const names = {
     wasteOther: 'Afval - Overige materialen',
 }
 
-const CustomTooltip = ({ x, y, label, value, color, tooltip }) => (
-    <div
-        style={{
-            position: 'fixed',
-            top: y,
-            left: x,
-            background: 'white',
-            padding: '6px 10px',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
-            pointerEvents: 'none',
-            color: '#333',
-            transform: 'translate(-50%, -100%)',
-            zIndex: 10,
-        }}
-    >
-        {tooltip?.({label, value, color, names}) || 'Tooltip text'}
-    </div>
-)
-
 const RenewableTrend = ({
     data,
     height = 400,
@@ -43,25 +24,10 @@ const RenewableTrend = ({
     margin = {},
     padding = 0.3,
     innerPadding = 4,
-    tooltipBody = null,
+    tooltip = null,
     axisBottom = {},
     axisLeft = {}
 }) => {
-    const [tooltip, setTooltip] = useState(null)
-
-    const handleMouseMove = (event, label, value, color) => {
-        setTooltip({
-            x: event.clientX,
-            y: event.clientY,
-            label,
-            value,
-            color,
-            tooltip: tooltipBody
-        })
-    }
-
-    const handleMouseLeave = () => setTooltip(null)
-
     const CustomLayer = (props) =>
         props.bars.map((bar, idx) => {
             const id = bar.data.id
@@ -83,16 +49,6 @@ const RenewableTrend = ({
                         width={bar.width}
                         height={renewHeight}
                         fill={colorMap[`${key}Renewable`]}
-                        style={{cursor: 'pointer'}}
-                        onMouseMove={(e) =>
-                            handleMouseMove(
-                                e,
-                                `${key} Renewable`,
-                                renewable,
-                                colorMap[`${key}Renewable`]
-                            )
-                        }
-                        onMouseLeave={handleMouseLeave}
                     />
                     {/* Other segment */}
                     <rect
@@ -101,16 +57,6 @@ const RenewableTrend = ({
                         width={bar.width}
                         height={otherHeight}
                         fill={colorMap[`${key}Other`]}
-                        style={{cursor: 'pointer'}}
-                        onMouseMove={(e) =>
-                            handleMouseMove(
-                                e,
-                                `${key} Other`,
-                                other,
-                                colorMap[`${key}Other`]
-                            )
-                        }
-                        onMouseLeave={handleMouseLeave}
                     />
                 </g>
             )
@@ -161,6 +107,8 @@ const RenewableTrend = ({
                     groupMode="grouped"
                     padding={padding}
                     innerPadding={innerPadding}
+                    enableLabel={false}
+                    colors={(c) => 'rgba(0, 0, 0, 0)'}
                     margin={{
                         top: 50,
                         right: 0,
@@ -180,9 +128,13 @@ const RenewableTrend = ({
                         legendOffset: 40,
                         ...axisBottom
                     }}
-                    layers={['axes', 'grid', CustomLayer]}
+                    layers={['axes', 'grid', CustomLayer, 'bars']}
+                    tooltip={(bar) => {
+                        return (
+                          <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
+                        );
+                    }}
                 />
-                {tooltip && <CustomTooltip {...tooltip} />}
             </div>
             <Legend />
         </Flex>
