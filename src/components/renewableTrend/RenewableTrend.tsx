@@ -1,11 +1,20 @@
 import { ResponsiveBar } from '@nivo/bar'
+import { Flex } from 'antd'
 import { useState } from 'react'
+
 
 const defaultMap = {
     goodsRenewable: '#36CFC9',
     goodsOther: '#BDE7E3',
     wasteRenewable: '#FFA940',
     wasteOther: '#EEDBBB',
+}
+
+const names = {
+    goodsRenewable: 'Goederen - Hernieuwbare materialen',
+    goodsOther: 'Goederen - Overige materialen',
+    wasteRenewable: 'Afval - Hernieuwbare materialen',
+    wasteOther: 'Afval - Overige materialen',
 }
 
 const CustomTooltip = ({ x, y, label, value, color, tooltip }) => (
@@ -34,7 +43,9 @@ const RenewableTrend = ({
     margin = {},
     padding = 0.3,
     innerPadding = 4,
-    tooltipBody = null
+    tooltipBody = null,
+    axisBottom = {},
+    axisLeft = {}
 }) => {
     const [tooltip, setTooltip] = useState(null)
 
@@ -105,38 +116,76 @@ const RenewableTrend = ({
             )
         })
 
+    const Legend = () => {
+        return (
+            <Flex
+                justify='center'
+                gap={16}
+                wrap
+            >
+                {Object.entries(defaultMap).map(([label, color], index) => (
+                    <Flex
+                        key={index}
+                        align='center'
+                        gap={8}
+                    >
+                        <div
+                            style={{
+                                width: 16,
+                                height: 16,
+                                background: color,
+                            }}
+                        />
+                        <span style={{ fontSize: 12 }}>{names?.[label]}</span>
+                    </Flex>
+                ))}
+            </Flex>
+        );
+    };
+
+
     return (
-        <div
-            style={{
-                position: 'relative',
-                height,
-                width: '100%',
-                overflow: 'visible',
-            }}
-        >
-            <ResponsiveBar
-                data={data}
-                keys={['goodsTotal', 'wasteTotal']}
-                indexBy="year"
-                groupMode="grouped"
-                padding={padding}
-                innerPadding={innerPadding}
-                margin={{
-                    top: 50,
-                    right: 0,
-                    bottom: 50,
-                    left: 60,
-                    ...margin,
+        <Flex vertical gap={8}>
+            <div
+                style={{
+                    position: 'relative',
+                    height,
+                    width: '100%',
+                    overflow: 'visible',
                 }}
-                axisLeft={{
-                    legend: 'Gewicht (t)',
-                    legendPosition: 'middle',
-                    legendOffset: -40,
-                }}
-                layers={['axes', 'grid', CustomLayer]}
-            />
-            {tooltip && <CustomTooltip {...tooltip} />}
-        </div>
+            >
+                <ResponsiveBar
+                    data={data}
+                    keys={['goodsTotal', 'wasteTotal']}
+                    indexBy="year"
+                    groupMode="grouped"
+                    padding={padding}
+                    innerPadding={innerPadding}
+                    margin={{
+                        top: 50,
+                        right: 0,
+                        bottom: 50,
+                        left: 60,
+                        ...margin,
+                    }}
+                    axisLeft={{
+                        legend: 'Gewicht (Mt)',
+                        legendPosition: 'middle',
+                        legendOffset: -40,
+                        ...axisLeft
+                    }}
+                    axisBottom={{
+                        legend: 'Jaar',
+                        legendPosition: 'middle',
+                        legendOffset: 40,
+                        ...axisBottom
+                    }}
+                    layers={['axes', 'grid', CustomLayer]}
+                />
+                {tooltip && <CustomTooltip {...tooltip} />}
+            </div>
+            <Legend />
+        </Flex>
     )
 }
 
