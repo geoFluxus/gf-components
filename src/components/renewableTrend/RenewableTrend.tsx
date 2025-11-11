@@ -32,7 +32,7 @@ const CustomTooltip = ({ x, y, label, value, color, tooltip }) => (
             zIndex: 10,
         }}
     >
-        {tooltip?.() || 'Tooltip text'}
+        {tooltip?.({label, value, color, names}) || 'Tooltip text'}
     </div>
 )
 
