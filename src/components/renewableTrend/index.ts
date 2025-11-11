@@ -1,0 +1,1 @@
+export { default as RenewableTrend } from './RenewableTrend'
