@@ -34,8 +34,8 @@ const RenewableTrend = ({
             const barData = bar.data.data
             const key = id?.replace('Total', '')
             const total = barData?.[`${key}Total`]
-            const renewable = barData?.[`${key}Renewable`]
-            const other = barData?.[`${key}Other`]
+            const renewable = barData?.[`${key}Renewable`] || 0
+            const other = barData?.[`${key}Other`] || 0
 
             const renewHeight = total ? (bar.height * renewable) / total : 0
             const otherHeight = total ? (bar.height * other) / total : 0
