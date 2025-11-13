@@ -64,10 +64,13 @@ const BarChart = ({
     keyLabelWidth=120,
     keyLabelPadding=20,
     axisBottom={},
+    axisTop={},
     layers=['grid', 'axes'],
     zeroMarker=false,
     defs=[],
-    fill=[]
+    fill=[],
+    enableGridY=false,
+    enableGridX=false
 }) => {
     const CustomNode = ({ bar }) => {
         const gRef = useRef(null);
@@ -233,8 +236,8 @@ const BarChart = ({
                         indexBy={indexBy}
                         margin={{ top: -10, right: 0, bottom: 50, left: 140, ...margin }}
                         layout="horizontal"
-                        enableGridY={false}
-                        enableGridX={false}
+                        enableGridY={enableGridY}
+                        enableGridX={enableGridX}
                         padding={padding}
                         enableLabel={false}
                         axisBottom={{
@@ -243,6 +246,7 @@ const BarChart = ({
                             legendOffset: 40,
                             ...axisBottom
                         }}
+                        axisTop={axisTop}
                         axisLeft={null}
                         layers={[...layers, CustomNodeLayer]}
                         tooltip={(bar) => {
