@@ -5,16 +5,20 @@ import { CustomToolTip } from "../customToolTip";
 
 const defaultMap = {
     goodsRenewable: '#36CFC9',
-    goodsOther: '#BDE7E3',
+    goodsNotRenewable: '#BDE7E3',
+    goodsMixed: 'green',
     wasteRenewable: '#FFA940',
-    wasteOther: '#EEDBBB',
+    wasteNotRenewable: '#EEDBBB',
+    wasteMixed: 'red'
 }
 
 const names = {
     goodsRenewable: 'Goederen - Hernieuwbare materialen',
-    goodsOther: 'Goederen - Overige materialen',
+    goodsNotRenewable: 'Goederen - Niet-hernieuwbare materialen',
+    goodsMixed: 'Goederen - Gemengde materialen',
     wasteRenewable: 'Afval - Hernieuwbare materialen',
-    wasteOther: 'Afval - Overige materialen',
+    wasteNotRenewable: 'Afval - Niet-hernieuwbare materialen',
+    wasteMixed: 'Afval - Gemengde materialen',
 }
 
 const RenewableTrend = ({
@@ -35,28 +39,38 @@ const RenewableTrend = ({
             const key = id?.replace('Total', '')
             const total = barData?.[`${key}Total`]
             const renewable = barData?.[`${key}Renewable`] || 0
-            const other = barData?.[`${key}Other`] || 0
+            const not_renewable = barData?.[`${key}NotRenewable`] || 0
+            const mixed = barData?.[`${key}Mixed`] || 0
 
             const renewHeight = total ? (bar.height * renewable) / total : 0
-            const otherHeight = total ? (bar.height * other) / total : 0
+            const notRenewHeight = total ? (bar.height * not_renewable) / total : 0
+            const mixedHeight = total ? (bar.height * mixed) / total : 0
 
             return (
                 <g key={idx}>
                     {/* Renewable segment */}
                     <rect
                         x={bar.x}
-                        y={bar.y + otherHeight}
+                        y={bar.y + notRenewHeight + mixedHeight}
                         width={bar.width}
                         height={renewHeight}
                         fill={colorMap[`${key}Renewable`]}
                     />
-                    {/* Other segment */}
+                    {/* Not-Renewable segment */}
                     <rect
                         x={bar.x}
-                        y={bar.y - 1}
+                        y={bar.y + mixedHeight}
                         width={bar.width}
-                        height={otherHeight}
-                        fill={colorMap[`${key}Other`]}
+                        height={notRenewHeight}
+                        fill={colorMap[`${key}NotRenewable`]}
+                    />
+                    {/* Mixed segment */}
+                    <rect
+                        x={bar.x}
+                        y={bar.y}
+                        width={bar.width}
+                        height={mixedHeight}
+                        fill={colorMap[`${key}Mixed`]}
                     />
                 </g>
             )
@@ -89,7 +103,7 @@ const RenewableTrend = ({
         );
     };
 
-
+    console.log(data)
     return (
         <Flex vertical gap={8}>
             <div
