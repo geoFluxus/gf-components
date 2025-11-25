@@ -6,10 +6,10 @@ import { CustomToolTip } from "../customToolTip";
 const defaultMap = {
     goodsRenewable: '#36CFC9',
     goodsNotRenewable: '#BDE7E3',
-    goodsMixed: 'green',
+    goodsMixed: '#00474F',
     wasteRenewable: '#FFA940',
     wasteNotRenewable: '#EEDBBB',
-    wasteMixed: 'red'
+    wasteMixed: '#873800'
 }
 
 const names = {
