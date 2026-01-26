@@ -112,13 +112,13 @@ const OverviewBarchart = ({
 
     const reverseData = data.slice().reverse()
     return (
-        <div style={{height: height + 40}}>
+        <div style={{height: height + 20}}>
             <ResponsiveBar
                 data={reverseData}
                 colors={({ id, data }) => String(data[`${id}Color`])}
                 keys={keys}
                 indexBy={indexBy}
-                margin={{ top: 70, right: 10, bottom: 0, left: 140, ...margin }}
+                margin={{ top: 50, right: 10, bottom: 0, left: 140, ...margin }}
                 layout="horizontal"
                 enableGridY={false}
                 enableGridX={true}
