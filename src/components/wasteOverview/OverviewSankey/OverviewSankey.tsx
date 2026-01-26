@@ -10,7 +10,7 @@ const OverviewSankey = forwardRef(({
     height='100%',
 }, ref) => {
     return (
-        <div style={{position: 'relative'}}>
+        <div style={{position: 'relative', marginTop: 40}}>
             <svg
                 ref={ref}
                 height={height}

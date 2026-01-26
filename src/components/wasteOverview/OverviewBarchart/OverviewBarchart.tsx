@@ -48,7 +48,8 @@ const OverviewBarchart = ({
     labelPadding=20,
     keys=null,
     indexBy=null,
-    tooltip=null
+    tooltip=null,
+    legendTitle='Legend title'
 }) => {
     const CustomNode = ({ bar }) => {
         const gRef = useRef(null);
@@ -111,13 +112,13 @@ const OverviewBarchart = ({
 
     const reverseData = data.slice().reverse()
     return (
-        <div style={{height: height}}>
+        <div style={{height: height + 40}}>
             <ResponsiveBar
                 data={reverseData}
                 colors={({ id, data }) => String(data[`${id}Color`])}
                 keys={keys}
                 indexBy={indexBy}
-                margin={{ top: 30, right: 10, bottom: 0, left: 140, ...margin }}
+                margin={{ top: 70, right: 10, bottom: 0, left: 140, ...margin }}
                 layout="horizontal"
                 enableGridY={false}
                 enableGridX={true}
@@ -125,7 +126,10 @@ const OverviewBarchart = ({
                 enableLabel={false}
                 axisTop={{
                     tickSize: 5,
-                    tickValues: xScale
+                    tickValues: xScale,
+                    legend: legendTitle,
+                    legendPosition: 'middle',
+                    legendOffset: -40
                 }}
                 gridXValues={xScale}
                 axisBottom={null}
