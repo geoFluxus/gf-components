@@ -17,6 +17,7 @@ const Anchor = ({
     items,
     width=226,
     offset=0,
+    rootMargin=80,
     containerStyle={},
 }) => {
   const [activeKey, setActiveKey] = React.useState(0);
@@ -68,7 +69,7 @@ const Anchor = ({
       {
         root: null,
         threshold: [0.1, 0.2, 0.3],
-        rootMargin: `-${offset}px 0px -80% 0px`,
+        rootMargin: `-${offset}px 0px -{rootMargin}% 0px`,
       }
     );
 
