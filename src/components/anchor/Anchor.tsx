@@ -16,12 +16,10 @@ const Section = styled.span`
 const Anchor = ({
     items,
     width=226,
-    headerOffset=80,
-    bannerOffset=55,
+    offset=0,
     containerStyle={},
 }) => {
   const [activeKey, setActiveKey] = React.useState(0);
-  const offset = headerOffset + bannerOffset
 
   const lockRef = React.useRef(false);
   const unlockTimerRef = React.useRef(null);
@@ -43,7 +41,7 @@ const Anchor = ({
     const el = items?.[key]?.href?.current;
     if (!el) return;
 
-    const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 

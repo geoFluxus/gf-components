@@ -45,8 +45,7 @@ const Example: FC<GFButtonProps> = ({
                 <Anchor
                     items={items}
                     containerStyle={{paddingTop: 0}}
-                    headerOffset={16}
-                    bannerOffset={0}
+                    offset={16}
                 />
                 <Flex
                     vertical
