@@ -69,7 +69,7 @@ const Anchor = ({
       {
         root: null,
         threshold: [0.1, 0.2, 0.3],
-        rootMargin: `-${offset}px 0px -{rootMargin}% 0px`,
+        rootMargin: `-${offset}px 0px -${rootMargin}% 0px`,
       }
     );
 
