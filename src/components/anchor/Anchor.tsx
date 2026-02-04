@@ -21,6 +21,11 @@ const Anchor = ({
 }) => {
   const [activeKey, setActiveKey] = React.useState(0);
 
+  const activeKeyRef = React.useRef(0);
+  React.useEffect(() => {
+    activeKeyRef.current = activeKey;
+  }, [activeKey]);
+
   const lockRef = React.useRef(false);
   const unlockTimerRef = React.useRef(null);
 
@@ -41,8 +46,7 @@ const Anchor = ({
     const el = items?.[key]?.href?.current;
     if (!el) return;
 
-    const y =
-      el.getBoundingClientRect().top + window.pageYOffset - offset;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
@@ -80,12 +84,11 @@ const Anchor = ({
         // pick the section whose top is closest to the offset line (stable)
         const chosen = candidates.sort(
           (a, b) =>
-            Math.abs(a.top - offset) -
-              Math.abs(b.top - offset) ||
+            Math.abs(a.top - offset) - Math.abs(b.top - offset) ||
             b.ratio - a.ratio
         )[0];
 
-        if (chosen && chosen.key !== activeKey) {
+        if (chosen && chosen.key !== activeKeyRef.current) {
           setActiveKey(chosen.key);
         }
       },
@@ -103,7 +106,7 @@ const Anchor = ({
       if (unlockTimerRef.current) clearTimeout(unlockTimerRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items, offset, activeKey]);
+  }, [items, offset, rootMargin]);
 
   return (
     <>
@@ -139,9 +142,7 @@ const Anchor = ({
                   boxSizing: "border-box",
                   padding: 8,
                   cursor: "pointer",
-                  background: isActive
-                    ? "#F0F6FF"
-                    : "transparent",
+                  background: isActive ? "#F0F6FF" : "transparent",
                   transition: "background 150ms ease",
                 }}
               >
