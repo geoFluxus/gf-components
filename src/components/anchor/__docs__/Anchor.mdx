@@ -1,0 +1,20 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Anchor from "./Anchor.stories.tsx";
+
+<Meta of={Anchor} title="Anchor" />
+
+### Example (primary button)
+
+<Canvas of={Anchor.Default} />
+
+## Usage
+
+```ts
+import {Anchor} from "gf-components";
+
+const Example = () => {
+  return (
+      <Anchor />
+  );
+};
