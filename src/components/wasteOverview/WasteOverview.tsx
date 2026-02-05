@@ -32,14 +32,15 @@ const WasteOverview = ({
             <Row gutter={[24, 0]}>
                 <Col span={12}>
                     <OverviewSankey ref={sankeyRef} {...sankey} />
+                    <Flex justify="center" style={{marginTop: 16, width: '100%'}}>
+                        <Legend />
+                    </Flex>
                 </Col>
                 <Col span={12}>
                     <OverviewBarchart {...bar} height={height} />
                 </Col>
             </Row>
-            <Flex justify="center" style={{marginTop: 16}}>
-                <Legend />
-            </Flex>
+
         </>
     )
 }

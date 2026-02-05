@@ -1,6 +1,5 @@
 import { forwardRef } from 'react';
 import { Flows } from './Flows'
-import { Legend } from './Legend'
 import Background from './Background'
 import { CustomToolTip } from "../../customToolTip";
 
@@ -14,7 +13,7 @@ const OverviewSankey = forwardRef(({
             <svg
                 ref={ref}
                 height={height}
-                viewBox="0 0 602 508"
+                viewBox="0 0 376 502"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
