@@ -27,6 +27,7 @@ export interface TabCardProps extends GFCardProps {
 const TabCard: React.FC<TabCardProps> = ({
   tabList,
   tabContent,
+  tabBarExtraContent,
   expandContent,
   expandLabel,
   padding=24,
@@ -52,7 +53,12 @@ const TabCard: React.FC<TabCardProps> = ({
         cardtype={'default'} 
         activeTabKey={activeTab}
         onTabChange={handleTabChange}
-        tabBarExtraContent={<DownloadButton onClick={handleDownload?.[activeTab]}/>}
+        tabBarExtraContent={
+            <Flex gap={8} align="center">
+                {tabBarExtraContent}
+                <DownloadButton onClick={handleDownload?.[activeTab]}/>
+            </Flex>
+        }
         actions={expandContent?.[activeTab] ? [
           <Flex vertical>
             <ExpandButton open={expand} onClick={handleExpad}>{expandLabel}</ExpandButton>
