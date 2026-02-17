@@ -24,7 +24,12 @@ export const Default: Story = {
         "Maakindustrie",
     ],
     color: {
-
+        "Biomassa en voedsel": "hsla(205, 40%, 79%, 1)",
+        Kunststoffen: "hsla(83, 47%, 73%, 1)",
+        Bouwmaterialen: "hsla(4, 55%, 75%, 1)",
+        Consumptiegoederen: "hsla(35, 74%, 73%, 1)",
+        Overig: "hsla(269, 24%, 77%, 1)",
+        Maakindustrie: "hsla(26, 74%, 58%, 1)",
     },
     valueFormat: (d) => Math.round(d),
     axisLeft: {

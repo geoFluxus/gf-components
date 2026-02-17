@@ -43,7 +43,7 @@ const ImpactTrend = ({
     data,
     height = 500,
     padding = 0.2,
-    keys = Object.keys(colorMap),
+    keys = [],
     indexBy = "year",
     margin = {},
     axisBottom = {},
@@ -89,7 +89,7 @@ const ImpactTrend = ({
     const Legend = ({data, keys}) => {
         const legend = keys?.map(key => ({
             name: key,
-            color: colorMap[key]
+            color: color[key]
         }))
 
         return (
@@ -118,7 +118,7 @@ const ImpactTrend = ({
                         keys={keys}
                         indexBy={indexBy}
                         colors={({ id, data }) => {
-                            return colorMap[id] || "orange"
+                            return color[id] || "orange"
                         }}
                         enableLabel={false}
                         margin={{left: 50, bottom: 50, top: 10, right: 50, ...margin}}
