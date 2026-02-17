@@ -1,5 +1,4 @@
 const LineTarget = ({x1, x2, y1, y2}) => {
-  console.log(x1, x2, y1, y2)
   return (
     // horizontal line representing the target value for comparison
     <g>
