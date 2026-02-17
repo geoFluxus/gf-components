@@ -3,6 +3,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import { CustomToolTip } from "../customToolTip";
 import styled from 'styled-components';
 import { Flex } from 'antd'
+import LineTarget from "./LineTarget";
 
 
 const fontSize = 12
@@ -52,11 +53,20 @@ const ImpactTrend = ({
     tooltip = null,
     label=null
 }) => {
+    const line = data?.line,
+        x1 = line?.x1,
+        y1 = line?.y1,
+        x2 = line?.x2,
+        y2 = line?.y2;
+
+    const yMin = Math.min(y1, y2),
+          yMax = Math.max(y1, y2)
+
     const CustomLabel = ({bar}) => {
         const fontSize = 10
 
         // text
-        const text = label?.(bar.data) || 'label'
+        const text = label?.(bar.data) || <></>
         const metrics = measureText(text, fontSize),
               textWidth = metrics.width,
               textHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent
@@ -114,13 +124,14 @@ const ImpactTrend = ({
             <Flex vertical gap={8} style={{width: "100%"}}>
                 <div style={{height: height}}>
                     <ResponsiveBar
-                        data={data}
+                        data={data?.data}
                         keys={keys}
                         indexBy={indexBy}
                         colors={({ id, data }) => {
                             return color[id] || "orange"
                         }}
                         enableLabel={false}
+                        yScale={{type: "linear", min: 0, max: yMax, reverse: false}}
                         margin={{left: 50, bottom: 50, top: 10, right: 50, ...margin}}
                         padding={padding}
                         axisBottom={{
@@ -139,7 +150,19 @@ const ImpactTrend = ({
                             'grid',
                             'axes',
                             'bars',
-                            CustomLabelLayer
+                            CustomLabelLayer,
+                            (props) => {
+                              return (
+                                <LineTarget
+                                  // @ts-ignore
+                                  x1={props.xScale(x1)}
+                                  y1={props.yScale(y1)}
+                                  // @ts-ignore
+                                  x2={props.xScale(x2) + props.xScale.bandwidth()}
+                                  y2={props.yScale(y2)}
+                                />
+                              )
+                            }
                         ]}
                         tooltip={(bar) => {
                             return (
