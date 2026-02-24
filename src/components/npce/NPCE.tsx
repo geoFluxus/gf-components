@@ -27,6 +27,32 @@ const cards = {
             }
         ]
     },
+    behouden_verwerking: {
+        title: 'Behouden (Verwerking)',
+        subtitle: 'Percentage gerecycled afval verhogen naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling.',
+        goals: {
+            goal30: { high: 11, other: 69, low: 20},
+            goal35: { high: 55, other: 45, low: 12},
+            unit: '%'
+        },
+        legend: [
+            {
+                key: 'high',
+                name: 'Hoogwaardige recycling',
+                color: '#226123'
+            },
+            {
+                key: 'other',
+                name: 'Overige recycling',
+                color: '#84B08D'
+            },
+            {
+                key: 'low',
+                name: 'Verbranden/Storten',
+                color: '#D0D5DD',
+            }
+        ]
+    },
     besparen: {
         title: 'Besparen',
         subtitle: 'Grondstoffengebruik verlagen met 15% ten op zichte van 2016 (gebaseerd op DMI).',
@@ -47,24 +73,6 @@ const cards = {
             },
         ]
     },
-    behouden_verwerking: {
-        title: 'Behouden (Verwerking)',
-        subtitle: 'Percentage gerecycled afval verhogen naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling.',
-        legend: [
-            {
-                name: 'Hoogwaardige recycling',
-                color: '#226123'
-            },
-            {
-                name: 'Overige recycling',
-                color: '#84B08D'
-            },
-            {
-                name: 'Verbranden/Storten',
-                color: '#D0D5DD'
-            }
-        ]
-    }
 }
 
 
@@ -115,7 +123,7 @@ const NPCE = ({
       <Row gutter={[16, 16]}>
         {Object.entries(cards).map(([key, card], idx) => {
             return (
-                idx < 1 && <Col span={12}>
+                idx < 2 && <Col span={12}>
                     <Card>
                         <Header
                             title={card?.title}

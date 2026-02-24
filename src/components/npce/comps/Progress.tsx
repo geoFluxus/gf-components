@@ -27,39 +27,43 @@ const Header = ({
                 {title}
             </span>
 
-            {legend.map((l, idx) => {
-                if (l?.hide) return (<></>)
-                return (
-                    <Flex
-                        key={idx}
-                        gap={4}
-                        align="center"
-                    >
-                        <div
-                            style={{
-                                minWidth: 7,
-                                minHeight: 7,
-                                borderRadius: 3.5,
-                                background: l?.color
-                            }}
-                        />
-                        <span
-                            style={{
-                                color: "#667085",
-                                fontSize: 12,
-                                fontWeight: 400,
-                                lineHeight: "14px"
-                            }}
+            <Flex
+                gap={8}
+            >
+                {legend.map((l, idx) => {
+                    if (l?.hide) return (<></>)
+                    return (
+                        <Flex
+                            key={idx}
+                            gap={4}
+                            align="center"
                         >
-                            {
-                                data?.value ?
-                                `${data?.value?.[l?.key]}${data?.unit}` :
-                                `${isPerc ? 'Minstens ' : ''} ${goal?.value?.[l?.key]}${goal?.unit}`
-                            }
-                        </span>
-                    </Flex>
-                )
-            })}
+                            <div
+                                style={{
+                                    minWidth: 7,
+                                    minHeight: 7,
+                                    borderRadius: 3.5,
+                                    background: l?.color
+                                }}
+                            />
+                            <span
+                                style={{
+                                    color: "#667085",
+                                    fontSize: 12,
+                                    fontWeight: 400,
+                                    lineHeight: "14px"
+                                }}
+                            >
+                                {
+                                    data?.value ?
+                                    `${data?.value?.[l?.key]}${data?.unit}` :
+                                    `${isPerc ? 'Minstens ' : ''} ${goal?.value?.[l?.key]}${goal?.unit}`
+                                }
+                            </span>
+                        </Flex>
+                    )
+                })}
+            </Flex>
         </Flex>
     )
 }
