@@ -1,0 +1,1 @@
+export { default as NPCE } from './NPCE'

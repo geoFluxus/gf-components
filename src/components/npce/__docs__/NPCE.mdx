@@ -1,0 +1,20 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as NPCE from "./NPCE.stories.tsx";
+
+<Meta of={NPCE} title="NPCE" />
+
+### Example (primary button)
+
+<Canvas of={NPCE.Default} />
+
+## Usage
+
+```ts
+import {NPCE} from "gf-components";
+
+const Example = () => {
+  return (
+      <NPCE />
+  );
+};
