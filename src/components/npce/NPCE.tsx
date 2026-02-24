@@ -8,14 +8,22 @@ const cards = {
     vervangen: {
         title: 'Vervangen',
         subtitle: 'Aandeel hernieuwbare en secundaire grondstoffen verhogen naar minimaal 55% (gebaseerd op DMI).',
+        goals: {
+            goal30: { renew: 50, other: 50},
+            goal35: { renew: 55, other: 45},
+            unit: '%'
+        },
         legend: [
             {
+                key: 'renew',
                 name: 'Hernieuwbare & secundaire grondstoffen',
-                color: '#84B08D'
+                color: '#86AA49'
             },
             {
+                key: 'other',
                 name: 'Overige grondstoffen',
-                color: '#D0D5DD'
+                color: '#D0D5DD',
+                hide: true
             }
         ]
     },
@@ -27,6 +35,34 @@ const cards = {
                 name: 'Grondstoffengebruik',
                 color: '#7BC6CE'
             },
+        ]
+    },
+    behouden_hoeveelheid: {
+        title: 'Behouden (Hoeveelheid)',
+        subtitle: 'De totale hoeveelheid afval verlagen ten op zichte van 2016.',
+        legend: [
+            {
+                name: 'Totale hoeveelheid afval',
+                color: '#809399'
+            },
+        ]
+    },
+    behouden_verwerking: {
+        title: 'Behouden (Verwerking)',
+        subtitle: 'Percentage gerecycled afval verhogen naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling.',
+        legend: [
+            {
+                name: 'Hoogwaardige recycling',
+                color: '#226123'
+            },
+            {
+                name: 'Overige recycling',
+                color: '#84B08D'
+            },
+            {
+                name: 'Verbranden/Storten',
+                color: '#D0D5DD'
+            }
         ]
     }
 }
@@ -70,6 +106,7 @@ const Card = ({children}) => {
 
 const NPCE = ({
     data,
+    year
 }) => {
   return (
     <>
@@ -78,15 +115,24 @@ const NPCE = ({
       <Row gutter={[16, 16]}>
         {Object.entries(cards).map(([key, card], idx) => {
             return (
-                <Col span={12}>
+                idx < 1 && <Col span={12}>
                     <Card>
                         <Header
                             title={card?.title}
                             subtitle={card?.subtitle}
                             legend={card?.legend}
                         />
-                        <Progress />
-                        <Progress curr={false} />
+                        <Progress
+                            year={year}
+                            data={data?.[key]}
+                            legend={card?.legend}
+                        />
+                        <Progress
+                            year={year}
+                            goals={card?.goals}
+                            curr={false}
+                            legend={card?.legend}
+                        />
                     </Card>
                 </Col>
             )
