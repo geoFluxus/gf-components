@@ -9,8 +9,8 @@ const cards = {
         title: 'Vervangen',
         subtitle: 'Aandeel hernieuwbare en secundaire grondstoffen verhogen naar minimaal 55% (gebaseerd op DMI).',
         goals: {
-            goal30: { renew: 50, other: 50},
-            goal35: { renew: 55, other: 45},
+            begin: { renew: 50, other: 50},
+            curr: { renew: 55, other: 45},
             unit: '%'
         },
         legend: [
@@ -32,8 +32,8 @@ const cards = {
         title: 'Besparen',
         subtitle: 'Grondstoffengebruik verlagen met 15% ten op zichte van 2016 (gebaseerd op DMI).',
         goals: {
-            goal30: { total: 2051, raw: 1928, reduction: 2051 - 1928 },
-            goal35: { total: 2051, raw: 1743, reduction: 2051 - 1743 },
+            begin: { total: 2051, raw: 1928, reduction: 2051 - 1928 },
+            curr: { total: 2051, raw: 1743, reduction: 2051 - 1743 },
             unit: 'kt'
         },
         legend: [
@@ -54,8 +54,8 @@ const cards = {
         title: 'Behouden (Verwerking)',
         subtitle: 'Percentage gerecycled afval verhogen naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling.',
         goals: {
-            goal30: { high: 11, other: 69, low: 20},
-            goal35: { high: 55, other: 45, low: 12},
+            begin: { high: 11, other: 69, low: 20},
+            curr: { high: 15, other: 67, low: 18},
             unit: '%'
         },
         legend: [
@@ -146,12 +146,12 @@ const NPCE = ({
                         <Progress
                             year={year}
                             data={data?.[key]}
+                            curr={true}
                             legend={card?.legend}
                         />
                         <Progress
                             year={year}
-                            goals={card?.goals}
-                            curr={false}
+                            data={card?.goals}
                             legend={card?.legend}
                         />
                     </Card>

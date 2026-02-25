@@ -5,11 +5,11 @@ import Arrow from './Arrow'
 const Header = ({
     title,
     data,
-    goal,
     legend,
+    curr,
     bold
 }) => {
-    const isPerc = goal?.unit === '%'
+    const isPerc = data?.unit === '%'
 
     return (
         <Flex
@@ -32,6 +32,10 @@ const Header = ({
                 gap={8}
             >
                 {legend.map((l, idx) => {
+                    const value = data?.value?.[l?.key]
+                    const unit = data?.unit
+                    const perc = Math.round(value / data?.value?.total * 100)
+
                     return (
                         <Flex
                             key={idx}
@@ -40,14 +44,16 @@ const Header = ({
                         >
                             {!l?.hide &&
                                 <>
-                                    <div
-                                        style={{
-                                            minWidth: 7,
-                                            minHeight: 7,
-                                            borderRadius: 3.5,
-                                            background: l?.color
-                                        }}
-                                    />
+                                    { !(l?.key === "reduction" && perc == 0) &&
+                                        <div
+                                            style={{
+                                                minWidth: 7,
+                                                minHeight: 7,
+                                                borderRadius: 3.5,
+                                                background: l?.color
+                                            }}
+                                        />
+                                    }
                                     <span
                                         style={{
                                             color: "#667085",
@@ -57,10 +63,9 @@ const Header = ({
                                         }}
                                     >
                                         {
-                                            l?.key === 'reduction' ? `↓` :
-                                            data?.value ?
-                                            `${data?.value?.[l?.key]}${data?.unit}` :
-                                            `${isPerc ? 'Minstens ' : ''} ${goal?.value?.[l?.key]}${goal?.unit}`
+                                          l?.key === "reduction"
+                                            ? (perc > 0 ? `↓${perc}%` : null)
+                                            : `${isPerc && !curr ? "Minstens " : ""}${value}${unit}`
                                         }
                                     </span>
                                 </>
@@ -76,20 +81,19 @@ const Header = ({
 
 const Bar = ({
     data,
-    goal,
+    curr,
     legend
 }) => {
-    const isPerc = goal?.unit === '%'
-    const total = isPerc ? 100 : 100
+    const isPerc = data?.unit === '%'
     const num = legend?.filter(item => item.key !== 'reduction')?.length
 
     return (
         <Flex>
             {legend?.map((l, idx) => {
                 const width =
-                  (data?.value || goal?.value)?.[l?.key] / total * 100
+                  data?.value?.[l?.key] / 100 * 100
                 const arrow =
-                    l?.arrow && !data?.value && width >= 5
+                    l?.arrow && !curr && width >= 5
                 const arrowWidth = width > 0
                     ? (5 / width) * 100
                     : 0
@@ -163,8 +167,8 @@ const Bar = ({
 const ProgressBar = ({
     title="",
     data,
-    goal,
     legend,
+    curr=false,
     bold=false
 }) => {
     return (
@@ -175,14 +179,14 @@ const ProgressBar = ({
             <Header
                 title={title}
                 data={data}
-                goal={goal}
+                curr={curr}
                 bold={bold}
                 legend={legend}
             />
             <Bar
                 data={data}
-                goal={goal}
                 legend={legend}
+                curr={curr}
             />
         </Flex>
     )
@@ -191,9 +195,8 @@ const ProgressBar = ({
 
 const Progress = ({
     data,
-    goals,
     legend,
-    curr=true,
+    curr=false,
     year=2023,
 }) => {
     return (
@@ -213,11 +216,8 @@ const Progress = ({
                     value: data?.begin,
                     unit: data?.unit
                 }}
-                goal={{
-                    value: goals?.goal30,
-                    unit: goals?.unit
-                }}
                 legend={legend}
+                curr={curr}
             />
             <ProgressBar
                 title={curr ? `Huidig (${year})` : 'Doel (2035)'}
@@ -225,11 +225,8 @@ const Progress = ({
                     value: data?.curr,
                     unit: data?.unit
                 }}
-                goal={{
-                    value: goals?.goal35,
-                    unit: goals?.unit
-                }}
                 bold={curr}
+                curr={curr}
                 legend={legend}
             />
         </Flex>
