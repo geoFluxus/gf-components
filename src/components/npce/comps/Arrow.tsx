@@ -1,26 +1,63 @@
 export default function Arrow({
   color = "white",
-  rotate = 0,
+  transform = "",
   style,
-  className
+  className,
+  showVerticalLine = false,
 }) {
   return (
-    <svg
-      viewBox="0 0 33 8"
-      preserveAspectRatio="none"
+    <span
       className={className}
       style={{
-        height: 8,
+        display: "inline-flex",
+        alignItems: "stretch",
         width: "100%",
+        height: 8,
         overflow: "visible",
-        transform: `translateY(-40%) rotate(${rotate}deg)`,
-        ...style
+        transform,
+        ...style,
       }}
     >
-      <path
-        d="M28.4648 0.146446C28.6601 -0.0488153 28.9766 -0.0488156 29.1719 0.146446L32.3535 3.32809C32.5488 3.52335 32.5488 3.83986 32.3535 4.03512L29.1719 7.21676C28.9766 7.41202 28.6601 7.41202 28.4648 7.21676C28.2696 7.0215 28.2696 6.70499 28.4648 6.50973L30.793 4.1816H0V3.1816H30.793L28.4648 0.853478C28.2696 0.658215 28.2696 0.341709 28.4648 0.146446Z"
-        fill={color}
-      />
-    </svg>
+      {/* Optional vertical line */}
+      {showVerticalLine && (
+        <svg
+          viewBox="0 0 1 8"
+          preserveAspectRatio="none"
+          style={{ width: 1, height: 8, flex: "0 0 1px" }}
+        >
+          <rect x="0" y="0" width="1" height="8" fill={color} />
+        </svg>
+      )}
+
+      {/* Shaft (stretchable) */}
+      <svg
+        viewBox="0 0 1 8"
+        preserveAspectRatio="none"
+        style={{ flex: 1, height: 8 }}
+      >
+        <rect x="0" y="3.5" width="1" height="1" fill={color} />
+      </svg>
+
+      {/* Small arrow head */}
+      <svg
+        viewBox="0 0 4 8"
+        preserveAspectRatio="xMinYMid meet"
+        style={{
+          width: 4,
+          height: 8,
+          flex: "0 0 4px",
+          marginLeft: -3, // overlap shaft slightly
+        }}
+      >
+        <path
+          d="M0 1 L3 4 L0 7"
+          fill="none"
+          stroke={color}
+          strokeWidth="1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
   );
 }

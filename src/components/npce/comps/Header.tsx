@@ -66,6 +66,7 @@ const Legend = ({
         <Flex
             gap={8}
             justify="center"
+            wrap
         >
             {legend.map((item, idx) => {
                 return (
@@ -100,9 +101,6 @@ const Header = ({
             <Flex
                 gap={8}
                 vertical
-                style={{
-                    flexGrow: 1,
-                }}
             >
                 <Flex
                     gap={8}
@@ -127,7 +125,7 @@ const Header = ({
                         color: "#475467",
                         fontSize: 14,
                         fontWeight: 400,
-                        lineHeight: "22px"
+                        lineHeight: "22px",
                     }}
                 >
                     {subtitle}

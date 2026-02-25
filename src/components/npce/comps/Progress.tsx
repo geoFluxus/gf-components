@@ -57,6 +57,7 @@ const Header = ({
                                         }}
                                     >
                                         {
+                                            l?.key === 'reduction' ? `↓` :
                                             data?.value ?
                                             `${data?.value?.[l?.key]}${data?.unit}` :
                                             `${isPerc ? 'Minstens ' : ''} ${goal?.value?.[l?.key]}${goal?.unit}`
@@ -80,7 +81,7 @@ const Bar = ({
 }) => {
     const isPerc = goal?.unit === '%'
     const total = isPerc ? 100 : 100
-    const num = legend?.length
+    const num = legend?.filter(item => item.key !== 'reduction')?.length
 
     return (
         <Flex>
@@ -88,50 +89,70 @@ const Bar = ({
                 const width =
                   (data?.value || goal?.value)?.[l?.key] / total * 100
                 const arrow =
-                    l?.arrow && !data?.value && width >= 10
-                // 10% of TOTAL bar
+                    l?.arrow && !data?.value && width >= 5
                 const arrowWidth = width > 0
-                    ? (10 / width) * 100
+                    ? (5 / width) * 100
                     : 0
 
                 return (
-                    <div
-                        key={idx}
-                        style={{
-                            width: `${width}%`,
-                            height: 16,
-                            position: "relative",
-                            borderRadius:
-                                (num === 1) ? 12 :
-                                (idx === 0) ? "12px 0 0 12px" :
-                                (idx === num - 1) ? "0 12px 12px 0" :
-                                0,
-                            borderRight:
-                                (num !== 1 && idx < num - 1)
-                                    ? "1px solid #FFF"
-                                    : "none",
-                            background: isPerc && !l?.hide
-                                ? `repeating-linear-gradient(
-                                    -60deg,
-                                    rgba(255,255,255,0.1) 0px,
-                                    rgba(255,255,255,0.1) 1px,
-                                    transparent 1px,
-                                    transparent 3px
-                                  ), ${l?.color}`
-                                : l?.color
-                        }}
-                    >
-                        {arrow && (
+                    <>
+                        {l?.key !== 'reduction' &&
+                            <div
+                                key={idx}
+                                style={{
+                                    width: `${width}%`,
+                                    height: 16,
+                                    position: "relative",
+                                    borderRadius:
+                                        (num === 1) ? 12 :
+                                        (idx === 0) ? "12px 0 0 12px" :
+                                        (idx === num - 1) ? "0 12px 12px 0" :
+                                        0,
+                                    borderRight:
+                                        (num !== 1 && idx < num - 1)
+                                            ? "1px solid #FFF"
+                                            : "none",
+                                    background: isPerc && !l?.hide
+                                        ? `repeating-linear-gradient(
+                                            -60deg,
+                                            rgba(255,255,255,0.1) 0px,
+                                            rgba(255,255,255,0.1) 1px,
+                                            transparent 1px,
+                                            transparent 3px
+                                          ), ${l?.color}`
+                                        : l?.color
+                                }}
+                            >
+                                {arrow && (
+                                    <div
+                                        style={{
+                                            width: `${arrowWidth}%`,
+                                            height: "100%"
+                                        }}
+                                    >
+                                        <Arrow
+                                            transform={`translateY(-30%)`}
+                                         />
+                                    </div>
+                                )}
+                            </div>
+                        }
+                        {l?.key === 'reduction' && width > 0 &&
                             <div
                                 style={{
-                                    width: `${arrowWidth}%`,
+                                    width: `${width}%`,
                                     height: "100%"
                                 }}
                             >
-                                <Arrow />
+                                <Arrow
+                                    color="#98A2B3"
+                                    rotate={180}
+                                    transform={`translateY(-30%) rotate(180deg)`}
+                                    showVerticalLine
+                                />
                             </div>
-                        )}
-                    </div>
+                        }
+                    </>
                 )
             })}
         </Flex>
