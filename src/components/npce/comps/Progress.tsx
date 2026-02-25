@@ -1,4 +1,5 @@
 import { Flex } from "antd"
+import Arrow from './Arrow'
 
 
 const Header = ({
@@ -31,35 +32,38 @@ const Header = ({
                 gap={8}
             >
                 {legend.map((l, idx) => {
-                    if (l?.hide) return (<></>)
                     return (
                         <Flex
                             key={idx}
                             gap={4}
                             align="center"
                         >
-                            <div
-                                style={{
-                                    minWidth: 7,
-                                    minHeight: 7,
-                                    borderRadius: 3.5,
-                                    background: l?.color
-                                }}
-                            />
-                            <span
-                                style={{
-                                    color: "#667085",
-                                    fontSize: 12,
-                                    fontWeight: 400,
-                                    lineHeight: "14px"
-                                }}
-                            >
-                                {
-                                    data?.value ?
-                                    `${data?.value?.[l?.key]}${data?.unit}` :
-                                    `${isPerc ? 'Minstens ' : ''} ${goal?.value?.[l?.key]}${goal?.unit}`
-                                }
-                            </span>
+                            {!l?.hide &&
+                                <>
+                                    <div
+                                        style={{
+                                            minWidth: 7,
+                                            minHeight: 7,
+                                            borderRadius: 3.5,
+                                            background: l?.color
+                                        }}
+                                    />
+                                    <span
+                                        style={{
+                                            color: "#667085",
+                                            fontSize: 12,
+                                            fontWeight: 400,
+                                            lineHeight: "14px"
+                                        }}
+                                    >
+                                        {
+                                            data?.value ?
+                                            `${data?.value?.[l?.key]}${data?.unit}` :
+                                            `${isPerc ? 'Minstens ' : ''} ${goal?.value?.[l?.key]}${goal?.unit}`
+                                        }
+                                    </span>
+                                </>
+                            }
                         </Flex>
                     )
                 })}
@@ -81,32 +85,53 @@ const Bar = ({
     return (
         <Flex>
             {legend?.map((l, idx) => {
-                const width = (data?.value || goal?.value)?.[l?.key] / total * 100
+                const width =
+                  (data?.value || goal?.value)?.[l?.key] / total * 100
+                const arrow =
+                    l?.arrow && !data?.value && width >= 10
+                // 10% of TOTAL bar
+                const arrowWidth = width > 0
+                    ? (10 / width) * 100
+                    : 0
+
                 return (
                     <div
+                        key={idx}
                         style={{
                             width: `${width}%`,
                             height: 16,
+                            position: "relative",
                             borderRadius:
                                 (num === 1) ? 12 :
                                 (idx === 0) ? "12px 0 0 12px" :
                                 (idx === num - 1) ? "0 12px 12px 0" :
-                                0
-                            ,
+                                0,
                             borderRight:
-                                (num !== 1 && idx < num - 1) ? "1px solid #FFF" : "none"
-                            ,
+                                (num !== 1 && idx < num - 1)
+                                    ? "1px solid #FFF"
+                                    : "none",
                             background: isPerc && !l?.hide
-                              ? `repeating-linear-gradient(
-                                  -60deg,
-                                  rgba(255,255,255,0.1) 0px,
-                                  rgba(255,255,255,0.1) 1px,
-                                  transparent 1px,
-                                  transparent 3px
-                                ), ${l?.color}`
-                              : l?.color
+                                ? `repeating-linear-gradient(
+                                    -60deg,
+                                    rgba(255,255,255,0.1) 0px,
+                                    rgba(255,255,255,0.1) 1px,
+                                    transparent 1px,
+                                    transparent 3px
+                                  ), ${l?.color}`
+                                : l?.color
                         }}
-                    />
+                    >
+                        {arrow && (
+                            <div
+                                style={{
+                                    width: `${arrowWidth}%`,
+                                    height: "100%"
+                                }}
+                            >
+                                <Arrow />
+                            </div>
+                        )}
+                    </div>
                 )
             })}
         </Flex>

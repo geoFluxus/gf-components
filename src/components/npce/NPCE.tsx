@@ -23,7 +23,8 @@ const cards = {
                 key: 'other',
                 name: 'Overige grondstoffen',
                 color: '#D0D5DD',
-                hide: true
+                hide: true,
+                arrow: true
             }
         ]
     },
@@ -123,7 +124,7 @@ const NPCE = ({
       <Row gutter={[16, 16]}>
         {Object.entries(cards).map(([key, card], idx) => {
             return (
-                idx < 2 && <Col span={12}>
+                idx < 2 && <Col span={12} key={idx}>
                     <Card>
                         <Header
                             title={card?.title}

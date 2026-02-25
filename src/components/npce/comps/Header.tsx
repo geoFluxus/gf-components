@@ -105,6 +105,7 @@ const Header = ({
                 }}
             >
                 <Flex
+                    gap={8}
                     justify="space-between"
                 >
                     <span
