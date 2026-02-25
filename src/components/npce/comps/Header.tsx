@@ -33,30 +33,38 @@ const Status = ({}) => {
 const LegendItem = ({
     color,
     name
-}) =>
-    <Flex
-        gap={4}
-        align="center"
-    >
-        <div
-            style={{
-                minWidth: 7,
-                minHeight: 7,
-                borderRadius: 3.5,
-                background: color
-            }}
-        />
-        <span
-            style={{
-                color: "#667085",
-                fontSize: 12,
-                fontWeight: 400,
-                lineHeight: "14px"
-            }}
-        >
-            {name}
-        </span>
-    </Flex>
+}) => {
+    return (
+        <>
+            {name.toLowerCase() !== 'reduction' ?
+                <Flex
+                    gap={4}
+                    align="center"
+                >
+                    <div
+                        style={{
+                            minWidth: 7,
+                            minHeight: 7,
+                            borderRadius: 3.5,
+                            background: color
+                        }}
+                    />
+                    <span
+                        style={{
+                            color: "#667085",
+                            fontSize: 12,
+                            fontWeight: 400,
+                            lineHeight: "14px"
+                        }}
+                    >
+                        {name}
+                    </span>
+                </Flex>
+                : null
+            }
+        </>
+    )
+}
 
 
 const Legend = ({

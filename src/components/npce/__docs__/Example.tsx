@@ -12,6 +12,11 @@ const data = {
         curr: { total: 2051, raw: 1210, reduction: 2051 - 1210 },
         unit: 'kt'
     },
+    behouden_hoeveelheid: {
+        begin: { total: 275, raw: 275, reduction: 0 },
+        curr: { total: 275, raw: 197, reduction: 275 - 197 },
+        unit: 'kt'
+    },
     behouden_verwerking: {
         begin: { high: 1, other: 76, low: 23 },
         curr: { high: 2, other: 70, low: 28 },

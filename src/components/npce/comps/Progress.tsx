@@ -42,7 +42,9 @@ const Header = ({
                             gap={4}
                             align="center"
                         >
-                            {!l?.hide &&
+                            {
+                             !l?.hide &&
+                             !(l?.key === 'reduction' && l?.lower && !curr) &&
                                 <>
                                     { !(l?.key === "reduction" && perc == 0) &&
                                         <div
@@ -65,6 +67,8 @@ const Header = ({
                                         {
                                           l?.key === "reduction"
                                             ? (perc > 0 ? `↓${perc}%` : null)
+                                            : (l?.lower && !curr)
+                                            ? `↓totaal omlaag`
                                             : `${isPerc && !curr ? "Minstens " : ""}${value}${unit}`
                                         }
                                     </span>
