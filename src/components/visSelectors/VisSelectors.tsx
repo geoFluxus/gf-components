@@ -1,11 +1,14 @@
 import GlobalStyle from "../../globalStyles";
-import { Col, Row, Select } from "antd";
+import { Col, Row, Select, Flex } from "antd";
 import { GFCard } from "../card";
 import styled from "styled-components";
 import { GFCardProps } from "../card/GFCard";
 
-const Title = styled.h3`
+const Title = styled.span`
   color: var(--gf-color-button-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
 `;
 
 export interface VisSelectorsProps extends GFCardProps {
@@ -23,15 +26,20 @@ const VisSelectors: React.FC<VisSelectorsProps> = ({ selectors, setter, style })
         <Row gutter={20} style={{width: "100%", ...style}}>
           {selectors.map((s, idx) =>
               <Col span={span} key={`col-${idx}`}>
-                <Title>{s.title}</Title>
-                <Select
-                  defaultValue={s.defaultValue}
-                  style={{ width: "100%" }}
-                  onChange={(value) => {
-                    setter(s.key, value)
-                  }}
-                  options={s.options}
-                />
+                <Flex
+                    vertical
+                    gap={10}
+                >
+                    <Title>{s.title}</Title>
+                    <Select
+                      defaultValue={s.defaultValue}
+                      style={{ width: "100%" }}
+                      onChange={(value) => {
+                        setter(s.key, value)
+                      }}
+                      options={s.options}
+                    />
+                </Flex>
               </Col>
           )}
         </Row>
