@@ -31,11 +31,6 @@ const cards = {
     besparen: {
         title: 'Besparen',
         subtitle: 'Grondstoffengebruik verlagen met 15% ten op zichte van 2016 (gebaseerd op DMI).',
-        goals: {
-            begin: { total: 2051, raw: 1928, reduction: 2051 - 1928 },
-            curr: { total: 2051, raw: 1743, reduction: 2051 - 1743 },
-            unit: 'kt'
-        },
         legend: [
             {
                 key: 'raw',
@@ -53,11 +48,6 @@ const cards = {
     behouden_hoeveelheid: {
         title: 'Behouden (Hoeveelheid)',
         subtitle: 'De totale hoeveelheid afval verlagen ten op zichte van 2016.',
-        goals: {
-            begin: { total: 275, raw: 275 * 0.85, reduction: 275 * 0.15 },
-            curr: { total: 275, raw: 275 * 0.85, reduction: 275 * 0.15 },
-            unit: 'kt'
-        },
         legend: [
             {
                 key: 'raw',
@@ -143,6 +133,11 @@ const NPCE = ({
     data,
     year
 }) => {
+  // update goals based on data
+  Object.keys(cards).forEach(key => {
+      cards[key].goals = data[key]?.goals || cards[key].goals;
+  });
+
   return (
     <>
       <GlobalStyle />
