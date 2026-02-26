@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Example from "./Example";
 import React from "react";
-import { vervangen } from "./data"
+import { vervangen, besparen } from "./data"
 
 const meta: Meta<typeof Example> = {
   title: "Components/Visualisation/GoalChart",
@@ -15,5 +15,13 @@ export const Default: Story = {
   args: {
     data: vervangen,
     goal: 'vervangen',
+  },
+};
+
+
+export const Besparen: Story = {
+  args: {
+    data: besparen,
+    goal: 'besparen',
   },
 };
