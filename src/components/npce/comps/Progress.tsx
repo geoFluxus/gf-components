@@ -45,17 +45,16 @@ const Header = ({
                             {
                              !l?.hide &&
                              !(l?.key === 'reduction' && l?.lower && !curr) &&
-                                <>
-                                    { !(l?.key === "reduction" && perc == 0) &&
-                                        <div
-                                            style={{
-                                                minWidth: 7,
-                                                minHeight: 7,
-                                                borderRadius: 3.5,
-                                                background: l?.color
-                                            }}
-                                        />
-                                    }
+                             !(l?.key === "reduction" && perc === 0) &&
+                                 <>
+                                    <div
+                                        style={{
+                                            minWidth: 7,
+                                            minHeight: 7,
+                                            borderRadius: 3.5,
+                                            background: l?.color
+                                        }}
+                                    />
                                     <span
                                         style={{
                                             color: "#667085",
@@ -90,6 +89,7 @@ const Bar = ({
 }) => {
     const isPerc = data?.unit === '%'
     const num = legend?.filter(item => item.key !== 'reduction')?.length
+    const arrowPerc = 8
 
     return (
         <Flex>
@@ -97,10 +97,8 @@ const Bar = ({
                 const width =
                   data?.value?.[l?.key] / 100 * 100
                 const arrow =
-                    l?.arrow && !curr && width >= 5
-                const arrowWidth = width > 0
-                    ? (5 / width) * 100
-                    : 0
+                    l?.arrow && !curr && width > arrowPerc
+                const arrowWidth = (arrowPerc / width) * 100
 
                 return (
                     <>
@@ -120,7 +118,7 @@ const Bar = ({
                                         (num !== 1 && idx < num - 1)
                                             ? "1px solid #FFF"
                                             : "none",
-                                    background: isPerc && !l?.hide
+                                    background: isPerc && !curr && !l?.hide
                                         ? `repeating-linear-gradient(
                                             -60deg,
                                             rgba(255,255,255,0.1) 0px,
@@ -132,21 +130,21 @@ const Bar = ({
                                 }}
                             >
                                 {arrow && (
-                                    <div
+                                    <Flex
+                                        align="center"
                                         style={{
                                             width: `${arrowWidth}%`,
                                             height: "100%"
                                         }}
                                     >
-                                        <Arrow
-                                            transform={`translateY(-30%)`}
-                                         />
-                                    </div>
+                                        <Arrow />
+                                    </Flex>
                                 )}
                             </div>
                         }
                         {l?.key === 'reduction' && width > 0 &&
-                            <div
+                            <Flex
+                                align="center"
                                 style={{
                                     width: `${width}%`,
                                     height: "100%"
@@ -155,10 +153,10 @@ const Bar = ({
                                 <Arrow
                                     color="#98A2B3"
                                     rotate={180}
-                                    transform={`translateY(-30%) rotate(180deg)`}
+                                    transform={`rotate(180deg)`}
                                     showVerticalLine
                                 />
-                            </div>
+                            </Flex>
                         }
                     </>
                 )
