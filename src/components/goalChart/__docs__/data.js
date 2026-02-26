@@ -1,23 +1,10 @@
-export const data = {
-    "bar": [
-        {"year": 2016, "total": 10.83, "unit": "Mt"},
-        {"year": 2017, "total": 10.85, "unit": "Mt"},
-        {"year": 2018, "total": 11.24, "unit": "Mt"},
-        {"year": 2019, "total": 11.22, "unit": "Mt"}
-    ],
-    "goal": {
-        "value": 0.9,
-        "unit": "Mt"
-    },
-    "area": "Nederland"
-}
-
-export const provincieData = {
-    "bar": [
-        {"year": 2016, "total": 10.83, "unit": "Mt"},
-        {"year": 2017, "total": 10.85, "unit": "Mt"},
-        {"year": 2018, "total": 11.24, "unit": "Mt"},
-        {"year": 2019, "total": 11.22, "unit": "Mt"}
-    ],
-    "area": "Groningen"
-}
+export const vervangen = [
+    {"year": 2016, "renew": 38, "other": 62, "unit": "%"},
+    {"year": 2017, "renew": 30, "other": 70, "unit": "%"},
+    {"year": 2018, "renew": 27, "other": 73, "unit": "%"},
+    {"year": 2019, "renew": 36, "other": 64, "unit": "%"},
+    {"year": 2020, "renew": 35, "other": 65, "unit": "%"},
+    {"year": 2021, "renew": 41, "other": 59, "unit": "%"},
+    {"year": 2022, "renew": 45, "other": 55, "unit": "%"},
+    {"year": 2023, "renew": 42, "other": 58, "unit": "%"}
+]
