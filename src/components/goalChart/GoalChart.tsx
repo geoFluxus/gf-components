@@ -226,7 +226,7 @@ const GoalChart = ({
                         indexBy={indexBy}
                         colors={(d) => colors?.[d?.id]}
                         enableLabel={false}
-                        margin={{left: 50, bottom: 50, top: 10, right: 0}}
+                        margin={{left: 50, bottom: 35, top: 10, right: 0}}
                         padding={padding}
                         valueFormat={d => valueFormat?.(d) || d}
                         minValue={0}
