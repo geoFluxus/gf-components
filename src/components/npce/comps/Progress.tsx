@@ -1,3 +1,4 @@
+import React from "react"
 import { Flex } from "antd"
 import Arrow from './Arrow'
 
@@ -101,10 +102,9 @@ const Bar = ({
                 const arrowWidth = (arrowPerc / width) * 100
 
                 return (
-                    <>
+                    <React.Fragment key={idx}>
                         {l?.key !== 'reduction' &&
                             <div
-                                key={idx}
                                 style={{
                                     width: `${width}%`,
                                     height: 16,
@@ -158,7 +158,7 @@ const Bar = ({
                                 />
                             </Flex>
                         }
-                    </>
+                    </React.Fragment>
                 )
             })}
         </Flex>
@@ -216,7 +216,7 @@ const Progress = ({
                 title={curr ? 'Begintpunt (2016)' : 'Doel (2030)'}
                 data={{
                     value: data?.begin,
-                    unit: data?.unit
+                    unit: data?.unit,
                 }}
                 legend={legend}
                 curr={curr}

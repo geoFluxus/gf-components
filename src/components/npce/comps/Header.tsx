@@ -1,7 +1,8 @@
 import { Flex } from "antd"
+import { CheckCircleFilled } from "@ant-design/icons";
 
 
-const Status = ({}) => {
+const Status = ({success}) => {
     return (
         <Flex
             gap={8}
@@ -10,21 +11,18 @@ const Status = ({}) => {
             style={{
                 padding: "4px 16px 4px 12px",
                 borderRadius: 24,
-                border: "1px solid #FFE58F",
-                background: "#FFFBE6"
+                border: "1px solid",
+                borderColor: success ? "#B7EB8F" : "#FFE58F",
+                background: success ? "#F6FFED" : "#FFFBE6",
+                color: success ? "#389E0D" : "#AD6800",
+                textAlign: "center",
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: "22px"
             }}
         >
-            <span
-                style={{
-                    color: "#AD6800",
-                    textAlign: "center",
-                    fontSize: 14,
-                    fontWeight: 400,
-                    lineHeight: "22px"
-                }}
-            >
-                {'2035 doel nog niet behaald'}
-            </span>
+            {success && <CheckCircleFilled />}
+            {success ? '2035 doel behaald' : '2035 doel nog niet behaald'}
         </Flex>
     )
 }
@@ -93,7 +91,8 @@ const Legend = ({
 const Header = ({
     title,
     subtitle,
-    legend
+    legend,
+    success,
 }) => {
     return (
         <Flex
@@ -126,7 +125,7 @@ const Header = ({
                         {title}
                     </span>
 
-                    <Status />
+                    <Status success={success} />
                 </Flex>
                 <span
                     style={{
