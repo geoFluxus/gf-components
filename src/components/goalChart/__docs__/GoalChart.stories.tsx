@@ -1,7 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Example from "./Example";
 import React from "react";
-import { vervangen, besparen } from "./data"
+import {
+    vervangen,
+    besparen,
+    behouden_hoeveelheid,
+    behouden_verwerking
+} from "./data"
 
 const meta: Meta<typeof Example> = {
   title: "Components/Visualisation/GoalChart",
@@ -23,5 +28,19 @@ export const Besparen: Story = {
   args: {
     data: besparen,
     goal: 'besparen',
+  },
+};
+
+export const BehoudenHoeveelheid: Story = {
+  args: {
+    data: behouden_hoeveelheid,
+    goal: 'behouden_hoeveelheid',
+  },
+};
+
+export const BehoudenVerwerking: Story = {
+  args: {
+    data: behouden_verwerking,
+    goal: 'behouden_verwerking',
   },
 };

@@ -30,11 +30,11 @@ const goals = {
         },
         text: 'Doel 2035: Verhogen naar 55%',
         increase: true,
-        targets: {
-            g30: 50,
-            g35: 55,
-            unit: '%'
-        }
+        unit: '%',
+        targets: [
+            {value: 50, name: 'Doel 2030', color: "#FFAB2E"},
+            {value: 55, name: 'Doel 2035', color: "#1094D7"},
+        ]
     },
     besparen: {
         colors: {
@@ -43,8 +43,43 @@ const goals = {
         legend: {
             "raw": "Grondstoffen gebruik",
         },
-        axisLeft: 'Gewicht',
         text: 'Doel 2035: Verlagen met 15% ten op zichte van 2016',
+        targets: [
+            {name: 'Doel 2030', color: "#FFAB2E"},
+            {name: 'Doel 2035', color: "#1094D7"},
+        ]
+    },
+    behouden_hoeveelheid: {
+        colors: {
+            "high": "#226123",
+            "other": '#84B08D',
+            "low": '#D0D5DD'
+        },
+        legend: {
+            "high": "Hoogwaardige recycling",
+            "other": 'Overige recycling',
+            "low": 'Verbranden/Storten'
+        },
+        text: 'Doel 2035: Verlagen van totale hoeveelheid afval ten op zichte van 2016',
+        unit: 'kt'
+    },
+    behouden_verwerking: {
+        colors: {
+            "high": "#226123",
+            "other": '#84B08D',
+            "low": '#D0D5DD'
+        },
+        legend: {
+            "high": "Hoogwaardige recycling",
+            "other": 'Overige recycling',
+            "low": 'Verbranden/Storten'
+        },
+        text: 'Doel 2035: Verhogen van percentage gerecycled afval naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling',
+        unit: '%',
+        targets: [
+            {name: 'Doel Hoogwaardig 2035', color: "#226123", value: 15},
+            {name: 'Doel Recycling 2035', color: "#84B08D", value: 82},
+        ]
     }
 }
 
@@ -95,7 +130,7 @@ const Legend = ({legend, targets, colors}) =>
                 </Flex>
             )
         })}
-        {Object.entries(targets).map(([key, name], idx) => {
+        {targets?.map((target, idx) => {
             return (
                 <Flex
                     key={idx}
@@ -106,14 +141,14 @@ const Legend = ({legend, targets, colors}) =>
                         style={{
                             width: 16,
                             height: 1,
-                            borderTop: `1px dashed ${key === 'g30' ? "#FFAB2E" : "#1094D7"}`
+                            borderTop: `1px dashed ${target?.color}`
                         }}
                     />
                     <StyledText
                         $size={12}
                         $height={14}
                     >
-                        {`Doel ${key === 'g30' ? '2030' : '2035'}`}
+                        {`${target?.name}`}
                     </StyledText>
                 </Flex>
             )
@@ -134,10 +169,11 @@ const GoalChart = ({
     tooltip = null
 }) => {
     const goalObj = goals?.[goal]
-    const targets = data?.targets || goalObj?.targets
-    const axisLeftLegend = targets?.unit === '%' ?
+    const targets = goalObj?.targets?.map((target, idx) => ({...target, ...data?.targets?.[idx]}))
+    const unit = data?.unit || goalObj?.unit
+    const axisLeftLegend = unit === '%' ?
         'Percentage (%)' :
-        `Gewicht (${targets?.unit})`
+        `Gewicht (${unit})`
 
     const barData = data?.data,
           colors = goalObj?.colors,
@@ -153,18 +189,16 @@ const GoalChart = ({
     const GoalLayer = (props) => {
         return (
             <>
-                <Line
-                    data={targets?.g30}
-                    graph={props}
-                    stroke="#FFAB2E"
-                    dashed
-                />
-                <Line
-                    data={targets?.g35}
-                    graph={props}
-                    stroke="#1094D7"
-                    dashed
-                />
+                {targets?.map((target, idx) => {
+                    return (
+                        <Line
+                            data={target?.value}
+                            graph={props}
+                            stroke={target?.color}
+                            dashed
+                        />
+                    )
+                })}
             </>
         )
     }
