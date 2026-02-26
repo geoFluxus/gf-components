@@ -20,8 +20,7 @@ const VisSelectors: React.FC<VisSelectorsProps> = ({ selectors, setter, style })
   return (
     <>
       <GlobalStyle />
-      <GFCard cardtype="default" style={{ width: "100%", ...style }}>
-        <Row gutter={20}>
+        <Row gutter={20} style={{width: "100%", ...style}}>
           {selectors.map((s, idx) =>
               <Col span={span} key={`col-${idx}`}>
                 <Title>{s.title}</Title>
@@ -36,7 +35,6 @@ const VisSelectors: React.FC<VisSelectorsProps> = ({ selectors, setter, style })
               </Col>
           )}
         </Row>
-      </GFCard>
     </>
   );
 };
