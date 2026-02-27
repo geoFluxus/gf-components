@@ -41,7 +41,7 @@ const goals = {
             "raw": "#92DAE1",
         },
         legend: {
-            "raw": "Grondstoffen gebruik",
+            "raw": "Grondstoffengebruik",
         },
         text: 'Doel 2035: Verlagen met 15% ten op zichte van 2016',
         targets: [

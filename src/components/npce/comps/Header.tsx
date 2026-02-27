@@ -108,6 +108,9 @@ const Header = ({
             <Flex
                 gap={8}
                 vertical
+                style={{
+                    flexGrow: 1,
+                }}
             >
                 <Flex
                     gap={8}
@@ -116,7 +119,7 @@ const Header = ({
                     <span
                         style={{
                             color: "#1D2939",
-                            textAlign: "center",
+                            textAlign: "left",
                             fontSize: 16,
                             fontWeight: 500,
                             lineHeight: "24px"

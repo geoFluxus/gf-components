@@ -118,7 +118,7 @@ const Bar = ({
                                         (num !== 1 && idx < num - 1)
                                             ? "1px solid #FFF"
                                             : "none",
-                                    background: isPerc && !curr && !l?.hide
+                                    background: isPerc && !l?.hide
                                         ? `repeating-linear-gradient(
                                             -60deg,
                                             rgba(255,255,255,0.1) 0px,
@@ -213,7 +213,7 @@ const Progress = ({
             }}
         >
             <ProgressBar
-                title={curr ? 'Begintpunt (2016)' : 'Doel (2030)'}
+                title={curr ? 'Beginpunt (2016)' : 'Doel (2030)'}
                 data={{
                     value: data?.begin,
                     unit: data?.unit,

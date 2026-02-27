@@ -44,13 +44,13 @@ export const behouden_hoeveelheid = {
 
 export const behouden_verwerking = {
     data: [
-        {"year": 2016, "high": 2, "other": 60, "low": 38, "unit": "kt"},
-        {"year": 2017, "high": 2, "other": 40, "low": 58, "unit": "kt"},
-        {"year": 2018, "high": 2, "other": 40, "low": 58, "unit": "kt"},
-        {"year": 2019, "high": 2, "other": 40, "low": 58, "unit": "kt"},
-        {"year": 2020, "high": 2, "other": 30, "low": 68, "unit": "kt"},
-        {"year": 2021, "high": 2, "other": 20, "low": 78, "unit": "kt"},
-        {"year": 2022, "high": 2, "other": 50, "low": 48, "unit": "kt"},
-        {"year": 2023, "high": 2, "other": 60, "low": 38, "unit": "kt"}
+        {"year": 2016, "high": 2, "other": 60, "low": 38, "unit": "%"},
+        {"year": 2017, "high": 2, "other": 40, "low": 58, "unit": "%"},
+        {"year": 2018, "high": 2, "other": 40, "low": 58, "unit": "%"},
+        {"year": 2019, "high": 2, "other": 40, "low": 58, "unit": "%"},
+        {"year": 2020, "high": 2, "other": 30, "low": 68, "unit": "%"},
+        {"year": 2021, "high": 2, "other": 20, "low": 78, "unit": "%"},
+        {"year": 2022, "high": 2, "other": 50, "low": 48, "unit": "%"},
+        {"year": 2023, "high": 2, "other": 60, "low": 38, "unit": "%"}
     ]
 }
