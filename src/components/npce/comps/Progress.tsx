@@ -118,11 +118,11 @@ const Bar = ({
                                         (num !== 1 && idx < num - 1)
                                             ? "1px solid #FFF"
                                             : "none",
-                                    background: isPerc && !l?.hide
+                                    background: !curr && !l?.hide
                                         ? `repeating-linear-gradient(
                                             -60deg,
-                                            rgba(255,255,255,0.1) 0px,
-                                            rgba(255,255,255,0.1) 1px,
+                                            rgba(255,255,255,0.35) 0px,
+                                            rgba(255,255,255,0.35) 1px,
                                             transparent 1px,
                                             transparent 3px
                                           ), ${l?.color}`
