@@ -66,7 +66,7 @@ const Header = ({
                                     >
                                         {
                                           l?.key === "reduction"
-                                            ? (perc > 0 ? `↓${perc}%` : null)
+                                            ? (perc > 0 ? `↓${perc}%` : perc < 0 ? `↑${Math.abs(perc)}%` : null)
                                             : (l?.lower && !curr)
                                             ? `↓totaal omlaag`
                                             : `${isPerc && !curr ? "Minstens " : ""}${value}${unit}`
@@ -83,86 +83,101 @@ const Header = ({
 }
 
 
-const Bar = ({
-    data,
-    curr,
-    legend
-}) => {
-    const isPerc = data?.unit === '%'
-    const num = legend?.filter(item => item.key !== 'reduction')?.length
-    const arrowPerc = 8
+const Bar = ({ data, curr, legend }) => {
+  const arrowPerc = 8
 
-    return (
-        <Flex>
-            {legend?.map((l, idx) => {
-                const width =
-                  data?.value?.[l?.key] / 100 * 100
-                const arrow =
-                    l?.arrow && !curr && width > arrowPerc
-                const arrowWidth = (arrowPerc / width) * 100
+  // Remove reduction items for bar rendering logic
+  const segments = legend?.filter(l => l.key !== "reduction") ?? []
 
-                return (
-                    <React.Fragment key={idx}>
-                        {l?.key !== 'reduction' &&
-                            <div
-                                style={{
-                                    width: `${width}%`,
-                                    height: 16,
-                                    position: "relative",
-                                    borderRadius:
-                                        (num === 1) ? 12 :
-                                        (idx === 0) ? "12px 0 0 12px" :
-                                        (idx === num - 1) ? "0 12px 12px 0" :
-                                        0,
-                                    borderRight:
-                                        (num !== 1 && idx < num - 1)
-                                            ? "1px solid #FFF"
-                                            : "none",
-                                    background: !curr && !l?.hide
-                                        ? `repeating-linear-gradient(
-                                            -60deg,
-                                            rgba(255,255,255,0.35) 0px,
-                                            rgba(255,255,255,0.35) 1px,
-                                            transparent 1px,
-                                            transparent 3px
-                                          ), ${l?.color}`
-                                        : l?.color
-                                }}
-                            >
-                                {arrow && (
-                                    <Flex
-                                        align="center"
-                                        style={{
-                                            width: `${arrowWidth}%`,
-                                            height: "100%"
-                                        }}
-                                    >
-                                        <Arrow />
-                                    </Flex>
-                                )}
-                            </div>
-                        }
-                        {l?.key === 'reduction' && width > 0 &&
-                            <Flex
-                                align="center"
-                                style={{
-                                    width: `${width}%`,
-                                    height: "100%"
-                                }}
-                            >
-                                <Arrow
-                                    color="#98A2B3"
-                                    rotate={180}
-                                    transform={`rotate(180deg)`}
-                                    showVerticalLine
-                                />
-                            </Flex>
-                        }
-                    </React.Fragment>
-                )
-            })}
-        </Flex>
-    )
+  // Compute widths
+  const widths = segments.map(l => data?.value?.[l?.key] ?? 0)
+
+  // Find first & last visible (non-zero) segments
+  const firstVisibleIndex = widths.findIndex(w => w > 0)
+  const lastVisibleIndex =
+    widths.length - 1 - [...widths].reverse().findIndex(w => w > 0)
+
+  return (
+    <Flex style={{ height: 16 }}>
+      {legend?.map((l, idx) => {
+        const width = data?.value?.[l?.key] ?? 0
+
+        // If reduction, render separately
+        if (l?.key === "reduction") {
+          return (
+            width > 0 && (
+              <Flex
+                key={idx}
+                align="center"
+                style={{
+                  width: `${width}%`,
+                  height: "100%",
+                }}
+              >
+                <Arrow
+                  color="#98A2B3"
+                  rotate={180}
+                  transform="rotate(180deg)"
+                  showVerticalLine
+                />
+              </Flex>
+            )
+          )
+        }
+
+        // Find index among non-reduction segments
+        const segmentIndex = segments.findIndex(s => s.key === l.key)
+
+        const isFirst = segmentIndex === firstVisibleIndex
+        const isLast = segmentIndex === lastVisibleIndex
+
+        const arrow = l?.arrow && !curr && width > arrowPerc
+        const arrowWidth = width > 0 ? (arrowPerc / width) * 100 : 0
+
+        return (
+          <div
+            key={idx}
+            style={{
+              width: `${width}%`,
+              position: "relative",
+              borderRadius:
+                isFirst && isLast
+                  ? 12
+                  : isFirst
+                    ? "12px 0 0 12px"
+                    : isLast
+                      ? "0 12px 12px 0"
+                      : 0,
+              borderRight:
+                !isLast ? "1px solid #FFF" : "none",
+              background:
+                !curr && !l?.hide
+                  ? `repeating-linear-gradient(
+                      -60deg,
+                      rgba(255,255,255,0.35) 0px,
+                      rgba(255,255,255,0.35) 1px,
+                      transparent 1px,
+                      transparent 3px
+                    ), ${l?.color}`
+                  : l?.color,
+            }}
+          >
+            {arrow && (
+              <Flex
+                align="center"
+                style={{
+                  width: `${arrowWidth}%`,
+                  height: "100%",
+                }}
+              >
+                <Arrow />
+              </Flex>
+            )}
+          </div>
+        )
+      })}
+    </Flex>
+  )
 }
 
 

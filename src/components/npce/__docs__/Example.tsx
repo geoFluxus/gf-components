@@ -2,36 +2,82 @@ import GlobalStyle from "../../../globalStyles";
 import NPCE from "../NPCE";
 
 const data = {
-    vervangen: {
-        begin: { renew: 37, other: 63 },
-        curr: { renew: 42, other: 58 },
-        unit: '%'
+  "vervangen": {
+    "begin": {
+      "renew": 59,
+      "other": 41
     },
-    besparen: {
-        begin: { total: 2051, raw: 2051, reduction: 0 },
-        curr: { total: 2051, raw: 1210, reduction: 2051 - 1210 },
-        goals: {
-            begin: { total: 2051, raw: 1928, reduction: 2051 - 1928 },
-            curr: { total: 2051, raw: 1743, reduction: 2051 - 1743 },
-            unit: 'kt'
-        },
-        unit: 'kt'
+    "curr": {
+      "renew": 69,
+      "other": 31
     },
-    behouden_hoeveelheid: {
-        begin: { total: 275, raw: 275, reduction: 0 },
-        curr: { total: 275, raw: 197, reduction: 275 - 197 },
-        goals: {
-            begin: { total: 275, raw: 275 * 0.85, reduction: 275 * 0.15 },
-            curr: { total: 275, raw: 275 * 0.85, reduction: 275 * 0.15 },
-            unit: 'kt'
-        },
-        unit: 'kt'
+    "unit": "%"
+  },
+  "besparen": {
+    "begin": {
+      "total": 3719,
+      "raw": 3719,
+      "reduction": 0
     },
-    behouden_verwerking: {
-        begin: { high: 1, other: 76, low: 23 },
-        curr: { high: 2, other: 70, low: 28 },
-        unit: '%'
-    }
+    "curr": {
+      "total": 3719,
+      "raw": 3674,
+      "reduction": 45
+    },
+    "goals": {
+      "begin": {
+        "total": 3719,
+        "raw": 3533,
+        "reduction": 186
+      },
+      "curr": {
+        "total": 3719,
+        "raw": 3124,
+        "reduction": 595
+      },
+      "unit": "kt"
+    },
+    "unit": "kt"
+  },
+  "behouden_hoeveelheid": {
+    "begin": {
+      "total": 485,
+      "raw": 485,
+      "reduction": 0
+    },
+    "curr": {
+      "total": 485,
+      "raw": 561,
+      "reduction": -76
+    },
+    "goals": {
+      "begin": {
+        "total": 485,
+        "raw": 456,
+        "reduction": 29
+      },
+      "curr": {
+        "total": 485,
+        "raw": 412,
+        "reduction": 73
+      },
+      "unit": "kt"
+    },
+    "unit": "kt"
+  },
+  "behouden_verwerking": {
+    "begin": {
+      "high": 0,
+      "other": 50,
+      "low": 50
+    },
+    "curr": {
+      "high": 0,
+      "other": 76,
+      "low": 39
+    },
+    "unit": "%"
+  }
 }
 
 const Example: FC<GFButtonProps> = ({
