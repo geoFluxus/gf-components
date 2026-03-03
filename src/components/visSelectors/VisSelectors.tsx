@@ -1,5 +1,5 @@
 import GlobalStyle from "../../globalStyles";
-import { Col, Row, Select, Flex } from "antd";
+import { Col, Row, Select, TreeSelect, Flex } from "antd";
 import { GFCard } from "../card";
 import styled from "styled-components";
 import { GFCardProps } from "../card/GFCard";
@@ -31,13 +31,14 @@ const VisSelectors: React.FC<VisSelectorsProps> = ({ selectors, setter, style })
                     gap={10}
                 >
                     <Title>{s.title}</Title>
-                    <Select
+                    <TreeSelect
                       defaultValue={s.defaultValue}
                       style={{ width: "100%" }}
                       onChange={(value) => {
-                        setter(s.key, value)
+                        setter(s.key, value);
                       }}
-                      options={s.options}
+                      treeData={s.options}
+                      treeDefaultExpandAll
                     />
                 </Flex>
               </Col>

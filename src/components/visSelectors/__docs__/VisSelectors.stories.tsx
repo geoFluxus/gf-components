@@ -11,15 +11,48 @@ export default meta;
 type Story = StoryObj<typeof Example>;
 
 const options_Industries = [
-  { label: "Alle industrieen", value: "" },
-  { label: "Chemie Energie", value: "chemie_energie" },
-  { label: "Afval Beheer", value: "afval_beheer" },
-  { label: "Onbekend", value: "onbekend" },
-  { label: "Metaal Machine Elektronica", value: "metaal_machine_elektronica" },
-  { label: "Landbouw Veeteelt", value: "landbouw_veeteelt" },
-  { label: "Plastic Rubber Textiel", value: "plastic_rubber_textiel" },
-  { label: "Diversen", value: "diversen" },
-  { label: "Bouw Sloop", value: "bouw_sloop" },
+    {
+        label: 'Alle productgroepen',
+        value: ''
+    },
+    {
+        label: 'Bouw',
+        value: 'bouw'
+    },
+    {
+        label: 'Biomassa en Voedsel',
+        value: 'biomassa'
+    },
+    {
+        label: 'Maakindustrie',
+        value: 'maakindustrie'
+    },
+    {
+        label: 'Kunststoffen',
+        value: 'kunststoffen'
+    },
+    {
+        label: 'Consumptiegoederen',
+        value: 'consumptie',
+        children: [
+            {
+                label: 'Meubilair',
+                value: 'consumptie_meubilair'
+            },
+            {
+                label: 'Textiel',
+                value: 'consumptie_textiel'
+            },
+            {
+                label: 'AEEA',
+                value: 'consumptie_aeea'
+            },
+            {
+                label: 'Overig',
+                value: 'consumptie_overig'
+            }
+        ]
+    },
 ];
 
 const options_ProcMethods = [
@@ -36,13 +69,14 @@ const selectors = [
         key: "industries",
         title: "Selecteer industrie:",
         options: options_Industries,
-        defaultValue: "Alle industrieen"
+        defaultValue: "",
+        isTree: true
     },
     {
         key: "procMethods",
         title: "Alle verwerkings",
         options: options_ProcMethods,
-        defaultValue: "Alle verwerkings"
+        defaultValue: ""
     }
 ]
 
