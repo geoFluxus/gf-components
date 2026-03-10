@@ -242,6 +242,7 @@ const BarChart = ({
                         enableLabel={false}
                         axisBottom={{
                             tickSize: 5,
+                            tickValues: 5,
                             legendPosition: 'middle',
                             legendOffset: 40,
                             ...axisBottom
@@ -254,6 +255,16 @@ const BarChart = ({
                               <CustomToolTip body={ tooltip?.(bar) || <span>Tooltip</span>} />
                             );
                         }}
+                        theme={{
+                            axis: {
+                              domain: {
+                                line: {
+                                  stroke: "#000",
+                                  strokeWidth: 1,
+                                },
+                              },
+                            },
+                          }}
                     />
                 </div>
                 <Legend data={data} keys={keys}/>
