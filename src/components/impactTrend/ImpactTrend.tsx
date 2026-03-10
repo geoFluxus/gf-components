@@ -141,11 +141,13 @@ const ImpactTrend = ({
                             ...axisBottom
                         }}
                         axisLeft={{
-                            tickSize: 5,
+                            tickSize: 0,
+                            tickValues: 5,
                             legendPosition: 'middle',
                             legendOffset: -40,
                             ...axisLeft
                         }}
+                        gridYValues={5}
                         layers={[
                             'grid',
                             'axes',
