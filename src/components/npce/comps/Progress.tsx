@@ -1,5 +1,6 @@
 import React from "react"
 import { Flex } from "antd"
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import Arrow from './Arrow'
 
 
@@ -57,20 +58,36 @@ const Header = ({
                                         }}
                                     />
                                     <span
-                                        style={{
-                                            color: "#667085",
-                                            fontSize: 12,
-                                            fontWeight: 400,
-                                            lineHeight: "14px"
-                                        }}
+                                      style={{
+                                        color: "#667085",
+                                        fontSize: 12,
+                                        fontWeight: 400,
+                                        lineHeight: "14px"
+                                      }}
                                     >
-                                        {
-                                          l?.key === "reduction"
-                                            ? (perc > 0 ? `↓${perc}%` : perc < 0 ? `↑${Math.abs(perc)}%` : null)
-                                            : (l?.lower && !curr)
-                                            ? `↓totaal omlaag`
-                                            : `${isPerc && !curr ? "Minstens " : ""}${value}${unit}`
-                                        }
+                                      {
+                                        l?.key === "reduction"
+                                          ? perc > 0
+                                            ? (
+                                              <span>
+                                                <ArrowDownOutlined/>{perc}%
+                                              </span>
+                                            )
+                                            : perc < 0
+                                            ? (
+                                              <span>
+                                                <ArrowUpOutlined/>{Math.abs(perc)}%
+                                              </span>
+                                            )
+                                            : null
+                                          : (l?.lower && !curr)
+                                          ? (
+                                            <span>
+                                              <ArrowDownOutlined/>totaal omlaag
+                                            </span>
+                                          )
+                                          : `${isPerc && !curr ? "Minstens " : ""}${value}${unit}`
+                                      }
                                     </span>
                                 </>
                             }

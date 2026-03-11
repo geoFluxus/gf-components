@@ -1,5 +1,5 @@
 export default function Arrow({
-  color = "white",
+  color = "#667085",
   transform = "",
   style,
   className,
@@ -10,26 +10,34 @@ export default function Arrow({
       className={className}
       style={{
         display: "inline-flex",
-        alignItems: "stretch",
+        alignItems: "center",
         width: "100%",
         height: 8,
         overflow: "visible",
         transform,
+        position: "relative",
         ...style,
       }}
     >
-      {/* Optional vertical line */}
+      {/* Vertical line (centered on shaft) */}
       {showVerticalLine && (
         <svg
-          viewBox="0 0 1 8"
+          viewBox="0 0 1 16"
           preserveAspectRatio="none"
-          style={{ width: 1, height: 8, flex: "0 0 1px" }}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 1,
+            height: 16,
+          }}
         >
-          <rect x="0" y="0" width="1" height="8" fill={color} />
+          <rect x="0" y="0" width="1" height="16" fill={color} />
         </svg>
       )}
 
-      {/* Shaft (stretchable) */}
+      {/* Shaft */}
       <svg
         viewBox="0 0 1 8"
         preserveAspectRatio="none"
@@ -38,7 +46,7 @@ export default function Arrow({
         <rect x="0" y="3.5" width="1" height="1" fill={color} />
       </svg>
 
-      {/* Small arrow head */}
+      {/* Arrow head */}
       <svg
         viewBox="0 0 4 8"
         preserveAspectRatio="xMinYMid meet"
@@ -46,7 +54,7 @@ export default function Arrow({
           width: 4,
           height: 8,
           flex: "0 0 4px",
-          marginLeft: -3, // overlap shaft slightly
+          marginLeft: -3,
         }}
       >
         <path
