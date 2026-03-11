@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GlobalStyle from "../../globalStyles";
 import { ResponsivePie } from "@nivo/pie";
+import tinycolor from "tinycolor2";
 import styled from "styled-components";
 import { CustomToolTip } from "../customToolTip";
 import { Col, Row, Flex } from "antd";
@@ -108,7 +109,9 @@ const PieChart: React.FC<Props> = ({
               borderWidth={1}
               borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
               arcLabelsSkipAngle={10}
-              arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+              arcLabelsTextColor={(d) =>
+                tinycolor(d.color).isLight() ? "#000" : "#fff"
+              }
               isInteractive={!isEmpty}
               layers={[
                 "arcs",

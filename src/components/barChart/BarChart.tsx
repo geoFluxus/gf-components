@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
+import tinycolor from "tinycolor2";
 import { CustomToolTip } from "../customToolTip";
 import styled from 'styled-components';
 import { Flex } from 'antd'
@@ -10,7 +11,6 @@ const fontSize = 12
 const lineHeight = 14
 const StyledText = styled.tspan`
   font: var(--gf-label-md-default);
-  color: var(--gf-color-text-secondary);
   font-size: ${fontSize}px;
   line-height: ${lineHeight}px;
 `
@@ -138,6 +138,7 @@ const BarChart = ({
         const transX = bar.x + bar.width / 2 - textWidth / 2
         const transY = bar.y + bar.height / 2 + textHeight / 2
 
+        const textColor = tinycolor(bar?.color).isLight() ? "black" : "white";
         return (
             <g transform={`translate(${transX}, ${transY})`} >
                 <text
@@ -148,7 +149,14 @@ const BarChart = ({
                       alignmentBaseline: 'middle',
                     }}
                 >
-                    <StyledText style={{fontSize: fontSize}}>{text || 'label'}</StyledText>
+                    <StyledText
+                        style={{
+                            fontSize: fontSize,
+                            fill: textColor
+                        }}
+                    >
+                        {text || 'label'}
+                    </StyledText>
                 </text>
             </g>
         )
