@@ -69,12 +69,14 @@ const data = {
     "begin": {
       "high": 0,
       "other": 50,
-      "low": 50
+      "low": 30,
+      "unknown": 20
     },
     "curr": {
       "high": 0,
       "other": 76,
-      "low": 39
+      "low": 20,
+      "unknown": 19
     },
     "unit": "%"
   }

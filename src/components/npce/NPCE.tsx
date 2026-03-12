@@ -113,7 +113,13 @@ const cards = {
             {
                 key: 'low',
                 name: 'Verbranden/Storten',
+                color: '#809399',
+            },
+            {
+                key: 'unknown',
+                name: 'Opslag',
                 color: '#D0D5DD',
+                hide: true
             }
         ]
     },

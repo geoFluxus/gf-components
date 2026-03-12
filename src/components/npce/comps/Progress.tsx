@@ -101,13 +101,18 @@ const Header = ({
 
 
 const Bar = ({ data, curr, legend }) => {
+  const isPerc = data?.unit === '%'
   const arrowPerc = 8
 
   // Remove reduction items for bar rendering logic
   const segments = legend?.filter(l => l.key !== "reduction") ?? []
 
   // Compute widths
-  const widths = segments.map(l => data?.value?.[l?.key] ?? 0)
+  const rawWidths = segments.map(l => data?.value?.[l?.key] ?? 0)
+  const total = data?.value?.total
+  const widths = !isPerc
+      ? rawWidths.map(v => (total ? (v / total) * 100 : 0))
+      : rawWidths
 
   // Find first & last visible (non-zero) segments
   const firstVisibleIndex = widths.findIndex(w => w > 0)
@@ -117,7 +122,7 @@ const Bar = ({ data, curr, legend }) => {
   return (
     <Flex style={{ height: 16 }}>
       {legend?.map((l, idx) => {
-        const width = data?.value?.[l?.key] ?? 0
+        const width = widths[idx] || data?.value?.[l?.key] / data?.value?.total * 100
 
         // If reduction, render separately
         if (l?.key === "reduction") {

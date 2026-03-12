@@ -53,12 +53,14 @@ const goals = {
         colors: {
             "high": "#226123",
             "other": '#84B08D',
-            "low": '#D0D5DD'
+            "low": "#809399",
+            "unknown": '#D0D5DD'
         },
         legend: {
             "high": "Hoogwaardige recycling",
             "other": 'Overige recycling',
-            "low": 'Verbranden/Storten'
+            "low": 'Verbranden/Storten',
+            "unknown": "Opslag"
         },
         text: 'Doel 2035: Verlagen van totale hoeveelheid afval ten op zichte van 2016',
         unit: 'kt'
@@ -67,12 +69,14 @@ const goals = {
         colors: {
             "high": "#226123",
             "other": '#84B08D',
-            "low": '#D0D5DD'
+            "low": "#809399",
+            "unknown": '#D0D5DD'
         },
         legend: {
             "high": "Hoogwaardige recycling",
             "other": 'Overige recycling',
-            "low": 'Verbranden/Storten'
+            "low": 'Verbranden/Storten',
+            "unknown": "Opslag"
         },
         text: 'Doel 2035: Verhogen van percentage gerecycled afval naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling',
         unit: '%',
