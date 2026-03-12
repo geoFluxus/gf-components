@@ -162,7 +162,7 @@ const BenchmarkSankey: React.FC<Props> = ({
             </g>
 
             <g transform={`
-                translate(${result?.max + nodeThickness + nodeLabelWidth + nodeLabelOffsetX - 117},
+                translate(${result?.max + nodeThickness + nodeLabelWidth + nodeLabelOffsetX - 135},
                 ${-(margin?.top || 50)})
                 scale(1.2)
             `}>
