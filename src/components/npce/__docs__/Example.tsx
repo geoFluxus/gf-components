@@ -68,14 +68,14 @@ const data = {
   "behouden_verwerking": {
     "begin": {
       "high": 0,
-      "other": 50,
-      "low": 30,
+      "other": 60,
+      "low": 40,
       "unknown": 20
     },
     "curr": {
       "high": 0,
       "other": 76,
-      "low": 20,
+      "low": 24,
       "unknown": 19
     },
     "unit": "%"

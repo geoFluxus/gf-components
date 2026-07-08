@@ -59,7 +59,7 @@ const cards = {
     },
     behouden_hoeveelheid: {
         title: 'Behouden (Hoeveelheid)',
-        subtitle: 'De totale hoeveelheid afval verlagen ten op zichte van 2016.',
+        subtitle: 'De totale hoeveelheid afval verlagen ten op zichte van 2016 (met opslag).',
         check: [
             // reduction with 2016
             (status, goal) => {
@@ -84,7 +84,7 @@ const cards = {
     },
     behouden_verwerking: {
         title: 'Behouden (Verwerking)',
-        subtitle: 'Percentage gerecycled afval verhogen naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling.',
+        subtitle: 'Percentage gerecycled afval verhogen naar minimaal 82% waarvan minimaal 15% hoogwaardige recycling (zonder opslag).',
         check: [
             // 82% high & other recycling
             (status, goal) => {
@@ -115,12 +115,12 @@ const cards = {
                 name: 'Verbranden/Storten',
                 color: '#809399',
             },
-            {
-                key: 'unknown',
-                name: 'Opslag',
-                color: '#D0D5DD',
-                hide: true
-            }
+            // {
+            //     key: 'unknown',
+            //     name: 'Opslag',
+            //     color: '#D0D5DD',
+            //     hide: true
+            // }
         ]
     },
 }
