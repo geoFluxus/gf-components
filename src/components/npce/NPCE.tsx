@@ -2,6 +2,8 @@ import React from 'react'
 import { Flex, Row, Col } from 'antd'
 import GlobalStyle from "../../globalStyles";
 import { Header, Progress } from "./comps"
+import { useRef } from "react";
+import * as htmlToImage from "html-to-image";
 
 
 const cards = {
@@ -136,31 +138,32 @@ const Divider = () =>
         }}
     />
 
-const Card = ({children}) => {
-    const num = children ?.length
+const Card = React.forwardRef(({ children }, ref) => {
+  const items = React.Children.toArray(children);
+  const num = items.length;
 
-    return (
-        <Flex
-            vertical
-            align="center"
-            style={{
-                height: "100%",
-                borderRadius: 8,
-                border: "1px solid #DAE1ED",
-                overflow: "hidden"
-            }}
-        >
-            {children.map((child, idx) =>
-                <React.Fragment
-                    key={idx}
-                >
-                    {child}
-                    {idx < num - 1 ? <Divider /> : <></>}
-                </React.Fragment>
-            )}
-        </Flex>
-    )
-}
+  return (
+    <Flex
+      ref={ref}
+      vertical
+      align="center"
+      style={{
+        height: "100%",
+        borderRadius: 8,
+        border: "1px solid #DAE1ED",
+        overflow: "hidden",
+        background: "#fff",
+      }}
+    >
+      {items.map((child, idx) => (
+        <React.Fragment key={idx}>
+          {child}
+          {(idx < num - 1) && idx !== 0 ? <Divider /> : null}
+        </React.Fragment>
+      ))}
+    </Flex>
+  );
+});
 
 function validate(a, b, checks = []) {
   return checks.every(
@@ -172,6 +175,27 @@ const NPCE = ({
     data,
     year
 }) => {
+  const cardRefs = useRef({});
+
+  const handleDownload = async (key) => {
+      const button = cardRefs.current[key].querySelector(".download-controls");
+
+      button.style.display = "none";
+
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+
+      const dataUrl = await htmlToImage.toPng(cardRefs.current[key], {
+        pixelRatio: 2,
+      });
+
+      button.style.display = "";
+
+      const link = document.createElement("a");
+      link.download = `${key}.png`;
+      link.href = dataUrl;
+      link.click();
+  };
+
   // update cards
   Object.keys(cards).forEach(key => {
       // update goals based on data
@@ -196,12 +220,17 @@ const NPCE = ({
         {Object.entries(cards).map(([key, card], idx) => {
             return (
                 <Col span={12} key={idx}>
-                    <Card>
+                    <Card
+                        ref={(el) => {
+                          cardRefs.current[key] = el;
+                        }}
+                    >
                         <Header
                             title={card?.title}
                             subtitle={card?.subtitle}
                             legend={card?.legend}
                             success={card?.success}
+                            handleDownload={() => handleDownload(key)}
                         />
                         <Progress
                             year={year}

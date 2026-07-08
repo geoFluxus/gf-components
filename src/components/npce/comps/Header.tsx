@@ -1,5 +1,5 @@
-import { Flex } from "antd"
-import { CheckCircleFilled } from "@ant-design/icons";
+import { Flex, Button } from "antd"
+import { CheckCircleFilled, DownloadOutlined } from "@ant-design/icons";
 
 
 const Status = ({success}) => {
@@ -93,6 +93,7 @@ const Header = ({
     subtitle,
     legend,
     success,
+    handleDownload
 }) => {
     return (
         <Flex
@@ -128,7 +129,17 @@ const Header = ({
                         {title}
                     </span>
 
-                    <Status success={success} />
+                    <Flex
+                        gap={8}
+                    >
+                        <Status success={success} />
+                        <Button
+                            className="download-controls"
+                            icon={<DownloadOutlined />}
+                            onClick={() => handleDownload?.()}
+                            style={{minWidth: 32, height: 32}}
+                        />
+                    </Flex>
                 </Flex>
                 <span
                     style={{
